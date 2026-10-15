@@ -1,0 +1,54 @@
+id: samurai
+name: Samurai
+tier: '2'
+main-stat: CON
+roles: [tank, dps]
+combat-modifier:
+  name: Kamae
+  description: 'All attacks Provoke. MAX HP equals double CON. Start in Kogeki Stance. Kogeki: Reactions trigger on targets entering 5x5 on you, all attacks +X. Boei: Reactions counter melee attackers, enemy abilities -X. Uses Two-Handed passive un-unlocked.'
+prerequisites:
+  - {class: knight, level: 10}
+unlocks:
+  - {class: paladin, level: 10}
+  - {class: elementalist, level: 10}
+health-mod: 5
+stats:
+  main: {STR: 2, DEX: 0, CON: 2, MND: 0, INT: 1, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Severance Blade
+  description: Defeat 1 adjacent non-boss target or deal 5D6.
+  charge:
+    - Stagger/Expose
+    - change stances
+    - Provoke 2 enemies
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Constitution, value: 1, unlock-at: 2}
+  - {expertise: Concentration, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Slashing 2H Sword
+  armor: Heavy Armor
+  off-hand: none (2-hander uses both slots)
+passives:
+  - {name: Stoicism, kind: non-combat, slot: passive, target: self, condition: Non-Combat Charisma/Bravado/Deception check against you outside combat, use: constant, description: Attackers roll at Disadvantage., locked: false}
+  - {name: Opportune Strike, kind: combat, slot: passive, target: T1 R1, condition: adjacent target leaves adjacency, use: passive, description: X + STR damage., locked: false}
+  - {name: Melee (2-Handed) Weapon Proficiency, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'Wield any melee 2-handed across both slots; physical melee deal 1D6 + X.', locked: true}
+  - {name: Built to Last, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent CON., locked: true}
+actions:
+  main:
+    - {name: Kogeki Kamae, tags: [physical], cost: '—', target-range: Self, check: 'Chain: enter Kogeki Stance', description: Enter Kogeki; incomers trigger Kogeki Reaction; ranges double this round.}
+    - {name: Boei Kamae, tags: [physical], cost: '—', target-range: Self, check: 'Chain: enter Boei Stance', description: Enter Boei; melee attackers trigger Boei Reaction; Boei Reactions +X SC this round.}
+  support:
+    - {name: Coin Toss, tags: [ranged, physical], cost: spend up to $300, target-range: T1 R5, check: '—', description: '$10:1 $20:2 $30:3 $40:5 $50:7 $60:10 $70:13 $80:17 $90:21 $100:26 $120:31 $140:37 $160:43 $180:50 $200:57 $220:65 $240:73 $260:82 $280:97 $300:100.'}
+    - {name: Mabushi-sa, tags: [ranged, physical], cost: 'Boost: target deals -X this round', target-range: T1 R5, check: '—', description: 'Inflict Taunt; Stagger checks -(X+1) this round.'}
+    - {name: Reverse Blade, tags: [melee, physical], cost: '—', target-range: 3x3 centered on self, check: 'D20+CON vs RES', description: 'STR to all; Expose Berserk.'}
+    - {name: Mukonisuru, tags: [melee, physical], cost: 'Boost: Stunned instead; Successfully Once per Combat', target-range: T1 R1, check: 'D20+CON vs RES', description: Expose Disable.}
+  reactions:
+    - {name: Nerve Ender, tags: [kogeki, melee, magic], cost: Energy 5, target-range: 5x5 centered on self, check: 'D20+STR vs DEF; Condition: target moves into range', description: 'STR damage, enter Boei; Stagger +XD6 and Weak (X-2).'}
+    - {name: True Release, tags: [kogeki, melee, physical], cost: Energy 5, target-range: 5x5 centered on self, check: 'D20+STR vs DEF; Condition: target moves into range', description: 'STR damage, slip 1 behind; Stagger +XD6 and Ruin (3).'}
+    - {name: Sanguine Grasp, tags: [boei, melee, magic], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF; Condition: after being attacked in melee', description: 'STR damage, heal it back, enter Kogeki; Stagger +XD6.'}
+    - {name: Dismantle Posture, tags: [boei, melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF; Condition: after being attacked in melee', description: 'STR damage; successful Stagger (when their attack did not Stagger you) also Knocks Prone; enter Kogeki; Stagger +XD6.'}
+source-pages: [p084]
+notes: Main stats 2 STR/2 CON/1 INT and bonus 2 DEF/1 RES as printed. Kogeki is combat-start stance.

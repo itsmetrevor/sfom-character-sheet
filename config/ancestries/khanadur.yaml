@@ -1,0 +1,27 @@
+id: khanadur
+name: Khanadur
+languages:
+  - khanadurian
+  - lagosian
+vision: dark
+max-hp: 10
+expertise:
+  crafting: 1
+  intelligence: 1
+main-mods:
+  positive: INT
+  negative: DEX
+bonus-stat:
+  stat: FOR
+  value: 1
+passives:
+  non-combat: tinkerer
+  combat: innovation
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p014+p015 sheet8

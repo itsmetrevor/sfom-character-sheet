@@ -1,0 +1,6 @@
+id: constitution
+name: Constitution
+main-stat: CON
+description: |
+  Endurance and hardiness. Used to resist exhaustion, poison, and hardship.
+source-pages: p002

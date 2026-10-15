@@ -1,0 +1,10 @@
+id: roar
+name: Roar
+source: ancestry
+slot: combat
+target: Enemies in Range (5x5 centered on Self)
+condition: Start of any Target's Turn, as a Reaction
+use: Once per Combat
+expose: Target is inflicted with the 'Fear (You)' Status Effect.
+description: |
+  Target is inflicted with the 'Fear (You)' Status Effect.

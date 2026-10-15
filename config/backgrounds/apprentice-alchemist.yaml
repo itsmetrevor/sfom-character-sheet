@@ -1,0 +1,31 @@
+id: apprentice-alchemist
+name: "Apprentice Alchemist"
+description: |
+  You are a novice Alchemist just starting out in the profession. With your Fragment abilities you can quickly learn all there is to know about crafting potions using various items. This background allows you to craft a larger variety of items than the 'Chemist' Class.
+expertise:
+  "crafting": 1
+  "resistance": 1
+starting-items:
+  - healing-potion
+  - super-potion
+  - revival-tonic
+starting-items-text: "3 Healing Potions 1 Super Potion 1 Revival Tonic"
+passives:
+  plvl-0:
+    name: "Knowledge"
+    summary: "Gain 'Inspired' when making an Intelligence check to understand the makeup of a potion or object."
+    detail: "This Effect can be used on anything to understand the components that make it up. The difficulty of the Check will be determined by your GM."
+  plvl-3:
+    name: "Craft Common"
+    summary: "You may Craft Common Potions. Check the Alchemy Crafting Guide for more info."
+    detail: "Go to the 'Alchemy Crafting Guide' on page XX. When crafting potions you will be required to spend Materials from your Inventory. Each Potion will require specific types of Materials. Common Potions require Materials that are easier to find and Rare Potions require Materials that are harder to find."
+  plvl-6:
+    name: "Efficiency"
+    summary: "When Crafting Potions you may spend 1 less Material (to a minimum of 1)."
+    detail: "You may choose which Material you don't want to spend when crafting potions."
+  plvl-9:
+    name: "Craft Rare"
+    summary: "You may Craft Rare Potions. Check the Alchemy Crafting Guide for more info."
+    detail: "Go to the 'Alchemy Crafting Guide' on page XX. When crafting potions you will be required to spend Materials from your Inventory. Each Potion will require specific types of Materials. Common Potions require Materials that are easier to find and Rare Potions require Materials that are harder to find."
+craftsman: false
+source-pages: "p032"

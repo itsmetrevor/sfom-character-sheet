@@ -1,0 +1,30 @@
+id: sailor
+name: "Sailor"
+description: |
+  You spent a portion of your life sailing and fishing in lakes and oceans. You know how way around a boat and everything you need to do to successfully catch fish.
+expertise:
+  "constitution": 2
+starting-items:
+  - rope
+  - net
+  - fishing-pole
+starting-items-text: "2 Rope / 1 Net / 1 Fishing Pole: (Items)"
+passives:
+  plvl-0:
+    name: "Sea Legs"
+    summary: "Sail boats without needing Checks."
+    detail: "You have been taught how to sail a variety of boats. Even if you know how to sail a boat, if it is too large you may need a crew or a party to help out and they still might need to make Checks."
+  plvl-3:
+    name: "Fisherman"
+    summary: "Gain 'Inspired' on 'Throw/Catch' Checks to catch fish."
+    detail: "You have an easier time fishing, the difficulty of the 'Throw/Catch' Check is at the discretion of the GM."
+  plvl-6:
+    name: "Iron Stomach"
+    summary: "Gain 'Inspired' on 'Constitution' Checks."
+    detail: "Your time on boats has built up a strong constitution against many different adverse effects."
+  plvl-9:
+    name: "Navigator"
+    summary: "'Nature' Check near the sea to read and predict weather."
+    detail: "When near or out to sea you can look to the clouds and read the ocean winds to determine upcoming weather. The difficulty of the 'Nature' Check is at the discretion of the GM."
+craftsman: false
+source-pages: "p042"

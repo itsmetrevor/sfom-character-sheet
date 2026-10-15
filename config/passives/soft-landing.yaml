@@ -1,0 +1,8 @@
+id: soft-landing
+name: Soft Landing
+source: ancestry
+slot: combat
+target: Self
+use: Constant
+description: |
+  When Jumping down, gain +2 JMP.

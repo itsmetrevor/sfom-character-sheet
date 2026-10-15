@@ -1,0 +1,8 @@
+id: sticky-fingers
+name: Sticky Fingers
+source: ancestry
+slot: combat
+target: Self
+use: Constant
+description: |
+  When defeating an Enemy also gain the Common 'Steal' Reward.

@@ -1,0 +1,8 @@
+id: stat-shapes
+name: Stat Shapes
+source-pages: p004
+shapes:
+  square: permanent (never changes)
+  circle: temporary (gear, passives, effects; changes)
+  star: class stats (follow current Main Class)
+  diamond-pip: permanent +1 Main stat from Party Level rewards (max twice per Main stat)

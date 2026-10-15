@@ -1,0 +1,26 @@
+id: kryss
+name: Kryss
+languages:
+  - lagosian
+vision: normal
+max-hp: 8
+expertise:
+  perception: 1
+  mind: 1
+main-mods:
+  positive: MND
+  negative: LUK
+bonus-stat:
+  stat: RES
+  value: 1
+passives:
+  non-combat: future-sight
+  combat: fated
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p016+p017 sheet9

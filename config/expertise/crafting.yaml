@@ -1,0 +1,6 @@
+id: crafting
+name: Crafting
+main-stat: INT
+description: |
+  Making and repairing gear, disguises, potions, and contraptions.
+source-pages: p002

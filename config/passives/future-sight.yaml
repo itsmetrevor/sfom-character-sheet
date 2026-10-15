@@ -1,0 +1,9 @@
+id: future-sight
+name: Future Sight
+source: ancestry
+slot: non-combat
+target: Self
+use: Once per Full Rest
+check: SC (Concentration) VS 20
+description: |
+  You may make a 'Perception' Check to see a memory of 1 possible outcome from the next 2 minutes.

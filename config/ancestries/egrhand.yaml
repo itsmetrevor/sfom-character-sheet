@@ -1,0 +1,27 @@
+id: egrhand
+name: Egrhand
+languages:
+  - egrhandi
+  - lagosian
+vision: normal
+max-hp: 12
+expertise:
+  strength: 1
+  throw-catch: 1
+main-mods:
+  positive: STR
+  negative: INT
+bonus-stat:
+  stat: NRG
+  value: 1
+passives:
+  non-combat: unstoppable
+  combat: immovable
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p008+p009 sheet5

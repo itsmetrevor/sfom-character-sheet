@@ -1,0 +1,29 @@
+id: treasure-hunter
+name: "Treasure Hunter"
+description: |
+  Your true love is delving deep into dungeons and ruins to find treasures hidden away. You have become a natural at navigating such places and dealing with traps and puzzles.
+expertise:
+  "luck": 1
+  "thievery": 1
+starting-items:
+  - trap-gadget
+starting-items-text: "Trap Gadget: (Accessory) +2 to Checks Related to Disabling Traps"
+passives:
+  plvl-0:
+    name: "Crawler"
+    summary: "Gain 'Inspired' on 'Perception' Checks while navigating dungeons."
+    detail: "You know your way around a dungeon and what to look out for. The difficulty of the 'Perception' Check is at the discretion of the GM."
+  plvl-3:
+    name: "Nimble Hands"
+    summary: "Once per Full Rest, your first 'Thievery' Check Succeeds."
+    detail: "You are use to having to quickly nab treasures from traps and have found it can be useful outside of dungeons as well. The difficulty of the 'Thievery' Check is at the discretion of the GM."
+  plvl-6:
+    name: "Delver"
+    summary: "Once per Full Rest in a dungeon, ignore the first 'Exhaustion' gain."
+    detail: "You know how to pace yourself when traversing a dungeon. You don't get tired or exhausted too easily anymore."
+  plvl-9:
+    name: "Puzzler"
+    summary: "Gain 1 GM hint when solving a puzzle."
+    detail: "You have become adept at solving puzzles after dealing with so many on your dungeon delves. This Ability can be helpful if you get stuck on a puzzle, the hint given is at the GM's Discretion."
+craftsman: false
+source-pages: "p044"

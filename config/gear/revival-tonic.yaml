@@ -1,0 +1,8 @@
+id: revival-tonic
+name: "Revival Tonic"
+slot: consumable
+damage-type: null
+bonus: null
+effect: "Starting tonic (Apprentice Alchemist). See the Alchemy Crafting Guide, page XX."
+source: apprentice-alchemist
+stack-max: 5

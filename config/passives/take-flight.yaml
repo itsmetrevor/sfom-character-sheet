@@ -1,0 +1,8 @@
+id: take-flight
+name: Take Flight
+source: ancestry
+slot: combat
+target: Self
+use: Once per Combat
+description: |
+  Gain the 'Flying' Status Effect until the end of the Round.

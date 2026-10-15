@@ -1,0 +1,111 @@
+# Starting gear bundles: each background id -> gear ids granted at character creation.
+# NOTE: full Gear section (page XX) is missing from the source notes; this file is a
+# bundle-choices stub and is extensible — add stats/costs here once the Gear section lands.
+# Rule reminder: Starting Items are gained from only 1 background even when 2 are selected.
+bundles:
+  armorer:
+    - gear: armorers-writ
+      qty: 1
+    - gear: medium-armor-generic
+      qty: 1
+  blacksmith:
+    - gear: blacksmiths-writ
+      qty: 1
+    - gear: weapon-of-choice-generic
+      qty: 1
+  clothier:
+    - gear: clothiers-writ
+      qty: 1
+    - gear: light-armor-generic
+      qty: 1
+  jeweler:
+    - gear: jewelers-writ
+      qty: 1
+    - gear: defense-ring
+      qty: 1
+  apprentice-alchemist:
+    - gear: healing-potion
+      qty: 3
+    - gear: super-potion
+      qty: 1
+    - gear: revival-tonic
+      qty: 1
+  apprentice-mage:
+    - gear: basic-magic-tome
+      qty: 1
+  artist:
+    - gear: artists-tools
+      qty: 1
+  athlete:
+    - gear: running-shoes
+      qty: 1
+  barbarian:
+    - gear: savage-axe
+      qty: 1
+  chef:
+    - gear: kitchen-set
+      qty: 1
+  cleric:
+    - gear: religious-tome
+      qty: 1
+  courier:
+    - gear: running-shoes
+      qty: 1
+  escort:
+    - gear: silk-robe
+      qty: 1
+  farmer:
+    - gear: shovel
+      qty: 1
+  gambler:
+    - gear: lucky-coin
+      qty: 1
+  guard:
+    - gear: bronze-shield
+      qty: 1
+  huntsman:
+    - gear: long-bow
+      qty: 1
+  investigator:
+    - gear: magnifying-glass
+      qty: 1
+  merchant:
+    - gear: gold-coins
+      qty: 25
+  military:
+    - gear: bronze-armor
+      qty: 1
+  miner:
+    - gear: khanadur-goggles
+      qty: 1
+  noble:
+    - gear: gold-coins
+      qty: 25
+  politician:
+    - gear: elegant-suit
+      qty: 1
+  psychologist:
+    - gear: self-help-book
+      qty: 1
+  rogue:
+    - gear: lockpicks
+      qty: 5
+  sailor:
+    - gear: rope
+      qty: 2
+    - gear: net
+      qty: 1
+    - gear: fishing-pole
+      qty: 1
+  spy:
+    - gear: disguise-kit
+      qty: 3
+  swindler:
+    - gear: shiny-ring
+      qty: 1
+  treasure-hunter:
+    - gear: trap-gadget
+      qty: 1
+  wanderer:
+    - gear: shovel
+      qty: 1

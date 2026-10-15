@@ -1,0 +1,26 @@
+id: halthket
+name: Halthket
+languages:
+  - halthketan
+  - lagosian
+vision: binocular
+max-hp: 7
+expertise:
+  dexterity: 2
+main-mods:
+  positive: DEX
+  negative: MND
+bonus-stat:
+  stat: JMP
+  value: 1
+passives:
+  non-combat: glide-hover
+  combat: take-flight
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p012+p013 sheet7

@@ -1,0 +1,6 @@
+id: resistance
+name: Resistance
+main-stat: CON
+description: |
+  Withstanding effects. Used to resist being moved, magic, and status effects.
+source-pages: p002

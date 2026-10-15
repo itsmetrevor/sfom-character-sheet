@@ -1,0 +1,29 @@
+id: miner
+name: "Miner"
+description: |
+  You have spent a lot of time exploring caverns and mines looking for new ore. You are skilled at finding and mining ore that can be used to craft new gear for your party or sold for gold.
+expertise:
+  "strength": 1
+  "constitution": 1
+starting-items:
+  - khanadur-goggles
+starting-items-text: "Khanadur Made Goggles: (Accessory) Dark Vision"
+passives:
+  plvl-0:
+    name: "Delver"
+    summary: "Gain 'Inspired' on Checks involving mines and caverns."
+    detail: "This Ability works for any Check made that pertains to mines or caverns."
+  plvl-3:
+    name: "Mining"
+    summary: "Gain 'Inspired' on 'Perception' to find ore veins and on 'Strength' to mine ore."
+    detail: "You are a professional miner and have an easier time finding and mining ore. You will still need the correct tools to mine the ore. The difficulty of the 'Perception' or 'Strength' Check and how much ore is mined is at the discretion of the GM."
+  plvl-6:
+    name: "Iron Lung"
+    summary: "Gain 'Inspired' on 'Constitution' Checks."
+    detail: "Your time in the mines has built up a strong constitution against many different adverse effect."
+  plvl-9:
+    name: "Mine Master"
+    summary: "Successfully mining ore yields +2 Ore and no 'Exhaustion' from mining."
+    detail: "You have mastered mining and know how to acquire everything you can from veins or ore with ease. You no longer tire or gain 'Exhaustion' from mining as well."
+craftsman: false
+source-pages: "p040"

@@ -1,0 +1,8 @@
+id: combat-ready
+name: Combat Ready
+source: ancestry
+slot: combat
+target: Self
+use: Constant
+description: |
+  When a Target Attacks but does not Stagger against you, only receive half the Damage (Rounded down).

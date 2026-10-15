@@ -1,0 +1,54 @@
+id: priest
+name: Priest
+tier: '1'
+main-stat: MND
+roles: [healer]
+combat-modifier:
+  name: Holy Charge
+  description: 'Each Restorative magic ability gains a Holy Charge; at 3, immediately cast 1 Magic ability for 0 Energy. Uses Auto-Regenerate even un-unlocked. Magic Ranged Healer.'
+prerequisites:
+  - {class: any-starter, level: 10}
+unlocks:
+  - {class: chronomancer, level: 10}
+  - {class: paladin, level: 5}
+health-mod: 0
+stats:
+  main: {STR: 0, DEX: 0, CON: 0, MND: 2, INT: 1, LUK: 1}
+  bonus: {JMP: 0, AGL: 0, DEF: 0, RES: 4, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Grand Blessing
+  description: Revive and fully heal each party member.
+  charge:
+    - restore 10+ HP to a target
+    - cast magic for 0 Energy
+    - restore another target to full
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Mind, value: 1, unlock-at: 2}
+  - {expertise: Resistance, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
+passives:
+  - {name: Sacred Senses, kind: non-combat, slot: passive, target: all, condition: Non-Combat Resistance check outside combat, use: passive, description: Inspired on Resistance., locked: false}
+  - {name: Holy Insight, kind: combat, slot: reaction, target: T1 R10, condition: once per round on your turn as Reaction, use: reaction, description: 'Stagger reveals 1 chosen info (D20+MND vs 13): HP, resistances, weaknesses.', locked: false}
+  - {name: Auto-Regenerate, kind: combat, slot: passive, target: self, condition: unlock all / enemy damages you, use: constant, description: Gain Regenerate DOT restoring MND at Status Step, lost at combat end., locked: true}
+  - {name: Mindful, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent MND., locked: true}
+actions:
+  main:
+    - {name: Heala, tags: [ranged, restorative, holy], cost: 'Energy 4, Boost: +MND restored', target-range: Self or 1 R10, check: Critical, description: (X+1)D6 + MND.}
+    - {name: Revive, tags: [ranged, restorative, holy], cost: 'Energy 5, Boost: +MND', target-range: T1 R10, check: Critical, description: 'Remove Knocked Out; XD6 + MND; Unseen + Damage Immunity till end of round.'}
+    - {name: Healios, tags: [restorative, holy], cost: 'Energy 5, Boost: +1D6 each in range', target-range: T1 5x5 within 10, check: Critical, description: XD6 + MND to all allies.}
+    - {name: Radiance, tags: [ranged, chrono, magic], cost: 'Energy 6, Boost: +1D6 restored', target-range: 5x5 on self, check: 'D20+MND vs RES', description: 'MNDxD6 damage; Expose Stun to all (Stunned immune to re-Stun this combat).'}
+  support:
+    - {name: Heal, tags: [restorative], cost: 'Energy 4, Boost: +1D6', target-range: T1 R10, check: Critical, description: XD6 + MND.}
+    - {name: Mend, tags: [restorative], cost: 'Energy 3, Boost: 2nd target', target-range: T1 R10, check: 'D20+MND vs RES', description: Remove 1 Status Effect (not Knocked Out).}
+    - {name: Holy Armor, tags: [holy], cost: 'Energy 4, Boost: target -5 damage till end of round', target-range: Self or 1 R10, check: '—', description: Target DEF and RES equal your MND till end of round.}
+    - {name: Regenerate, tags: [holy], cost: 'Energy 5, Boost: HP equal to MND+3', target-range: Self or 1 R10, check: '—', description: Gain Regenerate DOT (MND at Status Step, lost at combat end).}
+  reactions:
+    - {name: Prepared Spell, tags: [magic], cost: '—', target-range: Self, check: 'Condition: any target ends its turn; Once per Combat', description: Immediately use a Magic ability.}
+    - {name: Holy Blessing, tags: [ranged, holy], cost: '—', target-range: Self or 1 R10, check: 'Condition: any target ends its turn; Once per Combat', description: Restore X+1 Energy.}
+source-pages: [p068]
+notes: Sheet tracks 3 Holy Charges.

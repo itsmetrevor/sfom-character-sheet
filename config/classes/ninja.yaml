@@ -1,0 +1,54 @@
+id: ninja
+name: Ninja
+tier: '2'
+main-stat: DEX
+roles: [dps, specialist]
+combat-modifier:
+  name: Ninja-Arts
+  description: 'Uses Dual Wield un-unlocked. Main Actions unlock specific Chakra (tracked symbols); spend Chakra on Jutsu during your turn. Jutsu are not Main/Support/Reaction. Frog Summons 2x AGL and 1+X JMP, act at end of owner turn, resummonable, one at a time, owner-controlled.'
+prerequisites:
+  - {class: thief, level: 10}
+unlocks:
+  - {class: dragon-lancer, level: 10}
+  - {class: rune-knight, level: 10}
+health-mod: 0
+stats:
+  main: {STR: 0, DEX: 2, CON: 0, MND: 1, INT: 0, LUK: 1}
+  bonus: {JMP: 1, AGL: 0, DEF: 1, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: The Seventh Gate
+  description: Fill all your Chakras.
+  charge:
+    - use 2 Main Actions
+    - use a Jutsu
+    - attack from behind
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Thievery, value: 1, unlock-at: 2}
+  - {expertise: Stealth, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Piercing Dagger
+  armor: Medium Armor
+  off-hand: Dagger
+passives:
+  - {name: From the Shadows, kind: non-combat, slot: passive, target: self, condition: Non-Combat Stealth check in Shadow, use: passive, description: Inspired on Stealth., locked: false}
+  - {name: Agility & Balance, kind: combat, slot: passive, target: self, condition: constant, use: constant, description: Liquid counts as regular squares; walls walkable but not endable., locked: false}
+  - {name: Dual-Wield, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'Wield second Main-Hand in Off-Hand with both effects; once per turn use Main Action as Support Action.', locked: true}
+  - {name: Dexterous, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent DEX., locked: true}
+actions:
+  main:
+    - {name: Suraisu, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs RES, Chain: X damage gain Chakra', description: 'Gain Chakra; DEX damage; Expose Bleed DOT 3.'}
+    - {name: Shuriken, tags: [ranged, physical], cost: '—', target-range: T1 R7, check: 'D20+DEX vs DEF, Chain: X damage gain Chakra', description: 'Gain Chakra; DEX damage; Stagger +XD6.'}
+    - {name: Setsudan Suru, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs RES, Chain: X damage gain Chakra', description: 'Gain Chakra; DEX damage; teleport adjacent; Expose Confused.'}
+    - {name: Bakkusutabu, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain: X damage; Back Attack DEX damage', description: 'Gain Chakra; DEX damage; Stagger +XD6; Back Attack +1D6.'}
+    - {name: 'Jutsu: Frog Summon', tags: [ranged, jutsu, magic, summon], cost: 2 same Chakra, target-range: Square R5, check: '—', description: 'Summon Ninja Frog — Tanku (Enmity 3x3 on self; 20HP DEF/RES 15+X), Dameiji (XD6 in 3x3; 15HP 11+X), Hira (restore XD6 in 3x3; 10HP 9+X).'}
+    - {name: 'Jutsu: Water Throwing Star', tags: [ranged, elemental, water, jutsu], cost: 'Boost: spend 1 Chakra for +1 star', target-range: T1 R7, check: 'D20+MND vs DEF', description: 'MND damage plus Wet; Stagger XD6.'}
+    - {name: 'Jutsu: Wind Storm', tags: [ranged, elemental, wind, jutsu], cost: 'Boost: spend 1 Chakra for 5x5 within 10', target-range: Square 3x3 within 5, check: 'D20+MND vs RES', description: 'MND to each; Expose Wind DOT 5.'}
+    - {name: 'Jutsu: Earth Pillars', tags: [ranged, elemental, earth, jutsu], cost: 'Boost: spend 1 for +1 pillar up to 3 high', target-range: Square 3x1 within 5, check: '—', description: 'Raise three 1x3 pillars as Wall (not under 2x2+; 1x1 victims Prone). 1x1 2HP, 1x2 5HP, 1x3 10HP.'}
+  support: []
+  reactions:
+    - {name: Smoke Bomb, tags: [physical], cost: '—', target-range: Square 3x3 within 5, check: 'Condition: your turn or before party member attacked; Once per Combat', description: '3x3 Smoke Cloud till end of round — others inside gain Blind, Slow, +1 AGL per square moved.'}
+    - {name: Chakra Pool, tags: [physical], cost: '—', target-range: Self, check: 'Condition: your turn; Twice per Combat', description: Gain 1 Chakra of choice.}
+source-pages: [p082]
+notes: Jutsu listed under Main in source; spend Chakra on your turn, not Main/Support/Reaction.

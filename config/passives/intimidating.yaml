@@ -1,0 +1,8 @@
+id: intimidating
+name: Intimidating
+source: ancestry
+slot: non-combat
+target: Self
+use: Constant
+description: |
+  Gain 'Inspired' when using a Bravado Check to Intimidate a Target.

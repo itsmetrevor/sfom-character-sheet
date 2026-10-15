@@ -1,0 +1,55 @@
+id: elementalist
+name: Elementalist
+tier: '4'
+main-stat: INT
+roles: [dps, healer]
+combat-modifier:
+  name: Elemental Power
+  description: 'Combat start gains 1 Elemental Charge of choice; each turn pick Active element coloring all attacks. Boost (Elemental Charge): spend specific Charge instead of Energy. Fire Burn DOT X (stacks +X on burning); Ice Slow (slowed/wet freeze); Lightning arcs within 5; Wind push/pull 5; Water heals allies + Wet; Earth 5x5 centered on target. Magic Ranged All-Rounder.'
+prerequisites:
+  - {class: monk, level: 5}
+  - {class: samurai, level: 10}
+  - {class: alchemist, level: 10}
+unlocks:
+  - {class: shard-bearer, level: 10}
+health-mod: 0
+stats:
+  main: {STR: 2, DEX: 0, CON: 0, MND: 2, INT: 1, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 0, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Elemental Master
+  description: Activate 3 elements; gain 1 charge of all 6; use 1 active ability.
+  charge:
+    - spend an Elemental Charge
+    - spend 2+ Energy
+    - resist an effect
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Intelligence, value: 1, unlock-at: 2}
+  - {expertise: Throw/Catch, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Focus or Unarmed (none)
+  armor: Medium Armor
+  off-hand: Tome
+passives:
+  - {name: Elemental Control, kind: non-combat, slot: passive, target: self, condition: Non-Combat Concentration check outside combat, use: passive, description: Steer element within 5 squares for 1 minute., locked: false}
+  - {name: Brave the Elements, kind: combat, slot: reaction, target: Square 3x3 within 5, condition: once per round as Reaction before/after any turn, use: reaction, description: Clear all terrain effects from markers in range (even obstacle-makers)., locked: false}
+  - {name: Master of Elements, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'When dealt Elemental damage, take it for +2 Energy or absorb as HP.', locked: true}
+  - {name: Intellectual, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent INT., locked: true}
+actions:
+  main:
+    - {name: Burst, tags: [melee, elemental], cost: 'Energy 5, Boost (+): +XD6', target-range: T1 R1, check: 'D20+INT vs DEF', description: '1D6 + INT; Stagger +XD6.'}
+    - {name: Blast, tags: [ranged, elemental], cost: 'Energy 5, Boost (+): one extra target', target-range: T1 R7, check: 'D20+INT vs DEF', description: 'INT to target; Stagger +XD6.'}
+    - {name: Elemental Pool, tags: [ranged, elemental], cost: 'Energy 5, Boost (+): 5x5 marker sparing allies', target-range: Square 3x3 within 5, check: '—', description: '3x3 Pool dealing charged element — INT to entrants/turn-starters.'}
+    - {name: Nature's Fury, tags: [ranged, elemental], cost: Energy pool, target-range: Square 1x1 within 7, check: 'D20+INT vs DEF', description: '1D6+INT to all; spend all Charges for +1D6 each and +2x2 size per charge.'}
+  support:
+    - {name: Absorption, tags: [ranged, elemental], cost: 'Energy 5, Boost (+): 3x3 within 10', target-range: Self or 1 R5, check: '—', description: 'Absorb (Element) till end of round, healing from charged-element damage taken.'}
+    - {name: Infliction, tags: [melee, elemental], cost: 'Energy 5, Boost (+): auto-succeed Expose', target-range: T1 R1, check: 'D20+INT vs RES', description: 'Inflict by element — Fire Berserk, Ice Disable, Earth Immobilize, Wind Levitate, Water Inspire, Lightning Quick.'}
+    - {name: Elemental Aspect, tags: [ranged, summon, elemental], cost: 'Energy pool, Once per Combat', target-range: Square R5, check: '—', description: 'Summon Aspect acting on your turn — Main INT to all in 5x5 with every Active effect (20HP 10 DEF/RES 14 AGL 3 JMP status-immune).'}
+    - {name: Duality, tags: [elemental], cost: 'Boost (+): 2 Energy to reuse; Once per Combat', target-range: Self, check: '—', description: Activate extra Element charge this round.}
+  reactions:
+    - {name: Elemental Control, tags: [elemental], cost: '—', target-range: Self or 1 R7, check: 'Condition: any time before/after any action', description: 'Spend 1 Charge to pull/push 5 one way, +2 Jump a round, or Levitate a round.'}
+    - {name: From the Aether, tags: [elemental], cost: '—', target-range: Self, check: 'Condition: your turn or any target ends turn', description: Convert any number of Charges into Energy.}
+source-pages: [p100]
+notes: Main stats 2 STR/2 MND/1 INT and bonus 1 RES as printed. Equipment header mislabeled Expertise Specialties in source. Charges refill 1 at turn start.

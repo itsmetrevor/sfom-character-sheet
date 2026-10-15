@@ -1,0 +1,8 @@
+id: innovation
+name: Innovation
+source: ancestry
+slot: combat
+target: Self
+use: Constant
+description: |
+  +X Damage Dealt and Healing Received when Spending Items from your inventory.

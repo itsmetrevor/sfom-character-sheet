@@ -1,0 +1,8 @@
+id: rope
+name: "Rope"
+slot: item
+damage-type: null
+bonus: null
+effect: "Utility rope (Sailor starting item)."
+source: sailor
+stack-max: 5

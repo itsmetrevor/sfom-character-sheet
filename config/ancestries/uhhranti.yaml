@@ -1,0 +1,27 @@
+id: uhhranti
+name: Uhhranti
+languages:
+  - uhhrantian
+  - lagosian
+vision: low-light
+max-hp: 11
+expertise:
+  bravado: 1
+  constitution: 1
+main-mods:
+  positive: STR
+  negative: MND
+bonus-stat:
+  stat: DEF
+  value: 1
+passives:
+  non-combat: intimidating
+  combat: roar
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p028+p029 sheet15

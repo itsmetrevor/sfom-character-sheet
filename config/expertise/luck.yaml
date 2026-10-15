@@ -1,0 +1,6 @@
+id: luck
+name: Luck
+main-stat: LUK
+description: |
+  Fortune. Used for gambling, fate effects, and wild-card checks.
+source-pages: p002

@@ -1,0 +1,54 @@
+id: beast-tamer
+name: Beast Tamer
+tier: '1'
+main-stat: DEX
+roles: [dps, specialist]
+combat-modifier:
+  name: Trained Beasts
+  description: 'Choose Falcon, Large Snake, or Wolf; one Summoned at a time unless stated. Move beasts on your turn; act per Command used. +1 stat (max 3) per 2 Party Levels; +2 Max HP per Party Level. Re-summon swaps (recalled heal to Attack stat). KO beasts stay unsummoned. Beasts count as Summons and Party Members. Rules persist as subclass. Physical Ranged Summoner.'
+prerequisites:
+  - {class: any-starter, level: 10}
+unlocks:
+  - {class: negotiator, level: 10}
+  - {class: assassin, level: 5}
+health-mod: 0
+stats:
+  main: {STR: 0, DEX: 2, CON: 0, MND: 1, INT: 0, LUK: 1}
+  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 2, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Heed My Call
+  description: Use Summon Beast to summon ALL beasts; Commands affect all.
+  charge:
+    - beast Staggers/Exposes
+    - summon a beast
+    - use a Command
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Charisma, value: 1, unlock-at: 2}
+  - {expertise: Nature, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Piercing 2H Bow (uses Off-Hand slot)
+  armor: Medium Armor
+  off-hand: none (2-hander uses both slots)
+passives:
+  - {name: Beast Communion, kind: non-combat, slot: passive, target: self, condition: talk to animals/beasts outside combat, use: constant, description: Communicate with animals and beasts., locked: false}
+  - {name: Medium Armor Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Medium anywhere; DEF and FOR +1.', locked: false}
+  - {name: Training, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Summons +1 AGL and +1 crit chance., locked: true}
+  - {name: Dexterous, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent DEX., locked: true}
+actions:
+  main:
+    - {name: Targeted Shot, tags: [ranged, physical], cost: '—', target-range: T1 R10, check: 'D20+DEX vs DEF, Chain: Reaction-use Attack support', description: 'Beasts deal +XD6 this turn; Stagger (X+1)D6 + DEX.'}
+    - {name: Summon Beast, tags: [ranged, summon, physical], cost: '—', target-range: Square R5, check: 'Chain: summoned beasts deal 1D6', description: 'Summon 1 beast to empty square; beasts adjacent to enemies deal 1D6 + Beast Main Stat.'}
+    - {name: Running Drills, tags: [ranged, summon, physical], cost: '—', target-range: Summon R7, check: 'Chain: Reaction-use Distract if available', description: +2 AGL, +1 JMP.}
+    - {name: Encourage, tags: [ranged, physical, talk], cost: '—', target-range: Summon R7, check: 'Boost: Reaction-use Whistle if available', description: Gain Inspired.}
+  support:
+    - {name: Attack!, tags: [command], cost: '—', target-range: Summon R7, check: '—', description: 'Use Attack on Beast Tamer card, or deal XD6 to 1 target within Range 1.'}
+    - {name: Distract!, tags: [command], cost: '—', target-range: Summon R7, check: '—', description: Use Distract, or inflict Weak (2) within Range 1.}
+    - {name: Whistle!, tags: [command], cost: '—', target-range: Summon R7, check: '—', description: Use Whistle, or Provoke within Range 5.}
+    - {name: Go All Out!, tags: [command], cost: Twice per Combat, target-range: Summon R7, check: '—', description: Use Go All Out, or deal (2+X)D6 within Range 1.}
+  reactions:
+    - {name: Tame Beast, tags: [ranged, physical], cost: '—', target-range: T1 non-Boss Beast R3, check: 'D20+MND vs RES; Successfully Once per Combat', description: 'Expose Tamed (max 3; 4th replaces one releasing it; Resisted beasts immune this combat). Sheet tracks 3 names.'}
+    - {name: Recall, tags: [ranged, physical], cost: '—', target-range: 1 Summon Beast R10, check: 'Condition: before target is attacked; Once per Combat', description: Remove it from battlefield.}
+source-pages: [p062]
+notes: ''

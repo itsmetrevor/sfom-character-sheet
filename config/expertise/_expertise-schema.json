@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Expertise",
+  "type": "object",
+  "required": ["id", "name", "main-stat", "description"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9-]+$" },
+    "name": { "type": "string" },
+    "main-stat": { "enum": ["STR", "DEX", "CON", "MND", "INT", "LUK"] },
+    "description": { "type": "string" },
+    "source-pages": { "type": "string" }
+  },
+  "additionalProperties": false
+}

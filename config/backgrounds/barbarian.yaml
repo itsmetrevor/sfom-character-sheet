@@ -1,0 +1,28 @@
+id: barbarian
+name: "Barbarian"
+description: |
+  You were raised or taught by barbarians. You naturally have an intimidating presence, backed up by your raw strength. You do not easily tire and can push through the pain and exhaustion.
+expertise:
+  "bravado": 2
+starting-items:
+  - savage-axe
+starting-items-text: "Savage Axe: (Slashing Weapon) Stagger with Melee Attack: Inflict a Bleed DOT 2"
+passives:
+  plvl-0:
+    name: "Intimidating"
+    summary: "Gain +3 and reduce the required number for Critical Success -X when making a 'Bravado' Check."
+    detail: "Your Intimidating presence give you a Bonus to all your Bravado checks."
+  plvl-3:
+    name: "Endure"
+    summary: "Gain 1 'Exhaustion' to succeed at any Expertise Check using STR or CON, even after failing."
+    detail: "You may push past your limits to succeed a check by gaining 1 'Exhaustion'. This may be done even after failing a check."
+  plvl-6:
+    name: "Relentless"
+    summary: "Start Combat as if you have -3 'Exhaustion' (without losing Exhaustion)."
+    detail: "Even when you are exhausted you don't let it effect you. When Combat starts you start as if you have 3 less 'Exhaustion' but you do not lose any Exhaustion from this effect."
+  plvl-9:
+    name: "Forceful"
+    summary: "Use a 'Strength' Check in place of any Expertise using STR, DEX, LUK, or CON."
+    detail: "Strength is your greatest asset and you may use brute force to succeed checks. You are capable of using your 'Strength' Expertise in place of any Expertise that uses the STR, DEX, LUK, or CON Stats."
+craftsman: false
+source-pages: "p034"

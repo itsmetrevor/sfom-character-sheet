@@ -1,0 +1,27 @@
+id: skrii
+name: Skrii
+languages:
+  - skrii
+  - lagosian
+vision: dark
+max-hp: 5
+expertise:
+  thievery: 1
+  stealth: 1
+main-mods:
+  positive: DEX
+  negative: STR
+bonus-stat:
+  stat: AGL
+  value: 1
+passives:
+  non-combat: compulsive-liar
+  combat: sticky-fingers
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p026+p027 sheet14

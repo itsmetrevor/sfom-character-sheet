@@ -1,0 +1,58 @@
+id: ranger
+name: Ranger
+tier: starter
+main-stat: DEX
+roles: []
+combat-modifier:
+  name: Deep Impact
+  description: 'Staggering attacks deal +X damage per square elevated above target. Uses Piercing (Ranged) Weapon Proficiency even un-unlocked.'
+prerequisites: []
+unlocks:
+  - {class: beast-tamer, level: 10}
+  - {class: knight, level: 10}
+  - {class: monk, level: 10}
+  - {class: priest, level: 10}
+  - {class: thief, level: 10}
+  - {class: wizard, level: 10}
+  - {class: dragon-lancer, level: 15}
+health-mod: -5
+stats:
+  main: {STR: 1, DEX: 2, CON: 0, MND: 1, INT: 0, LUK: 0}
+  bonus: {JMP: 1, AGL: 0, DEF: 2, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Precise Arrow
+  description: Gain full Focus; use Focus Shot; it will Stagger.
+  charge:
+    - gain Focus
+    - Stagger
+    - attack from 2+ squares above target
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Dexterity, value: 1, unlock-at: 2}
+  - {expertise: Nature, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Piercing 2H Bow (uses Off-Hand slot)
+  armor: Medium Armor
+  off-hand: none (2-hander uses both slots)
+passives:
+  - {name: Calm Creature, kind: non-combat, slot: passive, target: self, condition: Non-Combat Nature check outside combat, use: constant, description: Inspired on Nature checks to interact with creatures., locked: false}
+  - {name: Ranged Fighter, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Ranged Physical Stagger rolls +X, +1 more per square above target.', locked: false}
+  - {name: Piercing (Ranged) Weapon Proficiency, kind: combat, slot: passive, target: self, condition: unlock all, use: passive, description: 'Equip Piercing (Ranged) with any class; melee attacks may use them at Range 10 dealing only Stagger-gated damage/effects; these weapons also use Off-Hand slot.', locked: true}
+  - {name: Dexterous, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent DEX., locked: true}
+actions:
+  main:
+    - {name: Focus, tags: [physical], cost: '—', target-range: Self, check: 'Chain: gain 1 Focus per round', description: 'Bank up to 4 Focus across turns (unused actions feed it); spending on anything but Focused Shot/Aim clears it.'}
+    - {name: Focused Shot, tags: [ranged, physical], cost: '—', target-range: T1 R10, check: 'D20+DEX vs DEF', description: 'Spend all Focus; +1 Stagger check per charge; +1D6 per Focus on Stagger; Stagger deals XD6 + DEX.'}
+    - {name: Arrow Volley, tags: [melee, physical], cost: '—', target-range: Square 5x5 within 10, check: 'D20+DEX vs DEF, Chain: 3x3 within 10 instead, DEX damage', description: 'DEX to all in range; Stagger +XD6.'}
+    - {name: Targeted Shot, tags: [ranged, physical], cost: '—', target-range: T1 R10, check: 'D20+DEX vs DEF, Chain: target inflicted with Slow', description: 'Expose choice — Disable or Immobilized.'}
+  support:
+    - {name: Aim, tags: [dark, magic], cost: '—', target-range: Self, check: 'Boost: +1 crit chance and next SC', description: +X crit chance and next SC roll, once per ability.}
+    - {name: Bear Trap, tags: [melee, physical, trap], cost: Twice per Combat, target-range: Square R1, check: '—', description: 'Place marker in empty adjacent square; movers stop, take XD6, gain Prone.'}
+    - {name: Soothe Creature, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: 'D20+DEX vs RES; Successfully Once per Combat', description: 'Expose Charmed (2) on a Creature; GM roleplays it; reusable if Resisted.'}
+    - {name: Fire Arrows, tags: [ranged, physical], cost: Thrice per Combat, target-range: Self, check: '—', description: Next Physical Ranged gains Expose Burn DOT 5.}
+  reactions:
+    - {name: Reflex, tags: [physical], cost: '—', target-range: T1 R10, check: 'Condition: after an enemy successfully staggers; Once per Combat', description: Cancel that Stagger.}
+    - {name: Concentrate, tags: [physical], cost: '—', target-range: Self, check: 'Condition: before you attack; Once per Combat', description: Next attack guaranteed to Stagger.}
+source-pages: [p054]
+notes: Health -5 as printed. Role not written as-printed.

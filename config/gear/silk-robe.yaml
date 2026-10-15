@@ -1,0 +1,10 @@
+id: silk-robe
+name: "Silk Robe"
+slot: armor
+damage-type: null
+bonus:
+  stat: "RES"
+  value: 1
+effect: "Light Armor. +1 RES."
+source: escort
+stack-max: 5

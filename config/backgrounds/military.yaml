@@ -1,0 +1,28 @@
+id: military
+name: "Military"
+description: |
+  You are trained soldier who has spent time in a military. With this you have acquired knowledge in military tactics and history. Your training has prepared you for anything to come.
+expertise:
+  "resistance": 2
+starting-items:
+  - bronze-armor
+starting-items-text: "Bronze Armor: (Heavy Armor) +1 DEF & +1 RES"
+passives:
+  plvl-0:
+    name: "Knowledge"
+    summary: "Gain 'Inspired' on 'Knowledge' checks about Military History, Armies, and Tactics."
+    detail: "Your time in the military has helped you gain an array of military knowledge. 'Knowledge' Checks related to anything military come easier for you."
+  plvl-3:
+    name: "Resist"
+    summary: "Gain 'Inspired' on 'Resistance' Checks against being pushed or moved."
+    detail: "You cannot be easily moved, your training has made it easier to withstand being pushed or moved unless you want to be moved."
+  plvl-6:
+    name: "Guarded"
+    summary: "Outside of Combat, you cannot be physically caught off guard."
+    detail: "When someone tries to attack you, sneak up on you, or try to catch you off guard in any way, you are prepared. You will be able to react to the situation with an 'Expertise' Check of your choice."
+  plvl-9:
+    name: "Marching"
+    summary: "Once per Full Rest, ignore the Party's first travel 'Exhaustion' gain."
+    detail: "If the GM were to give your party 'Exhaustion' from any type of travel you don't gain the Exhaustion instead. This can only be from travelling long distances, such as between cities."
+craftsman: false
+source-pages: "p039"

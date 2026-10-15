@@ -1,0 +1,26 @@
+id: nethander
+name: Nethander
+languages:
+  - nethander
+  - lagosian
+vision: low-light
+max-hp: 7
+expertise:
+  knowledge: 2
+main-mods:
+  positive: INT
+  negative: LUK
+bonus-stat:
+  stat: DEF
+  value: 1
+passives:
+  non-combat: vigilant
+  combat: combat-ready
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p022+p023 sheet12

@@ -1,0 +1,49 @@
+id: alchemist
+name: Alchemist
+tier: '3'
+main-stat: INT
+roles: [dps, healer, specialist]
+combat-modifier:
+  name: Advanced Alchemy
+  description: 'Spend multiple items combining into one. +5 ingredients from Chemistry. Spending via Alchemy-Mix: roll D6 — 6 item works without being spent. Final Mix effects end with combat. Physical Ranged All-Rounder.'
+prerequisites:
+  - {class: chemist, level: 15}
+  - {class: battle-mage, level: 10}
+unlocks:
+  - {class: elementalist, level: 10}
+health-mod: 0
+stats:
+  main: {STR: 0, DEX: 2, CON: 0, MND: 0, INT: 1, LUK: 1}
+  bonus: {JMP: 0, AGL: 1, DEF: 1, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Philosopher's Stone
+  description: Use all 3 catalysts and add x enhancements to next Alchemy-Mix without spending items.
+  charge:
+    - add an Enhancement
+    - throw an item
+    - use Alchemy-Mix
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Intelligence, value: 1, unlock-at: 2}
+  - {expertise: Crafting, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Ranged Piercing Pistol
+  armor: Medium
+  off-hand: Dagger
+passives:
+  - {name: Equivalent Exchange, kind: non-combat, slot: passive, target: 1 1-square-or-smaller target, condition: Non-Combat object transformation outside combat, use: Once per Long Rest, description: Reshape object keeping materials and mass., locked: false}
+  - {name: Quick Mix, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Once per turn, 2 spent items count as 1.', locked: false}
+  - {name: Chemical Enhancement, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'Used items hit harder — healing/damage +X, statuses +1 round, DOTs +2.', locked: true}
+  - {name: Intellectual, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent INT., locked: true}
+actions:
+  main:
+    - {name: Alchemy-Mix, tags: [ranged, throwing, item, physical, restorative], cost: spend items, target-range: Self, check: '—', description: 'Start mixing along arrows; fresh Final Mix used immediately. Spend 2 items for Steps 1+2 (2 for Step 1 skips Step 2). S1 Restorative/ Damage(+1)/ Status(+1)/ Curative(+1). S2 Elemental (immunity or XD6) / Gear (DEF&RES+3 or reduce dealt 3) / Weapon (halve type or +XD6). S3 Enhancements (Restorative +INT, Damage +INT, Elemental +INT, status +-1 / DOT+2, weapons +1D6, gear -2). S4 Catalysts: Unfettered (1 survives), Compound (5x5), Surge (+XD6+INT). S5 Final Mix Self/1/Square R10 used now.'}
+  support:
+    - {name: Efficiency, tags: [physical, item], cost: Twice per Combat, target-range: Self, check: '—', description: 1 chosen item survives this round Final Mix crafting.}
+    - {name: Bag of Many Things, tags: [physical, item], cost: '—', target-range: Self, check: '—', description: 'Roll D6 for bonus enhancements next Mix — 1-3:1, 4-5:2, 6:3.'}
+  reactions:
+    - {name: Rebuild, tags: [ranged, physical, throwing, item], cost: '—', target-range: Self, check: 'Condition: start or end of any target turn; Once per Combat', description: Swap 1 inventory item for any other Common non-weapon/gear item, usable immediately.}
+    - {name: Stabilized Formula, tags: [physical], cost: '—', target-range: Self, check: 'Condition: finishing Step 4; Once per Combat', description: Bottle craft for later instead of immediate use.}
+source-pages: [p086]
+notes: Main stats 1 LUK/2 DEX/1 INT and bonus 1 AGL/1 DEF/1 RES as printed. Sheet tracks 5 mix slots plus flask.

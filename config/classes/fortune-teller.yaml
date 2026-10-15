@@ -1,0 +1,49 @@
+id: fortune-teller
+name: Fortune Teller
+tier: '4'
+main-stat: LUK
+roles: [specialist]
+combat-modifier:
+  name: Psychic Readings
+  description: 'Passed checks from Card Reading gain Psychic Charge. Spend charges to hand-pick Tarot Deck cards instead of flipping (shuffle before further flips). Card effects use your stats and D6 rolls. Magic Ranged Wild Card.'
+prerequisites:
+  - {class: trickster, level: 5}
+  - {class: battle-mage, level: 10}
+  - {class: bard, level: 10}
+unlocks:
+  - {class: shard-bearer, level: 10}
+health-mod: -5
+stats:
+  main: {STR: 0, DEX: 0, CON: 0, MND: 1, INT: 1, LUK: 2}
+  bonus: {JMP: 0, AGL: 1, DEF: 0, RES: 2, NRG: 0, FOR: 1}
+x-start: 1
+ultimate:
+  name: Intertwined Fate
+  description: Make a Card Reading where all checks succeed, hitting all party members and all enemies.
+  charge:
+    - use a Fortune Die
+    - use Card Reading
+    - succeed all 3 flipped cards
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Luck, value: 1, unlock-at: 3}
+equipment:
+  main-hand: Focus or Instrument
+  armor: Light Armor
+  off-hand: Dagger
+passives:
+  - {name: Prediction, kind: non-combat, slot: passive, target: self, condition: outside combat, use: Once per Long Rest, description: Draw 3 Tarot cards for GM fortune reading., locked: false}
+  - {name: Fortunate, kind: combat, slot: passive, target: T1 enemy R5, condition: constant, use: passive, description: '+1 FOR; Fortune Die floor of 3. Check D20+LUK vs RES.', locked: false}
+  - {name: Serendipitous, kind: combat, slot: passive, target: Self or 1 R5, condition: unlock all + once per round target checks in range, use: passive, description: Roll D6 to raise or lower one check per round., locked: true}
+  - {name: Lucky, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent LUK., locked: true}
+actions:
+  main:
+    - {name: Card Reading, tags: [ranged, magic], cost: Energy 5, target-range: T1 R5, check: '—', description: 'Flip 3 Tarot cards — allies top effects, enemies bottom; non-status/DOT shed at round end as cards shuffle back. Unlocks: Queen of Cups, Lovers, Hanged Man, Death, Sun, Moon. Starting deck: Fool, Wheel of Fortune, Star, Emperor, King of Wands, Knight of Swords.'}
+  support:
+    - {name: Luck or Misfortune, tags: [ranged, magic], cost: Energy 5, target-range: T1 R5, check: '—', description: 'Flip for party member (keeps card on passed check till end of round) or enemy (same check vs them).'}
+    - {name: Alter Fate, tags: [magic], cost: 'Energy 5, Boost: bottom cards instead of shuffling', target-range: Self, check: '—', description: After Card Reading before effects, re-shuffle flipped and flip replacements.}
+  reactions:
+    - {name: Rewrite the Future, tags: [ranged, magic], cost: '—', target-range: T1 R5, check: 'Condition: start of enemy turn; Once per Combat', description: Card Reading against them on their own turn.}
+    - {name: Destiny, tags: [ranged, magic], cost: '—', target-range: T1 R5, check: 'Condition: after using Card Reading; Once per Combat', description: Gift one flipped card effect to target, refreshing every round start till combat end.}
+source-pages: [p102]
+notes: 'Prereq Trickster LVL 5 chart vs sheet header Trickster LVL 15 — chart authoritative per notes, use 5. Single expertise track unlock 3. Sheet tracks 3 Psychic Charges.'

@@ -1,0 +1,54 @@
+id: wizard
+name: Wizard
+tier: '1'
+main-stat: INT
+roles: [dps]
+combat-modifier:
+  name: Elemental Power
+  description: 'Elemental magic grants Elemental Charge (max 3). Spend ALL charges before Elemental attack to enhance by count — 1: Boost for 0 Energy; 2: target Square 5x5 within 10 instead; 3: +XD6 damage. Magic Ranged Damage Dealer.'
+prerequisites:
+  - {class: any-starter, level: 10}
+unlocks:
+  - {class: battle-mage, level: 10}
+  - {class: necromancer, level: 5}
+health-mod: -5
+stats:
+  main: {STR: 0, DEX: 0, CON: 1, MND: 1, INT: 2, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 1, RES: 3, NRG: 0, FOR: 1}
+x-start: 1
+ultimate:
+  name: Arcane Blast
+  description: 4D6 in 5x5 area within 10 squares.
+  charge:
+    - use 2 Main Actions
+    - spend Charges
+    - Boost an ability
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Intelligence, value: 1, unlock-at: 2}
+  - {expertise: Knowledge, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
+passives:
+  - {name: Basic Magic, kind: non-combat, slot: passive, target: self, condition: Non-Combat elemental magic outside combat, use: constant, description: Simple Fire/Ice/Lightning cantrips (flame, freeze water, current)., locked: false}
+  - {name: Focus Weapon Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Focus anywhere; once per round with Boost, 1 or 6 uses Boost for 0 Energy.', locked: false}
+  - {name: Glass Cannon, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: '-1 CON/MND/DEF/RES, +1 INT/NRG as printed.', locked: true}
+  - {name: Intellectual, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent INT., locked: true}
+actions:
+  main:
+    - {name: Fire, tags: [ranged, elemental, fire], cost: 'Energy 4, Boost: Stagger inflicts Burn DOT 3', target-range: T1 R10, check: 'D20+INT vs DEF', description: '1D6 + INT; Stagger +XD6.'}
+    - {name: Ice, tags: [elemental, ice], cost: 'Energy 4, Boost: +XD6', target-range: T1 R10, check: 'D20+INT vs RES', description: '1D6 + INT; Expose Slow.'}
+    - {name: Lightning, tags: [ranged, elemental, lightning], cost: 'Energy 4, Boost: +XD6', target-range: T1 R10, check: 'D20+INT vs RES', description: 'INT damage; Expose Lightning DOT 5.'}
+    - {name: Arcane Orb, tags: [ranged, arcane], cost: 'Energy 7, only if no other Main/Secondary used; lose all Charges at end of turn', target-range: 5x5 within 10, check: 'D20+INT vs DEF', description: 'INT + 3D6 to all; Stagger +(1+X)D6.'}
+  support:
+    - {name: Quick Cast, tags: [arcane, magic], cost: '—', target-range: Self, check: '—', description: Use a Main-Action Magic ability still available this combat.}
+    - {name: Sleep, tags: [ranged, arcane], cost: 'Energy 4, Boost: 5x5 within 10 instead', target-range: T1 R10, check: 'D20+INT vs RES', description: 'Expose Sleep (Sleep-inflicted immune to re-Sleep this combat).'}
+    - {name: Energize, tags: [arcane, magic], cost: Once per Combat, target-range: Self, check: '—', description: Restore 2 Energy; next Magic costs 1 less (min 1).}
+    - {name: Elemental Master, tags: [elemental], cost: Once per Combat, target-range: Self, check: '—', description: 'Next Elemental attack guaranteed to Stagger, gains every Elemental Boost, cannot be Resisted.'}
+  reactions:
+    - {name: Counter Spell, tags: [magic], cost: '—', target-range: T1 R10, check: 'Condition: any target in range uses Magic; Once per Combat', description: Interrupt it, negating everything.}
+    - {name: From the Aether, tags: [ranged, holy], cost: '—', target-range: Self or 1 R10, check: 'Condition: your turn or any target ends turn; Once per Combat', description: Restore X+1 Energy to target.}
+source-pages: [p072]
+notes: Health -5 as printed. Sheet tracks 3 Elemental Charges.

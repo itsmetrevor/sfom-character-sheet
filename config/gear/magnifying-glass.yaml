@@ -1,0 +1,10 @@
+id: magnifying-glass
+name: "Magnifying Glass"
+slot: accessory
+damage-type: null
+bonus:
+  stat: "perception"
+  value: 1
+effect: "+1 Perception Expertise."
+source: investigator
+stack-max: 5

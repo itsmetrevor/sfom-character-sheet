@@ -1,0 +1,8 @@
+id: cute
+name: Cute
+source: ancestry
+slot: non-combat
+target: Self
+use: Constant
+description: |
+  Gain 'Inspired' when using a Charisma Check against a Target for the first time.

@@ -1,0 +1,54 @@
+id: negotiator
+name: Negotiator
+tier: '2'
+main-stat: LUK
+roles: [specialist]
+combat-modifier:
+  name: Real Talk
+  description: 'Describe talk freely; GM bonuses Expose checks by performance — Liked +2, Loved +4, Unbelievable +6. Lose any Mercy ally unless Main or Sub Class is Negotiator.'
+prerequisites:
+  - {class: beast-tamer, level: 5}
+unlocks:
+  - {class: bard, level: 10}
+  - {class: necromancer, level: 10}
+health-mod: -5
+stats:
+  main: {STR: 0, DEX: 0, CON: 0, MND: 1, INT: 1, LUK: 2}
+  bonus: {JMP: 0, AGL: 1, DEF: 0, RES: 3, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Silver Tongue
+  description: Convince 1 non-boss target to leave battle; gain both Steal options from it.
+  charge:
+    - Chain an ability
+    - inflict a Status Effect
+    - Stagger an enemy
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Charisma, value: 1, unlock-at: 2}
+  - {expertise: Deception, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Ranged Piercing Pistol
+  armor: Medium
+  off-hand: Dagger
+passives:
+  - {name: Linguistics, kind: combat, slot: passive, target: self, condition: constant, use: constant, description: Know all Ancestry Languages., locked: false}
+  - {name: Steel Trap, kind: combat, slot: passive, target: self, condition: constant, use: constant, description: 'Immune to mind-altering statuses (Berserk, Charm, Confuse, Fear, Mute, Provoke, Ruin, Sleep).', locked: false}
+  - {name: Mediator, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Talk range +3; add LUK to Expose checks., locked: true}
+  - {name: Lucky, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent LUK., locked: true}
+actions:
+  main:
+    - {name: Threatening Shot, tags: [melee, physical], cost: '—', target-range: T1 R10, check: 'D20+INT vs DEF', description: 'RES -2 till end of turn; Stagger (X+2)D6; RES -LUK instead.'}
+    - {name: Intimidate, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: 'D20+LUK vs RES, Chain: use as Main Action', description: 'Expose Dizzy to understanding targets; Staggered with Threatening Shot lets 1 ally in R10 inflict Fear (Ally Target) till end of round.'}
+    - {name: Condemn, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: 'D20+LUK vs RES, Chain: use as Main Action', description: 'Expose Ruin (3); Staggered with Threatening Shot makes Ruin (2).'}
+    - {name: Insult, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: 'D20+LUK vs RES, Chain: use as Main Action', description: 'Expose Berserk; Staggered with Threatening Shot also inflicts Confused.'}
+  support:
+    - {name: Listen Here!, tags: [ranged, physical, talk], cost: 'Boost: 3x3 within 5', target-range: T1 R5, check: 'D20+LUK vs RES', description: 'Expose Immobilized; Staggered with Threatening Shot upgrades to Pause (no re-Pause this combat).'}
+    - {name: Tall Tell, tags: [ranged, physical, talk], cost: 'Boost: 3x3 within 5', target-range: T1 R5, check: 'D20+LUK vs RES', description: 'Expose Sleep as printed (Tall Tell); not Staggered with Threatening Shot fail first Sleep check as rolled 1.'}
+    - {name: Inspire, tags: [ranged, physical, talk], cost: 'Boost: target Ultimate Gauge +1', target-range: T1 R5, check: '—', description: 'Inspired till end of their turn; roll 2D20 take highest.'}
+    - {name: Persuade, tags: [ranged, physical, talk], cost: 'Boost: inflict Charmed (2)', target-range: T1 R5, check: 'D20+LUK vs RES', description: 'Expose Charmed (GM roleplays; no re-Charm this combat).'}
+  reactions:
+    - {name: Mercy, tags: [ranged, physical, talk], cost: '—', target-range: T1 non-Boss R5, check: 'D20+LUK vs RES; Condition: before KO understanding enemy; Successfully Once per Combat', description: 'Expose — joins as 1HP ally (may join party; stays to end of next combat then leaves/dies; enters adjacent as Ally Summon).'}
+    - {name: Delay, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: 'D20+LUK vs RES; Condition: any target begins turn; Successfully Once per Combat', description: Expose — it takes no turn this round.}
+source-pages: [p080]
+notes: 'Chart LVL 5 vs sheet header Beast Tamer LVL 10 — chart authoritative per notes, use LVL 5. Tall Tell as printed. Bonus 1 AGL/3 RES as printed.'

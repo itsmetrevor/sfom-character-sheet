@@ -1,0 +1,8 @@
+id: fated
+name: Fated
+source: ancestry
+slot: combat
+target: Self
+use: Once per Combat
+description: |
+  When you are Knocked Out, Remove the 'Knocked Out' Status Effect and Restore 1HP. Grants 'Unseen' & 'Damage Immunity' until the end of this Round.

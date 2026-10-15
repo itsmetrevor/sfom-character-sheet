@@ -1,0 +1,58 @@
+id: soldier
+name: Soldier
+tier: starter
+main-stat: STR
+roles: [dps, tank]
+combat-modifier:
+  name: Soldier's Duty
+  description: 'MAX HP equals double CON. Inspired attacking from side or behind in melee. Uses Marching Drills even un-unlocked. Physical Melee All-Rounder.'
+prerequisites: []
+unlocks:
+  - {class: beast-tamer, level: 10}
+  - {class: knight, level: 10}
+  - {class: monk, level: 10}
+  - {class: priest, level: 10}
+  - {class: thief, level: 10}
+  - {class: wizard, level: 10}
+  - {class: judge, level: 15}
+health-mod: 0
+stats:
+  main: {STR: 2, DEX: 0, CON: 1, MND: 1, INT: 0, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 2, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Valor Strike
+  description: Deal 50% damage to an adjacent target.
+  charge:
+    - attack from side/behind
+    - Chain
+    - Stagger/Expose
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Strength, value: 1, unlock-at: 2}
+  - {expertise: Perception, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Slashing Sword
+  armor: Heavy Armor
+  off-hand: Shield
+passives:
+  - {name: Military Knowledge, kind: non-combat, slot: passive, target: self, condition: Non-Combat Knowledge check outside combat, use: passive, description: Inspired on Military Knowledge., locked: false}
+  - {name: Slashing Weapon Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Slashing with any class; physical melee +X damage.', locked: false}
+  - {name: Marching Drills, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: +1 JMP/AGL., locked: true}
+  - {name: Stronger, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent STR, always on even without the card., locked: true}
+actions:
+  main:
+    - {name: Enraged Swing, tags: [melee, physical, attack], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain STR', description: 'STR damage; Stagger +XD6; Critical refunds a Heightened Senses slot; Charge +X damage.'}
+    - {name: Throw Rock, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'STR vs DEF', description: 'STR damage, Provoked; Stagger inflicts Berserk.'}
+    - {name: Rally Call, tags: [melee, restorative, magic], cost: 'Energy 2/6, Boost: triple HP', target-range: T1 R1, check: '—', description: Lose half current HP (round down); target restores double HP lost.}
+    - {name: Double Slash, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'STR vs DEF, Chain STR, Charge range +1', description: 'STR damage; Stagger +XD6; Critical refunds Heightened Senses; Charge range +X.'}
+  support:
+    - {name: Charge, tags: [ranged, physical], cost: '—', target-range: T1 R3, check: 'D20+DEX vs DEF', description: 'Move adjacent between you and target; X damage, lose damage/range bonuses; shield +X; Stagger +STR.'}
+    - {name: Healing Herbs, tags: [melee, physical], cost: '—', target-range: T1 R1, check: '—', description: Remove all Status Effects.}
+    - {name: War Cry, tags: [magic], cost: 'Energy 2/6, Boost: 3x3 centered on self, Once per Combat', target-range: Self, check: '—', description: '+(X+1) AGL, reduce physical damage by (X+1), deal +(X+1) damage till end of round.'}
+    - {name: Bolster, tags: [melee, physical], cost: 'Energy 3/6, Boost: restore MND x STR HP', target-range: Self or 1 R1, check: '—', description: '+(X+2) DEF; target only damaged by attacks while Staggered.'}
+  reactions:
+    - {name: Heightened Senses, tags: [physical], cost: '—', target-range: Self, check: 'Condition: your turn or before attacking; Twice per Combat', description: Abilities +(X+1) damage this round.}
+    - {name: Counter Bash, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'Condition: after being attacked; Once per Combat; roll D6', description: 1 or 6 deals STR damage back; shield +X.}
+source-pages: [p048]
+notes: Example sheet vision-transcribed p048; only finished ability text in book.

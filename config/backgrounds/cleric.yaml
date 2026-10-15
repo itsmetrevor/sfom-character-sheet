@@ -1,0 +1,29 @@
+id: cleric
+name: "Cleric"
+description: |
+  You have devoted yourself to your chosen religion and learned much about holy magic. Blessed by your Diety you are capable of using holy magic to heal those in need.
+expertise:
+  "mind": 1
+  "concentration": 1
+starting-items:
+  - religious-tome
+starting-items-text: "Religious Tome: (Focus) +1 When Restoring HP"
+passives:
+  plvl-0:
+    name: "Knowledge"
+    summary: "Choose a Religion to Follow. Gain 'Inspired' on Knowledge checks about Holy Magic or Religion."
+    detail: "Confer with your GM and check the Religion Section on page XX to determine your Religion."
+  plvl-3:
+    name: "Cleanse"
+    summary: "Once per Full Rest, remove a Curse or Affliction from a Target."
+    detail: "Outside of Combat, you are capable of using holy magic to remove curses and heal those around you with afflictions or injuries. This can even be used to fix scars and old wounds."
+  plvl-6:
+    name: "Healer"
+    summary: "Once per Full Rest, before Combat begins, remove 1 'Exhaustion' from each Party Member."
+    detail: "Your connection to your Diety allows you to use holy magic to remove 1 'Exhaustion' from your allies before starting a Combat."
+  plvl-9:
+    name: "Prophet"
+    summary: "Once per Full Rest, ask your Diety for help: make a 'Mind' Check; the GM gives you a vision based on the Roll."
+    detail: "You have reached enlightenment and can now commune with your Diety. You may ask your Diety for help and they will give you a vision. The difficulty of the 'Mind' Check and what the vision shows you is at the discretion of the GM."
+craftsman: false
+source-pages: "p035"

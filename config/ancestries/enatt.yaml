@@ -1,0 +1,26 @@
+id: enatt
+name: Enatt
+languages:
+  - enattish
+  - lagosian
+vision: low-light
+max-hp: 9
+expertise:
+  resistance: 2
+main-mods:
+  positive: CON
+  negative: DEX
+bonus-stat:
+  stat: RES
+  value: 1
+passives:
+  non-combat: one-with-nature
+  combat: detoxify
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p010+p011 sheet6

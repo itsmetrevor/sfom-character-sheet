@@ -1,0 +1,26 @@
+id: orinotis
+name: Orinotis
+languages:
+  - orinotisian
+  - lagosian
+vision: normal
+max-hp: 8
+expertise:
+  concentration: 2
+main-mods:
+  positive: CON
+  negative: INT
+bonus-stat:
+  stat: NRG
+  value: 1
+passives:
+  non-combat: holy-mothers-will
+  combat: holy-mothers-blessing
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p024+p025 sheet13

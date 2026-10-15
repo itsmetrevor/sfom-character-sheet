@@ -1,0 +1,141 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Background",
+  "type": "object",
+  "required": [
+    "id",
+    "name",
+    "description",
+    "expertise",
+    "starting-items",
+    "passives",
+    "craftsman",
+    "source-pages"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "expertise": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer"
+      },
+      "description": "Permanent expertise points granted (pick-1-of-2-backgrounds rule applied at build time)"
+    },
+    "starting-items": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Refs to gear ids in config/gear/"
+    },
+    "starting-items-text": {
+      "type": "string",
+      "description": "Verbatim Starting Items line from the handbook notes"
+    },
+    "passives": {
+      "type": "object",
+      "required": [
+        "plvl-0",
+        "plvl-3",
+        "plvl-6",
+        "plvl-9"
+      ],
+      "properties": {
+        "plvl-0": {
+          "type": "object",
+          "required": [
+            "name",
+            "summary",
+            "detail"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        },
+        "plvl-3": {
+          "type": "object",
+          "required": [
+            "name",
+            "summary",
+            "detail"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        },
+        "plvl-6": {
+          "type": "object",
+          "required": [
+            "name",
+            "summary",
+            "detail"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        },
+        "plvl-9": {
+          "type": "object",
+          "required": [
+            "name",
+            "summary",
+            "detail"
+          ],
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            },
+            "detail": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "craftsman": {
+      "type": "boolean"
+    },
+    "source-pages": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Transcription flags (as-printed quirks, truncation, index mismatches)"
+    }
+  }
+}

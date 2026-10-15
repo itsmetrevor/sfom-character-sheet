@@ -1,0 +1,27 @@
+id: litoora
+name: Litoora
+languages:
+  - litooran
+  - lagosian
+vision: dark
+max-hp: 6
+expertise:
+  luck: 1
+  stealth: 1
+main-mods:
+  positive: LUK
+  negative: CON
+bonus-stat:
+  stat: FOR
+  value: 1
+passives:
+  non-combat: unobtrusive
+  combat: non-threatening
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p020+p021 sheet11

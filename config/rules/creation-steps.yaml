@@ -1,0 +1,19 @@
+id: creation-steps
+name: Character Creation (Steps 1-5)
+source-pages: p004-p005
+steps:
+  - step: 1
+    title: Fill in base stats
+    detail: Right-side squares — Max HP 30; STR/DEX/CON/MND/INT/LUK 1; JMP/NRG/FOR 1; AGL 5; DEF/RES 10.
+  - step: 2
+    title: Choose Ancestry
+    detail: Left — name, languages, vision, ancestry expertise (permanent), non-combat passive (first slot). Right — max-hp, 1 positive + 1 negative main stat, bonus stat, combat passive (first slot).
+  - step: 3
+    title: Choose Background
+    detail: "Left — background expertise (permanent) + tier passives at P.LVL 0/3/6/9. Right — starting items into inventory. Up to 2 backgrounds: expertise from 1, items from 1, one tier pick per level."
+  - step: 4
+    title: Choose Starting Class
+    detail: Chemist, Gladiator, Ranger, Scholar, Soldier, or Trickster. Copy class-stat stars; X = 1.
+  - step: 5
+    title: Choose Starting Gear bundle
+    detail: Bundle of choice; see Gear section (page XX missing — starter-item catalog only for now).

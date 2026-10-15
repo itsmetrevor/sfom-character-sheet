@@ -1,0 +1,8 @@
+id: one-with-nature
+name: One With Nature
+source: ancestry
+slot: non-combat
+target: Self
+use: Once per Full Rest
+description: |
+  You may commune with nearby plant life.

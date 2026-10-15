@@ -1,0 +1,26 @@
+id: children-of-maulawi
+name: Children of Maulawi
+languages:
+  - maulawian
+  - lagosian
+vision: low-light
+max-hp: 7
+expertise:
+  nature: 2
+main-mods:
+  positive: MND
+  negative: CON
+bonus-stat:
+  stat: JMP
+  value: 1
+passives:
+  non-combat: forest-dweller
+  combat: soft-landing
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p006+p007 sheet4

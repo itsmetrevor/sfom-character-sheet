@@ -1,0 +1,8 @@
+id: gold-coins
+name: "Gold Coins"
+slot: currency
+damage-type: null
+bonus: null
+effect: "Spend at shops and vendors. (Granted 25 by Merchant and Noble.)"
+source: merchant
+stack-max: 999

@@ -1,0 +1,6 @@
+id: concentration
+name: Concentration
+main-stat: CON
+description: |
+  Focus under pressure. Used to maintain spells, resist distraction, and steady aim.
+source-pages: p002

@@ -1,0 +1,28 @@
+id: investigator
+name: "Investigator"
+description: |
+  You spent some time as a detective or private investigator looking for clues and solving crimes. When investigating, you know what to look for and how to get people to talk.
+expertise:
+  "knowledge": 2
+starting-items:
+  - magnifying-glass
+starting-items-text: "Magnifying Glass: (Accessory) +1 Perception Expertise"
+passives:
+  plvl-0:
+    name: "Investigate"
+    summary: "Finding Clues: 'Perception' Checks to look for Clues always find at least one."
+    detail: "Keep track of each clue you find, it may be helpful to have an additional piece of paper with you to help with tracking clues."
+  plvl-3:
+    name: "Process"
+    summary: "+1 per Clue found on 'Knowledge' Checks to get a hint toward your Investigation."
+    detail: "You may make a 'Knowledge' Check to get a hint from the GM towards your investigation. The difficulty of the 'Knowledge' Check and the hint given to you is at the discretion of the GM."
+  plvl-6:
+    name: "Interrogate"
+    summary: "+2 per Clue found on 'Bravado' Checks to Interrogate a Target."
+    detail: "Once the investigation is underway you will need to interrogate people. For each Clue you have gain +2 to your 'Bravado' Check to get them to talk."
+  plvl-9:
+    name: "Detective"
+    summary: "Gain 'Inspired' on all 'Investigator' Abilities."
+    detail: "You are professional, you have an easier time finding leads, interrogating perps, and solving your investigations. Each of your previous Investigator Abilities will gain the 'Inspired' Status Effect."
+craftsman: false
+source-pages: "p038"

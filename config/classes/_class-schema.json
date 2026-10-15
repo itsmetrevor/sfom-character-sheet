@@ -1,0 +1,161 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Class",
+  "type": "object",
+  "required": ["id", "name", "tier", "main-stat", "health-mod", "stats", "equipment"],
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "tier": { "type": "string", "enum": ["starter", "1", "2", "3", "4", "ultimate"] },
+    "main-stat": { "type": "string", "enum": ["STR", "DEX", "CON", "MND", "INT", "LUK", "ANY"] },
+    "roles": { "type": "array", "items": { "type": "string" } },
+    "combat-modifier": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" }
+      }
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": { "type": "string" },
+          "level": { "type": "integer" }
+        }
+      }
+    },
+    "unlocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "class": { "type": "string" },
+          "level": { "type": "integer" }
+        }
+      }
+    },
+    "health-mod": { "type": "integer" },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "main": {
+          "type": "object",
+          "properties": {
+            "STR": { "type": "integer" },
+            "DEX": { "type": "integer" },
+            "CON": { "type": "integer" },
+            "MND": { "type": "integer" },
+            "INT": { "type": "integer" },
+            "LUK": { "type": "integer" }
+          }
+        },
+        "bonus": {
+          "type": "object",
+          "properties": {
+            "JMP": { "type": "integer" },
+            "AGL": { "type": "integer" },
+            "DEF": { "type": "integer" },
+            "RES": { "type": "integer" },
+            "NRG": { "type": "integer" },
+            "FOR": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "x-start": { "type": "integer", "default": 1 },
+    "ultimate": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "charge": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "expertise-tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "expertise": { "type": "string" },
+          "value": { "type": "integer" },
+          "unlock-at": { "type": "integer" }
+        }
+      }
+    },
+    "equipment": {
+      "type": "object",
+      "properties": {
+        "main-hand": { "type": "string" },
+        "armor": { "type": "string" },
+        "off-hand": { "type": "string" }
+      }
+    },
+    "passives": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "kind": { "type": "string" },
+          "slot": { "type": "string" },
+          "target": { "type": "string" },
+          "condition": { "type": "string" },
+          "use": { "type": "string" },
+          "description": { "type": "string" },
+          "locked": { "type": "boolean" }
+        }
+      }
+    },
+    "actions": {
+      "type": "object",
+      "properties": {
+        "main": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "tags": { "type": "array", "items": { "type": "string" } },
+              "cost": { "type": "string" },
+              "target-range": { "type": "string" },
+              "check": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "support": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "tags": { "type": "array", "items": { "type": "string" } },
+              "cost": { "type": "string" },
+              "target-range": { "type": "string" },
+              "check": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        },
+        "reactions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "tags": { "type": "array", "items": { "type": "string" } },
+              "cost": { "type": "string" },
+              "target-range": { "type": "string" },
+              "check": { "type": "string" },
+              "description": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+    "source-pages": { "type": "array", "items": { "type": "string" } },
+    "notes": { "type": "string" }
+  }
+}

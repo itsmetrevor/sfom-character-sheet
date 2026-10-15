@@ -1,0 +1,55 @@
+id: chronomancer
+name: Chronomancer
+tier: '2'
+main-stat: MND
+roles: [specialist]
+combat-modifier:
+  name: Change Fate
+  description: 'When another party member fails a check, spend 1 Time Warp to rewind — re-roll D20 adding LUK (Critical refunds Time Warp). Spending Time Warp gains 1 Energy. Time Warps refill each combat.'
+prerequisites:
+  - {class: priest, level: 10}
+unlocks:
+  - {class: invoker, level: 10}
+  - {class: judge, level: 10}
+health-mod: 0
+stats:
+  main: {STR: 0, DEX: 0, CON: 0, MND: 2, INT: 1, LUK: 1}
+  bonus: {JMP: 0, AGL: 1, DEF: 0, RES: 2, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Manipulate Time
+  description: Each party member gains Quick and Inspired; all enemies gain Slow and Dizzy; regain all Time Warp charges.
+  charge:
+    - Boost an ability
+    - inflict a Status Effect
+    - Change Fate
+    - use all Change Fate
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Mind, value: 1, unlock-at: 2}
+  - {expertise: Knowledge, value: 1, unlock-at: 2}
+equipment:
+  main-hand: Focus
+  armor: Light Armor
+  off-hand: Tome
+passives:
+  - {name: Retry, kind: non-combat, slot: passive, target: all, condition: Non-Combat outside combat, use: Twice per Long Rest, description: 'Reverse time up to 1 minute; chosen targets in 5x5 on self remember what happened.', locked: false}
+  - {name: Float, kind: combat, slot: passive, target: self, condition: target moves within 5 squares, use: constant, description: Levitate (no terrain or fall damage)., locked: false}
+  - {name: Rewind, kind: combat, slot: passive, target: T1 R10, condition: unlock all / target fails check within range, use: once per round, description: Re-roll a failed check., locked: true}
+  - {name: Mindful, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent MND., locked: true}
+actions:
+  main:
+    - {name: Heavy, tags: [ranged, chrono], cost: 'Energy 5, Boost: 5x5 within 5 instead', target-range: T1 R10, check: 'D20+MND vs RES', description: 'Shave 15% current HP (round down); Expose 25%; Critical doubles.'}
+    - {name: Pause, tags: [chrono], cost: 'Energy 5, Boost: inflict Pause (2) instead', target-range: T1 R10, check: 'D20+MND vs RES', description: 'Expose Pause (no Move/actions till end of Enemy Step; no re-Pause).'}
+    - {name: Repeat, tags: [chrono], cost: 'Energy 5, Boost: target gains Inspired till end of next turn', target-range: T1 R10, check: 'Once per Combat', description: 'Target immediately takes another turn; main-class Chronomancers regain Time Warp.'}
+    - {name: Falling Star, tags: [ranged, chrono], cost: Energy pool, target-range: T1 1x1 within 5, check: Critical, description: 'Spend any Energy pre-roll — each point past first doubles size (2x2 steps) and adds +XD6; deals MND XD6 split evenly (round down) to all.'}
+  support:
+    - {name: Quick, tags: [chrono], cost: 'Energy 5, Boost: 3x3 within 10 instead', target-range: Self or 1 R10, check: '—', description: 'Quick (+1 Main/Support/Movement next turn; expires end of that turn).'}
+    - {name: Slow, tags: [chrono], cost: 'Energy 5, Boost: 3x3 within 10 instead', target-range: T1 R10, check: 'D20+MND vs RES', description: Expose Slow (AGL halved, round down).}
+    - {name: Levitate, tags: [chrono], cost: 'Energy 4, Boost: 5x5 within 5 instead', target-range: T1 R10, check: 'D20+MND vs RES', description: Levitate till end of round.}
+    - {name: Teleport, tags: [chrono], cost: 'Energy 5, Boost: up to (X+7) from start', target-range: Self or 1 non-Boss R10, check: '—', description: Teleport up to (X+4) from start, ignoring verticality.}
+  reactions:
+    - {name: Time Loop, tags: [ranged, chrono], cost: '—', target-range: T1 R10, check: 'Condition: end of target turn; Once per Combat', description: 'Pick 1 action target took (Main/Support/Move) — repeats exactly that every turn. Final card line partially obscured as-printed.'}
+    - {name: Immobilize, tags: [holy, magic], cost: '—', target-range: T1 R10, check: 'D20+MND vs RES; Condition: beginning/end of any target turn or before it moves; Successfully Once per Combat', description: 'Expose Immobilize (no Move till end of Enemy Phase; reusable if Resisted).'}
+source-pages: [p078]
+notes: Bonus 1 AGL/2 RES as printed. Both expertise tracks read Unlock 2 as printed. Sheet tracks 3 Time Warp Charges.

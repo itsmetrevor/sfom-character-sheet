@@ -1,0 +1,29 @@
+id: armorer
+name: "Armorer"
+description: |
+  Four Craftsman backgrounds — Armorer, Blacksmith, Clothier, Jeweler — share crafting mechanics; each requires adventure resources, and resources impart effects on crafted Gear. See the Crafting Section, page XX. Capabilities: Medium & Heavy Armor. Each comes with a specific 'Writ' shown to shop/forge proprietors for facility access.
+expertise:
+  "crafting": 2
+starting-items:
+  - armorers-writ
+  - medium-armor-generic
+starting-items-text: "Armorer's Writ (Item); Med or Heavy Armor (Armor) +1 DEF"
+passives:
+  plvl-0:
+    name: "Common"
+    summary: "Craft 1 Heavy or Medium Armor. Required: 3 Materials. Armor gains 1 Effect from Materials used."
+    detail: "Craft 1 Heavy or Medium Armor. Required: 3 Materials. Armor gains 1 Effect from Materials used. (From ability-bar graphic; no paragraph details in source.)"
+  plvl-3:
+    name: "Uncommon"
+    summary: "Craft 1 Heavy or Medium Armor. Required: 7 Materials. Armor gains 2 Effects from Materials used."
+    detail: "Craft 1 Heavy or Medium Armor. Required: 7 Materials. Armor gains 2 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
+  plvl-6:
+    name: "Rare"
+    summary: "Craft 1 Heavy or Medium Armor. Required: 15 Materials. Armor gains 3 Effects from Materials used."
+    detail: "Craft 1 Heavy or Medium Armor. Required: 15 Materials. Armor gains 3 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
+  plvl-9:
+    name: "Efficiency"
+    summary: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3."
+    detail: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3. (From ability-bar graphic; no paragraph details in source.)"
+craftsman: true
+source-pages: "p031"

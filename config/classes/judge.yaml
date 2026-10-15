@@ -1,0 +1,52 @@
+id: judge
+name: Judge
+tier: '4'
+main-stat: STR
+roles: [dps, specialist]
+combat-modifier:
+  name: Law & Order
+  description: 'Abilities can Create and Declare any followable Law fitting fight (e.g. melee range +3, or no damage without Staggering). Laws bind everyone able to follow. Always open with 3 Rulings + 3 Favors active. Activating Ruling under Judgements also selects Favor; both persist while Active. Uses Assignment un-unlocked. Physical Melee/Ranged Damage Dealer, Support, Saboteur.'
+prerequisites:
+  - {class: soldier, level: 15}
+  - {class: chronomancer, level: 10}
+  - {class: grim-knight, level: 10}
+unlocks:
+  - {class: shard-bearer, level: 10}
+health-mod: 0
+stats:
+  main: {STR: 2, DEX: 0, CON: 1, MND: 0, INT: 1, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 2, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Transgression
+  description: X damage per active Ruling to each enemy; create and declare a Law till end of round; enemies only.
+  charge:
+    - declare a Law
+    - activate a Ruling
+    - deactivate a Ruling
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Any, value: 1, unlock-at: 3}
+equipment:
+  main-hand: Slashing or Bludgeoning Sword
+  armor: Medium Armor
+  off-hand: Pistol or Crossbow
+passives:
+  - {name: Sense of Justice, kind: non-combat, slot: passive, target: self, condition: constant, use: passive, description: Know every local law., locked: false}
+  - {name: Arbiter, kind: combat, slot: passive, target: self, condition: constant, use: once per round, description: Reorder turn order once per round., locked: false}
+  - {name: Assignment, kind: combat, slot: passive, target: all party, condition: unlock all, use: Once per Combat, description: 'Before combat, party may pre-move STR from their starts.', locked: true}
+  - {name: Stronger, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent STR., locked: true}
+actions:
+  main:
+    - {name: Judge, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: X damage activate 1 Ruling + 1 Favor', description: 'Activate 1 Ruling + 1 Favor; STR damage; Stagger +XD6 plus +1 per active Ruling.'}
+    - {name: Hammer of Justice, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: X damage deactivate 1 Ruling + 1 Favor', description: 'Deactivate 1+1; STR damage; Stagger +XD6 plus +1 per non-active Ruling.'}
+    - {name: Order, tags: [ranged, magic], cost: 'Energy 5, Boost: activate 1 Ruling + 1 Favor', target-range: All any range, check: '—', description: Create and declare 1 Law till end of round for everyone on field.}
+    - {name: Executioner, tags: [ranged, magic], cost: 'Energy 5, Chain: X damage deactivate 1 Ruling + 1 Favor', target-range: T1 R5, check: 'D20+STR vs DEF', description: 'STR+Xd6; Stagger +1D6 per 2 active Rulings; 5+ active inflicts Sever (Main (1)); then deactivate 3 Rulings + 3 Favors.'}
+  support:
+    - {name: Ordinance, tags: [magic], cost: 'Boost: Inspired on next attack', target-range: Self, check: '—', description: Activate 1 Ruling and 1 Favor.}
+    - {name: Justified Disobedience, tags: [ranged, magic], cost: 'Energy 5, Boost: activate/deactivate 1 Ruling + 1 Favor', target-range: Self or 1 R5, check: '—', description: Target ignores current Rulings/Laws till end of round.}
+    - {name: Jury, tags: [ranged, magic], cost: 'Energy 5, Boost: Guilty Ruin 3 / Innocent Quick', target-range: T1 R5, check: '—', description: 'Everyone else rolls D6 — majority Guilty inflicts chosen Hex (1-3), majority Innocent grants Inspired (4-6).'}
+    - {name: Scales of Justice, tags: [ranged, magic], cost: 'Energy pool, Once per Combat; Condition: Judge+Jury+Executioner used', target-range: All any range, check: 'D20+STR vs RES', description: 'Enemies take STR+(X+1)D6 and Dizzy; allies restore STR+(X+1)D6 and Inspired.'}
+  reactions: []
+source-pages: [p104]
+notes: 'Sheet header and chart agree Soldier 15 + Chronomancer 10 + Grim Knight 10; p105 crunch-page text repeats Fortune Teller chain — disregarded, use chart+soldier header. Single track Any Expertise unlock 3. Judgements: open every combat 3 Rulings+3 Favors. Rulings: allies heal -1D6 / enemies +1D6 / allies halve AGL / enemy statuses auto-succeed / allies cannot repeat Direction / enemies +3 crit / first ability +1 Energy / channeled wait 2 party turns. Favors: party +2 range / +1 level after combat / party +1 X / guaranteed common reward / party +1 energy Status Steps / +5 LUK defeat / diagonal move / x2 gold.'

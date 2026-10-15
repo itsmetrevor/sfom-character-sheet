@@ -1,0 +1,29 @@
+id: apprentice-mage
+name: "Apprentice Mage"
+description: |
+  You are a novice Mage studying Elemental and Arcane magic to become a Wizard. As you progress you will learn various magic powers that will help you on your new journey.
+expertise:
+  "knowledge": 1
+  "intelligence": 1
+starting-items:
+  - basic-magic-tome
+starting-items-text: "Basic Magic Tome: (Focus Weapon) +1 Magic Damage"
+passives:
+  plvl-0:
+    name: "Intellect"
+    summary: "Gain 'Inspired' when making an 'Intelligence' check about Arcane or Elemental Magic."
+    detail: "You are Knowledgable of Arcane & Elemental Magic so related checks are easier for you to pass."
+  plvl-3:
+    name: "Basic Magic"
+    summary: "You can cast basic Elemental Magic: Earth, Fire, Wind, Water, Ice, and Lightning."
+    detail: "This magic is rudimentary, you can make a small flame, turn water into ice in a small area, etc. GM is allowed discretion on how much magic you may cast in specific circumstance."
+  plvl-6:
+    name: "Detect Magic"
+    summary: "You can detect if an Item has magical properties and see what those properties are."
+    detail: "If any item has magical properties you are capable of sensing exactly what those properties are. GM is allowed discretion on certain magical items you may have no knowledge of."
+  plvl-9:
+    name: "Magic Hand"
+    summary: "Once per Full Rest, summon an invisible hand that acts as your own hand. It may move within 30ft of you."
+    detail: "This is a floating hand that can move any direction within 30ft from you. It is capable of lifting objects that you would be capable of lifting yourself with one hand."
+craftsman: false
+source-pages: "p032"

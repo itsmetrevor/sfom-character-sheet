@@ -1,0 +1,28 @@
+id: courier
+name: "Courier"
+description: |
+  You have worked diligently as a Courier, delivering mail. You know how to train pigeons to deliver messages and are highly dexterous from your time on the job.
+expertise:
+  "dexterity": 2
+starting-items:
+  - running-shoes
+starting-items-text: "Running Shoes: (Accessory) +1 AGL"
+passives:
+  plvl-0:
+    name: "Pigeon Call"
+    summary: "You have a Pigeon that carries messages to visited locations and always finds its way back."
+    detail: "Your Pigeon will fly at 24x your normal walking pace. It will take your Pigeon 1 Hour to fly what would take you 24 hours to walk. If you ever find need of a new pigeon you can easily find one."
+  plvl-3:
+    name: "Fleet of Foot"
+    summary: "No issues keeping pace with another running Target."
+    detail: "You have no issues keeping pace with another Target that is running. That doesn't mean the GM doesn't have discretion for making checks or giving exhaustion based on how far you have run."
+  plvl-6:
+    name: "Limber"
+    summary: "Gain 'Inspired' when making a 'Dexterity' Check."
+    detail: "Your days delivering Mail keep you in shape. you have an easier time making Dexterity Checks."
+  plvl-9:
+    name: "Efficient"
+    summary: "Increase the Max of each Inventory Slot by 2."
+    detail: "You have mastered the art of efficiently packing items from your time as a Courier. Each inventory slot on your Character sheet can now hold 7 items in a stack instead of 5."
+craftsman: false
+source-pages: "p035"

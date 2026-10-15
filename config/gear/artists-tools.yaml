@@ -1,0 +1,10 @@
+id: artists-tools
+name: "Artist's Tools"
+slot: accessory
+damage-type: null
+bonus:
+  stat: "charisma"
+  value: 1
+effect: "+1 Charisma when performing an 'Art Form'."
+source: artist
+stack-max: 5

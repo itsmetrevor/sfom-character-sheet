@@ -1,0 +1,26 @@
+id: lagos
+name: Lagos
+languages:
+  - lagosian
+extra-language-choices: 1
+vision: low-light
+max-hp: 5
+expertise:
+  charisma: 2
+main-mods:
+  positive: LUK
+  negative: STR
+bonus-stat:
+  stat: AGL
+  value: 1
+passives:
+  non-combat: cute
+  combat: small
+lore:
+  history: null
+  religion: null
+  appearance: null
+  culture: null
+  architecture-technology: null
+  naming-conventions: null
+source-pages: p018+p019 sheet10

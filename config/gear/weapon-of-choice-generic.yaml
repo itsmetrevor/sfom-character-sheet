@@ -1,0 +1,10 @@
+id: weapon-of-choice-generic
+name: "Weapon of Choice (Starting)"
+slot: main-hand
+damage-type: null
+bonus:
+  stat: "damage"
+  value: 1
+effect: "Weapon of Choice (Main-Hand) +1 Damage. Granted via Blacksmith background."
+source: blacksmith
+stack-max: 5

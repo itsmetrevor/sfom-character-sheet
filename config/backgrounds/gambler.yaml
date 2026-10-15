@@ -1,0 +1,28 @@
+id: gambler
+name: "Gambler"
+description: |
+  You spent your life trusting in lady luck beyond anything else. Do gamble with cards and dice or gamble with your own life? You put everything you have on the line knowing one day it will pay off.
+expertise:
+  "luck": 2
+starting-items:
+  - lucky-coin
+starting-items-text: "Lucky Coin: (Accessory) +1 LUK"
+passives:
+  plvl-0:
+    name: "Once More"
+    summary: "Once per Full Rest outside Combat, reroll a failed Check."
+    detail: "Sometimes you get an extra chance in life, hopefully lady luck is friendlier on the second try."
+  plvl-3:
+    name: "Lucky 7"
+    summary: "Outside of Combat, 7s count as a Critical Success."
+    detail: "7 is your lucky number, it always seems to work in your favor. Any time you make a Check if you roll a 7 on the D20 it counts as a 'Critical Success'."
+  plvl-6:
+    name: "Gambling"
+    summary: "Rolling 1 on a Check lets you reroll; failing again gains 1 Exhaustion."
+    detail: "High risk can equal high reward, as long as you succeed. This effect only works when you roll a 1 on a D20 when making a Check."
+  plvl-9:
+    name: "Lady Luck"
+    summary: "Outside of Combat, your 'Fortune' dice cannot roll below 3."
+    detail: "You have found your stride and everything seems like its getting better. Your 'Fortune Die' cannot roll lower than 3, so if you were to roll a 1 or 2 on a D6 when adding a 'Fortune Die' to a Check it is considered a 3 instead."
+craftsman: false
+source-pages: "p037"

@@ -1,0 +1,54 @@
+id: monk
+name: Monk
+tier: '1'
+main-stat: STR
+roles: [dps, healer]
+combat-modifier:
+  name: Disciple of the Fist
+  description: 'Way of the Fist checks can Crit for double damage. Each Stagger/Expose gains 1 Combo Point (max 6); spend points before Way-of-the-Fist check for Inspired per point on 1 check (no points on spent-point checks). Without ranged weapon, Sub-Class physical ranged count as Ranged Elemental Wind Magic. Physical Melee Damage Dealer.'
+prerequisites:
+  - {class: any-starter, level: 10}
+unlocks:
+  - {class: berserker, level: 10}
+  - {class: elementalist, level: 5}
+health-mod: 0
+stats:
+  main: {STR: 2, DEX: 1, CON: 0, MND: 1, INT: 0, LUK: 0}
+  bonus: {JMP: 0, AGL: 1, DEF: 1, RES: 1, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Full Palm Barrage
+  description: Gain Inspired; use Way of the Fist; +3 on all checks for the attack.
+  charge:
+    - Push/Pull a target
+    - x2 Way-of-the-Fist hits
+    - x4 hits
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Strength, value: 1, unlock-at: 2}
+  - {expertise: Nature, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Unarmed (gloves/wraps, none)
+  armor: Light Armor
+  off-hand: Unarmed
+passives:
+  - {name: Balanced, kind: non-combat, slot: passive, target: self, condition: Non-Combat Concentration/Mind check outside combat, use: Once per Long Rest, description: May succeed a Concentration or Mind check., locked: false}
+  - {name: Unarmed Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Unarmed anywhere; melee Physical Attack abilities +X damage and +X Stagger/Expose with no Off-Hand.', locked: false}
+  - {name: Counter Attack, kind: combat, slot: passive, target: T1 R1, condition: unlock all / target in range attacks you, use: passive, description: 'Counter with STR check (D20+STR vs DEF); Stagger STR+X.', locked: true}
+  - {name: Stronger, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent STR., locked: true}
+actions:
+  main:
+    - {name: Vital Punch, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: STR damage + Paralysis', description: 'STR damage and Paralysis; Stagger +XD6, or inflict Ruin (3) instead.'}
+    - {name: Way of the Fist, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF', description: 'STR damage; Stagger climbs 1 on Combo Track and repeats until failure or track end, dealing each passed square bonus; unusable with Unarmed Main-Hand.'}
+    - {name: Vortex, tags: [ranged, elemental, wind, magic], cost: 'Energy 6, Boost: use your Expose check', target-range: 5x5 centered on self, check: 'D20+MND vs RES', description: 'MND damage to all; Expose pulls up-to-2-square targets adjacent.'}
+    - {name: Spin Kick, tags: [melee, physical], cost: '—', target-range: 3x3 centered on self, check: 'D20+STR vs DEF, Chain: X damage push all within Range 3', description: 'STR to all; Stagger +XD6.'}
+  support:
+    - {name: Kick, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF', description: 'STR damage; Stagger pushes 1-square target (X+1) spaces straight.'}
+    - {name: Purify, tags: [restorative, magic], cost: Once per Combat, target-range: Self, check: '—', description: Remove all Status Effects from self.}
+    - {name: Earth Shatter, tags: [ranged, elemental, earth, magic], cost: 'Energy 4, Boost: 3x4 line instead', target-range: 1x4 line, check: 'D20+MND vs DEF', description: 'MND damage in line; Stagger +MND+STR and Slow.'}
+    - {name: Aura, tags: [melee, restorative, magic], cost: 'Energy 5, Boost: restore MND x STR instead', target-range: Self 3x3, check: Critical, description: Restore MND to all in range plus 1 Energy to others.}
+  reactions:
+    - {name: Preemptive Strike, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'Condition: before adjacent target attacks; Once per Combat', description: 'Interrupt attack entirely; deal XD6 + STR.'}
+    - {name: Bind Soul, tags: [melee, restorative, magic], cost: '—', target-range: T1 R1, check: 'Critical; Condition: your turn or end of any target turn; Once per Combat', description: 'Remove Knocked Out, restore XD6 + MND, grant Unseen + Damage Immunity till end of round.'}
+source-pages: [p066]
+notes: Sheet tracks Combo Points.

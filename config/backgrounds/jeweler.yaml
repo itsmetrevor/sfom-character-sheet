@@ -1,0 +1,30 @@
+id: jeweler
+name: "Jeweler"
+description: |
+  Four Craftsman backgrounds — Armorer, Blacksmith, Clothier, Jeweler — share crafting mechanics; each requires adventure resources, and resources impart effects on crafted Gear. See the Crafting Section, page XX. Capabilities: Jewelry Accessories. Each comes with a specific 'Writ' shown to shop/forge proprietors for facility access.
+expertise:
+  "crafting": 2
+starting-items:
+  - jewelers-writ
+  - defense-ring
+starting-items-text: "Jeweler's Writ (Item); Defense Ring (Accessory) -1 Damage"
+passives:
+  plvl-0:
+    name: "Unknown — source truncated"
+    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
+    detail: "Flagged for author check; no tier abilities transcribed."
+  plvl-3:
+    name: "Unknown — source truncated"
+    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
+    detail: "Flagged for author check; no tier abilities transcribed."
+  plvl-6:
+    name: "Unknown — source truncated"
+    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
+    detail: "Flagged for author check; no tier abilities transcribed."
+  plvl-9:
+    name: "Unknown — source truncated"
+    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
+    detail: "Flagged for author check; no tier abilities transcribed."
+craftsman: true
+source-pages: "p031"
+notes: "SOURCE-TRUNCATED: Jeweler's ability-bar section runs off the bottom of p031 with no continuation on p032 — flagged for author check."

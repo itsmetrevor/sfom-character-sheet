@@ -1,0 +1,10 @@
+id: shiny-ring
+name: "Shiny Ring"
+slot: accessory
+damage-type: null
+bonus:
+  stat: "deception"
+  value: 1
+effect: "+1 Deception."
+source: swindler
+stack-max: 5

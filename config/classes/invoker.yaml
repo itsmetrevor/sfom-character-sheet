@@ -1,0 +1,54 @@
+id: invoker
+name: Invoker
+tier: '3'
+main-stat: MND
+roles: [dps, healer, specialist]
+combat-modifier:
+  name: Communion
+  description: 'Channeled Marker effects fire at start of next turn; vanish on firing unless stated. One channeled at a time unless stated; channeling ends if you use another Main. Grand Dragon (Ranged Summon Arcane; Square 7x7 within 10; D20+MND vs RES): MND to all enemies + Disabled; 7x7 marker dealing (X+3)D6+MND at next-turn start.'
+prerequisites:
+  - {class: scholar, level: 15}
+  - {class: chronomancer, level: 10}
+unlocks:
+  - {class: necromancer, level: 10}
+health-mod: -5
+stats:
+  main: {STR: 0, DEX: 1, CON: 0, MND: 2, INT: 1, LUK: 0}
+  bonus: {JMP: 0, AGL: 0, DEF: 1, RES: 0, NRG: 1, FOR: 1}
+x-start: 1
+ultimate:
+  name: Invoke the Heavens
+  description: Summon the Grand Dragon.
+  charge:
+    - Expose a target
+    - cast a Summon
+    - land a marker hit
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Mind, value: 1, unlock-at: 2}
+  - {expertise: Resistance, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
+passives:
+  - {name: Grant Me Audience, kind: non-combat, slot: passive, target: self, condition: outside combat, use: Once per Full Rest, description: Commune with Invoker summon for information/aid., locked: false}
+  - {name: Celestial Blessing, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Once per round, -1 energy cost (min 1).', locked: false}
+  - {name: Guidance, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Summon damaging/healing abilities +1D6., locked: true}
+  - {name: Mindful, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent MND., locked: true}
+actions:
+  main:
+    - {name: Hellfire Demon, tags: [ranged, summon, elemental, fire], cost: Energy 5, target-range: 2 targets Base R10 / channeled 5x5 within 10, check: 'D20+MND vs RES', description: 'MND each + Burn DOT 3; marker fires (X+2)D6+MND with Severe (Burn).'}
+    - {name: Earthen Giant, tags: [ranged, summon, elemental, earth], cost: Energy 5, target-range: 5 squares Base R10 / channeled 5x5 within 10, check: '—', description: 'Raise five 1x2 pillars (15HP, resummoned); marker fires (X+2)D6+MND + Immobilize.'}
+    - {name: Crystal Fox, tags: [ranged, summon, holy], cost: Energy 5, target-range: party Base Any / channeled 3x3 within 10, check: '—', description: 'Party +2 DEF/+2 RES + Levitate till end of round; two markers each restore 1 energy, Regenerate DOT 5, MND+10 temp HP (max 20).'}
+    - {name: Ice Queen, tags: [ranged, summon, elemental, ice], cost: Energy 5, target-range: 2 targets Base R10 / channeled 5x5 within 10, check: '—', description: 'MND each + Wet; marker fires (X+2)D6+MND + Frozen.'}
+    - {name: Thunder Sage, tags: [ranged, summon, elemental, lightning], cost: Energy 5, target-range: 2 targets Base R10 / channeled 3x3 within 10, check: '—', description: 'Tether pair (half echoes); marker fires (X+2)D6+MND + Paralysis.'}
+    - {name: Tidal Serpent, tags: [ranged, summon, elemental, water], cost: Energy 5, target-range: full-field straight line, check: '—', description: '3-wide serpent hits Wet targets for MND (Slowed inside); next-turn moves one dir dealing (X+2)D6+MND pushing 5 enemies along.'}
+    - {name: Flame Phoenix, tags: [ranged, summon, elemental, restorative, fire], cost: Energy 5, target-range: 2 targets Base R10 / channeled 5x5 within 10, check: 'D20+MND vs RES', description: 'MND each + Fear (chosen); marker removes KO, restores (X+2)D6+MND, deals that to enemies.'}
+    - {name: Dark Horseman, tags: [ranged, summon, dark], cost: Energy 5, target-range: 1 target Base R10 / channeled 3x3 within 10, check: 'D20+MND vs RES', description: 'Expose Sever (Support 1); marker fires (X+2)D6+MND, +3D6 center.'}
+  support: []
+  reactions:
+    - {name: Mecha Wall, tags: [ranged, summon, holy], cost: '—', target-range: Square R10, check: 'Condition: beginning/end of target turn; Once per Combat', description: '1x5 indestructible wall till end of round — no crossing, adjacent allies cannot be Staggered/crit.'}
+    - {name: Gale Harpy, tags: [ranged, summon, wind], cost: '—', target-range: Any targets all ranges, check: 'Condition: beginning/end of any turn or before it moves', description: Shove any targets 5 squares one way, OR drag chosen 5 toward one square.}
+source-pages: [p094]
+notes: All summons Energy 5 base as printed. Sheet has no separate Support block.

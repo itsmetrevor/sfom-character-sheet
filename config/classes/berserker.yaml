@@ -1,0 +1,54 @@
+id: berserker
+name: Berserker
+tier: '2'
+main-stat: STR
+roles: [dps, tank]
+combat-modifier:
+  name: Pure Rage
+  description: 'All attacks Provoke. MAX HP equals double CON. Each damage instance +1 Rage (max 5); each Rage -1 damage received. Extend Chains spending 1 Rage per extra Chain (energy still applies). Immune to Berserk.'
+prerequisites:
+  - {class: monk, level: 10}
+unlocks:
+  - {class: grim-knight, level: 10}
+  - {class: assassin, level: 10}
+health-mod: 5
+stats:
+  main: {STR: 2, DEX: 0, CON: 2, MND: 0, INT: 0, LUK: 0}
+  bonus: {JMP: 0, AGL: 1, DEF: 1, RES: 0, NRG: 0, FOR: 0}
+x-start: 1
+ultimate:
+  name: Wrath & Rampage
+  description: Gain full Rage; chaining into Beatdown will Critical.
+  charge:
+    - Provoke 2+ targets
+    - gain 2+ Rage
+    - Chain 2+ times
+    - roll a Critical
+expertise-tracks:
+  - {expertise: Strength, value: 1, unlock-at: 2}
+  - {expertise: Bravado, value: 1, unlock-at: 4}
+equipment:
+  main-hand: Slashing or Unarmed (none)
+  armor: Medium Armor
+  off-hand: Pistol or Crossbow
+passives:
+  - {name: Brute Force, kind: non-combat, slot: passive, target: self, condition: Non-Combat expertise check outside combat, use: passive, description: STR for any expertise check., locked: false}
+  - {name: Aggression, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Each round first Chained ability costs 0 Energy., locked: false}
+  - {name: Unhinged, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Chain twice per turn., locked: true}
+  - {name: Stronger, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent STR., locked: true}
+actions:
+  main:
+    - {name: Beatdown, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: STR damage +X per other Chain this round besides Beatdown', description: 'STR damage; chaining Roar next inflicts Disable instead.'}
+    - {name: Roar, tags: [ranged, physical], cost: '—', target-range: 5x5 centered on self, check: 'D20+STR vs RES, Chain: use as Main Action', description: 'Provoke all; chaining Ferocious Vault next extends to Range 10; Expose Paralysis.'}
+    - {name: Ferocious Vault, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'D20+STR vs DEF, Chain: use as Main Action no Stagger', description: 'Leap adjacent, STR damage; chaining Brutalize next adds +XD6; Stagger +XD6.'}
+    - {name: Brutalize, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: use as Main Action no Stagger', description: 'STR damage; chaining Beatdown next costs 0 Energy; Stagger XD6.'}
+  support:
+    - {name: Dash Strike, tags: [ranged, physical], cost: '—', target-range: T1 R3, check: 'D20+STR vs DEF', description: 'Move adjacent between you and target; X damage; counts as Chained for Beatdown; Stagger +STR.'}
+    - {name: Pump Up, tags: [physical], cost: '—', target-range: Self, check: Critical, description: 'Attacks +X this turn; receive -X per attack till end of round; Critical doubles.'}
+    - {name: Raging, tags: [physical], cost: '—', target-range: Self, check: Critical, description: 'Crit-required -X this round; may roll Crits on Chained abilities; Critical doubles.'}
+    - {name: Adrenaline, tags: [melee, physical], cost: Once per Combat, target-range: Self, check: Critical, description: 'Receive -CON damage; +1 Energy whenever damaged till end of round; Critical doubles.'}
+  reactions:
+    - {name: Howl, tags: [physical], cost: '—', target-range: Self, check: 'Condition: your turn or before being attacked; Once per Combat', description: Gain (Xx10) temporary HP.}
+    - {name: Unstoppable, tags: [physical], cost: '—', target-range: Self, check: 'Condition: before being attacked; Once per Combat', description: '+5 RES and DEF; each damage instance this round moves you X squares (can Push up to 2-square targets).'}
+source-pages: [p076]
+notes: Main stats 2 STR/2 CON as printed. Sheet tracks Rage and Chain Counter; use Chain Counter for mains.

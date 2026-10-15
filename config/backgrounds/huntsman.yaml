@@ -1,0 +1,29 @@
+id: huntsman
+name: "Huntsman"
+description: |
+  You have spent much of your time in the wilderness tracking and hunting various beasts. You are capable of creating traps and hiding in plain sight until you find your prey.
+expertise:
+  "nature": 1
+  "stealth": 1
+starting-items:
+  - long-bow
+starting-items-text: "Long Bow: (Piercing [Ranged] Weapon) Ranged Attacks: +1 Range"
+passives:
+  plvl-0:
+    name: "Trapper"
+    summary: "Create and set traps without Checks: Snare, 1-Square Pit, Deadfall Traps."
+    detail: "You are capable of creating simple traps for hunting game. You do not need to make a Check for crafting the traps but you will still need to find the materials. Trying to craft anything larger or more complicated will still require a Check."
+  plvl-3:
+    name: "Tracker"
+    summary: "Gain 'Inspired' when Hunting or Tracking in the Wilderness."
+    detail: "Wilderness is anywhere outside of civilization where you are in nature such as a forest, plains, etc."
+  plvl-6:
+    name: "Camouflage"
+    summary: "Once per Full Rest in the Wilderness, your first 'Stealth' Check Succeeds."
+    detail: "You have mastered the art of blending into your surroundings while in the wilderness."
+  plvl-9:
+    name: "Fur Trader"
+    summary: "Gain 1 Pelt per killed 'Beast' Enemy at end of Combat."
+    detail: "You know how to quickly skin beasts of all kinds. You know the value of a good pelt, you can use them for crafting or to make some extra gold."
+craftsman: false
+source-pages: "p038"

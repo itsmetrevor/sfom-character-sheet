@@ -1,0 +1,28 @@
+id: swindler
+name: "Swindler"
+description: |
+  Lying and tricking people comes naturally to you and it often seems to work in your favor. You have a way with words and all your own lying allows you to tell if others are lying to you.
+expertise:
+  "deception": 2
+starting-items:
+  - shiny-ring
+starting-items-text: "Shiny Ring: (Accessory) +1 Deception"
+passives:
+  plvl-0:
+    name: "Conniving"
+    summary: "Each truth inside a lie gains +2 to the 'Deception' Roll."
+    detail: "You know your way around a conversation and how to worm your way out of saying something you shouldn't. If you add any amount of truth within a statement where you are lying you gain a bonus. This works each time you add in a truth to the lie."
+  plvl-3:
+    name: "Awareness"
+    summary: "Gain 'Inspired' on 'Deception' Checks to spot lies."
+    detail: "You know how to spot when someone else is lying. The difficulty of the 'Deception' Check is at the discretion of the GM."
+  plvl-6:
+    name: "Underground"
+    summary: "'Mind' Check in a City/Town to remember local Criminals."
+    detail: "You are aware of a vast criminal network. The difficulty of the 'Mind' Check is at the discretion of the GM."
+  plvl-9:
+    name: "Grifter"
+    summary: "Gain 'Inspired' on 'Deception' Checks while grifting."
+    detail: "Grifting is the act of getting money or goods from someone through deceit, fraud, or a confidence game. The difficulty of the 'Deception' Check is at the discretion of the GM."
+craftsman: false
+source-pages: "p043"
