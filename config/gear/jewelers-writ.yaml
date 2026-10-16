@@ -1,8 +1,0 @@
-id: jewelers-writ
-name: "Jeweler's Writ"
-slot: item
-damage-type: null
-bonus: null
-effect: "Writ shown to shop/forge proprietors for facility access (Jeweler: Jewelry Accessory crafting)."
-source: jeweler
-stack-max: 1

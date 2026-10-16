@@ -1,0 +1,8 @@
+id: kitchen-set
+name: Kitchen Set
+slot: main-hand
+damage-type: none
+stat-modifiers:
+  - melee-damage: 1
+effect: Slashing/Bludgeoning/Piercing Weapon. +1 Melee Damage.
+stack-max: 5

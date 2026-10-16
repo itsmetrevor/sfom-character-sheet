@@ -1,0 +1,18 @@
+constant: Always active; no trigger, rest, or unlock needed.
+well-rested: Usable after a Full Rest.
+class-adept: Requires all class abilities unlocked.
+non-combat: Usable outside of combat.
+in-combat: Usable in combat.
+class-lvl: "Number of class abilities to unlock first, e.g. {class-lvl: 2} (expertise tracks)."
+party-lvl: "Party level that unlocks the ability, e.g. {party-lvl: 3} (background tiers 0, 3, 6, 9)."
+once-per-round: Usable once per round.
+once-per-combat: Usable once per combat.
+reaction: Usable as a Reaction.
+attacked-while-armed: Triggers when attacked while holding a Sword.
+target-approaches: Triggers when a target moves within 5 squares of you.
+attacked-in-range: Triggers when a target in range attacks you.
+attacked: Triggers when a target attacks you.
+exposed: Triggers when an Expose check targets you.
+damaged: Triggers when an enemy damages you.
+failed-check-nearby: Triggers when a target fails a check within range of you.
+target-leaves: Triggers when an adjacent target leaves adjacency.

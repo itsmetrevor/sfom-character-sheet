@@ -1,6 +1,0 @@
-id: strength
-name: Strength
-main-stat: STR
-description: |
-  Raw physical power. Used for melee damage, lifting, breaking, and shoving.
-source-pages: p002

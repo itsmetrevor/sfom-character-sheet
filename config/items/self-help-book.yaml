@@ -1,0 +1,8 @@
+id: self-help-book
+name: Self Help Book
+slot: accessory
+damage-type: none
+stat-modifiers:
+  - res: 1
+effect: +1 RES.
+stack-max: 5

@@ -1,8 +1,0 @@
-id: holy-mothers-will
-name: Holy Mother's Will
-source: ancestry
-slot: non-combat
-target: Self
-use: Once per Full Rest
-description: |
-  You may use a 'Concentration' Check in place of any Check that uses CON, INT, or MND.

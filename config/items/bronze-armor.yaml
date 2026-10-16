@@ -1,0 +1,8 @@
+id: bronze-armor
+name: Bronze Armor
+slot: armor
+damage-type: none
+stat-modifiers:
+  - def: 1
+effect: Heavy Armor. +1 DEF & +1 RES. (Single-bonus field holds DEF; see effect for full bonus.)
+stack-max: 5

@@ -1,6 +1,0 @@
-id: throw-catch
-name: Throw/Catch
-main-stat: STR
-description: |
-  Thrown precision and catching. Used for throwing items, weapons, and potions.
-source-pages: p002

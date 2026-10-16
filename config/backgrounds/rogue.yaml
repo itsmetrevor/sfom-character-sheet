@@ -1,28 +1,32 @@
+# source: p042
+
 id: rogue
 name: "Rogue"
+craftsman: false
 description: |
   Your time spent in the criminal underworld has taught you how to easily steal from people in plain sight. You know many Criminals just like yourself and can use your connections when you need to.
-expertise:
-  "thievery": 2
+
+expertise-modifiers:
+  - thievery: 2
+
 starting-items:
-  - lockpicks
-starting-items-text: "5 Lockpicks: (Item) Use to open locked doors"
+  - item: lockpicks
+    quantity: 5
+
 passives:
-  plvl-0:
-    name: "Pickpocket"
+  - name: "Pickpocket"
+    requirements: [ party-lvl: 0 ]
     summary: "Gain 'Inspired' on 'Thievery' Checks to pickpocket."
     detail: "You have an easier time stealing from people's pockets without getting caught. The difficulty of the 'Thievery' Check is at the discretion of the GM."
-  plvl-3:
-    name: "Underground"
+  - name: "Underground"
+    requirements: [ party-lvl: 3 ]
     summary: "'Mind' Check in a City/Town to remember local Criminals."
     detail: "You are aware of a vast criminal network. The difficulty of the 'Mind' Check is at the discretion of the GM."
-  plvl-6:
-    name: "Lockpicking"
+  - name: "Lockpicking"
+    requirements: [ party-lvl: 6 ]
     summary: "Gain 'Inspired' on 'Thievery' Checks to lockpick."
     detail: "You have an easier time opening locks with lockpicks. The difficulty of the 'Thievery' Check is at the discretion of the GM."
-  plvl-9:
-    name: "Fence"
+  - name: "Fence"
+    requirements: [ party-lvl: 9 ]
     summary: "Know the nearest fence to sell stolen goods safely."
     detail: "Part of your time in the underground criminal network was spent memorizing where fences are across the land. You may go to a fence to sell stolen goods without worrying about getting caught selling stolen goods."
-craftsman: false
-source-pages: "p042"

@@ -1,0 +1,8 @@
+id: basic-magic-tome
+name: Basic Magic Tome
+slot: main-hand
+damage-type: none
+stat-modifiers:
+  - magic-damage: 1
+effect: Focus Weapon. +1 Magic Damage.
+stack-max: 5

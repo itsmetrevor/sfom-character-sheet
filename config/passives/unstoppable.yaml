@@ -1,8 +1,0 @@
-id: unstoppable
-name: Unstoppable
-source: ancestry
-slot: non-combat
-target: Self
-use: Constant
-description: |
-  Gain 'Inspired' when making a Strength Check against a Target that is smaller than you.

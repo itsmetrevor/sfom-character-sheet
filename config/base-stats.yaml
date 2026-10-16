@@ -1,0 +1,32 @@
+# source: p004
+# note: Class stats overlay these per Main Class (star fields).
+
+main-stats: [str, dex, con, mnd, int, luk]
+bonus-stats: [jmp, agl, def, res, nrg, for]
+
+# Bonus stat grafts from Main Stats (p002 right-side callouts)
+bonus-from-main:
+  - str: { per: 3, grants: { stat: jmp, value: 1 } }
+  - dex: { per: 3, grants: { stat: agl, value: 1 } }
+  - con: { per: 2, grants: { stat: def, value: 1 } }
+  - mnd: { per: 2, grants: { stat: res, value: 1 } }
+  - int: { per: 3, grants: { stat: nrg, value: 1 } }
+  - luk: { per: 2, grants: { stat: for, value: 1 } }
+
+# Base stat spread that each new character starts with.
+base-stats:
+  - max-hp: 30
+
+  - str: 1
+  - dex: 1
+  - con: 1
+  - mnd: 1
+  - int: 1
+  - luk: 1
+
+  - jmp: 1
+  - agl: 5
+  - def: 10
+  - res: 10
+  - nrg: 1
+  - for: 1

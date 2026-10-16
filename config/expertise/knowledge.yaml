@@ -1,6 +1,0 @@
-id: knowledge
-name: Knowledge
-main-stat: INT
-description: |
-  Recalled lore. Used for military history, tactics, religion, and investigation hints.
-source-pages: p002

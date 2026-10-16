@@ -1,26 +1,49 @@
+# source: p018+p019 sheet10
+
 id: lagos
 name: Lagos
+
 languages:
   - lagosian
 extra-language-choices: 1
+
 vision: low-light
-max-hp: 5
-expertise:
-  charisma: 2
-main-mods:
-  positive: LUK
-  negative: STR
-bonus-stat:
-  stat: AGL
-  value: 1
+
+stat-modifiers:
+  - max-hp: 5
+  - luk: 1
+  - str: -1
+  - agl: 1
+
+expertise-modifiers:
+  - charisma: 2
+
 passives:
-  non-combat: cute
-  combat: small
+  - name: Cute
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Gain 'Inspired' when using a Charisma Check against a Target for the first time.
+  - name: Small
+    type: combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      When spending AGL to move you may move through Enemy Squares.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p018+p019 sheet10
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

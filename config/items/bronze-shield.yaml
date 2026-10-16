@@ -1,0 +1,8 @@
+id: bronze-shield
+name: Bronze Shield
+slot: off-hand
+damage-type: none
+stat-modifiers:
+  - def: 1
+effect: +1 DEF.
+stack-max: 5

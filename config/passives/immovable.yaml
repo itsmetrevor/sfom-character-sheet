@@ -1,8 +1,0 @@
-id: immovable
-name: Immovable
-source: ancestry
-slot: combat
-target: Self
-use: Constant
-description: |
-  You may choose to not be moved by Effects.

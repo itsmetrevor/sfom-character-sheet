@@ -1,26 +1,49 @@
+# source: p012+p013 sheet7
+
 id: halthket
 name: Halthket
+
 languages:
   - halthketan
   - lagosian
+
 vision: binocular
-max-hp: 7
-expertise:
-  dexterity: 2
-main-mods:
-  positive: DEX
-  negative: MND
-bonus-stat:
-  stat: JMP
-  value: 1
+
+stat-modifiers:
+  - max-hp: 7
+  - dex: 1
+  - mnd: -1
+  - jmp: 1
+
+expertise-modifiers:
+  - dexterity: 2
+
 passives:
-  non-combat: glide-hover
-  combat: take-flight
+  - name: Glide & Hover
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      While in the air you may make a descending Glide at a standard Running pace. You may also instead hover in place to slow your descent.
+  - name: Take Flight
+    type: combat
+    target: Self
+    requirements:
+      - once-per-combat
+    description: |
+      Gain the 'Flying' Status Effect until the end of the Round.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p012+p013 sheet7
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

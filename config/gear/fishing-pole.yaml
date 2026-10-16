@@ -1,8 +1,0 @@
-id: fishing-pole
-name: "Fishing Pole"
-slot: tool
-damage-type: null
-bonus: null
-effect: "Used to catch fish (Sailor starting item)."
-source: sailor
-stack-max: 5

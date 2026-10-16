@@ -1,8 +1,0 @@
-id: savage-axe
-name: "Savage Axe"
-slot: main-hand
-damage-type: "slashing"
-bonus: null
-effect: "Slashing Weapon. Stagger with Melee Attack: Inflict a Bleed DOT 2."
-source: barbarian
-stack-max: 5

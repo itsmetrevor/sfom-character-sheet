@@ -1,28 +1,32 @@
+# source: p041
+
 id: psychologist
 name: "Psychologist"
+craftsman: false
 description: |
   You are a professional psychologist with knowledge of how to help people work through their problems.
-expertise:
-  "mind": 2
+
+expertise-modifiers:
+  - mind: 2
+
 starting-items:
-  - self-help-book
-starting-items-text: "Self Help Book: (Accessory) +1 RES"
+  - item: self-help-book
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Find Truth"
+  - name: "Find Truth"
+    requirements: [ party-lvl: 0 ]
     summary: "Make a 'Mind' check to find the deeper truth of what a Target says or feels."
     detail: "You are capable of reading between the lines of what someone is trying to say or how they are feeling. The difficulty of the 'Mind' Check is at the discretion of the GM."
-  plvl-3:
-    name: "Affirmation"
+  - name: "Affirmation"
+    requirements: [ party-lvl: 3 ]
     summary: "Supportive language + passed 'Mind' Check opens the Target up."
     detail: "Here are a few examples of supportive language; I believe in you, take all the time you need, or you are not alone in this. The difficulty of the 'Mind' Check is at the discretion of the GM."
-  plvl-6:
-    name: "Talk it Out"
+  - name: "Talk it Out"
+    requirements: [ party-lvl: 6 ]
     summary: "Alone-with-Target 'Mind'/'Charisma' Checks gain 'Inspired'."
     detail: "To gain 'Inspired' on 'Mind' and 'Charisma' Checks you must be the only person speaking with the Target."
-  plvl-9:
-    name: "Enlightened"
+  - name: "Enlightened"
+    requirements: [ party-lvl: 9 ]
     summary: "You cannot be deceived."
     detail: "You have always been good at catching when someone was withholding information. With your knowledge and experience you now notice any time someone is lying."
-craftsman: false
-source-pages: "p041"

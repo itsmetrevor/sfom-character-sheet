@@ -1,8 +1,0 @@
-id: khanadur-goggles
-name: "Khanadur Made Goggles"
-slot: accessory
-damage-type: null
-bonus: null
-effect: "Dark Vision."
-source: miner
-stack-max: 5

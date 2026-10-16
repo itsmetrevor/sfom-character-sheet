@@ -1,26 +1,50 @@
+# source: p016+p017 sheet9
+
 id: kryss
 name: Kryss
+
 languages:
   - lagosian
+
 vision: normal
-max-hp: 8
-expertise:
-  perception: 1
-  mind: 1
-main-mods:
-  positive: MND
-  negative: LUK
-bonus-stat:
-  stat: RES
-  value: 1
+
+stat-modifiers:
+  - max-hp: 8
+  - mnd: 1
+  - luk: -1
+  - res: 1
+
+expertise-modifiers:
+  - perception: 1
+  - mind: 1
+
 passives:
-  non-combat: future-sight
-  combat: fated
+  - name: Future Sight
+    type: non-combat
+    target: Self
+    requirements:
+      - well-rested
+    check: SC (Concentration) VS 20
+    description: |
+      You may make a 'Perception' Check to see a memory of 1 possible outcome from the next 2 minutes.
+  - name: Fated
+    type: combat
+    target: Self
+    requirements:
+      - once-per-combat
+    description: |
+      When you are Knocked Out, Remove the 'Knocked Out' Status Effect and Restore 1HP. Grants 'Unseen' & 'Damage Immunity' until the end of this Round.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p016+p017 sheet9
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

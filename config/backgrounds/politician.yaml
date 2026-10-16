@@ -1,30 +1,34 @@
+# source: p041
+# note: The p030 index says 'Diplomat'; the book entry reads 'Politician' (p041) — transcribed as printed.
+
 id: politician
 name: "Politician"
+craftsman: false
 description: |
   Your goal is to gain power by any means necessary. You will lie and manipulate those around you to get what you want. Your Bravado is often mistaken as Charisma and people fall easily for your charm.
-expertise:
-  "bravado": 1
-  "perception": 1
+
+expertise-modifiers:
+  - bravado: 1
+  - perception: 1
+
 starting-items:
-  - elegant-suit
-starting-items-text: "Elegant Suit: (Any Size Armor) +2 Bravado"
+  - item: elegant-suit
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Linguistic"
+  - name: "Linguistic"
+    requirements: [ party-lvl: 0 ]
     summary: "Know 2 additional Ancestral Languages of your choice."
     detail: "Its always a good idea to reach out to a larger audience. You learned 2 other languages for more ears to hear your cause."
-  plvl-3:
-    name: "Two-Faced"
+  - name: "Two-Faced"
+    requirements: [ party-lvl: 3 ]
     summary: "Make 'LUK'-based Expertise Checks as 'Bravado' Checks."
     detail: "'Charisma', 'Deception', and 'Luck' Expertise Checks can be made using your 'Bravado' Expertise instead."
-  plvl-6:
-    name: "Conniving"
+  - name: "Conniving"
+    requirements: [ party-lvl: 6 ]
     summary: "Each truth inside a lie gains +2 to the Roll."
     detail: "You know your way around a conversation and how to worm your way out of saying something you shouldn't. If you add any amount of truth within a statement where you are lying you gain a bonus. This works each time you add in a truth to the lie."
-  plvl-9:
-    name: "Campaign"
+  - name: "Campaign"
+    requirements: [ party-lvl: 9 ]
     summary: "Speech targets roll 'Resistance' vs your 'Bravado'; failures are 'Mesmerized' while you speak."
     detail: "When making a speech it must be more than just a statement. Targets will roll a 'Resistance' Check against your 'Bravado' check and whichever total roll is higher passes the Check. Targets will be 'Mesmerized' as long as you are still making a speech."
-craftsman: false
-source-pages: "p041"
-notes: "The p030 index says 'Diplomat'; the book entry reads 'Politician' (p041) — transcribed as printed."

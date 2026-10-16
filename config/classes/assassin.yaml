@@ -1,54 +1,138 @@
+# source: p098
+# note: Single expertise track — unlock 3 Assassin abilities as-printed. Main stats 1 LUK/2 STR/1 DEX as printed.
+
 id: assassin
 name: Assassin
-tier: '4'
-main-stat: DEX
-roles: [dps]
-combat-modifier:
-  name: Killer Instincts
-  description: 'Every Critical Hit rolls again — second Critical upgrades multiplier to x3. Uses Weapon Specialist un-unlocked. Physical Melee/Ranged Damage Dealer.'
-prerequisites:
-  - {class: beast-tamer, level: 5}
-  - {class: berserker, level: 10}
-  - {class: dragon-lancer, level: 10}
-unlocks:
-  - {class: shard-bearer, level: 10}
-health-mod: -5
-stats:
-  main: {STR: 2, DEX: 1, CON: 0, MND: 0, INT: 0, LUK: 1}
-  bonus: {JMP: 1, AGL: 1, DEF: 0, RES: 0, NRG: 0, FOR: 1}
+roles: [ dps ]
+main-stat: dex
+tier: 4
 x-start: 1
+
+prerequisites:
+  - class: beast-tamer
+    level: 5
+  - class: berserker
+    level: 10
+  - class: dragon-lancer
+    level: 10
+
+expertise-modifiers:
+  - stealth: 1
+    requirements: [ class-lvl: 3 ]
+
+stat-modifiers:
+  - max-hp: -5
+  - str: 2
+  - dex: 1
+  - luk: 1
+  - jmp: 1
+  - agl: 1
+  - for: 1
+
+equipment:
+  - main-hand: any Main-Hand
+  - armor: any Armor over Medium base
+  - off-hand: any Off-Hand (Any Dagger / Any Pistol per sheet)
+
+combat-modifier:
+  - name: Killer Instincts
+  - description: 'Every Critical Hit rolls again — second Critical upgrades multiplier to x3. Uses Weapon Specialist un-unlocked. Physical Melee/Ranged Damage Dealer.'
+
 ultimate:
-  name: Assassination
-  description: +5 crit chance this round; Critical vs non-boss defeats it.
-  charge:
+  - name: Assassination
+  - description: +5 crit chance this round; Critical vs non-boss defeats it.
+  - charge:
     - inflict a Status Effect
     - gain Unseen
     - roll a Critical
     - deal x3 critical damage
-expertise-tracks:
-  - {expertise: Stealth, value: 1, unlock-at: 3}
-equipment:
-  main-hand: any Main-Hand
-  armor: any Armor over Medium base
-  off-hand: any Off-Hand (Any Dagger / Any Pistol per sheet)
+
 passives:
-  - {name: Master of Disguise, kind: non-combat, slot: passive, target: self, condition: Non-Combat Crafting/Deception/Stealth outside combat, use: passive, description: 'Inspired crafting disguises; disguised Inspired on Deception and Stealth.', locked: false}
-  - {name: Resourceful, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Defeating target adds bonus Steal item roll to LUK rewards., locked: false}
-  - {name: Weapon Specialist, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'Equip any weapon; melee +X crit chance from behind; ranged +1 per square above.', locked: true}
-  - {name: Dexterous, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent DEX., locked: true}
+  - name: Master of Disguise
+    target: self
+    requirements: [ non-combat ]
+    description: 'Inspired crafting disguises; disguised Inspired on Deception and Stealth.'
+  - name: Resourceful
+    target: self
+    requirements: [ in-combat, constant ]
+    description: Defeating target adds bonus Steal item roll to LUK rewards.
+  - name: Weapon Specialist
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: 'Equip any weapon; melee +X crit chance from behind; ranged +1 per square above.'
+  - name: Dexterous
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent DEX.
+
 actions:
-  main:
-    - {name: Back Stab, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain: inflict Bleed DOT 2; Back Attack DEX damage', description: 'DEX damage; Back Attacks auto-Stagger (still roll Critical); Stagger (X+1)D6; Critical inflicts Bleed DOT 5.'}
-    - {name: Sniper Shot, tags: [ranged, physical], cost: '—', target-range: T1 R10, check: 'D20+DEX vs DEF, Chain: Disabled target', description: 'Needs Ranged weapon; Puncture target; Stagger (X+1)D6+DEX with Disabled; Critical +X per square above.'}
-    - {name: Deadly Needle, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs RES, Chain: Weak (3) target', description: 'Expose — Deadly Needle (X) deals X per square moved; Critical upgrades to (X+2).'}
-    - {name: Injection, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'D20+DEX vs RES, Chain: Confused target', description: 'Expose — roll D6: 2+ Confused, 4+ Berserk, 6 Stun; attacking/healing target clears all.'}
-  support:
-    - {name: Invisibility, tags: [dark, magic], cost: 'Energy 5, Boost: +3 AGL; Twice per Combat', target-range: Self, check: '—', description: 'Unseen until acting (besides Movement) or damaged; +X crit chance while Unseen.'}
-    - {name: Coated Weapon, tags: [physical], cost: '—', target-range: Self, check: 'D20+DEX vs RES', description: All physical attacks Expose Poison DOT 5 this round.}
-    - {name: Hawk's Eyes, tags: [ranged, physical], cost: '—', target-range: T1 any range, check: 'D20+DEX vs RES', description: 'Expose Weakspot (1); each Weakspot adds D6 to attacks — 1 or 6 adds +X crit chance.'}
-    - {name: Disguise, tags: [melee, physical], cost: 'Successfully Once per Combat', target-range: T1 1-square non-Boss, check: Critical, description: 'Back Attack +X crit; Critical KOs and removes target; both Steal rewards count ally-to-enemy; use while using ability on enemy; next ability auto-Criticals 3x.'}
-  reactions:
-    - {name: Gear Sets, tags: [physical], cost: '—', target-range: Self, check: 'Condition: before/after any target acts', description: Keep 2 gear sets (Main/Off/Armor/2 Accessories); swap once per round.}
-    - {name: Hide, tags: [physical], cost: '—', target-range: Self, check: 'Condition: after avoiding Stagger/Expose; once per round roll D6', description: 'When targeted without Stagger/Expose, 1 or 6 gains Unseen till end of next turn; +X crit chance while Unseen.'}
-source-pages: [p098]
-notes: Single expertise track — unlock 3 Assassin abilities as-printed. Main stats 1 LUK/2 STR/1 DEX as printed.
+  - name: Back Stab
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs DEF, Chain: inflict Bleed DOT 2; Back Attack DEX damage'
+    description: 'DEX damage; Back Attacks auto-Stagger (still roll Critical); Stagger (X+1)D6; Critical inflicts Bleed DOT 5.'
+  - name: Sniper Shot
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R10
+    check: 'D20+DEX vs DEF, Chain: Disabled target'
+    description: 'Needs Ranged weapon; Puncture target; Stagger (X+1)D6+DEX with Disabled; Critical +X per square above.'
+  - name: Deadly Needle
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs RES, Chain: Weak (3) target'
+    description: 'Expose — Deadly Needle (X) deals X per square moved; Critical upgrades to (X+2).'
+  - name: Injection
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'D20+DEX vs RES, Chain: Confused target'
+    description: 'Expose — roll D6: 2+ Confused, 4+ Berserk, 6 Stun; attacking/healing target clears all.'
+  - name: Invisibility
+    type: support
+    tags: [ dark, magic ]
+    cost: 'Energy 5, Boost: +3 AGL; Twice per Combat'
+    target-range: Self
+    check: '—'
+    description: 'Unseen until acting (besides Movement) or damaged; +X crit chance while Unseen.'
+  - name: Coated Weapon
+    type: support
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: 'D20+DEX vs RES'
+    description: All physical attacks Expose Poison DOT 5 this round.
+  - name: Hawk's Eyes
+    type: support
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 any range
+    check: 'D20+DEX vs RES'
+    description: 'Expose Weakspot (1); each Weakspot adds D6 to attacks — 1 or 6 adds +X crit chance.'
+  - name: Disguise
+    type: support
+    tags: [ melee, physical ]
+    cost: 'Successfully Once per Combat'
+    target-range: T1 1-square non-Boss
+    check: Critical
+    description: 'Back Attack +X crit; Critical KOs and removes target; both Steal rewards count ally-to-enemy; use while using ability on enemy; next ability auto-Criticals 3x.'
+  - name: Gear Sets
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: before/after any target acts'
+    description: Keep 2 gear sets (Main/Off/Armor/2 Accessories); swap once per round.
+  - name: Hide
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: after avoiding Stagger/Expose; once per round roll D6'
+    description: 'When targeted without Stagger/Expose, 1 or 6 gains Unseen till end of next turn; +X crit chance while Unseen.'

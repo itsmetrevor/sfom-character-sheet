@@ -1,8 +1,0 @@
-id: net
-name: "Net"
-slot: item
-damage-type: null
-bonus: null
-effect: "Fishing/capture net (Sailor starting item)."
-source: sailor
-stack-max: 5

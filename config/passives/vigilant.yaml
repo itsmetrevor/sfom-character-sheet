@@ -1,8 +1,0 @@
-id: vigilant
-name: Vigilant
-source: ancestry
-slot: non-combat
-target: Self
-use: Constant
-description: |
-  Gain 'Inspired' when using a Perception Check to see if you are being followed.

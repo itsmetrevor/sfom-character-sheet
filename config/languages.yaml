@@ -1,0 +1,59 @@
+- id: common
+  name: Common
+  description: |
+    Universal common tongue understood across ancestries; hybrid ancestries always count it in addition to their one chosen language.
+
+- id: egrhandi
+  name: Egrhandi
+  description: |
+    Ancestral language of the Egrhand.
+
+- id: enattish
+  name: Enattish
+  description: |
+    Ancestral language of the Enatt.
+
+- id: halthketan
+  name: Halthketan
+  description: |
+    Ancestral language of the Halthket.
+
+- id: khanadurian
+  name: Khanadurian
+  description: |
+    Ancestral language of the Khanadur.
+
+- id: lagosian
+  name: Lagosian
+  description: |
+    Widely spoken trade tongue of Lagos; every ancestry in the handbook lists it alongside its own tongue.
+
+- id: litooran
+  name: Litooran
+  description: |
+    Ancestral language of the Litoora.
+
+- id: maulawian
+  name: Maulawian
+  description: |
+    Ancestral language of the Children of Maulawi.
+
+- id: nethander
+  name: Nethander
+  description: |
+    Ancestral language of the Nethander.
+
+- id: orinotisian
+  name: Orinotisian
+  description: |
+    Ancestral language of the Orinotis.
+
+- id: skrii
+  name: Skrii
+  description: |
+    Ancestral language of the Skrii.
+
+- id: uhhrantian
+  name: Uhhrantian
+  description: |
+    Ancestral language of the Uhhranti.

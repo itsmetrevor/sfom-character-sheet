@@ -358,7 +358,7 @@ Combat Passive Ability:
 
 # Backgrounds
 
-<!-- Batch 2 — 30 entries (26 standard + 4 Craftsman). Tier names + bar summaries vision-verified from the PLVL ability-bar graphics (bars + p041 full render); paragraph details from text-layer. Tier order = printed order. NOTE: p030 index says 'Diplomat'; the book entry reads 'Politician' (p041), transcribed as printed. Jeweler's bar section runs off p031 bottom — flagged. Wanderer's blurb duplicates Farmer's in the source — transcribed as printed. -->
+<!-- Batch 2 — 30 entries (26 standard + 4 Craftsman). Tier names + bar summaries vision-verified from the PLVL ability-bar graphics (bars + p041 full render); paragraph details from text-layer. Tier order = printed order. NOTE: p030 index says 'Diplomat'; the book entry reads 'Politician' (p041), transcribed as printed. Jeweler's printed bar on p031 is Artist's bar (book misprint, vision-verified); Jeweler tiers inferred by Craftsman analogy. Wanderer's blurb duplicates Farmer's in the source — transcribed as printed. -->
 
 After selecting the Ancestry for your character you will then select a Background. Selecting a background helps determine what your character was like before starting your new Adventure. Each background is completely unique with various abilities that will come in handy to you and your Party. Once a Background is selected, gain the following:
 
@@ -420,7 +420,7 @@ Starting Items: Jeweler's Writ (Item); Defense Ring (Accessory) -1 Damage
 
 Crafting Expertise +2
 
-> NOTE: Jeweler's ability-bar section runs off the bottom of p031 with no continuation on p032 — flagged for author check.
+> NOTE: the ability bar printed under Jeweler on p031 is Artist's bar (Art Form / Performer / Mesmerizing / Perfection) — book misprint, vision-verified. Jeweler has no tier abilities of its own in the source; Jeweler tiers are inferred by analogy with the other three Craftsman bars.
 
 ## Apprentice Alchemist <!-- p032 -->
 

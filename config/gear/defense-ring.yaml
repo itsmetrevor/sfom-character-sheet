@@ -1,8 +1,0 @@
-id: defense-ring
-name: "Defense Ring"
-slot: accessory
-damage-type: null
-bonus: null
-effect: "Jewelry Accessory. -1 Damage."
-source: jeweler
-stack-max: 5

@@ -1,58 +1,133 @@
+# source: p060
+
 id: trickster
 name: Trickster
+roles: [ specialist ]
+main-stat: luk
 tier: starter
-main-stat: LUK
-roles: [specialist]
-combat-modifier:
-  name: Up My Sleeve
-  description: 'Trickster Main Ability rolls use D6 for bonus effects. Rolling 1 banks a Wild Card. Wild Cards may be spent to choose effects instead of rolling (like Fortune Die). Wild Cards expire at combat end. Immune to own markers. Physical/Magic Melee Saboteur.'
-prerequisites: []
-unlocks:
-  - {class: beast-tamer, level: 10}
-  - {class: knight, level: 10}
-  - {class: monk, level: 10}
-  - {class: priest, level: 10}
-  - {class: thief, level: 10}
-  - {class: wizard, level: 10}
-  - {class: fortune-teller, level: 15}
-health-mod: -5
-stats:
-  main: {STR: 0, DEX: 1, CON: 0, MND: 0, INT: 1, LUK: 2}
-  bonus: {JMP: 1, AGL: 1, DEF: 0, RES: 0, NRG: 0, FOR: 1}
 x-start: 1
+
+prerequisites: []
+
+expertise-modifiers:
+  - luck: 1
+    requirements: [ class-lvl: 2 ]
+  - deception: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: -5
+  - dex: 1
+  - int: 1
+  - luk: 2
+  - jmp: 1
+  - agl: 1
+  - for: 1
+
+equipment:
+  - main-hand: Bludgeoning Hammer
+  - armor: Light Armor
+  - off-hand: Pistol or 1H Crossbow (no bonus)
+
+combat-modifier:
+  - name: Up My Sleeve
+  - description: 'Trickster Main Ability rolls use D6 for bonus effects. Rolling 1 banks a Wild Card. Wild Cards may be spent to choose effects instead of rolling (like Fortune Die). Wild Cards expire at combat end. Immune to own markers. Physical/Magic Melee Saboteur.'
+
 ultimate:
-  name: Wild Side
-  description: Gain Max Wild Cards; all party members' D6 rolls cannot be lower than LUK this round.
-  charge:
+  - name: Wild Side
+  - description: Gain Max Wild Cards; all party members' D6 rolls cannot be lower than LUK this round.
+  - charge:
     - place a marker
     - gain/spend a Wild Card
     - inflict a Status Effect
     - roll a Critical
-expertise-tracks:
-  - {expertise: Luck, value: 1, unlock-at: 2}
-  - {expertise: Deception, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Bludgeoning Hammer
-  armor: Light Armor
-  off-hand: Pistol or 1H Crossbow (no bonus)
+
 passives:
-  - {name: Tricksy, kind: non-combat, slot: passive, target: self, condition: Non-Combat Deception check outside combat, use: constant, description: 'Inspired on Deception. Source prints trailing ZZZZ as-printed.', locked: false}
-  - {name: Bludgeoning Weapon Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Bludgeoning with any class; melee Stagger abilities Push target 2 squares.', locked: false}
-  - {name: Lucky Roll, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: FOR +2., locked: true}
-  - {name: Lucky, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent LUK., locked: true}
+  - name: Tricksy
+    target: self
+    requirements: [ non-combat, constant ]
+    description: 'Inspired on Deception. Source prints trailing ZZZZ as-printed.'
+  - name: Bludgeoning Weapon Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: 'Equip Bludgeoning with any class; melee Stagger abilities Push target 2 squares.'
+  - name: Lucky Roll
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: FOR +2.
+  - name: Lucky
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent LUK.
+
 actions:
-  main:
-    - {name: Party Popper, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX+LUK vs DEF, Chain: roll D6', description: 'XD6 damage. 1 wild card; 2 +LUK damage; 3 Confuse; 4 Berserk; 5 Mute; 6 Dizzy.'}
-    - {name: Surprise Gift, tags: [ranged, physical], cost: '—', target-range: Square 3x3 within 5, check: 'roll D6, Chain: marker on adjacent square triggers on entry', description: 'XD6 to all. 1 wild card; 2 Frozen; 3 Burn; 4 Bleed; 5 Sleep; 6 Burn DOT 3.'}
-    - {name: Trip Wire, tags: [ranged, physical], cost: '—', target-range: Empty squares 3x1 within 5, check: roll D6, description: 'Gain Wild Card. 3x1 marker; movers take XD6 + rolled effect then Knocked Prone, marker removed. 1 wild; 2 Immobilize; 3 Confuse; 4 Berserk; 5 Paralyze; 6 Stun.'}
-    - {name: Pick a Card, tags: [melee, physical], cost: '—', target-range: T1 R5, check: 'roll D6, Chain: roll D6', description: 'XD6 damage; spend Wild Cards, +LUK damage each. 1 wild; 2 Mute; 3 Bleed DOT 2; 4 Weak; 5 Daze; 6 Disable.'}
-  support:
-    - {name: Oil Slick, tags: [ranged, physical], cost: '—', target-range: Square 3x3 within 5, check: 'D20+LUK vs RES', description: '3x3 Difficult Terrain marker; movers Resist or gain Prone. Expose: hit with Fire becomes Fire marker — 2D6 to all + 1D6 per square travelled.'}
-    - {name: Merry-Go-Round, tags: [ranged, magic], cost: '—', target-range: Square 3x3 within 3, check: 'roll D6; Condition: beginning of target turn or entering range', description: '3x3 marker; movers spin it, gain effect, must finish movement to reuse. 1 nothing; 2 cw1; 3 cw2; 4 cw3; 5 marker cw4; 6 +3 + Dizzy.'}
-    - {name: Inflatable Decoy, tags: [ranged, physical], cost: Once per Combat, target-range: Square R5, check: '—', description: '15HP decoy marker; enemies within 5 attack Decoy (not LUK damage); destroyed deals (X+2)D6 to all in 5x5.'}
-    - {name: Throw Pie, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'D20+LUK vs RES', description: 'Ally restores XD6-LUK HP; Expose Blind; target -5 vs Oil Slick while Blind.'}
-  reactions:
-    - {name: Magic Mirror, tags: [ranged, magic], cost: '—', target-range: Self or 1 R5, check: 'Condition: before target makes attack; Once per Combat', description: Attackers gain Dizzy vs selected target till end of round.}
-    - {name: Play Dead, tags: [ranged, magic], cost: '—', target-range: Self or 1 R5, check: 'Condition: start or end of any target turn; Once per Combat', description: Target goes Prone; prone-staying targets cannot be targeted this round.}
-source-pages: [p060]
-notes: ''
+  - name: Party Popper
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX+LUK vs DEF, Chain: roll D6'
+    description: 'XD6 damage. 1 wild card; 2 +LUK damage; 3 Confuse; 4 Berserk; 5 Mute; 6 Dizzy.'
+  - name: Surprise Gift
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: Square 3x3 within 5
+    check: 'roll D6, Chain: marker on adjacent square triggers on entry'
+    description: 'XD6 to all. 1 wild card; 2 Frozen; 3 Burn; 4 Bleed; 5 Sleep; 6 Burn DOT 3.'
+  - name: Trip Wire
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: Empty squares 3x1 within 5
+    check: roll D6
+    description: 'Gain Wild Card. 3x1 marker; movers take XD6 + rolled effect then Knocked Prone, marker removed. 1 wild; 2 Immobilize; 3 Confuse; 4 Berserk; 5 Paralyze; 6 Stun.'
+  - name: Pick a Card
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'roll D6, Chain: roll D6'
+    description: 'XD6 damage; spend Wild Cards, +LUK damage each. 1 wild; 2 Mute; 3 Bleed DOT 2; 4 Weak; 5 Daze; 6 Disable.'
+  - name: Oil Slick
+    type: support
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: Square 3x3 within 5
+    check: 'D20+LUK vs RES'
+    description: '3x3 Difficult Terrain marker; movers Resist or gain Prone. Expose: hit with Fire becomes Fire marker — 2D6 to all + 1D6 per square travelled.'
+  - name: Merry-Go-Round
+    type: support
+    tags: [ ranged, magic ]
+    cost: '—'
+    target-range: Square 3x3 within 3
+    check: 'roll D6; Condition: beginning of target turn or entering range'
+    description: '3x3 marker; movers spin it, gain effect, must finish movement to reuse. 1 nothing; 2 cw1; 3 cw2; 4 cw3; 5 marker cw4; 6 +3 + Dizzy.'
+  - name: Inflatable Decoy
+    type: support
+    tags: [ ranged, physical ]
+    cost: Once per Combat
+    target-range: Square R5
+    check: '—'
+    description: '15HP decoy marker; enemies within 5 attack Decoy (not LUK damage); destroyed deals (X+2)D6 to all in 5x5.'
+  - name: Throw Pie
+    type: support
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'D20+LUK vs RES'
+    description: 'Ally restores XD6-LUK HP; Expose Blind; target -5 vs Oil Slick while Blind.'
+  - name: Magic Mirror
+    type: reaction
+    tags: [ ranged, magic ]
+    cost: '—'
+    target-range: Self or 1 R5
+    check: 'Condition: before target makes attack; Once per Combat'
+    description: Attackers gain Dizzy vs selected target till end of round.
+  - name: Play Dead
+    type: reaction
+    tags: [ ranged, magic ]
+    cost: '—'
+    target-range: Self or 1 R5
+    check: 'Condition: start or end of any target turn; Once per Combat'
+    description: Target goes Prone; prone-staying targets cannot be targeted this round.

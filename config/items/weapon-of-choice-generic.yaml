@@ -1,0 +1,8 @@
+id: weapon-of-choice-generic
+name: Weapon of Choice (Starting)
+slot: main-hand
+damage-type: none
+stat-modifiers:
+  - damage: 1
+effect: Weapon of Choice (Main-Hand) +1 Damage. Granted via Blacksmith background.
+stack-max: 5

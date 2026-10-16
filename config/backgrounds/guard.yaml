@@ -1,28 +1,32 @@
+# source: p037
+
 id: guard
 name: "Guard"
+craftsman: false
 description: |
   You have been trained as a guard in some form. You have spent time as a bodyguard, royal guard, city guard or some other type of guard. You have patience and it's hard to catch you off-guard.
-expertise:
-  "concentration": 2
+
+expertise-modifiers:
+  - concentration: 2
+
 starting-items:
-  - bronze-shield
-starting-items-text: "Bronze Shield: (Off-Hand) +1 DEF"
+  - item: bronze-shield
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Stalwart"
+  - name: "Stalwart"
+    requirements: [ party-lvl: 0 ]
     summary: "Once per Full Rest, ignore the first Exhaustion gain."
     detail: "You are used to having to deal with long hours and harsh situations. Your body has been trained to not get exhausted that easily."
-  plvl-3:
-    name: "Focused"
+  - name: "Focused"
+    requirements: [ party-lvl: 3 ]
     summary: "Once per Full Rest, your first 'Concentration' Check Succeeds."
     detail: "You have trained your mind to stay focused. You do not sway from your task so easily."
-  plvl-6:
-    name: "Guarded"
+  - name: "Guarded"
+    requirements: [ party-lvl: 6 ]
     summary: "Outside of Combat, you cannot be physically caught off guard."
     detail: "When someone tries to attack you, sneak up on you, or try to catch you off guard in any way, you are prepared. You will be able to react to the situation with an 'Expertise' Check of your choice."
-  plvl-9:
-    name: "Centered"
+  - name: "Centered"
+    requirements: [ party-lvl: 9 ]
     summary: "Outside of Combat, you cannot be mentally or emotionally caught off guard."
     detail: "When someone tries to play with your mind, try to hurt your feelings, or even get you to react in a specific way, you are prepared. You will be able to react to the situation with an 'Expertise' Check of your choice."
-craftsman: false
-source-pages: "p037"

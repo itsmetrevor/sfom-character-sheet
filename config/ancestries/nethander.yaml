@@ -1,26 +1,49 @@
+# source: p022+p023 sheet12
+
 id: nethander
 name: Nethander
+
 languages:
   - nethander
   - lagosian
+
 vision: low-light
-max-hp: 7
-expertise:
-  knowledge: 2
-main-mods:
-  positive: INT
-  negative: LUK
-bonus-stat:
-  stat: DEF
-  value: 1
+
+stat-modifiers:
+  - max-hp: 7
+  - int: 1
+  - luk: -1
+  - def: 1
+
+expertise-modifiers:
+  - knowledge: 2
+
 passives:
-  non-combat: vigilant
-  combat: combat-ready
+  - name: Vigilant
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Gain 'Inspired' when using a Perception Check to see if you are being followed.
+  - name: Combat Ready
+    type: combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      When a Target Attacks but does not Stagger against you, only receive half the Damage (Rounded down).
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p022+p023 sheet12
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

@@ -1,28 +1,32 @@
+# source: p033
+
 id: athlete
 name: "Athlete"
+craftsman: false
 description: |
   As a trained athlete, you have greater physical abilities than the common person. You are capable of completing physical tasks faster and easier than others.
-expertise:
-  throw-catch: 2
+
+expertise-modifiers:
+  - throw-catch: 2
+
 starting-items:
-  - running-shoes
-starting-items-text: "Running Shoes: (Accessory) +1 AGL"
+  - item: running-shoes
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Athletic"
+  - name: "Athletic"
+    requirements: [ party-lvl: 0 ]
     summary: "Once per Full Rest, your first 'Strength' or 'Dexterity' Check will succeed."
     detail: "Because of your physical prowess you can easily succeed at your first physical task each day."
-  plvl-3:
-    name: "Accurate"
+  - name: "Accurate"
+    requirements: [ party-lvl: 3 ]
     summary: "Gain 'Inspired' when making a 'Throw/Catch' Check."
     detail: "Your time playing sports has given you precision and great perception for catching or throwing things."
-  plvl-6:
-    name: "Tireless"
+  - name: "Tireless"
+    requirements: [ party-lvl: 6 ]
     summary: "Do not gain 'Exhaustion' when making 'Strength' or 'Dexterity' Checks."
     detail: "You don't tire easily from physical tasks. Even if its quite a strenous task, your body is built to handle it without becoming exhausted."
-  plvl-9:
-    name: "Parkour"
+  - name: "Parkour"
+    requirements: [ party-lvl: 9 ]
     summary: "Climb, move over, and under obstacles without losing pace."
     detail: "Outside of Combat, when jumping, climbing, sliding, or moving under objects you move at whatever pace you were currently moving at. Even if the GM requires checks for 'Parkour' you do not slow down when moving this way."
-craftsman: false
-source-pages: "p033"

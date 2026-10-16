@@ -1,8 +1,0 @@
-id: detoxify
-name: Detoxify
-source: ancestry
-slot: combat
-target: Self
-use: Once per Combat
-description: |
-  When you are inflicted with a Status Effect you may Negate it.

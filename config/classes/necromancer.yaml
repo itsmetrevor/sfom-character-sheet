@@ -1,54 +1,138 @@
+# source: p106
+# note: Ultimate charge labels repeat Fortune Teller Intertwined Fate labels as-printed. Single track unlock 3. Sheet tracks 3 skeleton HP pools.
+
 id: necromancer
 name: Necromancer
-tier: '4'
-main-stat: MND
-roles: [healer, specialist]
-combat-modifier:
-  name: Necromancy
-  description: 'Undead lose HP instead of gaining from Disease DOTs. Immune to Disease DOT. Player Undead Summons player-controlled; enemy ones GM. Once per character turn as Reaction summon 1 Undead Skeleton within 5 (3/combat); act at end of your turn. Skeleton: HP20 AGL5 DEF12 RES12 STR5; immune to everything but Disease DOTs; Main STR damage + Provoke. Magic Ranged Summoner Saboteur.'
-prerequisites:
-  - {class: wizard, level: 5}
-  - {class: negotiator, level: 10}
-  - {class: invoker, level: 10}
-unlocks:
-  - {class: shard-bearer, level: 10}
-health-mod: -5
-stats:
-  main: {STR: 0, DEX: 1, CON: 0, MND: 2, INT: 0, LUK: 1}
-  bonus: {JMP: 0, AGL: 0, DEF: 1, RES: 1, NRG: 1, FOR: 0}
+roles: [ healer, specialist ]
+main-stat: mnd
+tier: 4
 x-start: 1
+
+prerequisites:
+  - class: wizard
+    level: 5
+  - class: negotiator
+    level: 10
+  - class: invoker
+    level: 10
+
+expertise-modifiers:
+  - thievery: 1
+    requirements: [ class-lvl: 3 ]
+
+stat-modifiers:
+  - max-hp: -5
+  - dex: 1
+  - mnd: 2
+  - luk: 1
+  - def: 1
+  - res: 1
+  - nrg: 1
+
+equipment:
+  - main-hand: Focus or Instrument
+  - armor: Light Armor
+  - off-hand: Dagger
+
+combat-modifier:
+  - name: Necromancy
+  - description: 'Undead lose HP instead of gaining from Disease DOTs. Immune to Disease DOT. Player Undead Summons player-controlled; enemy ones GM. Once per character turn as Reaction summon 1 Undead Skeleton within 5 (3/combat); act at end of your turn. Skeleton: HP20 AGL5 DEF12 RES12 STR5; immune to everything but Disease DOTs; Main STR damage + Provoke. Magic Ranged Summoner Saboteur.'
+
 ultimate:
-  name: Plague Bearer
-  description: Consume all Disease DOTs off all targets; redistribute and activate them.
-  charge:
+  - name: Plague Bearer
+  - description: Consume all Disease DOTs off all targets; redistribute and activate them.
+  - charge:
     - inflict a DOT
     - target a Summon
     - spread a DOT between targets
     - roll a Critical
-expertise-tracks:
-  - {expertise: Thievery, value: 1, unlock-at: 3}
-equipment:
-  main-hand: Focus or Instrument
-  armor: Light Armor
-  off-hand: Dagger
+
 passives:
-  - {name: Speak With the Dead, kind: non-combat, slot: passive, target: T1 R3, condition: Non-Combat Mind check outside combat, use: Once per Long Rest, description: 'Question corpse (only answers asked; follow-ups need Concentration 13). Check D20+MND vs 15.', locked: false}
-  - {name: Resist, kind: combat, slot: passive, target: summons, condition: constant, use: constant, description: 'Summons +3 RES and +3 Expose; Channeled cannot be interrupted/cancelled.', locked: false}
-  - {name: Resistance is Futile, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Status-inflicting Expose checks always succeed., locked: true}
-  - {name: Mindful, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent MND., locked: true}
+  - name: Speak With the Dead
+    target: T1 R3
+    requirements: [ non-combat, well-rested ]
+    description: 'Question corpse (only answers asked; follow-ups need Concentration 13). Check D20+MND vs 15.'
+  - name: Resist
+    target: summons
+    requirements: [ in-combat, constant ]
+    description: 'Summons +3 RES and +3 Expose; Channeled cannot be interrupted/cancelled.'
+  - name: Resistance is Futile
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: Status-inflicting Expose checks always succeed.
+  - name: Mindful
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent MND.
+
 actions:
-  main:
-    - {name: Disease, tags: [ranged, dark], cost: 'Energy 5, Boost: auto-succeed Expose with +1 DOT', target-range: T1 R10, check: 'D20+MND vs RES', description: 'Expose Disease DOT 5 (+3 instead on already-diseased).'}
-    - {name: Undead Hands, tags: [ranged, dark], cost: 'Energy 5, Boost: 5x5 within 10', target-range: Square 3x3 within 7, check: '—', description: 3x3 marker till end of round inflicting Slow and Jinx inside.}
-    - {name: Drain, tags: [ranged, dark], cost: 'Energy 5, Boost: double HP restored', target-range: T1 R10, check: 'D20+MND vs RES', description: 'MND damage, heal it back, Expose +(X+1)D6.'}
-    - {name: As I Command, tags: [ranged, dark], cost: 'Energy 5, Boost: one more target', target-range: Summon R10, check: '—', description: 'Slide summon up to (X+1) squares and force Main action out of it.'}
-  support:
-    - {name: Affliction, tags: [ranged, dark], cost: 'Energy 5, Boost: all -2 Disease DOT first', target-range: All any range, check: '—', description: 'Diseased take DOT as damage; Undead Summons with DOT heal it instead.'}
-    - {name: Consumption, tags: [ranged, dark], cost: 'Energy 5, Boost: all -2 Disease DOT first', target-range: Any R10, check: '—', description: Lower chosen Disease DOTs and lose HP equal to Disease removed.}
-    - {name: Plague Rat, tags: [ranged, dark], cost: 'Energy 5, Boost: XD6 till end of round', target-range: Summon R10, check: '—', description: Target attacks carry its own Disease DOT this round.}
-    - {name: Putrid Attack, tags: [ranged, dark], cost: 'Energy 5, Boost: trade HP for Disease DOT', target-range: Summon R10, check: '—', description: Its next attack deals bonus equal to Disease DOT spent.}
-  reactions:
-    - {name: Resurrection, tags: [ranged, dark], cost: '—', target-range: T1 Any, check: 'Condition: any non-summon KO; once per character turn', description: 'KO Diseased returns as Undead, keeping DOT and healing to DOT+MND (full-HP Undead losing everything KO).'}
-    - {name: Immunity, tags: [ranged, dark], cost: '—', target-range: T1 Any, check: 'D20+MND vs RES; Condition: start/end of any turn; Once per Combat', description: 'Wipe Disease DOTs to full HP, splash removed as DOTs onto adjacent, immune to Undead Summon and Disease DOT.'}
-source-pages: [p106]
-notes: 'Ultimate charge labels repeat Fortune Teller Intertwined Fate labels as-printed. Single track unlock 3. Sheet tracks 3 skeleton HP pools.'
+  - name: Disease
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: auto-succeed Expose with +1 DOT'
+    target-range: T1 R10
+    check: 'D20+MND vs RES'
+    description: 'Expose Disease DOT 5 (+3 instead on already-diseased).'
+  - name: Undead Hands
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: 5x5 within 10'
+    target-range: Square 3x3 within 7
+    check: '—'
+    description: 3x3 marker till end of round inflicting Slow and Jinx inside.
+  - name: Drain
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: double HP restored'
+    target-range: T1 R10
+    check: 'D20+MND vs RES'
+    description: 'MND damage, heal it back, Expose +(X+1)D6.'
+  - name: As I Command
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: one more target'
+    target-range: Summon R10
+    check: '—'
+    description: 'Slide summon up to (X+1) squares and force Main action out of it.'
+  - name: Affliction
+    type: support
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: all -2 Disease DOT first'
+    target-range: All any range
+    check: '—'
+    description: 'Diseased take DOT as damage; Undead Summons with DOT heal it instead.'
+  - name: Consumption
+    type: support
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: all -2 Disease DOT first'
+    target-range: Any R10
+    check: '—'
+    description: Lower chosen Disease DOTs and lose HP equal to Disease removed.
+  - name: Plague Rat
+    type: support
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: XD6 till end of round'
+    target-range: Summon R10
+    check: '—'
+    description: Target attacks carry its own Disease DOT this round.
+  - name: Putrid Attack
+    type: support
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: trade HP for Disease DOT'
+    target-range: Summon R10
+    check: '—'
+    description: Its next attack deals bonus equal to Disease DOT spent.
+  - name: Resurrection
+    type: reaction
+    tags: [ ranged, dark ]
+    cost: '—'
+    target-range: T1 Any
+    check: 'Condition: any non-summon KO; once per character turn'
+    description: 'KO Diseased returns as Undead, keeping DOT and healing to DOT+MND (full-HP Undead losing everything KO).'
+  - name: Immunity
+    type: reaction
+    tags: [ ranged, dark ]
+    cost: '—'
+    target-range: T1 Any
+    check: 'D20+MND vs RES; Condition: start/end of any turn; Once per Combat'
+    description: 'Wipe Disease DOTs to full HP, splash removed as DOTs onto adjacent, immune to Undead Summon and Disease DOT.'

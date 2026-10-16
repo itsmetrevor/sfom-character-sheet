@@ -1,54 +1,137 @@
+# source: p088
+# note: Main stats 2 LUK/1 DEX/1 MND and bonus 1 JMP/1 NRG as printed. Songs cannot chain; any other Main ends song.
+
 id: bard
 name: Bard
-tier: '3'
-main-stat: LUK
-roles: [specialist]
-combat-modifier:
-  name: Performing Arts
-  description: 'Main Actions are Playing a Song — no other mains while playing; spend Main+Energy per turn to continue. Roll 5D6 per song (1/section; same stack; 6 counts 1-5). Complete all sections earns Influence to spend; new song transfers all; clears at end. Influence: Elegy -1 damage; Refrain Blind choice; Shanty Levitate choice; Mending +3HP; Marching +1 damage; Encore Quick choice.'
-prerequisites:
-  - {class: thief, level: 5}
-  - {class: negotiator, level: 10}
-unlocks:
-  - {class: fortune-teller, level: 10}
-health-mod: -5
-stats:
-  main: {STR: 0, DEX: 1, CON: 0, MND: 1, INT: 0, LUK: 2}
-  bonus: {JMP: 1, AGL: 0, DEF: 0, RES: 0, NRG: 1, FOR: 0}
+roles: [ specialist ]
+main-stat: luk
+tier: 3
 x-start: 1
+
+prerequisites:
+  - class: thief
+    level: 5
+  - class: negotiator
+    level: 10
+
+expertise-modifiers:
+  - luck: 1
+    requirements: [ class-lvl: 2 ]
+  - charisma: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: -5
+  - dex: 1
+  - mnd: 1
+  - luk: 2
+  - jmp: 1
+  - nrg: 1
+
+equipment:
+  - main-hand: Instrument 2H
+  - armor: Light
+  - off-hand: none (2-hander uses both slots)
+
+combat-modifier:
+  - name: Performing Arts
+  - description: 'Main Actions are Playing a Song — no other mains while playing; spend Main+Energy per turn to continue. Roll 5D6 per song (1/section; same stack; 6 counts 1-5). Complete all sections earns Influence to spend; new song transfers all; clears at end. Influence: Elegy -1 damage; Refrain Blind choice; Shanty Levitate choice; Mending +3HP; Marching +1 damage; Encore Quick choice.'
+
 ultimate:
-  name: Greatest Showman
-  description: All enemies Charmed; all move adjacent to you; gain (X+LUK) gold per enemy.
-  charge:
+  - name: Greatest Showman
+  - description: All enemies Charmed; all move adjacent to you; gain (X+LUK) gold per enemy.
+  - charge:
     - play 5 song sections
     - play 3+ sections of one song
     - add an Influence
     - roll a Critical
-expertise-tracks:
-  - {expertise: Luck, value: 1, unlock-at: 2}
-  - {expertise: Charisma, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Instrument 2H
-  armor: Light
-  off-hand: none (2-hander uses both slots)
+
 passives:
-  - {name: Performer, kind: non-combat, slot: passive, target: self, condition: Non-Combat Charisma check outside combat, use: constant, description: Inspired on performance Charisma., locked: false}
-  - {name: Instrument Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: once per round, description: 'Equip Instruments anywhere; once per round flip 1 rolled D6 to opposite face.', locked: false}
-  - {name: Talented, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Once per round treat rolled D6 as any 1-6., locked: true}
-  - {name: Lucky, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent LUK., locked: true}
+  - name: Performer
+    target: self
+    requirements: [ non-combat, constant ]
+    description: Inspired on performance Charisma.
+  - name: Instrument Proficiency
+    target: self
+    requirements: [ in-combat, once-per-round, constant ]
+    description: 'Equip Instruments anywhere; once per round flip 1 rolled D6 to opposite face.'
+  - name: Talented
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: Once per round treat rolled D6 as any 1-6.
+  - name: Lucky
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent LUK.
+
 actions:
-  main:
-    - {name: Rousing Elegy, tags: [active-song, ranged, magic], cost: Energy 5, target-range: all party R All, check: roll 5D6, description: 'Members gain each rolled tier while played — +1 DEF / +1 RES / take -1 / +1 DEF&RES / take -2.'}
-    - {name: Enfeebled Refrain, tags: [active-song, ranged, magic], cost: Energy 5, target-range: all enemies R All, check: 'roll 5D6; D20+LUK vs RES', description: 'Expose up to 5 enemies different statuses — Blind / Weaken (3) / Paralysis / Sleep / Charm.'}
-    - {name: Scenetics Shanty, tags: [active-song, ranged, magic], cost: Energy 5, target-range: all party R All, check: roll 5D6, description: 'Up to 5 members gain different — Levitate / Drain HP (3) / Quick / Status Immunity / Inspired. As printed Scenetics.'}
-    - {name: Mending Melody, tags: [active-song, ranged, magic], cost: Energy 5, target-range: all party R All, check: roll 5D6, description: 'Members immediately gain every rolled tier once — restore 3HP / -1 Status / restore MND / restore 1 Energy / Regenerate (3).'}
-    - {name: Marching Song, tags: [active-song, ranged, magic], cost: Energy 5, target-range: all party R All, check: roll 5D6, description: 'Members gain every rolled tier while played — +2 Stagger / +X damage / +2 Expose / +1D6 / +2 AGL.'}
-    - {name: Encore, tags: [active-song, ranged, magic], cost: 'Energy 5, Successfully Once per Combat', target-range: all party R All, check: roll 5D6, description: 'Gain effect per completed section; afterwards each other party member takes 1 extra turn this round (no refresh with another phase).'}
-  support:
-    - {name: Cresendo, tags: [magic], cost: Energy 5, target-range: Self, check: '—', description: 'Elegy/Mending/Marching +2 positives -2 negatives; Refrain skips Expose; Shanty treats D6 as 6. As printed Cresendo.'}
-    - {name: Medley, tags: [physical], cost: Energy 5, target-range: Self, check: '—', description: 'Play 2 songs this round as 1 Main (pay both); one must end next turn.'}
-  reactions:
-    - {name: Love Ballad, tags: [ranged, magic, song], cost: '—', target-range: T1 non-Boss any range, check: 'D20+LUK vs RES; Condition: before any target takes turn; Successfully Once per Combat', description: Expose Charmed (2).}
-    - {name: Swift Fingers, tags: [physical], cost: '—', target-range: Self, check: 'Condition: your turn', description: Reroll 1D6 once per turn.}
-source-pages: [p088]
-notes: Main stats 2 LUK/1 DEX/1 MND and bonus 1 JMP/1 NRG as printed. Songs cannot chain; any other Main ends song.
+  - name: Rousing Elegy
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: Energy 5
+    target-range: all party R All
+    check: roll 5D6
+    description: 'Members gain each rolled tier while played — +1 DEF / +1 RES / take -1 / +1 DEF&RES / take -2.'
+  - name: Enfeebled Refrain
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: Energy 5
+    target-range: all enemies R All
+    check: 'roll 5D6; D20+LUK vs RES'
+    description: 'Expose up to 5 enemies different statuses — Blind / Weaken (3) / Paralysis / Sleep / Charm.'
+  - name: Scenetics Shanty
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: Energy 5
+    target-range: all party R All
+    check: roll 5D6
+    description: 'Up to 5 members gain different — Levitate / Drain HP (3) / Quick / Status Immunity / Inspired. As printed Scenetics.'
+  - name: Mending Melody
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: Energy 5
+    target-range: all party R All
+    check: roll 5D6
+    description: 'Members immediately gain every rolled tier once — restore 3HP / -1 Status / restore MND / restore 1 Energy / Regenerate (3).'
+  - name: Marching Song
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: Energy 5
+    target-range: all party R All
+    check: roll 5D6
+    description: 'Members gain every rolled tier while played — +2 Stagger / +X damage / +2 Expose / +1D6 / +2 AGL.'
+  - name: Encore
+    type: main
+    tags: [ active-song, ranged, magic ]
+    cost: 'Energy 5, Successfully Once per Combat'
+    target-range: all party R All
+    check: roll 5D6
+    description: 'Gain effect per completed section; afterwards each other party member takes 1 extra turn this round (no refresh with another phase).'
+  - name: Cresendo
+    type: support
+    tags: [ magic ]
+    cost: Energy 5
+    target-range: Self
+    check: '—'
+    description: 'Elegy/Mending/Marching +2 positives -2 negatives; Refrain skips Expose; Shanty treats D6 as 6. As printed Cresendo.'
+  - name: Medley
+    type: support
+    tags: [ physical ]
+    cost: Energy 5
+    target-range: Self
+    check: '—'
+    description: 'Play 2 songs this round as 1 Main (pay both); one must end next turn.'
+  - name: Love Ballad
+    type: reaction
+    tags: [ ranged, magic, song ]
+    cost: '—'
+    target-range: T1 non-Boss any range
+    check: 'D20+LUK vs RES; Condition: before any target takes turn; Successfully Once per Combat'
+    description: Expose Charmed (2).
+  - name: Swift Fingers
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: your turn'
+    description: Reroll 1D6 once per turn.

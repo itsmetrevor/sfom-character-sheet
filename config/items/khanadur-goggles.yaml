@@ -1,0 +1,7 @@
+id: khanadur-goggles
+name: Khanadur Made Goggles
+slot: accessory
+damage-type: none
+stat-modifiers: []
+effect: Dark Vision.
+stack-max: 5

@@ -1,0 +1,115 @@
+# source: p002
+
+# str
+- id: strength
+  name: Strength
+  main-stat: str
+  description: |
+    Raw physical power. Used for melee damage, lifting, breaking, and shoving.
+
+- id: bravado
+  name: Bravado
+  main-stat: str
+  description: |
+    Intimidation and force of presence. Used to frighten, taunt, and dominate.
+
+- id: throw-catch
+  name: Throw/Catch
+  main-stat: str
+  description: |
+    Thrown precision and catching. Used for throwing items, weapons, and potions.
+
+# con
+- id: constitution
+  name: Constitution
+  main-stat: con
+  description: |
+    Endurance and hardiness. Used to resist exhaustion, poison, and hardship.
+
+- id: concentration
+  name: Concentration
+  main-stat: con
+  description: |
+    Focus under pressure. Used to maintain spells, resist distraction, and steady aim.
+
+- id: resistance
+  name: Resistance
+  main-stat: con
+  description: |
+    Withstanding effects. Used to resist being moved, magic, and status effects.
+
+# int
+- id: intelligence
+  name: Intelligence
+  main-stat: int
+  description: |
+    Reasoning and arcane lore. Used for checks about magic, potions, and devices.
+
+- id: crafting
+  name: Crafting
+  main-stat: int
+  description: |
+    Making and repairing gear, disguises, potions, and contraptions.
+
+- id: knowledge
+  name: Knowledge
+  main-stat: int
+  description: |
+    Recalled lore. Used for military history, tactics, religion, and investigation hints.
+
+# dex
+- id: dexterity
+  name: Dexterity
+  main-stat: dex
+  description: |
+    Agility and fine control. Used for dodging, balancing, and delicate work.
+
+- id: stealth
+  name: Stealth
+  main-stat: dex
+  description: |
+    Hiding and moving unseen. Used to sneak, tail, and disappear.
+
+- id: thievery
+  name: Thievery
+  main-stat: dex
+  description: |
+    Crime toolkit. Used to pickpocket, pick locks, steal, and disarm traps.
+
+# mnd
+- id: mind
+  name: Mind
+  main-stat: mnd
+  description: |
+    Insight and will. Used to read motives, recall under stress, and commune.
+
+- id: nature
+  name: Nature
+  main-stat: mnd
+  description: |
+    Wilderness lore. Used with animals, plants, weather, and tracking.
+
+- id: perception
+  name: Perception
+  main-stat: mnd
+  description: |
+    Noticing. Used to spot clues, ambushes, ore, and dungeon hazards.
+
+# luk
+- id: luck
+  name: Luck
+  main-stat: luk
+  description: |
+    Fortune. Used for gambling, fate effects, and wild-card checks.
+
+- id: charisma
+  name: Charisma
+  main-stat: luk
+  description: |
+    Charm and performance. Used to persuade, perform, and haggle.
+
+- id: deception
+  name: Deception
+  main-stat: luk
+  description: |
+    Lies and disguise. Used to deceive, impersonate, and spot lies.

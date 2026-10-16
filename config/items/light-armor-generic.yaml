@@ -1,0 +1,8 @@
+id: light-armor-generic
+name: Light Armor (Starting)
+slot: armor
+damage-type: none
+stat-modifiers:
+  - res: 1
+effect: Light Armor (Armor) +1 RES. Granted via Clothier background.
+stack-max: 5

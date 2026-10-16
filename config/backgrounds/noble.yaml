@@ -1,28 +1,32 @@
+# source: p040
+
 id: noble
 name: "Noble"
+craftsman: false
 description: |
   You were born and raised living in high society with your wealthy and well known family. Your family name and their money has helped ease your way through life so far.
-expertise:
-  "perception": 2
+
+expertise-modifiers:
+  - perception: 2
+
 starting-items:
-  - gold-coins
-starting-items-text: "25 Gold"
+  - item: gold-coins
+    quantity: 25
+
 passives:
-  plvl-0:
-    name: "Assistant"
+  - name: "Assistant"
+    requirements: [ party-lvl: 0 ]
     summary: "An assistant from your family estate is at your call when needed."
     detail: "You have an assistant from your family estate that works for you. They can be used however you see fit, just remember they are a person and actions have consequences."
-  plvl-3:
-    name: "Upper Class"
+  - name: "Upper Class"
+    requirements: [ party-lvl: 3 ]
     summary: "Gain 'Inspired' on Checks helping your Party blend with High Society."
     detail: "You know the attire and etiquette that is appropriate when dealing with people from high society. You can use that knowledge to more easily help your party blend in as if they belond there."
-  plvl-6:
-    name: "Bribe"
+  - name: "Bribe"
+    requirements: [ party-lvl: 6 ]
     summary: "Gain 'Inspired' on 'Charisma' Checks to Bribe using your family name."
     detail: "Your family name has gotten you this far, I am sure it can help now. Only gain inspiration if you use your family name while bribing."
-  plvl-9:
-    name: "Inheritance"
+  - name: "Inheritance"
+    requirements: [ party-lvl: 9 ]
     summary: "Once per week start, your assistant is sent 25 Gold for you from the family estate."
     detail: "Start to keep track of the days of the week and work with the GM to determine when the 'Start of the week' is. Your assistant will hold onto any money gained if you are gone."
-craftsman: false
-source-pages: "p040"

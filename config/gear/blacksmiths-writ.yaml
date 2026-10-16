@@ -1,8 +1,0 @@
-id: blacksmiths-writ
-name: "Blacksmith's Writ"
-slot: item
-damage-type: null
-bonus: null
-effect: "Writ shown to shop/forge proprietors for facility access (Blacksmith: Weapon crafting)."
-source: blacksmith
-stack-max: 1

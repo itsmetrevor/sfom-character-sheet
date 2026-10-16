@@ -1,8 +1,0 @@
-id: disguise-kit
-name: "Disguise Kit"
-slot: item
-damage-type: null
-bonus: null
-effect: "Used to craft disguises (Spy starting item)."
-source: spy
-stack-max: 5

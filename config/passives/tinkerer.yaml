@@ -1,8 +1,0 @@
-id: tinkerer
-name: Tinkerer
-source: ancestry
-slot: non-combat
-target: Self
-use: Constant
-description: |
-  Gain 'Inspired' when making a Crafting Check.

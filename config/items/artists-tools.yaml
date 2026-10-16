@@ -1,0 +1,8 @@
+id: artists-tools
+name: Artist's Tools
+slot: accessory
+damage-type: none
+stat-modifiers:
+  - charisma: 1
+effect: +1 Charisma when performing an 'Art Form'.
+stack-max: 5

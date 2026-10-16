@@ -1,58 +1,132 @@
+# source: p052
+# note: Role not written as-printed. Expertise header in source mislabels these as Knight Expertise Specialties — transcribed as Gladiator's.
+
 id: gladiator
 name: Gladiator
+roles: [ tank, dps ]
+main-stat: con
 tier: starter
-main-stat: CON
-roles: []
-combat-modifier:
-  name: Shield Drum
-  description: 'All attacks inflict Provoke. MAX HP equals double CON. +X damage per target Provoked from this character. Keep Taunt until another target is taunted.'
-prerequisites: []
-unlocks:
-  - {class: beast-tamer, level: 10}
-  - {class: knight, level: 10}
-  - {class: monk, level: 10}
-  - {class: priest, level: 10}
-  - {class: thief, level: 10}
-  - {class: wizard, level: 10}
-  - {class: rune-knight, level: 15}
-health-mod: 5
-stats:
-  main: {STR: 1, DEX: 0, CON: 2, MND: 0, INT: 0, LUK: 1}
-  bonus: {JMP: 0, AGL: 0, DEF: 3, RES: 0, NRG: 0, FOR: 0}
 x-start: 1
+
+prerequisites: []
+
+expertise-modifiers:
+  - constitution: 1
+    requirements: [ class-lvl: 2 ]
+  - throw-catch: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 5
+  - str: 1
+  - con: 2
+  - luk: 1
+  - def: 3
+
+equipment:
+  - main-hand: Slashing Sword
+  - armor: Heavy
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Shield Drum
+  - description: 'All attacks inflict Provoke. MAX HP equals double CON. +X damage per target Provoked from this character. Keep Taunt until another target is taunted.'
+
 ultimate:
-  name: Provoking Shout
-  description: Inflict Provoke on all enemies; receive -CON damage from all attacks this round.
-  charge:
+  - name: Provoking Shout
+  - description: Inflict Provoke on all enemies; receive -CON damage from all attacks this round.
+  - charge:
     - Stagger/Expose an enemy
     - Provoke 2+ targets
     - Taunt a target
     - roll a Critical
-expertise-tracks:
-  - {expertise: Constitution, value: 1, unlock-at: 2}
-  - {expertise: Throw/Catch, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Slashing Sword
-  armor: Heavy
-  off-hand: Shield
+
 passives:
-  - {name: Throwing Skills, kind: non-combat, slot: passive, target: self, condition: Non-Combat Throw/Catch check, use: constant, description: Inspired on Throw/Catch., locked: false}
-  - {name: Heavy Armor Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Equip Heavy with any class; DEF and RES +1., locked: false}
-  - {name: Attention!, kind: combat, slot: reaction, target: T1 R5, condition: unlock all, use: Reaction Taunt 1 target, description: 'Reaction Taunt 1 target; keep Taunt until another is taunted.', locked: true}
-  - {name: Built to Last, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent CON., locked: true}
+  - name: Throwing Skills
+    target: self
+    requirements: [ non-combat, constant ]
+    description: Inspired on Throw/Catch.
+  - name: Heavy Armor Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: Equip Heavy with any class; DEF and RES +1.
+  - name: Attention!
+    target: T1 R5
+    requirements: [ in-combat, class-adept, reaction ]
+    description: 'Reaction Taunt 1 target; keep Taunt until another is taunted.'
+  - name: Built to Last
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent CON.
+
 actions:
-  main:
-    - {name: Enraged Swing, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain STR', description: 'STR damage; Stagger +XD6; Taunted targets gain Berserk; Critical inflicts Confuse.'}
-    - {name: Shield Bounce, tags: [ranged, physical], cost: '—', target-range: T2 R5, check: 'STR vs DEF, requires shield', description: 'STR damage, repeat vs another within 5 of 1st; Stagger +XD6; Critical repeats vs another within 5 of 2nd.'}
-    - {name: Rush Attack, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'STR vs DEF, Chain: move 3/1 and deal STR', description: 'STR damage; Stagger +XD6 and gain 1 Energy.'}
-    - {name: Throw Javelin, tags: [ranged, physical], cost: Twice per Combat, target-range: T1 R7, check: 'D20+STR vs DEF, Chain: pull target adjacent, Javelin not lost', description: 'STR damage, place adjacent Javelin Marker; moving onto it regains a use; Stagger +XD6.'}
-  support:
-    - {name: Belittle, tags: [ranged, physical, talk], cost: '—', target-range: T1 R5, check: Critical, description: 'Taunt a non-Boss or Provoke a Boss; Critical Provokes all in 5x5 on target.'}
-    - {name: Throw Sand, tags: [ranged, physical], cost: '—', target-range: T1 R3, check: 'D20+CON vs RES', description: 'Expose Blind.'}
-    - {name: Sever Magic, tags: [melee, physical], cost: Once per Combat, target-range: Self, check: Critical, description: '-X damage received per Provoked target till next turn; Critical adds another -X.'}
-    - {name: Shield Push, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF', description: 'X damage; shield Push 3; Push damage inflicts Provoked; Stagger +STR.'}
-  reactions:
-    - {name: Memorized Attacks, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'Condition: before being attacked by Taunted/Boss-Provoked target; Twice per Combat', description: They roll Dizzy on Stagger/Expose vs you till end of round.}
-    - {name: Disarm, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+CON vs RES; Condition: before being attacked with Main Action; Successfully Once per Combat', description: 'Expose Disable; reusable this combat if Resisted.'}
-source-pages: [p052]
-notes: 'Role not written as-printed. Expertise header in source mislabels these as Knight Expertise Specialties — transcribed as Gladiator''s.'
+  - name: Enraged Swing
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+STR vs DEF, Chain STR'
+    description: 'STR damage; Stagger +XD6; Taunted targets gain Berserk; Critical inflicts Confuse.'
+  - name: Shield Bounce
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T2 R5
+    check: 'STR vs DEF, requires shield'
+    description: 'STR damage, repeat vs another within 5 of 1st; Stagger +XD6; Critical repeats vs another within 5 of 2nd.'
+  - name: Rush Attack
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'STR vs DEF, Chain: move 3/1 and deal STR'
+    description: 'STR damage; Stagger +XD6 and gain 1 Energy.'
+  - name: Throw Javelin
+    type: main
+    tags: [ ranged, physical ]
+    cost: Twice per Combat
+    target-range: T1 R7
+    check: 'D20+STR vs DEF, Chain: pull target adjacent, Javelin not lost'
+    description: 'STR damage, place adjacent Javelin Marker; moving onto it regains a use; Stagger +XD6.'
+  - name: Belittle
+    type: support
+    tags: [ ranged, physical, talk ]
+    cost: '—'
+    target-range: T1 R5
+    check: Critical
+    description: 'Taunt a non-Boss or Provoke a Boss; Critical Provokes all in 5x5 on target.'
+  - name: Throw Sand
+    type: support
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R3
+    check: 'D20+CON vs RES'
+    description: 'Expose Blind.'
+  - name: Sever Magic
+    type: support
+    tags: [ melee, physical ]
+    cost: Once per Combat
+    target-range: Self
+    check: Critical
+    description: '-X damage received per Provoked target till next turn; Critical adds another -X.'
+  - name: Shield Push
+    type: support
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+STR vs DEF'
+    description: 'X damage; shield Push 3; Push damage inflicts Provoked; Stagger +STR.'
+  - name: Memorized Attacks
+    type: reaction
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'Condition: before being attacked by Taunted/Boss-Provoked target; Twice per Combat'
+    description: They roll Dizzy on Stagger/Expose vs you till end of round.
+  - name: Disarm
+    type: reaction
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+CON vs RES; Condition: before being attacked with Main Action; Successfully Once per Combat'
+    description: 'Expose Disable; reusable this combat if Resisted.'

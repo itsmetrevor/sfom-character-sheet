@@ -1,8 +1,0 @@
-id: super-potion
-name: "Super Potion"
-slot: consumable
-damage-type: null
-bonus: null
-effect: "Starting potion (Apprentice Alchemist). See the Alchemy Crafting Guide, page XX."
-source: apprentice-alchemist
-stack-max: 5

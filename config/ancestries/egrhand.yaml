@@ -1,27 +1,50 @@
+# source: p008+p009 sheet5
+
 id: egrhand
 name: Egrhand
+
 languages:
   - egrhandi
   - lagosian
+
 vision: normal
-max-hp: 12
-expertise:
-  strength: 1
-  throw-catch: 1
-main-mods:
-  positive: STR
-  negative: INT
-bonus-stat:
-  stat: NRG
-  value: 1
+
+stat-modifiers:
+  - max-hp: 12
+  - str: 1
+  - int: -1
+  - nrg: 1
+
+expertise-modifiers:
+  - strength: 1
+  - throw-catch: 1
+
 passives:
-  non-combat: unstoppable
-  combat: immovable
+  - name: Unstoppable
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Gain 'Inspired' when making a Strength Check against a Target that is smaller than you.
+  - name: Immovable
+    type: combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      You may choose to not be moved by Effects.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p008+p009 sheet5
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

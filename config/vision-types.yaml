@@ -1,0 +1,19 @@
+- id: normal
+  name: Normal
+  description: |
+    Standard vision with no special adaptation to dim light or darkness.
+
+- id: low-light
+  name: Low Light
+  description: |
+    Sees in dim light as if it were bright light.
+
+- id: dark
+  name: Dark
+  description: |
+    Sees in darkness as if it were dim light.
+
+- id: binocular
+  name: Binocular
+  description: |
+    Keen avian sight with overlapping fields of view; aids judging distance while gliding and hovering. (Provisional: inferred from Halthket Glide & Hover passive; handbook gives the name only.)

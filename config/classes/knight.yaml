@@ -1,54 +1,133 @@
+# source: p064
+
 id: knight
 name: Knight
-tier: '1'
-main-stat: CON
-roles: [tank, dps]
-combat-modifier:
-  name: Knight's Path
-  description: 'All attacks inflict Provoke. MAX HP equals double CON. May take damage for adjacent party members. Parry-Shield usable un-unlocked. Physical Melee Provoker Saboteur.'
-prerequisites:
-  - {class: any-starter, level: 10}
-unlocks:
-  - {class: samurai, level: 10}
-  - {class: grim-knight, level: 5}
-health-mod: 5
-stats:
-  main: {STR: 1, DEX: 0, CON: 2, MND: 1, INT: 0, LUK: 0}
-  bonus: {JMP: 0, AGL: 0, DEF: 3, RES: 0, NRG: 0, FOR: 0}
+roles: [ tank, dps ]
+main-stat: con
+tier: 1
 x-start: 1
+
+prerequisites:
+  - class: any-starter
+    level: 10
+
+expertise-modifiers:
+  - resistance: 1
+    requirements: [ class-lvl: 2 ]
+  - perception: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 5
+  - str: 1
+  - con: 2
+  - mnd: 1
+  - def: 3
+
+equipment:
+  - main-hand: Slashing Sword
+  - armor: Heavy Armor
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Knight's Path
+  - description: 'All attacks inflict Provoke. MAX HP equals double CON. May take damage for adjacent party members. Parry-Shield usable un-unlocked. Physical Melee Provoker Saboteur.'
+
 ultimate:
-  name: Hero's Shield
-  description: Provoke all enemies in 5x5; successfully Parry all attacks on you this turn.
-  charge:
+  - name: Hero's Shield
+  - description: Provoke all enemies in 5x5; successfully Parry all attacks on you this turn.
+  - charge:
     - Expose a target
     - Provoke
     - receive 10+ damage
     - roll a Critical
-expertise-tracks:
-  - {expertise: Resistance, value: 1, unlock-at: 2}
-  - {expertise: Perception, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Slashing Sword
-  armor: Heavy Armor
-  off-hand: Shield
+
 passives:
-  - {name: Prepared, kind: non-combat, slot: passive, target: self, condition: Non-Combat Resistance/Constitution check, use: Once per Long Rest, description: May succeed a Resistance or Constitution check., locked: false}
-  - {name: Shield Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Shields anywhere; +1 DEF.', locked: false}
-  - {name: Parry-Shield, kind: combat, slot: passive, target: self, condition: unlock all / a target attacks you, use: constant, description: 'Attacked with shield — roll D20, beat attack total to take no damage; once per round.', locked: true}
-  - {name: Built to Last, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent CON., locked: true}
+  - name: Prepared
+    target: self
+    requirements: [ non-combat, well-rested ]
+    description: May succeed a Resistance or Constitution check.
+  - name: Shield Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: 'Equip Shields anywhere; +1 DEF.'
+  - name: Parry-Shield
+    target: self
+    requirements: [ in-combat, class-adept, attacked, constant ]
+    description: 'Attacked with shield — roll D20, beat attack total to take no damage; once per round.'
+  - name: Built to Last
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent CON.
+
 actions:
-  main:
-    - {name: Heavy Swing, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain STR', description: 'STR damage; Stagger +XD6 and target deals -X till end of Enemy Step; Critical doubles -X.'}
-    - {name: Lunge, tags: [ranged, physical], cost: '—', target-range: T1 R3, check: 'D20+STR vs DEF, Chain: STR damage target -X', description: 'Move to target, STR damage; Puncture if moved; Stagger +XD6.'}
-    - {name: Defensive Measures, tags: [magic], cost: 'Energy 5, Boost: Taunt 1 other within 10', target-range: T1 R10, check: '—', description: 'Taunt 1 within 10; +3 physical and magic DEF; receive -5 damage till next turn.'}
-    - {name: Full Rotation, tags: [melee, physical], cost: '—', target-range: 3x3 centered on self, check: 'D20+STR vs DEF, Chain: STR damage targets -X', description: 'STR to all; Stagger +XD6 and -X till end of Enemy Step.'}
-  support:
-    - {name: Sever Power, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+CON vs RES', description: 'Inflict Sever Power (target deals -1 physical); Expose -2 instead.'}
-    - {name: Shield Up, tags: [physical], cost: 'Once per Combat, Boost: extra -(CON)', target-range: Self, check: '—', description: '-(X+1) damage from all abilities till end of round; equipped shield adds -(CON).'}
-    - {name: Sever Magic, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+CON vs RES', description: 'Inflict Sever Magic (target deals -1 magic); Expose -2.'}
-    - {name: Sever Defense, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+CON vs RES', description: 'Inflict Sever Defense (target receives +1 damage); Expose +2 instead.'}
-  reactions:
-    - {name: Interrupt, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'Condition: start/end of any target turn while adjacent enemy Channels; Once per Combat', description: STR damage; end channeled ability and negate markers.}
-    - {name: Stunning Strike, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+CON vs RES; Condition: your turn or before adjacent enemy attacks; Successfully Once per Combat', description: 'Expose Stunned; reusable if Resisted.'}
-source-pages: [p064]
-notes: ''
+  - name: Heavy Swing
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+STR vs DEF, Chain STR'
+    description: 'STR damage; Stagger +XD6 and target deals -X till end of Enemy Step; Critical doubles -X.'
+  - name: Lunge
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R3
+    check: 'D20+STR vs DEF, Chain: STR damage target -X'
+    description: 'Move to target, STR damage; Puncture if moved; Stagger +XD6.'
+  - name: Defensive Measures
+    type: main
+    tags: [ magic ]
+    cost: 'Energy 5, Boost: Taunt 1 other within 10'
+    target-range: T1 R10
+    check: '—'
+    description: 'Taunt 1 within 10; +3 physical and magic DEF; receive -5 damage till next turn.'
+  - name: Full Rotation
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: 3x3 centered on self
+    check: 'D20+STR vs DEF, Chain: STR damage targets -X'
+    description: 'STR to all; Stagger +XD6 and -X till end of Enemy Step.'
+  - name: Sever Power
+    type: support
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+CON vs RES'
+    description: 'Inflict Sever Power (target deals -1 physical); Expose -2 instead.'
+  - name: Shield Up
+    type: support
+    tags: [ physical ]
+    cost: 'Once per Combat, Boost: extra -(CON)'
+    target-range: Self
+    check: '—'
+    description: '-(X+1) damage from all abilities till end of round; equipped shield adds -(CON).'
+  - name: Sever Magic
+    type: support
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+CON vs RES'
+    description: 'Inflict Sever Magic (target deals -1 magic); Expose -2.'
+  - name: Sever Defense
+    type: support
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+CON vs RES'
+    description: 'Inflict Sever Defense (target receives +1 damage); Expose +2 instead.'
+  - name: Interrupt
+    type: reaction
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'Condition: start/end of any target turn while adjacent enemy Channels; Once per Combat'
+    description: STR damage; end channeled ability and negate markers.
+  - name: Stunning Strike
+    type: reaction
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+CON vs RES; Condition: your turn or before adjacent enemy attacks; Successfully Once per Combat'
+    description: 'Expose Stunned; reusable if Resisted.'

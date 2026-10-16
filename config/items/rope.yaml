@@ -1,0 +1,7 @@
+id: rope
+name: Rope
+slot: item
+damage-type: none
+stat-modifiers: []
+effect: Utility rope (Sailor starting item).
+stack-max: 5

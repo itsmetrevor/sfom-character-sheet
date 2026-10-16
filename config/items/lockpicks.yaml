@@ -1,0 +1,7 @@
+id: lockpicks
+name: Lockpicks
+slot: tool
+damage-type: none
+stat-modifiers: []
+effect: Use to open locked doors.
+stack-max: 5

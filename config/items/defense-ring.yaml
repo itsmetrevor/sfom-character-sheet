@@ -1,0 +1,7 @@
+id: defense-ring
+name: Defense Ring
+slot: accessory
+damage-type: none
+stat-modifiers: []
+effect: Jewelry Accessory. -1 Damage.
+stack-max: 5

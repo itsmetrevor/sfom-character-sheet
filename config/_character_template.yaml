@@ -1,0 +1,56 @@
+# Incomplete WIP
+# Character save data model
+
+
+# These fields are included on the character sheet
+# but don't need to be tracked explicitly.
+#
+# stats: # calc p+ c + t +- modifiers
+# inventory-max: # calc base max + or - modifiers
+# stack-max: # calc base max + or - modifiers
+# clvl-total: # calc by sum of all class levels
+# expertise: # calc s + p + c + t +- modifiers
+# abilities-available: # from class
+# passives-available: # from class, background, ancestry
+
+name: Jimmy John
+ancestry: enatt
+background: blacksmith
+class: scholar
+subclass: necromancer
+
+character-info: |
+  Some very interesting lore information about Jimmy John.
+
+current-hp:
+energy:
+exaustion:
+
+party-lvl:
+
+condis-boons:
+  - poisoned
+  - haste
+
+equiped:
+  - main-hand:
+  - off-hand:
+  - armor:
+  - accessory1:
+  - accessory2:
+
+inventory:
+  - item:
+    quantity:
+  - item:
+    quantity:
+
+class-lvls:
+  - scholar: 9
+  - berserker: 4
+  - monk: 10
+  - soldier: 10
+
+slotted-abilities:
+
+slotted-passives:

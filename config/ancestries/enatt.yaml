@@ -1,26 +1,49 @@
+# source: p010+p011 sheet6
+
 id: enatt
 name: Enatt
+
 languages:
   - enattish
   - lagosian
+
 vision: low-light
-max-hp: 9
-expertise:
-  resistance: 2
-main-mods:
-  positive: CON
-  negative: DEX
-bonus-stat:
-  stat: RES
-  value: 1
+
+stat-modifiers:
+  - max-hp: 9
+  - con: 1
+  - dex: -1
+  - res: 1
+
+expertise-modifiers:
+  - resistance: 2
+
 passives:
-  non-combat: one-with-nature
-  combat: detoxify
+  - name: One With Nature
+    type: non-combat
+    target: Self
+    requirements:
+      - well-rested
+    description: |
+      You may commune with nearby plant life.
+  - name: Detoxify
+    type: combat
+    target: Self
+    requirements:
+      - once-per-combat
+    description: |
+      When you are inflicted with a Status Effect you may Negate it.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p010+p011 sheet6
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

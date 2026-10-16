@@ -1,0 +1,7 @@
+id: jewelers-writ
+name: Jeweler's Writ
+slot: item
+damage-type: none
+stat-modifiers: []
+effect: "Writ shown to shop/forge proprietors for facility access (Jeweler: Jewelry Accessory crafting)."
+stack-max: 1

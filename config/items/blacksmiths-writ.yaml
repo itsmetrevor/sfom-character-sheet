@@ -1,0 +1,7 @@
+id: blacksmiths-writ
+name: Blacksmith's Writ
+slot: item
+damage-type: none
+stat-modifiers: []
+effect: "Writ shown to shop/forge proprietors for facility access (Blacksmith: Weapon crafting)."
+stack-max: 1

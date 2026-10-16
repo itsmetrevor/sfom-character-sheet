@@ -1,58 +1,133 @@
+# source: p050, p051
+# note: Combat goal keep party alive throwing potions; poison bombs + Piercing weapon add DPS. Physical items enable Chain into Restorative with fixed-HP restoration. Canonical full ability text; Chemist-specific prose transcribed once here.
+
 id: chemist
 name: Chemist
+roles: [ healer ]
+main-stat: int
 tier: starter
-main-stat: INT
-roles: [healer]
-combat-modifier:
-  name: Enhanced Chemistry
-  description: '+5 ingredients when using Chemistry. Item abilities spend the item; they are enhanced (EX) versions of regular items. Basic Alchemy: before a Throwing ability roll D6 — 1-3 nothing; 4-5 +INT HP restored / +INT damage; 6 item not spent.'
-prerequisites: []
-unlocks:
-  - {class: beast-tamer, level: 10}
-  - {class: knight, level: 10}
-  - {class: monk, level: 10}
-  - {class: priest, level: 10}
-  - {class: thief, level: 10}
-  - {class: wizard, level: 10}
-  - {class: alchemist, level: 15}
-health-mod: 0
-stats:
-  main: {STR: 0, DEX: 0, CON: 0, MND: 1, INT: 2, LUK: 1}
-  bonus: {JMP: 0, AGL: 0, DEF: 1, RES: 3, NRG: 0, FOR: 0}
 x-start: 1
+
+prerequisites: []
+
+expertise-modifiers:
+  - crafting: 1
+    requirements: [ class-lvl: 2 ]
+  - throw-catch: 1
+    requirements: [ class-lvl: 2 ]
+
+stat-modifiers:
+  - max-hp: 0
+  - mnd: 1
+  - int: 2
+  - luk: 1
+  - def: 1
+  - res: 3
+
+equipment:
+  - main-hand: Piercing (Ranged) — Pistol, no bonus
+  - armor: Medium — basic, no bonus
+  - off-hand: Dagger (Knife) — melee, basic, no bonus
+
+combat-modifier:
+  - name: Enhanced Chemistry
+  - description: '+5 ingredients when using Chemistry. Item abilities spend the item; they are enhanced (EX) versions of regular items. Basic Alchemy: before a Throwing ability roll D6 — 1-3 nothing; 4-5 +INT HP restored / +INT damage; 6 item not spent.'
+
 ultimate:
-  name: Crafting Frenzy
-  description: Use the Chemistry passive; use any potions crafted.
-  charge:
+  - name: Crafting Frenzy
+  - description: Use the Chemistry passive; use any potions crafted.
+  - charge:
     - gain Basic Alchemy effect
     - throw an item 2+ squares
     - restore HP
     - roll a Critical
-expertise-tracks:
-  - {expertise: Crafting, value: 1, unlock-at: 2}
-  - {expertise: Throw/Catch, value: 1, unlock-at: 2}
-equipment:
-  main-hand: Piercing (Ranged) — Pistol, no bonus
-  armor: Medium — basic, no bonus
-  off-hand: Dagger (Knife) — melee, basic, no bonus
+
 passives:
-  - {name: Chemistry, kind: non-combat, slot: passive, target: self, condition: craft outside combat, use: Once per Long Rest, description: 'Gather 5 ingredients, craft from list — Healing Potion 1, Poison Bomb 1, Super Potion 2, XL Potion 3, Curing Tonic 2, Ener-oil 3.', locked: false}
-  - {name: Throw Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Throw inventory items at Range 10 instead of 1., locked: false}
-  - {name: Mixologist, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: +INT damage dealt and healing received spending inventory items., locked: true}
-  - {name: Intellectual, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent INT, always on even without the card., locked: true}
+  - name: Chemistry
+    target: self
+    requirements: [ non-combat, well-rested ]
+    description: 'Gather 5 ingredients, craft from list — Healing Potion 1, Poison Bomb 1, Super Potion 2, XL Potion 3, Curing Tonic 2, Ener-oil 3.'
+  - name: Throw Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: Throw inventory items at Range 10 instead of 1.
+  - name: Mixologist
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +INT damage dealt and healing received spending inventory items.
+  - name: Intellectual
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent INT, always on even without the card.
+
 actions:
-  main:
-    - {name: Single Shot, tags: [ranged, physical], cost: '—', target-range: T1 R10, check: 'D20+STR vs DEF, Chain XD6', description: 'Stagger (X+2)D6.'}
-    - {name: Revival Tincture EX, tags: [ranged, physical, throwing, restorative], cost: spend item, target-range: T1 R10, check: 'STR vs DEF', description: 'Spend it — remove Knocked Out, restore X+PLVL+INT, grant Unseen + Damage Immunity till end of round.'}
-    - {name: Super Potion EX, tags: [chain, restorative], cost: spend item, target-range: Self or 1 R10, check: 'Chain: spend it, restore (X+3)+PLVL', description: 'Restore (X+3)+PLVL+INT.'}
-    - {name: XL Potion EX, tags: [chain, restorative], cost: spend item, target-range: Square 5x5 within 10, check: 'Chain: spend it, restore X+PLVL to all', description: 'Restore X+PLVL+INT to all in range.'}
-  support:
-    - {name: Healing Potion EX, tags: [restorative], cost: spend item, target-range: Self or 1 R10, check: '—', description: 'Restore X+PLVL+INT.'}
-    - {name: Curing Tonic EX, tags: [curative], cost: spend item, target-range: Square 3x3 within 10, check: '—', description: Each target removes 1 Status Effect or DOT (not Knocked Out).}
-    - {name: Poison Bomb EX, tags: [ranged, physical, throwing], cost: spend item, target-range: T1 R10, check: 'D20+INT vs RES', description: Inflict Poison DOT 3.}
-    - {name: Ener-oil EX, tags: [restorative], cost: spend item, target-range: Self or 1 R10, check: '—', description: Restore 3 Energy.}
-  reactions:
-    - {name: Quick Toss, tags: [throwing], cost: '—', target-range: Self, check: 'Condition: start or end of any target''s turn; Once per Combat', description: Immediately use a Throwing ability.}
-    - {name: Quick Craft, tags: [crafting], cost: '—', target-range: Any R10, check: 'Condition: start or end of any target''s turn; Once per Combat', description: Find 3 ingredients, quickly craft any number of items via Chemistry, immediately use them.}
-source-pages: [p050, p051]
-notes: Combat goal keep party alive throwing potions; poison bombs + Piercing weapon add DPS. Physical items enable Chain into Restorative with fixed-HP restoration. Canonical full ability text; Chemist-specific prose transcribed once here.
+  - name: Single Shot
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R10
+    check: 'D20+STR vs DEF, Chain XD6'
+    description: 'Stagger (X+2)D6.'
+  - name: Revival Tincture EX
+    type: main
+    tags: [ ranged, physical, throwing, restorative ]
+    cost: spend item
+    target-range: T1 R10
+    check: 'STR vs DEF'
+    description: 'Spend it — remove Knocked Out, restore X+PLVL+INT, grant Unseen + Damage Immunity till end of round.'
+  - name: Super Potion EX
+    type: main
+    tags: [ chain, restorative ]
+    cost: spend item
+    target-range: Self or 1 R10
+    check: 'Chain: spend it, restore (X+3)+PLVL'
+    description: 'Restore (X+3)+PLVL+INT.'
+  - name: XL Potion EX
+    type: main
+    tags: [ chain, restorative ]
+    cost: spend item
+    target-range: Square 5x5 within 10
+    check: 'Chain: spend it, restore X+PLVL to all'
+    description: 'Restore X+PLVL+INT to all in range.'
+  - name: Healing Potion EX
+    type: support
+    tags: [ restorative ]
+    cost: spend item
+    target-range: Self or 1 R10
+    check: '—'
+    description: 'Restore X+PLVL+INT.'
+  - name: Curing Tonic EX
+    type: support
+    tags: [ curative ]
+    cost: spend item
+    target-range: Square 3x3 within 10
+    check: '—'
+    description: Each target removes 1 Status Effect or DOT (not Knocked Out).
+  - name: Poison Bomb EX
+    type: support
+    tags: [ ranged, physical, throwing ]
+    cost: spend item
+    target-range: T1 R10
+    check: 'D20+INT vs RES'
+    description: Inflict Poison DOT 3.
+  - name: Ener-oil EX
+    type: support
+    tags: [ restorative ]
+    cost: spend item
+    target-range: Self or 1 R10
+    check: '—'
+    description: Restore 3 Energy.
+  - name: Quick Toss
+    type: reaction
+    tags: [ throwing ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: start or end of any target''s turn; Once per Combat'
+    description: Immediately use a Throwing ability.
+  - name: Quick Craft
+    type: reaction
+    tags: [ crafting ]
+    cost: '—'
+    target-range: Any R10
+    check: 'Condition: start or end of any target''s turn; Once per Combat'
+    description: Find 3 ingredients, quickly craft any number of items via Chemistry, immediately use them.

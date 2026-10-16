@@ -1,30 +1,35 @@
+# source: p031
+# note: BOOK-MISPRINT: the ability bar printed under Jeweler on p031 is Artist's bar (Art Form / Performer / Mesmerizing / Perfection); Jeweler has no tier abilities of its own in the source. Tiers below inferred by analogy with the other three Craftsman bars.
+
 id: jeweler
 name: "Jeweler"
+craftsman: true
 description: |
   Four Craftsman backgrounds — Armorer, Blacksmith, Clothier, Jeweler — share crafting mechanics; each requires adventure resources, and resources impart effects on crafted Gear. See the Crafting Section, page XX. Capabilities: Jewelry Accessories. Each comes with a specific 'Writ' shown to shop/forge proprietors for facility access.
-expertise:
-  "crafting": 2
+
+expertise-modifiers:
+  - crafting: 2
+
 starting-items:
-  - jewelers-writ
-  - defense-ring
-starting-items-text: "Jeweler's Writ (Item); Defense Ring (Accessory) -1 Damage"
+  - item: jewelers-writ
+    quantity: 1
+  - item: defense-ring
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Unknown — source truncated"
-    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
-    detail: "Flagged for author check; no tier abilities transcribed."
-  plvl-3:
-    name: "Unknown — source truncated"
-    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
-    detail: "Flagged for author check; no tier abilities transcribed."
-  plvl-6:
-    name: "Unknown — source truncated"
-    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
-    detail: "Flagged for author check; no tier abilities transcribed."
-  plvl-9:
-    name: "Unknown — source truncated"
-    summary: "Ability-bar section runs off the bottom of p031 with no continuation on p032."
-    detail: "Flagged for author check; no tier abilities transcribed."
-craftsman: true
-source-pages: "p031"
-notes: "SOURCE-TRUNCATED: Jeweler's ability-bar section runs off the bottom of p031 with no continuation on p032 — flagged for author check."
+  - name: "Common"
+    requirements: [ party-lvl: 0 ]
+    summary: "Craft 1 Jewelry Accessory. Required: 3 Materials. Accessory gains 1 Effect from Materials used."
+    detail: "Craft 1 Jewelry Accessory. Required: 3 Materials. Accessory gains 1 Effect from Materials used. (Inferred by analogy with the other three Craftsman bars; no paragraph details in source — the printed Jeweler bar shows Artist's abilities.)"
+  - name: "Uncommon"
+    requirements: [ party-lvl: 3 ]
+    summary: "Craft 1 Jewelry Accessory. Required: 7 Materials. Accessory gains 2 Effects from Materials used."
+    detail: "Craft 1 Jewelry Accessory. Required: 7 Materials. Accessory gains 2 Effects from Materials used. (Inferred by analogy with the other three Craftsman bars; no paragraph details in source — the printed Jeweler bar shows Artist's abilities.)"
+  - name: "Rare"
+    requirements: [ party-lvl: 6 ]
+    summary: "Craft 1 Jewelry Accessory. Required: 15 Materials. Accessory gains 3 Effects from Materials used."
+    detail: "Craft 1 Jewelry Accessory. Required: 15 Materials. Accessory gains 3 Effects from Materials used. (Inferred by analogy with the other three Craftsman bars; no paragraph details in source — the printed Jeweler bar shows Artist's abilities.)"
+  - name: "Efficiency"
+    requirements: [ party-lvl: 9 ]
+    summary: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3."
+    detail: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3. (Inferred by analogy with the other three Craftsman bars; no paragraph details in source — the printed Jeweler bar shows Artist's abilities.)"

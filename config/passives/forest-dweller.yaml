@@ -1,8 +1,0 @@
-id: forest-dweller
-name: Forest Dweller
-source: ancestry
-slot: non-combat
-target: Self
-use: Constant
-description: |
-  Traverse through Forests and Trees without making Checks.

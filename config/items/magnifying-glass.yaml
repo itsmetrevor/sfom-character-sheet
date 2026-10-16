@@ -1,0 +1,8 @@
+id: magnifying-glass
+name: Magnifying Glass
+slot: accessory
+damage-type: none
+stat-modifiers:
+  - perception: 1
+effect: +1 Perception Expertise.
+stack-max: 5

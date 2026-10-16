@@ -1,0 +1,7 @@
+id: fishing-pole
+name: Fishing Pole
+slot: tool
+damage-type: none
+stat-modifiers: []
+effect: Used to catch fish (Sailor starting item).
+stack-max: 5

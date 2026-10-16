@@ -1,27 +1,50 @@
+# source: p026+p027 sheet14
+
 id: skrii
 name: Skrii
+
 languages:
   - skrii
   - lagosian
+
 vision: dark
-max-hp: 5
-expertise:
-  thievery: 1
-  stealth: 1
-main-mods:
-  positive: DEX
-  negative: STR
-bonus-stat:
-  stat: AGL
-  value: 1
+
+stat-modifiers:
+  - max-hp: 5
+  - dex: 1
+  - str: -1
+  - agl: 1
+
+expertise-modifiers:
+  - thievery: 1
+  - stealth: 1
+
 passives:
-  non-combat: compulsive-liar
-  combat: sticky-fingers
+  - name: Compulsive Liar
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Add +1D6 to your 'Deception' Checks.
+  - name: Sticky Fingers
+    type: combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      When defeating an Enemy also gain the Common 'Steal' Reward.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p026+p027 sheet14
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

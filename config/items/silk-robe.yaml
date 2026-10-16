@@ -1,0 +1,8 @@
+id: silk-robe
+name: Silk Robe
+slot: armor
+damage-type: none
+stat-modifiers:
+  - res: 1
+effect: Light Armor. +1 RES.
+stack-max: 5

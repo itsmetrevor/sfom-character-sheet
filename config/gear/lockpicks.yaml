@@ -1,8 +1,0 @@
-id: lockpicks
-name: "Lockpicks"
-slot: tool
-damage-type: null
-bonus: null
-effect: "Use to open locked doors."
-source: rogue
-stack-max: 5

@@ -1,53 +1,129 @@
+# source: p092
+# note: Main stats 2 STR/2 INT as printed. Sheet tracks Shadow/Blood scale to 10.
+
 id: grim-knight
 name: Grim Knight
-tier: '3'
-main-stat: STR
-roles: [dps, tank]
-combat-modifier:
-  name: Shadow & Blood
-  description: 'All attacks Provoke. MAX HP equals double CON. Start in Shadow Stance with 1 Shadow Charge. Shadow: dealing damage +1 Charge (max 10), bonus damage/healing by count. Blood: dealing damage -1 Charge (min 1), healing by count. Uses Reborn un-unlocked.'
-prerequisites:
-  - {class: knight, level: 5}
-  - {class: berserker, level: 10}
-unlocks:
-  - {class: judge, level: 10}
-health-mod: 10
-stats:
-  main: {STR: 2, DEX: 0, CON: 0, MND: 0, INT: 2, LUK: 0}
-  bonus: {JMP: 0, AGL: 0, DEF: 1, RES: 1, NRG: 0, FOR: 0}
+roles: [ dps, tank ]
+main-stat: str
+tier: 3
 x-start: 1
+
+prerequisites:
+  - class: knight
+    level: 5
+  - class: berserker
+    level: 10
+
+expertise-modifiers:
+  - strength: 1
+    requirements: [ class-lvl: 2 ]
+  - deception: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 10
+  - str: 2
+  - int: 2
+  - def: 1
+  - res: 1
+
+equipment:
+  - main-hand: Slashing or Piercing Sword
+  - armor: Heavy Armor
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Shadow & Blood
+  - description: 'All attacks Provoke. MAX HP equals double CON. Start in Shadow Stance with 1 Shadow Charge. Shadow: dealing damage +1 Charge (max 10), bonus damage/healing by count. Blood: dealing damage -1 Charge (min 1), healing by count. Uses Reborn un-unlocked.'
+
 ultimate:
-  name: Dark Imbuement
-  description: Restore to full HP; deal HP-restored as damage to all enemies within Range 5.
-  charge:
+  - name: Dark Imbuement
+  - description: Restore to full HP; deal HP-restored as damage to all enemies within Range 5.
+  - charge:
     - restore or lose 15+ HP
     - change stances
     - gain 2 Charges
     - roll a Critical
-expertise-tracks:
-  - {expertise: Strength, value: 1, unlock-at: 2}
-  - {expertise: Deception, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Slashing or Piercing Sword
-  armor: Heavy Armor
-  off-hand: Shield
+
 passives:
-  - {name: Dark Vision, kind: non-combat, slot: passive, target: self, condition: Non-Combat outside combat, use: constant, description: 'See in any darkness; sense darkness/evil in hearts.', locked: false}
-  - {name: Vigor, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Shed DEF and RES in any amount (tracked) for +5 HP each.', locked: false}
-  - {name: Reborn, kind: combat, slot: passive, target: self, condition: unlock all, use: Once per Combat, description: 'KO removes Knocked Out, restores 1HP, grants Unseen + Damage Immunity till end of round.', locked: true}
-  - {name: Stronger, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent STR., locked: true}
+  - name: Dark Vision
+    target: self
+    requirements: [ non-combat, constant ]
+    description: 'See in any darkness; sense darkness/evil in hearts.'
+  - name: Vigor
+    target: self
+    requirements: [ in-combat, constant ]
+    description: 'Shed DEF and RES in any amount (tracked) for +5 HP each.'
+  - name: Reborn
+    target: self
+    requirements: [ in-combat, class-adept, once-per-combat ]
+    description: 'KO removes Knocked Out, restores 1HP, grants Unseen + Damage Immunity till end of round.'
+  - name: Stronger
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent STR.
+
 actions:
-  main:
-    - {name: Thrust, tags: [ranged, dark], cost: 'Energy 5, Boost: Stagger and pull up-to-2-square target', target-range: T1 R5, check: 'D20+INT vs DEF', description: 'STR damage; Stagger +XD6 and drag 1-square target adjacent.'}
-    - {name: Frenzy, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+STR vs DEF, Chain: STR damage then move within 3 for more STR', description: 'STR damage; Stagger must immediately spend 1 Energy to repeat, +X per same-turn repeat.'}
-    - {name: Blood Tether, tags: [ranged, dark], cost: 'Energy 5, Boost: Drain DOT (X+STR)', target-range: T1 R7, check: 'D20+STR vs RES', description: 'STR damage; Expose Drain DOT (you heal what it deals).'}
-    - {name: Dark Release, tags: [ranged, dark], cost: 'Energy 5, Boost: Stagger inflicts Jinx on all', target-range: Self-centered 5x5, check: 'D20+INT vs DEF', description: 'STR to all; Stagger +XD6.'}
-  support:
-    - {name: Soul Sliver, tags: [melee, dark], cost: 'Boost: auto-succeed Expose', target-range: T1 R1, check: 'D20+INT vs RES', description: 'Expose — STR damage plus Ruin (3); Ruin kills refund current HP to you.'}
-    - {name: The Abyss, tags: [melee, physical], cost: Energy pool of 10, target-range: Square 3x3 within 5, check: '—', description: 'Curse (10); +10 Curse per energy; 3x3 Abyss Marker dealing INT+XD6 to entrants/turn-starters; vanish without your Curse.'}
-    - {name: Power of Shadows, tags: [dark, magic], cost: 'Boost: all x(X+1); Once per Combat', target-range: Self, check: '—', description: 'Bleed any HP for +1 damage/restoration/DOTs per HP lost this turn (not statuses/ability damage).'}
-    - {name: Shadow Clone, tags: [ranged, dark], cost: Once per Combat, target-range: T1 R5, check: '—', description: 'Halve current HP (round up) to summon unhealable copy with that HP; acts on your turn, mirrors at half (round down), Provokes what it hits.'}
-  reactions:
-    - {name: Ritual, tags: [ranged, physical], cost: '—', target-range: Self, check: 'Condition: once per character turn, before/after any action', description: 'Start in Shadow with 1 Charge; once per turn swap Blood/Shadow (stance rules above).'}
-source-pages: [p092]
-notes: Main stats 2 STR/2 INT as printed. Sheet tracks Shadow/Blood scale to 10.
+  - name: Thrust
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: Stagger and pull up-to-2-square target'
+    target-range: T1 R5
+    check: 'D20+INT vs DEF'
+    description: 'STR damage; Stagger +XD6 and drag 1-square target adjacent.'
+  - name: Frenzy
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+STR vs DEF, Chain: STR damage then move within 3 for more STR'
+    description: 'STR damage; Stagger must immediately spend 1 Energy to repeat, +X per same-turn repeat.'
+  - name: Blood Tether
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: Drain DOT (X+STR)'
+    target-range: T1 R7
+    check: 'D20+STR vs RES'
+    description: 'STR damage; Expose Drain DOT (you heal what it deals).'
+  - name: Dark Release
+    type: main
+    tags: [ ranged, dark ]
+    cost: 'Energy 5, Boost: Stagger inflicts Jinx on all'
+    target-range: Self-centered 5x5
+    check: 'D20+INT vs DEF'
+    description: 'STR to all; Stagger +XD6.'
+  - name: Soul Sliver
+    type: support
+    tags: [ melee, dark ]
+    cost: 'Boost: auto-succeed Expose'
+    target-range: T1 R1
+    check: 'D20+INT vs RES'
+    description: 'Expose — STR damage plus Ruin (3); Ruin kills refund current HP to you.'
+  - name: The Abyss
+    type: support
+    tags: [ melee, physical ]
+    cost: Energy pool of 10
+    target-range: Square 3x3 within 5
+    check: '—'
+    description: 'Curse (10); +10 Curse per energy; 3x3 Abyss Marker dealing INT+XD6 to entrants/turn-starters; vanish without your Curse.'
+  - name: Power of Shadows
+    type: support
+    tags: [ dark, magic ]
+    cost: 'Boost: all x(X+1); Once per Combat'
+    target-range: Self
+    check: '—'
+    description: 'Bleed any HP for +1 damage/restoration/DOTs per HP lost this turn (not statuses/ability damage).'
+  - name: Shadow Clone
+    type: support
+    tags: [ ranged, dark ]
+    cost: Once per Combat
+    target-range: T1 R5
+    check: '—'
+    description: 'Halve current HP (round up) to summon unhealable copy with that HP; acts on your turn, mirrors at half (round down), Provokes what it hits.'
+  - name: Ritual
+    type: reaction
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: once per character turn, before/after any action'
+    description: 'Start in Shadow with 1 Charge; once per turn swap Blood/Shadow (stance rules above).'

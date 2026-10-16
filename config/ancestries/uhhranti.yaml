@@ -1,27 +1,52 @@
+# source: p028+p029 sheet15
+
 id: uhhranti
 name: Uhhranti
+
 languages:
   - uhhrantian
   - lagosian
+
 vision: low-light
-max-hp: 11
-expertise:
-  bravado: 1
-  constitution: 1
-main-mods:
-  positive: STR
-  negative: MND
-bonus-stat:
-  stat: DEF
-  value: 1
+
+stat-modifiers:
+  - max-hp: 11
+  - str: 1
+  - mnd: -1
+  - def: 1
+
+expertise-modifiers:
+  - bravado: 1
+  - constitution: 1
+
 passives:
-  non-combat: intimidating
-  combat: roar
+  - name: Intimidating
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Gain 'Inspired' when using a Bravado Check to Intimidate a Target.
+  - name: Roar
+    type: combat
+    target: Enemies in Range (5x5 centered on Self)
+    requirements:
+      - reaction
+      - once-per-combat
+    expose: Target is inflicted with the 'Fear (You)' Status Effect.
+    description: |
+      Target is inflicted with the 'Fear (You)' Status Effect.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p028+p029 sheet15
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

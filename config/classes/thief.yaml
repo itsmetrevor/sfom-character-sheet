@@ -1,53 +1,135 @@
+# source: p070
+# note: Sheet tracks 10 Lucky Hit charges.
+
 id: thief
 name: Thief
-tier: '1'
-main-stat: LUK
-roles: [dps, specialist]
-combat-modifier:
-  name: Lucky Hit
-  description: 'Chaining or using Theft abilities gains 1 Lucky Hit Charge (max 10); each charge -1 to Critical-required number; reset to 0 on Critical. Physical Melee Saboteur Damage Dealer.'
-prerequisites:
-  - {class: any-starter, level: 10}
-unlocks:
-  - {class: ninja, level: 10}
-  - {class: bard, level: 5}
-health-mod: 0
-stats:
-  main: {STR: 0, DEX: 1, CON: 0, MND: 0, INT: 1, LUK: 2}
-  bonus: {JMP: 0, AGL: 1, DEF: 1, RES: 1, NRG: 0, FOR: 0}
+roles: [ dps, specialist ]
+main-stat: luk
+tier: 1
 x-start: 1
+
+prerequisites:
+  - class: any-starter
+    level: 10
+
+expertise-modifiers:
+  - thievery: 1
+    requirements: [ class-lvl: 2 ]
+  - stealth: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 0
+  - dex: 1
+  - int: 1
+  - luk: 2
+  - agl: 1
+  - def: 1
+  - res: 1
+
+equipment:
+  - main-hand: Piercing Dagger
+  - armor: Medium Armor
+  - off-hand: Pistol or 1H Crossbow
+
+combat-modifier:
+  - name: Lucky Hit
+  - description: 'Chaining or using Theft abilities gains 1 Lucky Hit Charge (max 10); each charge -1 to Critical-required number; reset to 0 on Critical. Physical Melee Saboteur Damage Dealer.'
+
 ultimate:
-  name: Sticky Fingers
-  description: Deal 4D6 to adjacent target; steal a rare item.
-  charge:
+  - name: Sticky Fingers
+  - description: Deal 4D6 to adjacent target; steal a rare item.
+  - charge:
     - at start of your turn
     - steal from target
     - roll a Critical
-expertise-tracks:
-  - {expertise: Thievery, value: 1, unlock-at: 2}
-  - {expertise: Stealth, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Piercing Dagger
-  armor: Medium Armor
-  off-hand: Pistol or 1H Crossbow
+
 passives:
-  - {name: Burglar, kind: non-combat, slot: passive, target: self, condition: Non-Combat Thievery check outside combat, use: constant, description: Inspired on Thievery., locked: false}
-  - {name: Piercing (Melee) Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: 'Equip Piercing (Melee) anywhere; +1 crit chance attacking from behind.', locked: false}
-  - {name: Vital Spot, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: 'When attacking roll D6; 1 or 6 lowers crit-required number by -X.', locked: true}
-  - {name: Lucky, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent LUK., locked: true}
+  - name: Burglar
+    target: self
+    requirements: [ non-combat, constant ]
+    description: Inspired on Thievery.
+  - name: Piercing (Melee) Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: 'Equip Piercing (Melee) anywhere; +1 crit chance attacking from behind.'
+  - name: Vital Spot
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: 'When attacking roll D6; 1 or 6 lowers crit-required number by -X.'
+  - name: Lucky
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent LUK.
+
 actions:
-  main:
-    - {name: Shank, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain DEX', description: 'DEX damage; Stagger +XD6; Critical: Double Thrust deals +0DEX till end of turn.'}
-    - {name: Throw Dagger, tags: [ranged, physical], cost: '—', target-range: T1 R5, check: 'D20+DEX vs DEF, Chain DEX', description: 'DEX damage; Stagger +XD6; Critical inflicts Disable or Immobilize.'}
-    - {name: Double Thrust, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain: target has Bleed DOT 2', description: 'DEX damage; Stagger +1D6 plus Bleed DOT 2; Critical inflicts Severe (Bleed).'}
-    - {name: Rob, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+LUK vs DEF, Chain: Reaction-use Theft ability', description: 'LUK damage; Stagger: Reaction-use Theft ability; Critical +5 to Theft checks this turn.'}
-  support:
-    - {name: Steal Gold, tags: [melee, physical, theft], cost: '—', target-range: T1 R1, check: 'D20+LUK vs RES', description: 'Expose — steal XD6 + LUK gold (once per enemy).'}
-    - {name: Steal Item, tags: [melee, physical, theft], cost: '—', target-range: T1 R1, check: 'D20+LUK vs RES', description: 'Expose — LUK check to steal item if any (once per enemy).'}
-    - {name: Charm, tags: [ranged, magic, theft], cost: 'Energy 4, Boost: Expose', target-range: T1 R5, check: 'D20+LUK vs RES', description: 'Expose — humanoid gains Charmed (2), GM roleplays it.'}
-    - {name: Lucky Die, tags: [physical], cost: '—', target-range: Self, check: '—', description: 'Roll D6 to lower crit-required numbers till end of round — 1-3: -0, 4-5: -1, 6: -2.'}
-  reactions:
-    - {name: Nimble, tags: [physical], cost: '—', target-range: Self, check: 'Condition: before being damaged; Once per Combat', description: Reduce damage taken by LUK+X till end of round.}
-    - {name: Bad Luck, tags: [physical], cost: '—', target-range: T1 R5, check: 'Condition: any target begins its turn; Once per Combat', description: Its D20 rolls suffer -(LUK+X) this turn.}
-source-pages: [p070]
-notes: Sheet tracks 10 Lucky Hit charges.
+  - name: Shank
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs DEF, Chain DEX'
+    description: 'DEX damage; Stagger +XD6; Critical: Double Thrust deals +0DEX till end of turn.'
+  - name: Throw Dagger
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'D20+DEX vs DEF, Chain DEX'
+    description: 'DEX damage; Stagger +XD6; Critical inflicts Disable or Immobilize.'
+  - name: Double Thrust
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs DEF, Chain: target has Bleed DOT 2'
+    description: 'DEX damage; Stagger +1D6 plus Bleed DOT 2; Critical inflicts Severe (Bleed).'
+  - name: Rob
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+LUK vs DEF, Chain: Reaction-use Theft ability'
+    description: 'LUK damage; Stagger: Reaction-use Theft ability; Critical +5 to Theft checks this turn.'
+  - name: Steal Gold
+    type: support
+    tags: [ melee, physical, theft ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+LUK vs RES'
+    description: 'Expose — steal XD6 + LUK gold (once per enemy).'
+  - name: Steal Item
+    type: support
+    tags: [ melee, physical, theft ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+LUK vs RES'
+    description: 'Expose — LUK check to steal item if any (once per enemy).'
+  - name: Charm
+    type: support
+    tags: [ ranged, magic, theft ]
+    cost: 'Energy 4, Boost: Expose'
+    target-range: T1 R5
+    check: 'D20+LUK vs RES'
+    description: 'Expose — humanoid gains Charmed (2), GM roleplays it.'
+  - name: Lucky Die
+    type: support
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: '—'
+    description: 'Roll D6 to lower crit-required numbers till end of round — 1-3: -0, 4-5: -1, 6: -2.'
+  - name: Nimble
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: before being damaged; Once per Combat'
+    description: Reduce damage taken by LUK+X till end of round.
+  - name: Bad Luck
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: T1 R5
+    check: 'Condition: any target begins its turn; Once per Combat'
+    description: Its D20 rolls suffer -(LUK+X) this turn.

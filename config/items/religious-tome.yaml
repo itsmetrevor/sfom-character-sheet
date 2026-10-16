@@ -1,0 +1,8 @@
+id: religious-tome
+name: Religious Tome
+slot: accessory
+damage-type: none
+stat-modifiers:
+  - restore-hp: 1
+effect: Focus. +1 When Restoring HP.
+stack-max: 5

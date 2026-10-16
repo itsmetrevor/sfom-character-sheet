@@ -1,27 +1,50 @@
+# source: p014+p015 sheet8
+
 id: khanadur
 name: Khanadur
+
 languages:
   - khanadurian
   - lagosian
+
 vision: dark
-max-hp: 10
-expertise:
-  crafting: 1
-  intelligence: 1
-main-mods:
-  positive: INT
-  negative: DEX
-bonus-stat:
-  stat: FOR
-  value: 1
+
+stat-modifiers:
+  - max-hp: 10
+  - int: 1
+  - dex: -1
+  - for: 1
+
+expertise-modifiers:
+  - crafting: 1
+  - intelligence: 1
+
 passives:
-  non-combat: tinkerer
-  combat: innovation
+  - name: Tinkerer
+    type: non-combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      Gain 'Inspired' when making a Crafting Check.
+  - name: Innovation
+    type: combat
+    target: Self
+    requirements:
+      - constant
+    description: |
+      +X Damage Dealt and Healing Received when Spending Items from your inventory.
+
 lore:
-  history: null
-  religion: null
-  appearance: null
-  culture: null
-  architecture-technology: null
-  naming-conventions: null
-source-pages: p014+p015 sheet8
+  history: |
+    WIP
+  religion: |
+    WIP
+  appearance: |
+    WIP
+  culture: |
+    WIP
+  architecture-technology: |
+    WIP
+  naming-conventions: |
+    WIP

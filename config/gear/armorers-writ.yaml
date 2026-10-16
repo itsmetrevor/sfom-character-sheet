@@ -1,8 +1,0 @@
-id: armorers-writ
-name: "Armorer's Writ"
-slot: item
-damage-type: null
-bonus: null
-effect: "Writ shown to shop/forge proprietors for facility access (Armorer: Medium & Heavy Armor crafting)."
-source: armorer
-stack-max: 1

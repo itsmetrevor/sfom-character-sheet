@@ -1,29 +1,33 @@
+# source: p036
+
 id: escort
 name: "Escort"
+craftsman: false
 description: |
   You are trained in the art of seduction and can use your Charisma and Deception to charm those around you. You have your ways of manipulating people to get the things you want.
-expertise:
-  "charisma": 1
-  "deception": 1
+
+expertise-modifiers:
+  - charisma: 1
+  - deception: 1
+
 starting-items:
-  - silk-robe
-starting-items-text: "Silk Robe: (Light Armor) +1 RES"
+  - item: silk-robe
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Charming"
+  - name: "Charming"
+    requirements: [ party-lvl: 0 ]
     summary: "Once per Full Rest, your first 'Charisma' Check will Succeed."
     detail: "You present yourself with a natural charm, allowing you to immediately succeed your first 'Charisma' check without trying."
-  plvl-3:
-    name: "Deceiver"
+  - name: "Deceiver"
+    requirements: [ party-lvl: 3 ]
     summary: "Gain 'Inspired' when making a 'Deception' Check."
     detail: "You are a natural liar, able to say whatever you need to say without much trouble or hesitation."
-  plvl-6:
-    name: "Client List"
+  - name: "Client List"
+    requirements: [ party-lvl: 6 ]
     summary: "Make a 'Mind' Check in a City or Town to remember any Clients in the area."
     detail: "You have kept a black book of all your clients with details on each. You may utilize this to gain help or blackmail them to gain information when the time is right."
-  plvl-9:
-    name: "Enchant"
+  - name: "Enchant"
+    requirements: [ party-lvl: 9 ]
     summary: "After succeeding a 'Charisma'/'Deception' Check, make 'Concentration' Checks to keep the Target 'Mesmerized'."
     detail: "You know how to get a person's attention and keep it. Once you have succeeded at a 'Charisma' or 'Deception' Check you can keep a Target's attention. It is at the GM's discretion how often you have to make a 'Concentration' Check to keep them 'Mesmerized'."
-craftsman: false
-source-pages: "p036"

@@ -1,29 +1,33 @@
+# source: p044
+# note: Source blurb duplicates Farmer's text; description below is a replacement written for this dataset, drawn from the Wanderer's tier abilities.
+
 id: wanderer
 name: "Wanderer"
+craftsman: false
 description: |
-  You have spent a portion of your life working on a farm. You know the ins-and-outs of growing and harvesting crops, working with various animals, and how to fix up old equipment when it breaks.
-expertise:
-  "nature": 2
+  You have spent much of your life wandering the wilds beyond civilization's reach. You read disturbances in the natural world, find hidden trails and shortcuts where others see only wilderness, understand what animals communicate by their behavior, and never lose your sense of direction.
+
+expertise-modifiers:
+  - nature: 2
+
 starting-items:
-  - shovel
-starting-items-text: "Shovel: (Slashing/ Bludgeoning Weapon) +1 Melee Damage"
+  - item: shovel
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Natural"
+  - name: "Natural"
+    requirements: [ party-lvl: 0 ]
     summary: "Gain 'Inspired' on 'Nature' Checks to spot disturbances in nature."
     detail: "When you are out in nature you can more easily spot when something is amiss. The difficulty of the 'Nature' Check is at the discretion of the GM."
-  plvl-3:
-    name: "Pathfinder"
+  - name: "Pathfinder"
+    requirements: [ party-lvl: 3 ]
     summary: "Gain 'Inspired' on 'Nature' Checks to find shortcuts or trails."
     detail: "Your keen eyes are capable of spotting hidden trails and spots typically unseen. The difficulty of the 'Nature' Check is at the discretion of the GM."
-  plvl-6:
-    name: "Understand"
+  - name: "Understand"
+    requirements: [ party-lvl: 6 ]
     summary: "Understand what animals communicate by behavior."
     detail: "You are capable of understanding what animals are communicating but you cannot speak to animals."
-  plvl-9:
-    name: "Awareness"
+  - name: "Awareness"
+    requirements: [ party-lvl: 9 ]
     summary: "Never lose your sense of direction or get lost."
     detail: "You cannot get lost in regards to where you have been. This does not mean you always know where you are just that you cannot lose the way you have come."
-craftsman: false
-source-pages: "p044"
-notes: "Blurb duplicates Farmer's as-printed in the source — transcribed verbatim."

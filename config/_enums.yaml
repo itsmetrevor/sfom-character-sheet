@@ -1,50 +1,8 @@
 # Shared enums — single source of truth for validators + app dropdowns
 # Source: p002 character sheet graphic (vision-verified); handbook text-layer p003-p005.
 
-main-stats: [STR, DEX, CON, MND, INT, LUK]
-bonus-stats: [JMP, AGL, DEF, RES, NRG, FOR]
-
-# Bonus stat grafts from Main Stats (p002 right-side callouts)
-bonus-from-main:
-  STR: { per: 3, grants: { stat: JMP, value: 1 } }
-  DEX: { per: 3, grants: { stat: AGL, value: 1 } }
-  CON: { per: 2, grants: { stat: DEF, value: 1 } }
-  MND: { per: 2, grants: { stat: RES, value: 1 } }
-  INT: { per: 3, grants: { stat: NRG, value: 1 } }
-  LUK: { per: 2, grants: { stat: FOR, value: 1 } }
-
-vision-types: [normal, low-light, dark, binocular]
-
-expertise-main-stat:
-  STR: [strength, bravado, throw-catch]
-  CON: [constitution, concentration, resistance]
-  INT: [intelligence, crafting, knowledge]
-  DEX: [dexterity, stealth, thievery]
-  MND: [mind, nature, perception]
-  LUK: [luck, charisma, deception]
-
-# 18 total — verified against p002 grid
-expertise-ids:
-  - strength
-  - bravado
-  - throw-catch
-  - constitution
-  - concentration
-  - resistance
-  - intelligence
-  - crafting
-  - knowledge
-  - dexterity
-  - stealth
-  - thievery
-  - mind
-  - nature
-  - perception
-  - luck
-  - charisma
-  - deception
-
 gear-slots: [main-hand, armor, off-hand, accessory, item, consumable, tool, currency]
 passive-sources: [ancestry, background, class]
 passive-slots: [non-combat, combat]
 class-tiers: [starter, 1, 2, 3, 4, ultimate]
+roles: [dps, tank, healer, specialist]

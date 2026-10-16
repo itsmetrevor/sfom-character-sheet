@@ -1,8 +1,0 @@
-id: compulsive-liar
-name: Compulsive Liar
-source: ancestry
-slot: non-combat
-target: Self
-use: Constant
-description: |
-  Add +1D6 to your 'Deception' Checks.

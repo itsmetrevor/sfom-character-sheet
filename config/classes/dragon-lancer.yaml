@@ -1,54 +1,137 @@
+# source: p090
+# note: Main stats 2 STR/2 DEX/1 CON and bonus 1 JMP/2 DEF as printed. Sheet tracks Surge vs DEX+3/5/7/9/12 scale.
+
 id: dragon-lancer
 name: Dragon Lancer
-tier: '3'
-main-stat: DEX
-roles: [dps]
-combat-modifier:
-  name: Dragon Surge
-  description: 'Failed Staggers +1 Surge. Before attack, spend all Surge: damage equals DEX + highest Surge on next attack. Roll SC for Dragon Lance on re-entry. Uses Weightless un-unlocked.'
-prerequisites:
-  - {class: ranger, level: 15}
-  - {class: ninja, level: 10}
-unlocks:
-  - {class: assassin, level: 10}
-health-mod: 0
-stats:
-  main: {STR: 2, DEX: 2, CON: 1, MND: 0, INT: 0, LUK: 0}
-  bonus: {JMP: 1, AGL: 0, DEF: 2, RES: 0, NRG: 0, FOR: 0}
+roles: [ dps ]
+main-stat: dex
+tier: 3
 x-start: 1
+
+prerequisites:
+  - class: ranger
+    level: 15
+  - class: ninja
+    level: 10
+
+expertise-modifiers:
+  - concentration: 1
+    requirements: [ class-lvl: 2 ]
+  - bravado: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 0
+  - str: 2
+  - dex: 2
+  - con: 1
+  - jmp: 1
+  - def: 2
+
+equipment:
+  - main-hand: Piercing Polearm (Reach)
+  - armor: Heavy Armor
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Dragon Surge
+  - description: 'Failed Staggers +1 Surge. Before attack, spend all Surge: damage equals DEX + highest Surge on next attack. Roll SC for Dragon Lance on re-entry. Uses Weightless un-unlocked.'
+
 ultimate:
-  name: Dragon Rage
-  description: Fully charge Dragon Surge; next attack considered to Stagger.
-  charge:
+  - name: Dragon Rage
+  - description: Fully charge Dragon Surge; next attack considered to Stagger.
+  - charge:
     - successfully Stagger
     - Puncture a target
     - spend Dragon Surge
     - roll a Critical
-expertise-tracks:
-  - {expertise: Concentration, value: 1, unlock-at: 2}
-  - {expertise: Bravado, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Piercing Polearm (Reach)
-  armor: Heavy Armor
-  off-hand: Shield
+
 passives:
-  - {name: Serpent's Tongue, kind: non-combat, slot: passive, target: self, condition: talk to serpents/dragons outside combat, use: constant, description: Speak with serpents and dragons., locked: false}
-  - {name: Piercing (Reach) Weapon Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Melee Piercing (Reach) Puncture targets behind adjacent ones., locked: false}
-  - {name: Weightless, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Ignore elevation for movement and attack range vs adjacent targets., locked: true}
-  - {name: Dexterous, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent DEX., locked: true}
+  - name: Serpent's Tongue
+    target: self
+    requirements: [ non-combat, constant ]
+    description: Speak with serpents and dragons.
+  - name: Piercing (Reach) Weapon Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: Melee Piercing (Reach) Puncture targets behind adjacent ones.
+  - name: Weightless
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: Ignore elevation for movement and attack range vs adjacent targets.
+  - name: Dexterous
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent DEX.
+
 actions:
-  main:
-    - {name: Thrust, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain: DEX damage; Pierced gain Bleed DOT 3', description: 'DEX damage; Stagger +XD6; Punctured gain Bleed DOT 3; +1 Surge.'}
-    - {name: Dragon Lance, tags: [ranged, physical], cost: Energy 5, target-range: T1 R5, check: 'D20+DEX vs DEF', description: 'Pick target and leave battlefield (untargetable); round end return same square dealing 1D6+DEX (+XD6 if never moved); Stagger +XD6.'}
-    - {name: Dragon's Talon, tags: [ranged, physical], cost: '—', target-range: T1 R7, check: 'D20+DEX vs DEF, Chain: DEX damage jump adjacent', description: 'DEX damage; Stagger +XD6 plus same-square jump; Critical +1 Surge.'}
-    - {name: Double Point, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs DEF, Chain: DEX damage; Punctured Drain equals dealt', description: 'DEX to target plus DEX to adjacent behind (Punctured Drain equals dealt); Stagger +XD6.'}
-  support:
-    - {name: Dragon Valor, tags: [magic], cost: 'Energy 5, Boost: +2 Surge; Once per Combat', target-range: Self, check: '—', description: +1 Surge; attacks +DEX and Inspired this round.}
-    - {name: Impeding Slash, tags: [melee, physical], cost: '—', target-range: T1 R1, check: 'D20+DEX vs RES', description: Expose Immobilized.}
-    - {name: Serpentine, tags: [physical], cost: '—', target-range: Self, check: '—', description: '+(X+1) AGL this turn and move through enemy spaces, optionally dragging 1-square enemy along.'}
-    - {name: Twin Serpent Lance, tags: [ranged, magic], cost: 'Energy 5, Boost: 8 range', target-range: T1 R5, check: '—', description: 'Repeat Dragon Lance on second target within 5 of first (counts as 1 Dragon Lance attack).'}
-  reactions:
-    - {name: Off-Kilter Swipe, tags: [ranged, physical], cost: '—', target-range: T1 R2, check: 'D20+DEX vs RES; Condition: beginning of turn or entering range; Successfully Once per Combat', description: 'Up-to-2-square targets Knocked Prone (reusable if Resisted).'}
-    - {name: Dragon's Breath, tags: [wind, magic], cost: '—', target-range: 7x7 within 5, check: 'Condition: your turn or before/after any turn; Once per Combat', description: Drag everyone toward center, center targets first.}
-source-pages: [p090]
-notes: Main stats 2 STR/2 DEX/1 CON and bonus 1 JMP/2 DEF as printed. Sheet tracks Surge vs DEX+3/5/7/9/12 scale.
+  - name: Thrust
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs DEF, Chain: DEX damage; Pierced gain Bleed DOT 3'
+    description: 'DEX damage; Stagger +XD6; Punctured gain Bleed DOT 3; +1 Surge.'
+  - name: Dragon Lance
+    type: main
+    tags: [ ranged, physical ]
+    cost: Energy 5
+    target-range: T1 R5
+    check: 'D20+DEX vs DEF'
+    description: 'Pick target and leave battlefield (untargetable); round end return same square dealing 1D6+DEX (+XD6 if never moved); Stagger +XD6.'
+  - name: Dragon's Talon
+    type: main
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R7
+    check: 'D20+DEX vs DEF, Chain: DEX damage jump adjacent'
+    description: 'DEX damage; Stagger +XD6 plus same-square jump; Critical +1 Surge.'
+  - name: Double Point
+    type: main
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs DEF, Chain: DEX damage; Punctured Drain equals dealt'
+    description: 'DEX to target plus DEX to adjacent behind (Punctured Drain equals dealt); Stagger +XD6.'
+  - name: Dragon Valor
+    type: support
+    tags: [ magic ]
+    cost: 'Energy 5, Boost: +2 Surge; Once per Combat'
+    target-range: Self
+    check: '—'
+    description: +1 Surge; attacks +DEX and Inspired this round.
+  - name: Impeding Slash
+    type: support
+    tags: [ melee, physical ]
+    cost: '—'
+    target-range: T1 R1
+    check: 'D20+DEX vs RES'
+    description: Expose Immobilized.
+  - name: Serpentine
+    type: support
+    tags: [ physical ]
+    cost: '—'
+    target-range: Self
+    check: '—'
+    description: '+(X+1) AGL this turn and move through enemy spaces, optionally dragging 1-square enemy along.'
+  - name: Twin Serpent Lance
+    type: support
+    tags: [ ranged, magic ]
+    cost: 'Energy 5, Boost: 8 range'
+    target-range: T1 R5
+    check: '—'
+    description: 'Repeat Dragon Lance on second target within 5 of first (counts as 1 Dragon Lance attack).'
+  - name: Off-Kilter Swipe
+    type: reaction
+    tags: [ ranged, physical ]
+    cost: '—'
+    target-range: T1 R2
+    check: 'D20+DEX vs RES; Condition: beginning of turn or entering range; Successfully Once per Combat'
+    description: 'Up-to-2-square targets Knocked Prone (reusable if Resisted).'
+  - name: Dragon's Breath
+    type: reaction
+    tags: [ wind, magic ]
+    cost: '—'
+    target-range: 7x7 within 5
+    check: 'Condition: your turn or before/after any turn; Once per Combat'
+    description: Drag everyone toward center, center targets first.

@@ -1,0 +1,8 @@
+id: lucky-coin
+name: Lucky Coin
+slot: accessory
+damage-type: none
+stat-modifiers:
+  - luk: 1
+effect: +1 LUK.
+stack-max: 5

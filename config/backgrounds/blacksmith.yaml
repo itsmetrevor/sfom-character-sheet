@@ -1,29 +1,34 @@
+# source: p031
+
 id: blacksmith
 name: "Blacksmith"
+craftsman: true
 description: |
   Four Craftsman backgrounds — Armorer, Blacksmith, Clothier, Jeweler — share crafting mechanics; each requires adventure resources, and resources impart effects on crafted Gear. See the Crafting Section, page XX. Capabilities: Weapons. Each comes with a specific 'Writ' shown to shop/forge proprietors for facility access.
-expertise:
-  "crafting": 2
+
+expertise-modifiers:
+  - crafting: 2
+
 starting-items:
-  - blacksmiths-writ
-  - weapon-of-choice-generic
-starting-items-text: "Blacksmith's Writ (Item); Weapon of Choice (Main-Hand) +1 Damage"
+  - item: blacksmiths-writ
+    quantity: 1
+  - item: weapon-of-choice-generic
+    quantity: 1
+
 passives:
-  plvl-0:
-    name: "Common"
+  - name: "Common"
+    requirements: [ party-lvl: 0 ]
     summary: "Craft 1 Weapon. Required: 3 Materials. Weapon gains 1 Effect from Materials used."
     detail: "Craft 1 Weapon. Required: 3 Materials. Weapon gains 1 Effect from Materials used. (From ability-bar graphic; no paragraph details in source.)"
-  plvl-3:
-    name: "Uncommon"
+  - name: "Uncommon"
+    requirements: [ party-lvl: 3 ]
     summary: "Craft 1 Weapon. Required: 7 Materials. Weapon gains 2 Effects from Materials used."
     detail: "Craft 1 Weapon. Required: 7 Materials. Weapon gains 2 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
-  plvl-6:
-    name: "Rare"
+  - name: "Rare"
+    requirements: [ party-lvl: 6 ]
     summary: "Craft 1 Weapon. Required: 15 Materials. Weapon gains 3 Effects from Materials used."
     detail: "Craft 1 Weapon. Required: 15 Materials. Weapon gains 3 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
-  plvl-9:
-    name: "Efficiency"
+  - name: "Efficiency"
+    requirements: [ party-lvl: 9 ]
     summary: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3."
     detail: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3. (From ability-bar graphic; no paragraph details in source.)"
-craftsman: true
-source-pages: "p031"

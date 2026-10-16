@@ -1,8 +1,0 @@
-id: holy-mothers-blessing
-name: Holy Mother's Blessing
-source: ancestry
-slot: combat
-target: Self
-use: Constant
-description: |
-  Restore +XHP when you Restore HP to a Target or your HP is Restored.

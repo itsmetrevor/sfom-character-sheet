@@ -1,7 +1,0 @@
-id: base-stats
-name: Base Stats (Step 1)
-source-pages: p004
-max-hp: 30
-main-stats: { STR: 1, DEX: 1, CON: 1, MND: 1, INT: 1, LUK: 1 }
-bonus-stats: { JMP: 1, AGL: 5, DEF: 10, RES: 10, NRG: 1, FOR: 1 }
-note: Class stats overlay these per Main Class (star fields).

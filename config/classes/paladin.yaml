@@ -1,54 +1,137 @@
+# source: p096
+# note: Main stats 2 STR/2 CON/1 MND and bonus 2 DEF/1 RES as printed. Oath Aura header; modifier named Communion as printed.
+
 id: paladin
 name: Paladin
-tier: '3'
-main-stat: CON
-roles: [tank, dps, healer]
-combat-modifier:
-  name: Communion
-  description: 'All attacks Provoke. MAX HP equals double CON. 5x5 Aura centered on you; allies inside share effect. Five Blessings, one per turn one use each per combat — each empowers Divine Circle. Blessings: remove Statuses (Circle victims restore HP) / DEF&RES+5 (+1D6) / Blind aura (+1 range) / +5 healing received (Circle 5x5) / -5 damage taken (Circle -1 Energy).'
-prerequisites:
-  - {class: priest, level: 5}
-  - {class: samurai, level: 10}
-unlocks:
-  - {class: rune-knight, level: 10}
-health-mod: 5
-stats:
-  main: {STR: 2, DEX: 0, CON: 2, MND: 1, INT: 0, LUK: 0}
-  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 1, NRG: 0, FOR: 0}
+roles: [ tank, dps, healer ]
+main-stat: con
+tier: 3
 x-start: 1
+
+prerequisites:
+  - class: priest
+    level: 5
+  - class: samurai
+    level: 10
+
+expertise-modifiers:
+  - constitution: 1
+    requirements: [ class-lvl: 2 ]
+  - resistance: 1
+    requirements: [ class-lvl: 4 ]
+
+stat-modifiers:
+  - max-hp: 5
+  - str: 2
+  - con: 2
+  - mnd: 1
+  - def: 2
+  - res: 1
+
+equipment:
+  - main-hand: Slashing or Bludgeoning
+  - armor: Heavy Armor
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Communion
+  - description: 'All attacks Provoke. MAX HP equals double CON. 5x5 Aura centered on you; allies inside share effect. Five Blessings, one per turn one use each per combat — each empowers Divine Circle. Blessings: remove Statuses (Circle victims restore HP) / DEF&RES+5 (+1D6) / Blind aura (+1 range) / +5 healing received (Circle 5x5) / -5 damage taken (Circle -1 Energy).'
+
 ultimate:
-  name: True Divinity
-  description: Gain every Blessing effect; receive all damage dealt to allies this round.
-  charge:
+  - name: True Divinity
+  - description: Gain every Blessing effect; receive all damage dealt to allies this round.
+  - charge:
     - restore target HP
     - use Divine Circle
     - Provoke 2+ enemies
     - roll a Critical
-expertise-tracks:
-  - {expertise: Constitution, value: 1, unlock-at: 2}
-  - {expertise: Resistance, value: 1, unlock-at: 4}
-equipment:
-  main-hand: Slashing or Bludgeoning
-  armor: Heavy Armor
-  off-hand: Shield
+
 passives:
-  - {name: Circle of Virtue, kind: non-combat, slot: passive, target: Square 3x3 within 5, condition: Non-Combat outside combat, use: Once per Long Rest, description: 5-minute 3x3 zone compelling truth and virtue., locked: false}
-  - {name: Divine Compulsion, kind: combat, slot: passive, target: T1 R5, condition: target moves within 5 squares, use: passive, description: First un-Provoked target in range gains Provoke., locked: false}
-  - {name: Holy Protection, kind: combat, slot: passive, target: self, condition: unlock all / Expose targets you, use: constant, description: 'Once per round, Expose checks against you grant +5 RES.', locked: true}
-  - {name: Built to Last, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent CON., locked: true}
+  - name: Circle of Virtue
+    target: Square 3x3 within 5
+    requirements: [ non-combat, well-rested ]
+    description: 5-minute 3x3 zone compelling truth and virtue.
+  - name: Divine Compulsion
+    target: T1 R5
+    requirements: [ in-combat, target-approaches ]
+    description: First un-Provoked target in range gains Provoke.
+  - name: Holy Protection
+    target: self
+    requirements: [ in-combat, class-adept, exposed, constant ]
+    description: 'Once per round, Expose checks against you grant +5 RES.'
+  - name: Built to Last
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent CON.
+
 actions:
-  main:
-    - {name: Ring of Virtue, tags: [melee, holy, physical], cost: 'Boost: 5x5 centered on self', target-range: Self-centered 3x3, check: 'D20+STR vs DEF, Chain: STR+MND to all', description: 'STR to all; +1 DEF/+1 RES per target till end of round; Stagger +XD6.'}
-    - {name: Divine Circle, tags: [ranged, holy], cost: 'Energy 5, Boost: Stagger inflicts Blind', target-range: Square 3x3 within 5, check: 'D20+MND vs DEF', description: 'MND to all; Stagger +XD6.'}
-    - {name: Justice Beam, tags: [ranged, holy], cost: 'Energy 5, Boost: 3x3 straight line', target-range: adjacent-square line across field, check: 'D20+MND vs RES', description: 'MND down line; Expose Dizzy.'}
-    - {name: Ring of Purity, tags: [melee, restorative, holy, physical], cost: '—', target-range: Self-centered 3x3, check: 'D20+STR vs DEF, Chain: STR damage with Fear', description: 'STR to all; Stagger +XD6 plus healing equal to damage dealt.'}
-  support:
-    - {name: Blessed Touch, tags: [melee, restorative, holy], cost: 'Energy 4, Boost: +XD6 restored', target-range: Self or 1 R1, check: '—', description: 1D6 + MND.}
-    - {name: Sacred Pact, tags: [holy], cost: 'Energy 5, Boost: attacks vs you at Disadvantage', target-range: Self, check: '—', description: 'Reduce all damage by (X+2); next attack Advantage; next attack vs you Disadvantage.'}
-    - {name: Holy Ground, tags: [ranged, holy], cost: 'Energy 5, Once per Combat', target-range: Square 3x3 within 5, check: 'D20+CON vs RES', description: 'Permanent 3x3 Holy Ground — enemies test CON vs your RES to leave (never enter); allies entering/starting restore MND+1D6.'}
-    - {name: Heavenly Shield, tags: [ranged, holy], cost: Once per Combat, target-range: all allies any range, check: '—', description: 'Allies gain Heavenly Shield — next damage to shielded hits you instead.'}
-  reactions:
-    - {name: Righteous Defense, tags: [ranged, holy], cost: '—', target-range: T1 R10, check: 'Condition: before party member attacked', description: Take that damage for them.}
-    - {name: Stunning Resilience, tags: [holy], cost: '—', target-range: Self, check: 'Condition: before taking damage', description: Ignore next attack entirely.}
-source-pages: [p096]
-notes: Main stats 2 STR/2 CON/1 MND and bonus 2 DEF/1 RES as printed. Oath Aura header; modifier named Communion as printed.
+  - name: Ring of Virtue
+    type: main
+    tags: [ melee, holy, physical ]
+    cost: 'Boost: 5x5 centered on self'
+    target-range: Self-centered 3x3
+    check: 'D20+STR vs DEF, Chain: STR+MND to all'
+    description: 'STR to all; +1 DEF/+1 RES per target till end of round; Stagger +XD6.'
+  - name: Divine Circle
+    type: main
+    tags: [ ranged, holy ]
+    cost: 'Energy 5, Boost: Stagger inflicts Blind'
+    target-range: Square 3x3 within 5
+    check: 'D20+MND vs DEF'
+    description: 'MND to all; Stagger +XD6.'
+  - name: Justice Beam
+    type: main
+    tags: [ ranged, holy ]
+    cost: 'Energy 5, Boost: 3x3 straight line'
+    target-range: adjacent-square line across field
+    check: 'D20+MND vs RES'
+    description: 'MND down line; Expose Dizzy.'
+  - name: Ring of Purity
+    type: main
+    tags: [ melee, restorative, holy, physical ]
+    cost: '—'
+    target-range: Self-centered 3x3
+    check: 'D20+STR vs DEF, Chain: STR damage with Fear'
+    description: 'STR to all; Stagger +XD6 plus healing equal to damage dealt.'
+  - name: Blessed Touch
+    type: support
+    tags: [ melee, restorative, holy ]
+    cost: 'Energy 4, Boost: +XD6 restored'
+    target-range: Self or 1 R1
+    check: '—'
+    description: 1D6 + MND.
+  - name: Sacred Pact
+    type: support
+    tags: [ holy ]
+    cost: 'Energy 5, Boost: attacks vs you at Disadvantage'
+    target-range: Self
+    check: '—'
+    description: 'Reduce all damage by (X+2); next attack Advantage; next attack vs you Disadvantage.'
+  - name: Holy Ground
+    type: support
+    tags: [ ranged, holy ]
+    cost: 'Energy 5, Once per Combat'
+    target-range: Square 3x3 within 5
+    check: 'D20+CON vs RES'
+    description: 'Permanent 3x3 Holy Ground — enemies test CON vs your RES to leave (never enter); allies entering/starting restore MND+1D6.'
+  - name: Heavenly Shield
+    type: support
+    tags: [ ranged, holy ]
+    cost: Once per Combat
+    target-range: all allies any range
+    check: '—'
+    description: 'Allies gain Heavenly Shield — next damage to shielded hits you instead.'
+  - name: Righteous Defense
+    type: reaction
+    tags: [ ranged, holy ]
+    cost: '—'
+    target-range: T1 R10
+    check: 'Condition: before party member attacked'
+    description: Take that damage for them.
+  - name: Stunning Resilience
+    type: reaction
+    tags: [ holy ]
+    cost: '—'
+    target-range: Self
+    check: 'Condition: before taking damage'
+    description: Ignore next attack entirely.

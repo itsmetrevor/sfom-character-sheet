@@ -1,50 +1,78 @@
+# source: p056
+# note: Main Actions and Support Actions boxes blank templates in source — combat abilities not yet written as-printed.
+
 id: scholar
 name: Scholar
+roles: [ specialist ]
+main-stat: mnd
 tier: starter
-main-stat: MND
-roles: []
-combat-modifier:
-  name: Knowledge is Power
-  description: 'Learn abilities from enemies via Study reaction. Track on Tomes of Knowledge sheets; put ALL learned abilities there. Before encounter Activate Tome abilities up to unlocked Scholar count (works as subclass too). Learned abilities use MND for checks and damage.'
-prerequisites: []
-unlocks:
-  - {class: beast-tamer, level: 10}
-  - {class: knight, level: 10}
-  - {class: monk, level: 10}
-  - {class: priest, level: 10}
-  - {class: thief, level: 10}
-  - {class: wizard, level: 10}
-  - {class: invoker, level: 15}
-health-mod: 0
-stats:
-  main: {STR: 0, DEX: 1, CON: 0, MND: 2, INT: 1, LUK: 0}
-  bonus: {JMP: 0, AGL: 0, DEF: 2, RES: 1, NRG: 0, FOR: 1}
 x-start: 1
+
+prerequisites: []
+
+expertise-modifiers:
+  - knowledge: 1
+    requirements: [ class-lvl: 2 ]
+  - perception: 1
+    requirements: [ class-lvl: 2 ]
+
+stat-modifiers:
+  - max-hp: 0
+  - dex: 1
+  - mnd: 2
+  - int: 1
+  - def: 2
+  - res: 1
+  - for: 1
+
+equipment:
+  - main-hand: Focus Tome
+  - armor: Light Armor
+  - off-hand: Shield
+
+combat-modifier:
+  - name: Knowledge is Power
+  - description: 'Learn abilities from enemies via Study reaction. Track on Tomes of Knowledge sheets; put ALL learned abilities there. Before encounter Activate Tome abilities up to unlocked Scholar count (works as subclass too). Learned abilities use MND for checks and damage.'
+
 ultimate:
-  name: Focused Studies
-  description: Learn all abilities from an enemy; immediately use any 1 ability from Tome of Knowledge.
-  charge:
+  - name: Focused Studies
+  - description: Learn all abilities from an enemy; immediately use any 1 ability from Tome of Knowledge.
+  - charge:
     - Examine an enemy
     - use an enemy ability
     - learn an enemy ability
     - roll a Critical
-expertise-tracks:
-  - {expertise: Knowledge, value: 1, unlock-at: 2}
-  - {expertise: Perception, value: 1, unlock-at: 2}
-equipment:
-  main-hand: Focus Tome
-  armor: Light Armor
-  off-hand: Shield
+
 passives:
-  - {name: Perceptive, kind: non-combat, slot: passive, target: self, condition: Non-Combat Perception check outside combat, use: constant, description: Inspired on Perception., locked: false}
-  - {name: Light Armor Proficiency, kind: combat, slot: passive, target: self, condition: constant, use: passive, description: Equip Light with any class; RES and JMP +1., locked: false}
-  - {name: Double Major, kind: combat, slot: passive, target: self, condition: unlock all, use: constant, description: Class levels may go into locked Sub-Class abilities., locked: true}
-  - {name: Mindful, kind: combat, slot: stat, target: self, condition: unlock all, use: always-on, description: +1 permanent MND., locked: true}
+  - name: Perceptive
+    target: self
+    requirements: [ non-combat, constant ]
+    description: Inspired on Perception.
+  - name: Light Armor Proficiency
+    target: self
+    requirements: [ in-combat, constant ]
+    description: Equip Light with any class; RES and JMP +1.
+  - name: Double Major
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: Class levels may go into locked Sub-Class abilities.
+  - name: Mindful
+    target: self
+    requirements: [ in-combat, class-adept, constant ]
+    description: +1 permanent MND.
+
 actions:
-  main: []
-  support: []
-  reactions:
-    - {name: Study, tags: [physical], cost: '—', target-range: T1 R10, check: 'D20+MND vs RES; Condition: after enemy uses Main or Support ability', description: Learn it into Tomes of Knowledge (GM details it; once per enemy per encounter).}
-    - {name: Examine, tags: [physical], cost: '—', target-range: T1 R10, check: 'Condition: once per target, start or end of its turn; once per round per target', description: Learn 1 info (HP, conditions, stats, weaknesses, resistances).}
-source-pages: [p056]
-notes: Main Actions and Support Actions boxes blank templates in source — combat abilities not yet written as-printed.
+  - name: Study
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: T1 R10
+    check: 'D20+MND vs RES; Condition: after enemy uses Main or Support ability'
+    description: Learn it into Tomes of Knowledge (GM details it; once per enemy per encounter).
+  - name: Examine
+    type: reaction
+    tags: [ physical ]
+    cost: '—'
+    target-range: T1 R10
+    check: 'Condition: once per target, start or end of its turn; once per round per target'
+    description: Learn 1 info (HP, conditions, stats, weaknesses, resistances).

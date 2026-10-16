@@ -1,8 +1,0 @@
-id: clothiers-writ
-name: "Clothier's Writ"
-slot: item
-damage-type: null
-bonus: null
-effect: "Writ shown to shop/forge proprietors for facility access (Clothier: Light Armor & Clothing Accessory crafting)."
-source: clothier
-stack-max: 1
