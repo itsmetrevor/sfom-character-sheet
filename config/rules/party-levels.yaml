@@ -1,0 +1,19 @@
+id: party-levels
+name: Party Level Unlocks
+source-pages: [p002, p003, p004]
+
+background-ability-tiers: [0, 3, 6, 9]
+
+passive-slots:
+  non-combat:
+    base: 2
+    extra-at: [4]
+  combat:
+    base: 3
+    extra-at: [8]
+
+stat-pips:
+  max-per-main-stat: 2
+
+shards:
+  slots: 5

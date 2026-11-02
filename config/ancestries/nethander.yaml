@@ -10,27 +10,28 @@ languages:
 vision: low-light
 
 stat-modifiers:
-  - max-hp: 7
-  - int: 1
-  - luk: -1
-  - def: 1
+  max-hp: 7
+  int: 1
+  luk: -1
+  def: 1
 
 expertise-modifiers:
-  - knowledge: 2
+  - expertise: knowledge
+    value: 2
 
 passives:
   - name: Vigilant
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Gain 'Inspired' when using a Perception Check to see if you are being followed.
   - name: Combat Ready
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       When a Target Attacks but does not Stagger against you, only receive half the Damage (Rounded down).
 

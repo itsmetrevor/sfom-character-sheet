@@ -3,6 +3,6 @@ name: Running Shoes
 slot: accessory
 damage-type: none
 stat-modifiers:
-  - agl: 1
+  agl: 1
 effect: +1 AGL. (Granted by Athlete and Courier.)
 stack-max: 5

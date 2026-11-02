@@ -5,40 +5,48 @@ id: chronomancer
 name: Chronomancer
 roles: [ specialist ]
 main-stat: mnd
-tier: 2
+tier: tier-2
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: priest
+  - kind: class
+    class: priest
     level: 10
 
 expertise-modifiers:
-  - mind: 1
-    requirements: [ class-lvl: 2 ]
-  - knowledge: 1
-    requirements: [ class-lvl: 2 ]
+  - expertise: mind
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: knowledge
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
 
 stat-modifiers:
-  - max-hp: 0
-  - mnd: 2
-  - int: 1
-  - luk: 1
-  - agl: 1
-  - res: 2
+  max-hp: 0
+  mnd: 2
+  int: 1
+  luk: 1
+  agl: 1
+  res: 2
 
 equipment:
-  - main-hand: Focus
-  - armor: Light Armor
-  - off-hand: Tome
+  main-hand: Focus
+  armor: Light Armor
+  off-hand: Tome
 
 combat-modifier:
-  - name: Change Fate
-  - description: 'When another party member fails a check, spend 1 Time Warp to rewind — re-roll D20 adding LUK (Critical refunds Time Warp). Spending Time Warp gains 1 Energy. Time Warps refill each combat.'
+  name: Change Fate
+  description: 'When another party member fails a check, spend 1 Time Warp to rewind — re-roll D20 adding LUK (Critical refunds Time Warp). Spending Time Warp gains 1 Energy. Time Warps refill each combat.'
 
 ultimate:
-  - name: Manipulate Time
-  - description: Each party member gains Quick and Inspired; all enemies gain Slow and Dizzy; regain all Time Warp charges.
-  - charge:
+  name: Manipulate Time
+  description: Each party member gains Quick and Inspired; all enemies gain Slow and Dizzy; regain all Time Warp charges.
+  charge:
     - Boost an ability
     - inflict a Status Effect
     - Change Fate
@@ -48,19 +56,31 @@ ultimate:
 passives:
   - name: Retry
     target: all
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: 'Reverse time up to 1 minute; chosen targets in 5x5 on self remember what happened.'
   - name: Float
     target: self
-    requirements: [ in-combat, target-approaches, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: target-approaches
+      - kind: constant
     description: Levitate (no terrain or fall damage).
   - name: Rewind
     target: T1 R10
-    requirements: [ in-combat, class-adept, once-per-round, failed-check-nearby ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: once-per-round
+      - kind: failed-check-nearby
     description: Re-roll a failed check.
   - name: Mindful
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent MND.
 
 actions:

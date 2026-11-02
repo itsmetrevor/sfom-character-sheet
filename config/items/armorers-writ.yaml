@@ -2,6 +2,6 @@ id: armorers-writ
 name: Armorer's Writ
 slot: item
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: "Writ shown to shop/forge proprietors for facility access (Armorer: Medium & Heavy Armor crafting)."
 stack-max: 1

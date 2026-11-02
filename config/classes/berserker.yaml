@@ -5,39 +5,47 @@ id: berserker
 name: Berserker
 roles: [ dps, tank ]
 main-stat: str
-tier: 2
+tier: tier-2
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites:
-  - class: monk
+  - kind: class
+    class: monk
     level: 10
 
 expertise-modifiers:
-  - strength: 1
-    requirements: [ class-lvl: 2 ]
-  - bravado: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: strength
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: bravado
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 5
-  - str: 2
-  - con: 2
-  - agl: 1
-  - def: 1
+  max-hp: 5
+  str: 2
+  con: 2
+  agl: 1
+  def: 1
 
 equipment:
-  - main-hand: Slashing or Unarmed (none)
-  - armor: Medium Armor
-  - off-hand: Pistol or Crossbow
+  main-hand: Slashing or Unarmed (none)
+  armor: Medium Armor
+  off-hand: Pistol or Crossbow
 
 combat-modifier:
-  - name: Pure Rage
-  - description: 'All attacks Provoke. MAX HP equals double CON. Each damage instance +1 Rage (max 5); each Rage -1 damage received. Extend Chains spending 1 Rage per extra Chain (energy still applies). Immune to Berserk.'
+  name: Pure Rage
+  description: 'All attacks Provoke. MAX HP equals double CON. Each damage instance +1 Rage (max 5); each Rage -1 damage received. Extend Chains spending 1 Rage per extra Chain (energy still applies). Immune to Berserk.'
 
 ultimate:
-  - name: Wrath & Rampage
-  - description: Gain full Rage; chaining into Beatdown will Critical.
-  - charge:
+  name: Wrath & Rampage
+  description: Gain full Rage; chaining into Beatdown will Critical.
+  charge:
     - Provoke 2+ targets
     - gain 2+ Rage
     - Chain 2+ times
@@ -46,19 +54,28 @@ ultimate:
 passives:
   - name: Brute Force
     target: self
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: STR for any expertise check.
   - name: Aggression
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Each round first Chained ability costs 0 Energy.
   - name: Unhinged
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Chain twice per turn.
   - name: Stronger
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent STR.
 
 actions:

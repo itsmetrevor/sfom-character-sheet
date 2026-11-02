@@ -6,37 +6,44 @@ roles: [ specialist ]
 main-stat: luk
 tier: starter
 x-start: 1
+max-hp-mode: normal
 
 prerequisites: []
 
 expertise-modifiers:
-  - luck: 1
-    requirements: [ class-lvl: 2 ]
-  - deception: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: luck
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: deception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - dex: 1
-  - int: 1
-  - luk: 2
-  - jmp: 1
-  - agl: 1
-  - for: 1
+  max-hp: -5
+  dex: 1
+  int: 1
+  luk: 2
+  jmp: 1
+  agl: 1
+  for: 1
 
 equipment:
-  - main-hand: Bludgeoning Hammer
-  - armor: Light Armor
-  - off-hand: Pistol or 1H Crossbow (no bonus)
+  main-hand: Bludgeoning Hammer
+  armor: Light Armor
+  off-hand: Pistol or 1H Crossbow (no bonus)
 
 combat-modifier:
-  - name: Up My Sleeve
-  - description: 'Trickster Main Ability rolls use D6 for bonus effects. Rolling 1 banks a Wild Card. Wild Cards may be spent to choose effects instead of rolling (like Fortune Die). Wild Cards expire at combat end. Immune to own markers. Physical/Magic Melee Saboteur.'
+  name: Up My Sleeve
+  description: 'Trickster Main Ability rolls use D6 for bonus effects. Rolling 1 banks a Wild Card. Wild Cards may be spent to choose effects instead of rolling (like Fortune Die). Wild Cards expire at combat end. Immune to own markers. Physical/Magic Melee Saboteur.'
 
 ultimate:
-  - name: Wild Side
-  - description: Gain Max Wild Cards; all party members' D6 rolls cannot be lower than LUK this round.
-  - charge:
+  name: Wild Side
+  description: Gain Max Wild Cards; all party members' D6 rolls cannot be lower than LUK this round.
+  charge:
     - place a marker
     - gain/spend a Wild Card
     - inflict a Status Effect
@@ -45,19 +52,29 @@ ultimate:
 passives:
   - name: Tricksy
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: 'Inspired on Deception. Source prints trailing ZZZZ as-printed.'
   - name: Bludgeoning Weapon Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Bludgeoning with any class; melee Stagger abilities Push target 2 squares.'
   - name: Lucky Roll
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: FOR +2.
   - name: Lucky
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent LUK.
 
 actions:

@@ -1,56 +1,84 @@
-# Incomplete WIP
-# Character save data model
+# Character save-data example (schema v1).
+# Rust domain types in src/ are authoritative; this file is a readable fixture.
+# Ability/passive references are owner-scoped names until stable per-ability ids exist.
 
+schema-version: 1
 
-# These fields are included on the character sheet
-# but don't need to be tracked explicitly.
-#
-# stats: # calc p+ c + t +- modifiers
-# inventory-max: # calc base max + or - modifiers
-# stack-max: # calc base max + or - modifiers
-# clvl-total: # calc by sum of all class levels
-# expertise: # calc s + p + c + t +- modifiers
-# abilities-available: # from class
-# passives-available: # from class, background, ancestry
-
+id: jimmy-john
 name: Jimmy John
-ancestry: enatt
-background: blacksmith
-class: scholar
-subclass: necromancer
-
-character-info: |
+notes: |
   Some very interesting lore information about Jimmy John.
 
-current-hp:
-energy:
-exaustion:
+main-class: scholar
 
-party-lvl:
+ancestry:
+  primary: enatt
+  hybrid: null
 
-condis-boons:
-  - poisoned
-  - haste
+backgrounds:
+  - background: blacksmith
+    chosen-abilities:
+      - party-level: 0
+        ability: Common
 
-equiped:
-  - main-hand:
-  - off-hand:
-  - armor:
-  - accessory1:
-  - accessory2:
+classes:
+  - class: scholar
+    role: main
+    level: 9
+    x: 1
+    unlocked-actions: [Study, Examine]
+    unlocked-passives: [Perceptive, Light Armor Proficiency]
+  - class: berserker
+    role: sub
+    level: 4
+    x: 1
+    unlocked-actions: []
+    unlocked-passives: []
+
+party-level: 7
+
+stat-pips:
+  str: 0
+  dex: 0
+  con: 0
+  mnd: 2
+  int: 0
+  luk: 0
+
+resources:
+  current-hp: 0
+  energy: 0
+  exhaustion: 0
+
+# Free-text fallback until the status-effect catalog is transcribed.
+statuses:
+  - id: poisoned
+    name: Poisoned
+    kind: condition
+    note: Placeholder label.
+
+equipment:
+  main-hand: null
+  armor: null
+  off-hand: null
+  accessories: []
 
 inventory:
-  - item:
-    quantity:
-  - item:
-    quantity:
+  - item: blacksmiths-writ
+    quantity: 1
+    custom-name: null
+  - item: weapon-of-choice-generic
+    quantity: 1
+    custom-name: null
 
-class-lvls:
-  - scholar: 9
-  - berserker: 4
-  - monk: 10
-  - soldier: 10
+currency:
+  gold: 0
+  shards: 0
 
-slotted-abilities:
+passive-slots:
+  non-combat: []
+  combat: []
 
-slotted-passives:
+# Manual escape hatch for rules the source does not structure yet.
+overrides:
+  max-hp: null

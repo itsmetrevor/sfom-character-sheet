@@ -8,7 +8,8 @@ description: |
   You have spent much of your life wandering the wilds beyond civilization's reach. You read disturbances in the natural world, find hidden trails and shortcuts where others see only wilderness, understand what animals communicate by their behavior, and never lose your sense of direction.
 
 expertise-modifiers:
-  - nature: 2
+  - expertise: nature
+    value: 2
 
 starting-items:
   - item: shovel
@@ -16,18 +17,26 @@ starting-items:
 
 passives:
   - name: "Natural"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Gain 'Inspired' on 'Nature' Checks to spot disturbances in nature."
     detail: "When you are out in nature you can more easily spot when something is amiss. The difficulty of the 'Nature' Check is at the discretion of the GM."
   - name: "Pathfinder"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' on 'Nature' Checks to find shortcuts or trails."
     detail: "Your keen eyes are capable of spotting hidden trails and spots typically unseen. The difficulty of the 'Nature' Check is at the discretion of the GM."
   - name: "Understand"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Understand what animals communicate by behavior."
     detail: "You are capable of understanding what animals are communicating but you cannot speak to animals."
   - name: "Awareness"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Never lose your sense of direction or get lost."
     detail: "You cannot get lost in regards to where you have been. This does not mean you always know where you are just that you cannot lose the way you have come."

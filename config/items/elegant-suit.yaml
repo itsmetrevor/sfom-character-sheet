@@ -2,7 +2,9 @@ id: elegant-suit
 name: Elegant Suit
 slot: armor
 damage-type: none
-stat-modifiers:
-  - bravado: 2
+stat-modifiers: {}
+expertise-modifiers:
+  - expertise: bravado
+    value: 2
 effect: Any Size Armor. +2 Bravado.
 stack-max: 5

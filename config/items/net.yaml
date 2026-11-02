@@ -2,6 +2,6 @@ id: net
 name: Net
 slot: item
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: Fishing/capture net (Sailor starting item).
 stack-max: 5

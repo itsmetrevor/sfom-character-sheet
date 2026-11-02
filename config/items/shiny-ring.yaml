@@ -2,7 +2,9 @@ id: shiny-ring
 name: Shiny Ring
 slot: accessory
 damage-type: none
-stat-modifiers:
-  - deception: 1
+stat-modifiers: {}
+expertise-modifiers:
+  - expertise: deception
+    value: 1
 effect: +1 Deception.
 stack-max: 5

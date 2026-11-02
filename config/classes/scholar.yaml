@@ -7,37 +7,44 @@ roles: [ specialist ]
 main-stat: mnd
 tier: starter
 x-start: 1
+max-hp-mode: normal
 
 prerequisites: []
 
 expertise-modifiers:
-  - knowledge: 1
-    requirements: [ class-lvl: 2 ]
-  - perception: 1
-    requirements: [ class-lvl: 2 ]
+  - expertise: knowledge
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: perception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
 
 stat-modifiers:
-  - max-hp: 0
-  - dex: 1
-  - mnd: 2
-  - int: 1
-  - def: 2
-  - res: 1
-  - for: 1
+  max-hp: 0
+  dex: 1
+  mnd: 2
+  int: 1
+  def: 2
+  res: 1
+  for: 1
 
 equipment:
-  - main-hand: Focus Tome
-  - armor: Light Armor
-  - off-hand: Shield
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Knowledge is Power
-  - description: 'Learn abilities from enemies via Study reaction. Track on Tomes of Knowledge sheets; put ALL learned abilities there. Before encounter Activate Tome abilities up to unlocked Scholar count (works as subclass too). Learned abilities use MND for checks and damage.'
+  name: Knowledge is Power
+  description: 'Learn abilities from enemies via Study reaction. Track on Tomes of Knowledge sheets; put ALL learned abilities there. Before encounter Activate Tome abilities up to unlocked Scholar count (works as subclass too). Learned abilities use MND for checks and damage.'
 
 ultimate:
-  - name: Focused Studies
-  - description: Learn all abilities from an enemy; immediately use any 1 ability from Tome of Knowledge.
-  - charge:
+  name: Focused Studies
+  description: Learn all abilities from an enemy; immediately use any 1 ability from Tome of Knowledge.
+  charge:
     - Examine an enemy
     - use an enemy ability
     - learn an enemy ability
@@ -46,19 +53,29 @@ ultimate:
 passives:
   - name: Perceptive
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Inspired on Perception.
   - name: Light Armor Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Equip Light with any class; RES and JMP +1.
   - name: Double Major
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Class levels may go into locked Sub-Class abilities.
   - name: Mindful
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent MND.
 
 actions:

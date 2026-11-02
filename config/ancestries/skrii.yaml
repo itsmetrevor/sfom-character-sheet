@@ -10,28 +10,30 @@ languages:
 vision: dark
 
 stat-modifiers:
-  - max-hp: 5
-  - dex: 1
-  - str: -1
-  - agl: 1
+  max-hp: 5
+  dex: 1
+  str: -1
+  agl: 1
 
 expertise-modifiers:
-  - thievery: 1
-  - stealth: 1
+  - expertise: thievery
+    value: 1
+  - expertise: stealth
+    value: 1
 
 passives:
   - name: Compulsive Liar
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Add +1D6 to your 'Deception' Checks.
   - name: Sticky Fingers
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       When defeating an Enemy also gain the Common 'Steal' Reward.
 

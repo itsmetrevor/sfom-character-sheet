@@ -1,0 +1,51 @@
+id: economy
+source-pages: [p002, p033, p037, p039, p040, p071, p089, p105]
+status: partial
+
+shards:
+  gain: [specific-party-levels, gm-discretion]
+  uses: inside-and-outside-combat
+  uses-detail: details page XX — TBD
+  sheet-slots: 5
+
+gold:
+  starting:
+    merchant: 25
+    noble: 25
+  performer-payouts:
+    roll-1-15: 2
+    roll-16-19: 5
+    roll-20-plus: 10
+  merchant-deals:
+    good-deals: { buy-discount: -2, sell-bonus: 2, min-price: 1 }
+    great-deals: { buy-discount: -4, sell-bonus: 4, min-price: 1 }
+  inheritance:
+    gold: 25
+    per: week-start
+    source: noble
+    party-level: 9
+  class-effects:
+    thief-steal: { dice: XD6, stat: luk, frequency: once-per-enemy }
+    bard-ultimate: { dice: X, stat: luk, frequency: per-enemy }
+    judge-favor: { multiplier: 2 }
+  coin-toss-table:
+    $10: 1
+    $20: 2
+    $30: 3
+    $40: 5
+    $50: 7
+    $60: 10
+    $70: 13
+    $80: 17
+    $90: 21
+    $100: 26
+    $120: 31
+    $140: 37
+    $160: 43
+    $180: 50
+    $200: 57
+    $220: 65
+    $240: 73
+    $260: 82
+    $280: 97
+    $300: 100

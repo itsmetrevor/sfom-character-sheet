@@ -1,0 +1,13 @@
+id: hybrid-ancestries
+name: Hybrid Ancestries
+source-pages: [p005]
+enabled: true
+
+inheritance:
+  languages: { choose: 1, exclude: [common] }
+  vision: { choose: 1 }
+  expertise: { choose-parents: 1 }
+  main-stats: { positive: 1, negative: 1 }
+  bonus-stats: { choose: 1 }
+  passives: { non-combat: 1, combat: 1 }
+  max-hp: lower-of-parents

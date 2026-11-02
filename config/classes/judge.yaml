@@ -5,42 +5,49 @@ id: judge
 name: Judge
 roles: [ dps, specialist ]
 main-stat: str
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: soldier
+  - kind: class
+    class: soldier
     level: 15
-  - class: chronomancer
+  - kind: class
+    class: chronomancer
     level: 10
-  - class: grim-knight
+  - kind: class
+    class: grim-knight
     level: 10
 
 expertise-modifiers:
-  - any: 1
-    requirements: [ class-lvl: 3 ]
+  - expertise: any
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 3
 
 stat-modifiers:
-  - max-hp: 0
-  - str: 2
-  - con: 1
-  - int: 1
-  - def: 2
-  - res: 2
+  max-hp: 0
+  str: 2
+  con: 1
+  int: 1
+  def: 2
+  res: 2
 
 equipment:
-  - main-hand: Slashing or Bludgeoning Sword
-  - armor: Medium Armor
-  - off-hand: Pistol or Crossbow
+  main-hand: Slashing or Bludgeoning Sword
+  armor: Medium Armor
+  off-hand: Pistol or Crossbow
 
 combat-modifier:
-  - name: Law & Order
-  - description: 'Abilities can Create and Declare any followable Law fitting fight (e.g. melee range +3, or no damage without Staggering). Laws bind everyone able to follow. Always open with 3 Rulings + 3 Favors active. Activating Ruling under Judgements also selects Favor; both persist while Active. Uses Assignment un-unlocked. Physical Melee/Ranged Damage Dealer, Support, Saboteur.'
+  name: Law & Order
+  description: 'Abilities can Create and Declare any followable Law fitting fight (e.g. melee range +3, or no damage without Staggering). Laws bind everyone able to follow. Always open with 3 Rulings + 3 Favors active. Activating Ruling under Judgements also selects Favor; both persist while Active. Uses Assignment un-unlocked. Physical Melee/Ranged Damage Dealer, Support, Saboteur.'
 
 ultimate:
-  - name: Transgression
-  - description: X damage per active Ruling to each enemy; create and declare a Law till end of round; enemies only.
-  - charge:
+  name: Transgression
+  description: X damage per active Ruling to each enemy; create and declare a Law till end of round; enemies only.
+  charge:
     - declare a Law
     - activate a Ruling
     - deactivate a Ruling
@@ -49,19 +56,30 @@ ultimate:
 passives:
   - name: Sense of Justice
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Know every local law.
   - name: Arbiter
     target: self
-    requirements: [ in-combat, once-per-round, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: once-per-round
+      - kind: constant
     description: Reorder turn order once per round.
   - name: Assignment
     target: all party
-    requirements: [ in-combat, class-adept, once-per-combat ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: once-per-combat
     description: 'Before combat, party may pre-move STR from their starts.'
   - name: Stronger
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent STR.
 
 actions:

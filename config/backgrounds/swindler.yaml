@@ -7,7 +7,8 @@ description: |
   Lying and tricking people comes naturally to you and it often seems to work in your favor. You have a way with words and all your own lying allows you to tell if others are lying to you.
 
 expertise-modifiers:
-  - deception: 2
+  - expertise: deception
+    value: 2
 
 starting-items:
   - item: shiny-ring
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Conniving"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Each truth inside a lie gains +2 to the 'Deception' Roll."
     detail: "You know your way around a conversation and how to worm your way out of saying something you shouldn't. If you add any amount of truth within a statement where you are lying you gain a bonus. This works each time you add in a truth to the lie."
   - name: "Awareness"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' on 'Deception' Checks to spot lies."
     detail: "You know how to spot when someone else is lying. The difficulty of the 'Deception' Check is at the discretion of the GM."
   - name: "Underground"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "'Mind' Check in a City/Town to remember local Criminals."
     detail: "You are aware of a vast criminal network. The difficulty of the 'Mind' Check is at the discretion of the GM."
   - name: "Grifter"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Gain 'Inspired' on 'Deception' Checks while grifting."
     detail: "Grifting is the act of getting money or goods from someone through deceit, fraud, or a confidence game. The difficulty of the 'Deception' Check is at the discretion of the GM."

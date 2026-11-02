@@ -7,8 +7,10 @@ description: |
   You have spent much of your time in the wilderness tracking and hunting various beasts. You are capable of creating traps and hiding in plain sight until you find your prey.
 
 expertise-modifiers:
-  - nature: 1
-  - stealth: 1
+  - expertise: nature
+    value: 1
+  - expertise: stealth
+    value: 1
 
 starting-items:
   - item: long-bow
@@ -16,18 +18,26 @@ starting-items:
 
 passives:
   - name: "Trapper"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Create and set traps without Checks: Snare, 1-Square Pit, Deadfall Traps."
     detail: "You are capable of creating simple traps for hunting game. You do not need to make a Check for crafting the traps but you will still need to find the materials. Trying to craft anything larger or more complicated will still require a Check."
   - name: "Tracker"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' when Hunting or Tracking in the Wilderness."
     detail: "Wilderness is anywhere outside of civilization where you are in nature such as a forest, plains, etc."
   - name: "Camouflage"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Once per Full Rest in the Wilderness, your first 'Stealth' Check Succeeds."
     detail: "You have mastered the art of blending into your surroundings while in the wilderness."
   - name: "Fur Trader"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Gain 1 Pelt per killed 'Beast' Enemy at end of Combat."
     detail: "You know how to quickly skin beasts of all kinds. You know the value of a good pelt, you can use them for crafting or to make some extra gold."

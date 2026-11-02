@@ -7,7 +7,8 @@ description: |
   You spent a portion of your life sailing and fishing in lakes and oceans. You know how way around a boat and everything you need to do to successfully catch fish.
 
 expertise-modifiers:
-  - constitution: 2
+  - expertise: constitution
+    value: 2
 
 starting-items:
   - item: rope
@@ -19,18 +20,26 @@ starting-items:
 
 passives:
   - name: "Sea Legs"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Sail boats without needing Checks."
     detail: "You have been taught how to sail a variety of boats. Even if you know how to sail a boat, if it is too large you may need a crew or a party to help out and they still might need to make Checks."
   - name: "Fisherman"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' on 'Throw/Catch' Checks to catch fish."
     detail: "You have an easier time fishing, the difficulty of the 'Throw/Catch' Check is at the discretion of the GM."
   - name: "Iron Stomach"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Gain 'Inspired' on 'Constitution' Checks."
     detail: "Your time on boats has built up a strong constitution against many different adverse effects."
   - name: "Navigator"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "'Nature' Check near the sea to read and predict weather."
     detail: "When near or out to sea you can look to the clouds and read the ocean winds to determine upcoming weather. The difficulty of the 'Nature' Check is at the discretion of the GM."

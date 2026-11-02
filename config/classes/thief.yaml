@@ -5,41 +5,48 @@ id: thief
 name: Thief
 roles: [ dps, specialist ]
 main-stat: luk
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - thievery: 1
-    requirements: [ class-lvl: 2 ]
-  - stealth: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: thievery
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: stealth
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - dex: 1
-  - int: 1
-  - luk: 2
-  - agl: 1
-  - def: 1
-  - res: 1
+  max-hp: 0
+  dex: 1
+  int: 1
+  luk: 2
+  agl: 1
+  def: 1
+  res: 1
 
 equipment:
-  - main-hand: Piercing Dagger
-  - armor: Medium Armor
-  - off-hand: Pistol or 1H Crossbow
+  main-hand: Piercing Dagger
+  armor: Medium Armor
+  off-hand: Pistol or 1H Crossbow
 
 combat-modifier:
-  - name: Lucky Hit
-  - description: 'Chaining or using Theft abilities gains 1 Lucky Hit Charge (max 10); each charge -1 to Critical-required number; reset to 0 on Critical. Physical Melee Saboteur Damage Dealer.'
+  name: Lucky Hit
+  description: 'Chaining or using Theft abilities gains 1 Lucky Hit Charge (max 10); each charge -1 to Critical-required number; reset to 0 on Critical. Physical Melee Saboteur Damage Dealer.'
 
 ultimate:
-  - name: Sticky Fingers
-  - description: Deal 4D6 to adjacent target; steal a rare item.
-  - charge:
+  name: Sticky Fingers
+  description: Deal 4D6 to adjacent target; steal a rare item.
+  charge:
     - at start of your turn
     - steal from target
     - roll a Critical
@@ -47,19 +54,29 @@ ultimate:
 passives:
   - name: Burglar
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Inspired on Thievery.
   - name: Piercing (Melee) Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Piercing (Melee) anywhere; +1 crit chance attacking from behind.'
   - name: Vital Spot
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'When attacking roll D6; 1 or 6 lowers crit-required number by -X.'
   - name: Lucky
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent LUK.
 
 actions:

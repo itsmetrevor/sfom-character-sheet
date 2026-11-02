@@ -10,28 +10,30 @@ languages:
 vision: normal
 
 stat-modifiers:
-  - max-hp: 12
-  - str: 1
-  - int: -1
-  - nrg: 1
+  max-hp: 12
+  str: 1
+  int: -1
+  nrg: 1
 
 expertise-modifiers:
-  - strength: 1
-  - throw-catch: 1
+  - expertise: strength
+    value: 1
+  - expertise: throw-catch
+    value: 1
 
 passives:
   - name: Unstoppable
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Gain 'Inspired' when making a Strength Check against a Target that is smaller than you.
   - name: Immovable
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       You may choose to not be moved by Effects.
 

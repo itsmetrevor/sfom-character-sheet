@@ -5,40 +5,48 @@ id: negotiator
 name: Negotiator
 roles: [ specialist ]
 main-stat: luk
-tier: 2
+tier: tier-2
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: beast-tamer
+  - kind: class
+    class: beast-tamer
     level: 5
 
 expertise-modifiers:
-  - charisma: 1
-    requirements: [ class-lvl: 2 ]
-  - deception: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: charisma
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: deception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - mnd: 1
-  - int: 1
-  - luk: 2
-  - agl: 1
-  - res: 3
+  max-hp: -5
+  mnd: 1
+  int: 1
+  luk: 2
+  agl: 1
+  res: 3
 
 equipment:
-  - main-hand: Ranged Piercing Pistol
-  - armor: Medium
-  - off-hand: Dagger
+  main-hand: Ranged Piercing Pistol
+  armor: Medium
+  off-hand: Dagger
 
 combat-modifier:
-  - name: Real Talk
-  - description: 'Describe talk freely; GM bonuses Expose checks by performance — Liked +2, Loved +4, Unbelievable +6. Lose any Mercy ally unless Main or Sub Class is Negotiator.'
+  name: Real Talk
+  description: 'Describe talk freely; GM bonuses Expose checks by performance — Liked +2, Loved +4, Unbelievable +6. Lose any Mercy ally unless Main or Sub Class is Negotiator.'
 
 ultimate:
-  - name: Silver Tongue
-  - description: Convince 1 non-boss target to leave battle; gain both Steal options from it.
-  - charge:
+  name: Silver Tongue
+  description: Convince 1 non-boss target to leave battle; gain both Steal options from it.
+  charge:
     - Chain an ability
     - inflict a Status Effect
     - Stagger an enemy
@@ -47,19 +55,29 @@ ultimate:
 passives:
   - name: Linguistics
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Know all Ancestry Languages.
   - name: Steel Trap
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Immune to mind-altering statuses (Berserk, Charm, Confuse, Fear, Mute, Provoke, Ruin, Sleep).'
   - name: Mediator
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Talk range +3; add LUK to Expose checks.
   - name: Lucky
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent LUK.
 
 actions:

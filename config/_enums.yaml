@@ -1,8 +1,64 @@
 # Shared enums — single source of truth for validators + app dropdowns
 # Source: p002 character sheet graphic (vision-verified); handbook text-layer p003-p005.
+# Closed vocabularies belong here; file/id references are validated separately.
+
+class-tiers: [starter, tier-1, tier-2, tier-3, tier-4, ultimate]
+class-roles: [main, sub]
+roles: [dps, tank, healer, specialist]
+
+main-stats: [str, dex, con, mnd, int, luk]
+bonus-stats: [jmp, agl, def, res, nrg, for]
+modifier-targets:
+  - max-hp
+  - str
+  - dex
+  - con
+  - mnd
+  - int
+  - luk
+  - jmp
+  - agl
+  - def
+  - res
+  - nrg
+  - for
+  - range
+  - damage
+  - magic-damage
+  - melee-damage
+  - restore-hp
+  - damage-taken
 
 gear-slots: [main-hand, armor, off-hand, accessory, item, consumable, tool, currency]
+equipment-slots: [main-hand, armor, off-hand]
+damage-types: [none, slashing, piercing, bludgeoning]
+
 passive-sources: [ancestry, background, class]
 passive-slots: [non-combat, combat]
-class-tiers: [starter, 1, 2, 3, 4, ultimate]
-roles: [dps, tank, healer, specialist]
+action-types: [main, support, reaction]
+
+requirement-kinds:
+  - constant
+  - well-rested
+  - class-adept
+  - non-combat
+  - in-combat
+  - class-level
+  - party-level
+  - once-per-round
+  - once-per-combat
+  - reaction
+  - attacked-while-armed
+  - target-approaches
+  - attacked-in-range
+  - attacked
+  - exposed
+  - damaged
+  - failed-check-nearby
+  - target-leaves
+
+prerequisite-kinds: [class, any-starter]
+max-hp-modes: [normal, double-con]
+stat-shapes: [square, circle, star, diamond-pip]
+stat-shape-meanings: [permanent, temporary, class, party-level]
+status-kinds: [boon, condition, dot, state, other]

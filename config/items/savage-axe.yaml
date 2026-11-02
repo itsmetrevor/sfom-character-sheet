@@ -2,6 +2,6 @@ id: savage-axe
 name: Savage Axe
 slot: main-hand
 damage-type: slashing
-stat-modifiers: []
+stat-modifiers: {}
 effect: "Slashing Weapon. Stagger with Melee Attack: Inflict a Bleed DOT 2."
 stack-max: 5

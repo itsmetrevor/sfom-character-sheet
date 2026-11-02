@@ -1,0 +1,11 @@
+id: starting-gear
+source-pages: [p004, p005]
+status: placeholder
+
+missing-source: The Gear section referenced as page XX is not included in the supplied handbook transcription.
+fallback:
+  - background-starting-items
+  - manual-inventory-entry
+
+# Populate with real bundles once the Gear section is supplied.
+bundles: []

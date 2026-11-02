@@ -7,7 +7,8 @@ description: |
   You are a professional psychologist with knowledge of how to help people work through their problems.
 
 expertise-modifiers:
-  - mind: 2
+  - expertise: mind
+    value: 2
 
 starting-items:
   - item: self-help-book
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Find Truth"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Make a 'Mind' check to find the deeper truth of what a Target says or feels."
     detail: "You are capable of reading between the lines of what someone is trying to say or how they are feeling. The difficulty of the 'Mind' Check is at the discretion of the GM."
   - name: "Affirmation"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Supportive language + passed 'Mind' Check opens the Target up."
     detail: "Here are a few examples of supportive language; I believe in you, take all the time you need, or you are not alone in this. The difficulty of the 'Mind' Check is at the discretion of the GM."
   - name: "Talk it Out"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Alone-with-Target 'Mind'/'Charisma' Checks gain 'Inspired'."
     detail: "To gain 'Inspired' on 'Mind' and 'Charisma' Checks you must be the only person speaking with the Target."
   - name: "Enlightened"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "You cannot be deceived."
     detail: "You have always been good at catching when someone was withholding information. With your knowledge and experience you now notice any time someone is lying."

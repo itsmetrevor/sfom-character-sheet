@@ -7,7 +7,8 @@ description: |
   You spent some time as a detective or private investigator looking for clues and solving crimes. When investigating, you know what to look for and how to get people to talk.
 
 expertise-modifiers:
-  - knowledge: 2
+  - expertise: knowledge
+    value: 2
 
 starting-items:
   - item: magnifying-glass
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Investigate"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Finding Clues: 'Perception' Checks to look for Clues always find at least one."
     detail: "Keep track of each clue you find, it may be helpful to have an additional piece of paper with you to help with tracking clues."
   - name: "Process"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "+1 per Clue found on 'Knowledge' Checks to get a hint toward your Investigation."
     detail: "You may make a 'Knowledge' Check to get a hint from the GM towards your investigation. The difficulty of the 'Knowledge' Check and the hint given to you is at the discretion of the GM."
   - name: "Interrogate"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "+2 per Clue found on 'Bravado' Checks to Interrogate a Target."
     detail: "Once the investigation is underway you will need to interrogate people. For each Clue you have gain +2 to your 'Bravado' Check to get them to talk."
   - name: "Detective"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Gain 'Inspired' on all 'Investigator' Abilities."
     detail: "You are professional, you have an easier time finding leads, interrogating perps, and solving your investigations. Each of your previous Investigator Abilities will gain the 'Inspired' Status Effect."

@@ -7,36 +7,43 @@ roles: [ dps, tank ]
 main-stat: str
 tier: starter
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites: []
 
 expertise-modifiers:
-  - strength: 1
-    requirements: [ class-lvl: 2 ]
-  - perception: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: strength
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: perception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - str: 2
-  - con: 1
-  - mnd: 1
-  - def: 2
-  - res: 2
+  max-hp: 0
+  str: 2
+  con: 1
+  mnd: 1
+  def: 2
+  res: 2
 
 equipment:
-  - main-hand: Slashing Sword
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing Sword
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Soldier's Duty
-  - description: 'MAX HP equals double CON. Inspired attacking from side or behind in melee. Uses Marching Drills even un-unlocked. Physical Melee All-Rounder.'
+  name: Soldier's Duty
+  description: 'MAX HP equals double CON. Inspired attacking from side or behind in melee. Uses Marching Drills even un-unlocked. Physical Melee All-Rounder.'
 
 ultimate:
-  - name: Valor Strike
-  - description: Deal 50% damage to an adjacent target.
-  - charge:
+  name: Valor Strike
+  description: Deal 50% damage to an adjacent target.
+  charge:
     - attack from side/behind
     - Chain
     - Stagger/Expose
@@ -45,19 +52,28 @@ ultimate:
 passives:
   - name: Military Knowledge
     target: self
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: Inspired on Military Knowledge.
   - name: Slashing Weapon Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Slashing with any class; physical melee +X damage.'
   - name: Marching Drills
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 JMP/AGL.
   - name: Stronger
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent STR, always on even without the card.
 
 actions:

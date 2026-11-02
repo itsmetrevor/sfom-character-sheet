@@ -7,36 +7,43 @@ roles: [ healer ]
 main-stat: int
 tier: starter
 x-start: 1
+max-hp-mode: normal
 
 prerequisites: []
 
 expertise-modifiers:
-  - crafting: 1
-    requirements: [ class-lvl: 2 ]
-  - throw-catch: 1
-    requirements: [ class-lvl: 2 ]
+  - expertise: crafting
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: throw-catch
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
 
 stat-modifiers:
-  - max-hp: 0
-  - mnd: 1
-  - int: 2
-  - luk: 1
-  - def: 1
-  - res: 3
+  max-hp: 0
+  mnd: 1
+  int: 2
+  luk: 1
+  def: 1
+  res: 3
 
 equipment:
-  - main-hand: Piercing (Ranged) — Pistol, no bonus
-  - armor: Medium — basic, no bonus
-  - off-hand: Dagger (Knife) — melee, basic, no bonus
+  main-hand: Piercing (Ranged) — Pistol, no bonus
+  armor: Medium — basic, no bonus
+  off-hand: Dagger (Knife) — melee, basic, no bonus
 
 combat-modifier:
-  - name: Enhanced Chemistry
-  - description: '+5 ingredients when using Chemistry. Item abilities spend the item; they are enhanced (EX) versions of regular items. Basic Alchemy: before a Throwing ability roll D6 — 1-3 nothing; 4-5 +INT HP restored / +INT damage; 6 item not spent.'
+  name: Enhanced Chemistry
+  description: '+5 ingredients when using Chemistry. Item abilities spend the item; they are enhanced (EX) versions of regular items. Basic Alchemy: before a Throwing ability roll D6 — 1-3 nothing; 4-5 +INT HP restored / +INT damage; 6 item not spent.'
 
 ultimate:
-  - name: Crafting Frenzy
-  - description: Use the Chemistry passive; use any potions crafted.
-  - charge:
+  name: Crafting Frenzy
+  description: Use the Chemistry passive; use any potions crafted.
+  charge:
     - gain Basic Alchemy effect
     - throw an item 2+ squares
     - restore HP
@@ -45,19 +52,29 @@ ultimate:
 passives:
   - name: Chemistry
     target: self
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: 'Gather 5 ingredients, craft from list — Healing Potion 1, Poison Bomb 1, Super Potion 2, XL Potion 3, Curing Tonic 2, Ener-oil 3.'
   - name: Throw Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Throw inventory items at Range 10 instead of 1.
   - name: Mixologist
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +INT damage dealt and healing received spending inventory items.
   - name: Intellectual
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent INT, always on even without the card.
 
 actions:

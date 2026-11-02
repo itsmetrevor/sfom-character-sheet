@@ -7,7 +7,8 @@ description: |
   You have spent a portion of your life working on a farm. You know the ins-and-outs of growing and harvesting crops, working with various animals, and how to fix up old equipment when it breaks.
 
 expertise-modifiers:
-  - strength: 2
+  - expertise: strength
+    value: 2
 
 starting-items:
   - item: shovel
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Agricultural"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "You know how to grow and harvest crops and other plant life."
     detail: "You know how to grow and harvest crops and other common plants without having to make any Checks. Keep in mind you have no control over the weather or the GM's Discretion."
   - name: "Tamer"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' when making a 'Nature' Check on an Animal."
     detail: "Working on a farm you have dealt with many different animals and you have an easier time handling them."
   - name: "Handy Man"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Gain 'Inspired' on Checks when building or fixing equipment and structures."
     detail: "You have had your share of farm equipment and structures that have needed fixing. With that knowledge you can use it to help fix things on your adventure."
   - name: "Early Riser"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Resting at least 4 hours removes an additional 2 'Exhaustion'."
     detail: "Waking up before dawn is nothing new to you, it has become a habit. Some how after all this time you feel even more rested with less sleep."

@@ -5,41 +5,50 @@ id: grim-knight
 name: Grim Knight
 roles: [ dps, tank ]
 main-stat: str
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites:
-  - class: knight
+  - kind: class
+    class: knight
     level: 5
-  - class: berserker
+  - kind: class
+    class: berserker
     level: 10
 
 expertise-modifiers:
-  - strength: 1
-    requirements: [ class-lvl: 2 ]
-  - deception: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: strength
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: deception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 10
-  - str: 2
-  - int: 2
-  - def: 1
-  - res: 1
+  max-hp: 10
+  str: 2
+  int: 2
+  def: 1
+  res: 1
 
 equipment:
-  - main-hand: Slashing or Piercing Sword
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing or Piercing Sword
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Shadow & Blood
-  - description: 'All attacks Provoke. MAX HP equals double CON. Start in Shadow Stance with 1 Shadow Charge. Shadow: dealing damage +1 Charge (max 10), bonus damage/healing by count. Blood: dealing damage -1 Charge (min 1), healing by count. Uses Reborn un-unlocked.'
+  name: Shadow & Blood
+  description: 'All attacks Provoke. MAX HP equals double CON. Start in Shadow Stance with 1 Shadow Charge. Shadow: dealing damage +1 Charge (max 10), bonus damage/healing by count. Blood: dealing damage -1 Charge (min 1), healing by count. Uses Reborn un-unlocked.'
 
 ultimate:
-  - name: Dark Imbuement
-  - description: Restore to full HP; deal HP-restored as damage to all enemies within Range 5.
-  - charge:
+  name: Dark Imbuement
+  description: Restore to full HP; deal HP-restored as damage to all enemies within Range 5.
+  charge:
     - restore or lose 15+ HP
     - change stances
     - gain 2 Charges
@@ -48,19 +57,29 @@ ultimate:
 passives:
   - name: Dark Vision
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: 'See in any darkness; sense darkness/evil in hearts.'
   - name: Vigor
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Shed DEF and RES in any amount (tracked) for +5 HP each.'
   - name: Reborn
     target: self
-    requirements: [ in-combat, class-adept, once-per-combat ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: once-per-combat
     description: 'KO removes Knocked Out, restores 1HP, grants Unseen + Damage Immunity till end of round.'
   - name: Stronger
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent STR.
 
 actions:

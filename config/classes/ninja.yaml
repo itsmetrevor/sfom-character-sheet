@@ -5,41 +5,49 @@ id: ninja
 name: Ninja
 roles: [ dps, specialist ]
 main-stat: dex
-tier: 2
+tier: tier-2
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: thief
+  - kind: class
+    class: thief
     level: 10
 
 expertise-modifiers:
-  - thievery: 1
-    requirements: [ class-lvl: 2 ]
-  - stealth: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: thievery
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: stealth
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - dex: 2
-  - mnd: 1
-  - luk: 1
-  - jmp: 1
-  - def: 1
-  - res: 1
+  max-hp: 0
+  dex: 2
+  mnd: 1
+  luk: 1
+  jmp: 1
+  def: 1
+  res: 1
 
 equipment:
-  - main-hand: Piercing Dagger
-  - armor: Medium Armor
-  - off-hand: Dagger
+  main-hand: Piercing Dagger
+  armor: Medium Armor
+  off-hand: Dagger
 
 combat-modifier:
-  - name: Ninja-Arts
-  - description: 'Uses Dual Wield un-unlocked. Main Actions unlock specific Chakra (tracked symbols); spend Chakra on Jutsu during your turn. Jutsu are not Main/Support/Reaction. Frog Summons 2x AGL and 1+X JMP, act at end of owner turn, resummonable, one at a time, owner-controlled.'
+  name: Ninja-Arts
+  description: 'Uses Dual Wield un-unlocked. Main Actions unlock specific Chakra (tracked symbols); spend Chakra on Jutsu during your turn. Jutsu are not Main/Support/Reaction. Frog Summons 2x AGL and 1+X JMP, act at end of owner turn, resummonable, one at a time, owner-controlled.'
 
 ultimate:
-  - name: The Seventh Gate
-  - description: Fill all your Chakras.
-  - charge:
+  name: The Seventh Gate
+  description: Fill all your Chakras.
+  charge:
     - use 2 Main Actions
     - use a Jutsu
     - attack from behind
@@ -48,19 +56,28 @@ ultimate:
 passives:
   - name: From the Shadows
     target: self
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: Inspired on Stealth.
   - name: Agility & Balance
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Liquid counts as regular squares; walls walkable but not endable.
   - name: Dual-Wield
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'Wield second Main-Hand in Off-Hand with both effects; once per turn use Main Action as Support Action.'
   - name: Dexterous
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent DEX.
 
 actions:

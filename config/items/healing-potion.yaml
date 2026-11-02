@@ -2,6 +2,6 @@ id: healing-potion
 name: Healing Potion
 slot: consumable
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: Starting potion (Apprentice Alchemist). See the Alchemy Crafting Guide, page XX.
 stack-max: 5

@@ -2,6 +2,6 @@ id: revival-tonic
 name: Revival Tonic
 slot: consumable
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: Starting tonic (Apprentice Alchemist). See the Alchemy Crafting Guide, page XX.
 stack-max: 5

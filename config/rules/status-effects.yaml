@@ -1,0 +1,8 @@
+id: status-effects
+status: placeholder
+
+missing-source: Status-effect rules are not included in the supplied handbook transcription.
+fallback: free-text-statuses
+
+# Populate with { id, name, kind, description } entries when source rules arrive.
+effects: []

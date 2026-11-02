@@ -10,29 +10,31 @@ languages:
 vision: low-light
 
 stat-modifiers:
-  - max-hp: 11
-  - str: 1
-  - mnd: -1
-  - def: 1
+  max-hp: 11
+  str: 1
+  mnd: -1
+  def: 1
 
 expertise-modifiers:
-  - bravado: 1
-  - constitution: 1
+  - expertise: bravado
+    value: 1
+  - expertise: constitution
+    value: 1
 
 passives:
   - name: Intimidating
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Gain 'Inspired' when using a Bravado Check to Intimidate a Target.
   - name: Roar
     type: combat
     target: Enemies in Range (5x5 centered on Self)
     requirements:
-      - reaction
-      - once-per-combat
+      - kind: reaction
+      - kind: once-per-combat
     expose: Target is inflicted with the 'Fear (You)' Status Effect.
     description: |
       Target is inflicted with the 'Fear (You)' Status Effect.

@@ -5,39 +5,46 @@ id: priest
 name: Priest
 roles: [ healer ]
 main-stat: mnd
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - mind: 1
-    requirements: [ class-lvl: 2 ]
-  - resistance: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: mind
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: resistance
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - mnd: 2
-  - int: 1
-  - luk: 1
-  - res: 4
+  max-hp: 0
+  mnd: 2
+  int: 1
+  luk: 1
+  res: 4
 
 equipment:
-  - main-hand: Focus Tome
-  - armor: Light Armor
-  - off-hand: Tome
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
 
 combat-modifier:
-  - name: Holy Charge
-  - description: 'Each Restorative magic ability gains a Holy Charge; at 3, immediately cast 1 Magic ability for 0 Energy. Uses Auto-Regenerate even un-unlocked. Magic Ranged Healer.'
+  name: Holy Charge
+  description: 'Each Restorative magic ability gains a Holy Charge; at 3, immediately cast 1 Magic ability for 0 Energy. Uses Auto-Regenerate even un-unlocked. Magic Ranged Healer.'
 
 ultimate:
-  - name: Grand Blessing
-  - description: Revive and fully heal each party member.
-  - charge:
+  name: Grand Blessing
+  description: Revive and fully heal each party member.
+  charge:
     - restore 10+ HP to a target
     - cast magic for 0 Energy
     - restore another target to full
@@ -46,19 +53,30 @@ ultimate:
 passives:
   - name: Sacred Senses
     target: all
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: Inspired on Resistance.
   - name: Holy Insight
     target: T1 R10
-    requirements: [ in-combat, once-per-round, reaction ]
+    requirements:
+      - kind: in-combat
+      - kind: once-per-round
+      - kind: reaction
     description: 'Stagger reveals 1 chosen info (D20+MND vs 13): HP, resistances, weaknesses.'
   - name: Auto-Regenerate
     target: self
-    requirements: [ in-combat, class-adept, damaged, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: damaged
+      - kind: constant
     description: Gain Regenerate DOT restoring MND at Status Step, lost at combat end.
   - name: Mindful
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent MND.
 
 actions:

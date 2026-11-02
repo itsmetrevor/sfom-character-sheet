@@ -5,43 +5,53 @@ id: elementalist
 name: Elementalist
 roles: [ dps, healer ]
 main-stat: int
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: monk
+  - kind: class
+    class: monk
     level: 5
-  - class: samurai
+  - kind: class
+    class: samurai
     level: 10
-  - class: alchemist
+  - kind: class
+    class: alchemist
     level: 10
 
 expertise-modifiers:
-  - intelligence: 1
-    requirements: [ class-lvl: 2 ]
-  - throw-catch: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: intelligence
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: throw-catch
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - str: 2
-  - mnd: 2
-  - int: 1
-  - res: 1
+  max-hp: 0
+  str: 2
+  mnd: 2
+  int: 1
+  res: 1
 
 equipment:
-  - main-hand: Focus or Unarmed (none)
-  - armor: Medium Armor
-  - off-hand: Tome
+  main-hand: Focus or Unarmed (none)
+  armor: Medium Armor
+  off-hand: Tome
 
 combat-modifier:
-  - name: Elemental Power
-  - description: 'Combat start gains 1 Elemental Charge of choice; each turn pick Active element coloring all attacks. Boost (Elemental Charge): spend specific Charge instead of Energy. Fire Burn DOT X (stacks +X on burning); Ice Slow (slowed/wet freeze); Lightning arcs within 5; Wind push/pull 5; Water heals allies + Wet; Earth 5x5 centered on target. Magic Ranged All-Rounder.'
+  name: Elemental Power
+  description: 'Combat start gains 1 Elemental Charge of choice; each turn pick Active element coloring all attacks. Boost (Elemental Charge): spend specific Charge instead of Energy. Fire Burn DOT X (stacks +X on burning); Ice Slow (slowed/wet freeze); Lightning arcs within 5; Wind push/pull 5; Water heals allies + Wet; Earth 5x5 centered on target. Magic Ranged All-Rounder.'
 
 ultimate:
-  - name: Elemental Master
-  - description: Activate 3 elements; gain 1 charge of all 6; use 1 active ability.
-  - charge:
+  name: Elemental Master
+  description: Activate 3 elements; gain 1 charge of all 6; use 1 active ability.
+  charge:
     - spend an Elemental Charge
     - spend 2+ Energy
     - resist an effect
@@ -50,19 +60,29 @@ ultimate:
 passives:
   - name: Elemental Control
     target: self
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: Steer element within 5 squares for 1 minute.
   - name: Brave the Elements
     target: Square 3x3 within 5
-    requirements: [ in-combat, once-per-round, reaction ]
+    requirements:
+      - kind: in-combat
+      - kind: once-per-round
+      - kind: reaction
     description: Clear all terrain effects from markers in range (even obstacle-makers).
   - name: Master of Elements
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'When dealt Elemental damage, take it for +2 Energy or absorb as HP.'
   - name: Intellectual
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent INT.
 
 actions:

@@ -5,42 +5,51 @@ id: dragon-lancer
 name: Dragon Lancer
 roles: [ dps ]
 main-stat: dex
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: ranger
+  - kind: class
+    class: ranger
     level: 15
-  - class: ninja
+  - kind: class
+    class: ninja
     level: 10
 
 expertise-modifiers:
-  - concentration: 1
-    requirements: [ class-lvl: 2 ]
-  - bravado: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: concentration
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: bravado
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - str: 2
-  - dex: 2
-  - con: 1
-  - jmp: 1
-  - def: 2
+  max-hp: 0
+  str: 2
+  dex: 2
+  con: 1
+  jmp: 1
+  def: 2
 
 equipment:
-  - main-hand: Piercing Polearm (Reach)
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Piercing Polearm (Reach)
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Dragon Surge
-  - description: 'Failed Staggers +1 Surge. Before attack, spend all Surge: damage equals DEX + highest Surge on next attack. Roll SC for Dragon Lance on re-entry. Uses Weightless un-unlocked.'
+  name: Dragon Surge
+  description: 'Failed Staggers +1 Surge. Before attack, spend all Surge: damage equals DEX + highest Surge on next attack. Roll SC for Dragon Lance on re-entry. Uses Weightless un-unlocked.'
 
 ultimate:
-  - name: Dragon Rage
-  - description: Fully charge Dragon Surge; next attack considered to Stagger.
-  - charge:
+  name: Dragon Rage
+  description: Fully charge Dragon Surge; next attack considered to Stagger.
+  charge:
     - successfully Stagger
     - Puncture a target
     - spend Dragon Surge
@@ -49,19 +58,29 @@ ultimate:
 passives:
   - name: Serpent's Tongue
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Speak with serpents and dragons.
   - name: Piercing (Reach) Weapon Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Melee Piercing (Reach) Puncture targets behind adjacent ones.
   - name: Weightless
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Ignore elevation for movement and attack range vs adjacent targets.
   - name: Dexterous
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent DEX.
 
 actions:

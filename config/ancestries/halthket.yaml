@@ -10,27 +10,28 @@ languages:
 vision: binocular
 
 stat-modifiers:
-  - max-hp: 7
-  - dex: 1
-  - mnd: -1
-  - jmp: 1
+  max-hp: 7
+  dex: 1
+  mnd: -1
+  jmp: 1
 
 expertise-modifiers:
-  - dexterity: 2
+  - expertise: dexterity
+    value: 2
 
 passives:
   - name: Glide & Hover
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       While in the air you may make a descending Glide at a standard Running pace. You may also instead hover in place to slow your descent.
   - name: Take Flight
     type: combat
     target: Self
     requirements:
-      - once-per-combat
+      - kind: once-per-combat
     description: |
       Gain the 'Flying' Status Effect until the end of the Round.
 

@@ -5,41 +5,48 @@ id: wizard
 name: Wizard
 roles: [ dps ]
 main-stat: int
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - intelligence: 1
-    requirements: [ class-lvl: 2 ]
-  - knowledge: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: intelligence
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: knowledge
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - con: 1
-  - mnd: 1
-  - int: 2
-  - def: 1
-  - res: 3
-  - for: 1
+  max-hp: -5
+  con: 1
+  mnd: 1
+  int: 2
+  def: 1
+  res: 3
+  for: 1
 
 equipment:
-  - main-hand: Focus Tome
-  - armor: Light Armor
-  - off-hand: Tome
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
 
 combat-modifier:
-  - name: Elemental Power
-  - description: 'Elemental magic grants Elemental Charge (max 3). Spend ALL charges before Elemental attack to enhance by count — 1: Boost for 0 Energy; 2: target Square 5x5 within 10 instead; 3: +XD6 damage. Magic Ranged Damage Dealer.'
+  name: Elemental Power
+  description: 'Elemental magic grants Elemental Charge (max 3). Spend ALL charges before Elemental attack to enhance by count — 1: Boost for 0 Energy; 2: target Square 5x5 within 10 instead; 3: +XD6 damage. Magic Ranged Damage Dealer.'
 
 ultimate:
-  - name: Arcane Blast
-  - description: 4D6 in 5x5 area within 10 squares.
-  - charge:
+  name: Arcane Blast
+  description: 4D6 in 5x5 area within 10 squares.
+  charge:
     - use 2 Main Actions
     - spend Charges
     - Boost an ability
@@ -48,19 +55,29 @@ ultimate:
 passives:
   - name: Basic Magic
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Simple Fire/Ice/Lightning cantrips (flame, freeze water, current).
   - name: Focus Weapon Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Focus anywhere; once per round with Boost, 1 or 6 uses Boost for 0 Energy.'
   - name: Glass Cannon
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: '-1 CON/MND/DEF/RES, +1 INT/NRG as printed.'
   - name: Intellectual
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent INT.
 
 actions:

@@ -5,42 +5,51 @@ id: paladin
 name: Paladin
 roles: [ tank, dps, healer ]
 main-stat: con
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites:
-  - class: priest
+  - kind: class
+    class: priest
     level: 5
-  - class: samurai
+  - kind: class
+    class: samurai
     level: 10
 
 expertise-modifiers:
-  - constitution: 1
-    requirements: [ class-lvl: 2 ]
-  - resistance: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: constitution
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: resistance
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 5
-  - str: 2
-  - con: 2
-  - mnd: 1
-  - def: 2
-  - res: 1
+  max-hp: 5
+  str: 2
+  con: 2
+  mnd: 1
+  def: 2
+  res: 1
 
 equipment:
-  - main-hand: Slashing or Bludgeoning
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing or Bludgeoning
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Communion
-  - description: 'All attacks Provoke. MAX HP equals double CON. 5x5 Aura centered on you; allies inside share effect. Five Blessings, one per turn one use each per combat — each empowers Divine Circle. Blessings: remove Statuses (Circle victims restore HP) / DEF&RES+5 (+1D6) / Blind aura (+1 range) / +5 healing received (Circle 5x5) / -5 damage taken (Circle -1 Energy).'
+  name: Communion
+  description: 'All attacks Provoke. MAX HP equals double CON. 5x5 Aura centered on you; allies inside share effect. Five Blessings, one per turn one use each per combat — each empowers Divine Circle. Blessings: remove Statuses (Circle victims restore HP) / DEF&RES+5 (+1D6) / Blind aura (+1 range) / +5 healing received (Circle 5x5) / -5 damage taken (Circle -1 Energy).'
 
 ultimate:
-  - name: True Divinity
-  - description: Gain every Blessing effect; receive all damage dealt to allies this round.
-  - charge:
+  name: True Divinity
+  description: Gain every Blessing effect; receive all damage dealt to allies this round.
+  charge:
     - restore target HP
     - use Divine Circle
     - Provoke 2+ enemies
@@ -49,19 +58,30 @@ ultimate:
 passives:
   - name: Circle of Virtue
     target: Square 3x3 within 5
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: 5-minute 3x3 zone compelling truth and virtue.
   - name: Divine Compulsion
     target: T1 R5
-    requirements: [ in-combat, target-approaches ]
+    requirements:
+      - kind: in-combat
+      - kind: target-approaches
     description: First un-Provoked target in range gains Provoke.
   - name: Holy Protection
     target: self
-    requirements: [ in-combat, class-adept, exposed, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: exposed
+      - kind: constant
     description: 'Once per round, Expose checks against you grant +5 RES.'
   - name: Built to Last
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent CON.
 
 actions:

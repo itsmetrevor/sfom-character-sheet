@@ -7,7 +7,8 @@ description: |
   You spent your life trusting in lady luck beyond anything else. Do gamble with cards and dice or gamble with your own life? You put everything you have on the line knowing one day it will pay off.
 
 expertise-modifiers:
-  - luck: 2
+  - expertise: luck
+    value: 2
 
 starting-items:
   - item: lucky-coin
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Once More"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Once per Full Rest outside Combat, reroll a failed Check."
     detail: "Sometimes you get an extra chance in life, hopefully lady luck is friendlier on the second try."
   - name: "Lucky 7"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Outside of Combat, 7s count as a Critical Success."
     detail: "7 is your lucky number, it always seems to work in your favor. Any time you make a Check if you roll a 7 on the D20 it counts as a 'Critical Success'."
   - name: "Gambling"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Rolling 1 on a Check lets you reroll; failing again gains 1 Exhaustion."
     detail: "High risk can equal high reward, as long as you succeed. This effect only works when you roll a 1 on a D20 when making a Check."
   - name: "Lady Luck"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Outside of Combat, your 'Fortune' dice cannot roll below 3."
     detail: "You have found your stride and everything seems like its getting better. Your 'Fortune Die' cannot roll lower than 3, so if you were to roll a 1 or 2 on a D6 when adding a 'Fortune Die' to a Check it is considered a 3 instead."

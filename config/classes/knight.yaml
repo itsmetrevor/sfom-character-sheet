@@ -4,39 +4,46 @@ id: knight
 name: Knight
 roles: [ tank, dps ]
 main-stat: con
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - resistance: 1
-    requirements: [ class-lvl: 2 ]
-  - perception: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: resistance
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: perception
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 5
-  - str: 1
-  - con: 2
-  - mnd: 1
-  - def: 3
+  max-hp: 5
+  str: 1
+  con: 2
+  mnd: 1
+  def: 3
 
 equipment:
-  - main-hand: Slashing Sword
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing Sword
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Knight's Path
-  - description: 'All attacks inflict Provoke. MAX HP equals double CON. May take damage for adjacent party members. Parry-Shield usable un-unlocked. Physical Melee Provoker Saboteur.'
+  name: Knight's Path
+  description: 'All attacks inflict Provoke. MAX HP equals double CON. May take damage for adjacent party members. Parry-Shield usable un-unlocked. Physical Melee Provoker Saboteur.'
 
 ultimate:
-  - name: Hero's Shield
-  - description: Provoke all enemies in 5x5; successfully Parry all attacks on you this turn.
-  - charge:
+  name: Hero's Shield
+  description: Provoke all enemies in 5x5; successfully Parry all attacks on you this turn.
+  charge:
     - Expose a target
     - Provoke
     - receive 10+ damage
@@ -45,19 +52,30 @@ ultimate:
 passives:
   - name: Prepared
     target: self
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: May succeed a Resistance or Constitution check.
   - name: Shield Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Shields anywhere; +1 DEF.'
   - name: Parry-Shield
     target: self
-    requirements: [ in-combat, class-adept, attacked, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: attacked
+      - kind: constant
     description: 'Attacked with shield — roll D20, beat attack total to take no damage; once per round.'
   - name: Built to Last
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent CON.
 
 actions:

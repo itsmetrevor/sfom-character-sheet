@@ -1,0 +1,39 @@
+# source: p004
+# note: Stat ids are defined in config/_enums.yaml.
+
+# Bonus stat grafts from Main Stats (p002 right-side callouts)
+bonus-from-main:
+  - stat: str
+    per: 3
+    grants: { stat: jmp, value: 1 }
+  - stat: dex
+    per: 3
+    grants: { stat: agl, value: 1 }
+  - stat: con
+    per: 2
+    grants: { stat: def, value: 1 }
+  - stat: mnd
+    per: 2
+    grants: { stat: res, value: 1 }
+  - stat: int
+    per: 3
+    grants: { stat: nrg, value: 1 }
+  - stat: luk
+    per: 2
+    grants: { stat: for, value: 1 }
+
+# Base stat spread that each new character starts with.
+base-stats:
+  max-hp: 30
+  str: 1
+  dex: 1
+  con: 1
+  mnd: 1
+  int: 1
+  luk: 1
+  jmp: 1
+  agl: 5
+  def: 10
+  res: 10
+  nrg: 1
+  for: 1

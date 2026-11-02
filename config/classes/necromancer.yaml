@@ -5,43 +5,50 @@ id: necromancer
 name: Necromancer
 roles: [ healer, specialist ]
 main-stat: mnd
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: wizard
+  - kind: class
+    class: wizard
     level: 5
-  - class: negotiator
+  - kind: class
+    class: negotiator
     level: 10
-  - class: invoker
+  - kind: class
+    class: invoker
     level: 10
 
 expertise-modifiers:
-  - thievery: 1
-    requirements: [ class-lvl: 3 ]
+  - expertise: thievery
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 3
 
 stat-modifiers:
-  - max-hp: -5
-  - dex: 1
-  - mnd: 2
-  - luk: 1
-  - def: 1
-  - res: 1
-  - nrg: 1
+  max-hp: -5
+  dex: 1
+  mnd: 2
+  luk: 1
+  def: 1
+  res: 1
+  nrg: 1
 
 equipment:
-  - main-hand: Focus or Instrument
-  - armor: Light Armor
-  - off-hand: Dagger
+  main-hand: Focus or Instrument
+  armor: Light Armor
+  off-hand: Dagger
 
 combat-modifier:
-  - name: Necromancy
-  - description: 'Undead lose HP instead of gaining from Disease DOTs. Immune to Disease DOT. Player Undead Summons player-controlled; enemy ones GM. Once per character turn as Reaction summon 1 Undead Skeleton within 5 (3/combat); act at end of your turn. Skeleton: HP20 AGL5 DEF12 RES12 STR5; immune to everything but Disease DOTs; Main STR damage + Provoke. Magic Ranged Summoner Saboteur.'
+  name: Necromancy
+  description: 'Undead lose HP instead of gaining from Disease DOTs. Immune to Disease DOT. Player Undead Summons player-controlled; enemy ones GM. Once per character turn as Reaction summon 1 Undead Skeleton within 5 (3/combat); act at end of your turn. Skeleton: HP20 AGL5 DEF12 RES12 STR5; immune to everything but Disease DOTs; Main STR damage + Provoke. Magic Ranged Summoner Saboteur.'
 
 ultimate:
-  - name: Plague Bearer
-  - description: Consume all Disease DOTs off all targets; redistribute and activate them.
-  - charge:
+  name: Plague Bearer
+  description: Consume all Disease DOTs off all targets; redistribute and activate them.
+  charge:
     - inflict a DOT
     - target a Summon
     - spread a DOT between targets
@@ -50,19 +57,29 @@ ultimate:
 passives:
   - name: Speak With the Dead
     target: T1 R3
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: 'Question corpse (only answers asked; follow-ups need Concentration 13). Check D20+MND vs 15.'
   - name: Resist
     target: summons
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Summons +3 RES and +3 Expose; Channeled cannot be interrupted/cancelled.'
   - name: Resistance is Futile
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Status-inflicting Expose checks always succeed.
   - name: Mindful
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent MND.
 
 actions:

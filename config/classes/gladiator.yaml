@@ -7,35 +7,42 @@ roles: [ tank, dps ]
 main-stat: con
 tier: starter
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites: []
 
 expertise-modifiers:
-  - constitution: 1
-    requirements: [ class-lvl: 2 ]
-  - throw-catch: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: constitution
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: throw-catch
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 5
-  - str: 1
-  - con: 2
-  - luk: 1
-  - def: 3
+  max-hp: 5
+  str: 1
+  con: 2
+  luk: 1
+  def: 3
 
 equipment:
-  - main-hand: Slashing Sword
-  - armor: Heavy
-  - off-hand: Shield
+  main-hand: Slashing Sword
+  armor: Heavy
+  off-hand: Shield
 
 combat-modifier:
-  - name: Shield Drum
-  - description: 'All attacks inflict Provoke. MAX HP equals double CON. +X damage per target Provoked from this character. Keep Taunt until another target is taunted.'
+  name: Shield Drum
+  description: 'All attacks inflict Provoke. MAX HP equals double CON. +X damage per target Provoked from this character. Keep Taunt until another target is taunted.'
 
 ultimate:
-  - name: Provoking Shout
-  - description: Inflict Provoke on all enemies; receive -CON damage from all attacks this round.
-  - charge:
+  name: Provoking Shout
+  description: Inflict Provoke on all enemies; receive -CON damage from all attacks this round.
+  charge:
     - Stagger/Expose an enemy
     - Provoke 2+ targets
     - Taunt a target
@@ -44,19 +51,29 @@ ultimate:
 passives:
   - name: Throwing Skills
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Inspired on Throw/Catch.
   - name: Heavy Armor Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Equip Heavy with any class; DEF and RES +1.
   - name: Attention!
     target: T1 R5
-    requirements: [ in-combat, class-adept, reaction ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: reaction
     description: 'Reaction Taunt 1 target; keep Taunt until another is taunted.'
   - name: Built to Last
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent CON.
 
 actions:

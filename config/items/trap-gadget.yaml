@@ -2,7 +2,9 @@ id: trap-gadget
 name: Trap Gadget
 slot: accessory
 damage-type: none
-stat-modifiers:
-  - thievery: 2
+stat-modifiers: {}
+expertise-modifiers:
+  - expertise: thievery
+    value: 2
 effect: +2 to Checks Related to Disabling Traps.
 stack-max: 5

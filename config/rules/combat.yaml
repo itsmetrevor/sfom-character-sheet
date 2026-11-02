@@ -1,0 +1,21 @@
+id: combat
+source-pages: [p049]
+
+action-economy:
+  main-per-turn: 1
+  support-per-turn: 1
+  support-if-skip-move: 2
+  reactions: condition-triggered
+
+ultimate:
+  charge-slots: 10
+  counts-as: reaction
+
+x:
+  start: 1
+  growth: party-level
+  growth-formula: placeholder
+
+energy:
+  tracked-on-sheet: true
+  max-formula: placeholder

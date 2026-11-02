@@ -7,37 +7,44 @@ roles: [ dps ]
 main-stat: dex
 tier: starter
 x-start: 1
+max-hp-mode: normal
 
 prerequisites: []
 
 expertise-modifiers:
-  - dexterity: 1
-    requirements: [ class-lvl: 2 ]
-  - nature: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: dexterity
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: nature
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - str: 1
-  - dex: 2
-  - mnd: 1
-  - jmp: 1
-  - def: 2
-  - res: 1
+  max-hp: -5
+  str: 1
+  dex: 2
+  mnd: 1
+  jmp: 1
+  def: 2
+  res: 1
 
 equipment:
-  - main-hand: Piercing 2H Bow (uses Off-Hand slot)
-  - armor: Medium Armor
-  - off-hand: none (2-hander uses both slots)
+  main-hand: Piercing 2H Bow (uses Off-Hand slot)
+  armor: Medium Armor
+  off-hand: none (2-hander uses both slots)
 
 combat-modifier:
-  - name: Deep Impact
-  - description: 'Staggering attacks deal +X damage per square elevated above target. Uses Piercing (Ranged) Weapon Proficiency even un-unlocked.'
+  name: Deep Impact
+  description: 'Staggering attacks deal +X damage per square elevated above target. Uses Piercing (Ranged) Weapon Proficiency even un-unlocked.'
 
 ultimate:
-  - name: Precise Arrow
-  - description: Gain full Focus; use Focus Shot; it will Stagger.
-  - charge:
+  name: Precise Arrow
+  description: Gain full Focus; use Focus Shot; it will Stagger.
+  charge:
     - gain Focus
     - Stagger
     - attack from 2+ squares above target
@@ -46,19 +53,28 @@ ultimate:
 passives:
   - name: Calm Creature
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Inspired on Nature checks to interact with creatures.
   - name: Ranged Fighter
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Ranged Physical Stagger rolls +X, +1 more per square above target.'
   - name: Piercing (Ranged) Weapon Proficiency
     target: self
-    requirements: [ in-combat, class-adept ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
     description: 'Equip Piercing (Ranged) with any class; melee attacks may use them at Range 10 dealing only Stagger-gated damage/effects; these weapons also use Off-Hand slot.'
   - name: Dexterous
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent DEX.
 
 actions:

@@ -2,6 +2,6 @@ id: gold-coins
 name: Gold Coins
 slot: currency
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: Spend at shops and vendors. (Granted 25 by Merchant and Noble.)
 stack-max: 999

@@ -3,6 +3,6 @@ name: Medium/Heavy Armor (Starting)
 slot: armor
 damage-type: none
 stat-modifiers:
-  - def: 1
+  def: 1
 effect: Med or Heavy Armor (Armor) +1 DEF. Granted via Armorer background.
 stack-max: 5

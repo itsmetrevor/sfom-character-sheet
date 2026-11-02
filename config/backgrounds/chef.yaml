@@ -7,8 +7,10 @@ description: |
   You are a trained cook on your way to becoming a Master Chef. You are capable of combining ingredients to create dishes that can buff the party and even remove exhaustion.
 
 expertise-modifiers:
-  - dexterity: 1
-  - throw-catch: 1
+  - expertise: dexterity
+    value: 1
+  - expertise: throw-catch
+    value: 1
 
 starting-items:
   - item: kitchen-set
@@ -16,18 +18,26 @@ starting-items:
 
 passives:
   - name: "Cooking"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Cook during a Rest: add 3 ingredients to create a Dish giving the Party Special Bonuses."
     detail: "To cook find the 'Cooking Guide' on page XX. When cooking dishes you will be required to spend Materials from your Inventory."
   - name: "Butcher"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain a D3 worth of ingredients from a defeated non-humanoid Enemy at the end of Combat."
     detail: "At the end of combat, choose 1 defeated non-humanoid Enemy. Gain a number of ingredients from the Target equal to a D3 roll."
   - name: "Master"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Targets eating food you cooked during a 'Rest' lose 1 Exhaustion."
     detail: "You have mastered your Culinary Arts and your food is enhanced. Target's who eat the food, while resting, lose 1 Exhaustion."
   - name: "Secret Spice"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Roll a D6 per ingredient added when cooking; on a 6 increase that ingredient's effect +1."
     detail: "You have created your own special ingredient that enhances your dishes further. Each Ingredient added to the dish gets a D6 roll. if you roll a 6 on that ingredient then the effect that ingredient gives is increased +1."

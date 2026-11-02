@@ -1,0 +1,12 @@
+[application]
+name = "som-v3"
+default_platform = "web"
+public_dir = "public"
+
+[web.app]
+title = "Shard - Fragments of Memory"
+base_path = "sfom-character-sheet"
+
+[web.watcher]
+reload_html = true
+watch_path = ["src", "public", "index.html"]

@@ -5,41 +5,49 @@ id: battle-mage
 name: Battle Mage
 roles: [ dps, healer ]
 main-stat: int
-tier: 2
+tier: tier-2
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: wizard
+  - kind: class
+    class: wizard
     level: 10
 
 expertise-modifiers:
-  - dexterity: 1
-    requirements: [ class-lvl: 2 ]
-  - bravado: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: dexterity
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: bravado
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - dex: 1
-  - con: 2
-  - mnd: 1
-  - int: 1
-  - jmp: 1
-  - nrg: 1
+  max-hp: -5
+  dex: 1
+  con: 2
+  mnd: 1
+  int: 1
+  jmp: 1
+  nrg: 1
 
 equipment:
-  - main-hand: Slashing or Focus Sword
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing or Focus Sword
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Balance
-  - description: 'May use Double Cast un-unlocked. Restorative Magic gains Dark Charge; Magic Attack gains Light Charge. Boost for 0 Energy while Light and Dark counts match. At 3 each, spend all to cast 1 Magic for 0 Energy (no charges that way).'
+  name: Balance
+  description: 'May use Double Cast un-unlocked. Restorative Magic gains Dark Charge; Magic Attack gains Light Charge. Boost for 0 Energy while Light and Dark counts match. At 3 each, spend all to cast 1 Magic for 0 Energy (no charges that way).'
 
 ultimate:
-  - name: True Balance
-  - description: 3D6 damage to enemies and 3D6 HP to party in 5x5 line across field.
-  - charge:
+  name: True Balance
+  description: 3D6 damage to enemies and 3D6 HP to party in 5x5 line across field.
+  charge:
     - use a Boost for 0 Energy
     - gain a Light Charge
     - gain a Dark Charge
@@ -48,19 +56,29 @@ ultimate:
 passives:
   - name: Mind, Body, and Soul
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Swap STR/DEX checks to MND/INT or vice versa.
   - name: Parry Sword
     target: self
-    requirements: [ in-combat, attacked-while-armed ]
+    requirements:
+      - kind: in-combat
+      - kind: attacked-while-armed
     description: 'Roll D20, beat attack total to take no damage; once per round.'
   - name: Double Cast
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'Once per round with Magic ability, cast any 2 Magic abilities as 1 instead (may repeat one); pay energy as followed.'
   - name: Intellectual
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent INT.
 
 actions:

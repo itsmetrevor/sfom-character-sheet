@@ -7,8 +7,10 @@ description: |
   You have devoted yourself to your chosen religion and learned much about holy magic. Blessed by your Diety you are capable of using holy magic to heal those in need.
 
 expertise-modifiers:
-  - mind: 1
-  - concentration: 1
+  - expertise: mind
+    value: 1
+  - expertise: concentration
+    value: 1
 
 starting-items:
   - item: religious-tome
@@ -16,18 +18,26 @@ starting-items:
 
 passives:
   - name: "Knowledge"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Choose a Religion to Follow. Gain 'Inspired' on Knowledge checks about Holy Magic or Religion."
     detail: "Confer with your GM and check the Religion Section on page XX to determine your Religion."
   - name: "Cleanse"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Once per Full Rest, remove a Curse or Affliction from a Target."
     detail: "Outside of Combat, you are capable of using holy magic to remove curses and heal those around you with afflictions or injuries. This can even be used to fix scars and old wounds."
   - name: "Healer"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Once per Full Rest, before Combat begins, remove 1 'Exhaustion' from each Party Member."
     detail: "Your connection to your Diety allows you to use holy magic to remove 1 'Exhaustion' from your allies before starting a Combat."
   - name: "Prophet"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Once per Full Rest, ask your Diety for help: make a 'Mind' Check; the GM gives you a vision based on the Roll."
     detail: "You have reached enlightenment and can now commune with your Diety. You may ask your Diety for help and they will give you a vision. The difficulty of the 'Mind' Check and what the vision shows you is at the discretion of the GM."

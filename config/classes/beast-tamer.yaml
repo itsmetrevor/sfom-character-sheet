@@ -4,40 +4,47 @@ id: beast-tamer
 name: Beast Tamer
 roles: [ dps, specialist ]
 main-stat: dex
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - charisma: 1
-    requirements: [ class-lvl: 2 ]
-  - nature: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: charisma
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: nature
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - dex: 2
-  - mnd: 1
-  - luk: 1
-  - def: 2
-  - res: 2
+  max-hp: 0
+  dex: 2
+  mnd: 1
+  luk: 1
+  def: 2
+  res: 2
 
 equipment:
-  - main-hand: Piercing 2H Bow (uses Off-Hand slot)
-  - armor: Medium Armor
-  - off-hand: none (2-hander uses both slots)
+  main-hand: Piercing 2H Bow (uses Off-Hand slot)
+  armor: Medium Armor
+  off-hand: none (2-hander uses both slots)
 
 combat-modifier:
-  - name: Trained Beasts
-  - description: 'Choose Falcon, Large Snake, or Wolf; one Summoned at a time unless stated. Move beasts on your turn; act per Command used. +1 stat (max 3) per 2 Party Levels; +2 Max HP per Party Level. Re-summon swaps (recalled heal to Attack stat). KO beasts stay unsummoned. Beasts count as Summons and Party Members. Rules persist as subclass. Physical Ranged Summoner.'
+  name: Trained Beasts
+  description: 'Choose Falcon, Large Snake, or Wolf; one Summoned at a time unless stated. Move beasts on your turn; act per Command used. +1 stat (max 3) per 2 Party Levels; +2 Max HP per Party Level. Re-summon swaps (recalled heal to Attack stat). KO beasts stay unsummoned. Beasts count as Summons and Party Members. Rules persist as subclass. Physical Ranged Summoner.'
 
 ultimate:
-  - name: Heed My Call
-  - description: Use Summon Beast to summon ALL beasts; Commands affect all.
-  - charge:
+  name: Heed My Call
+  description: Use Summon Beast to summon ALL beasts; Commands affect all.
+  charge:
     - beast Staggers/Exposes
     - summon a beast
     - use a Command
@@ -46,19 +53,29 @@ ultimate:
 passives:
   - name: Beast Communion
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Communicate with animals and beasts.
   - name: Medium Armor Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Medium anywhere; DEF and FOR +1.'
   - name: Training
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Summons +1 AGL and +1 crit chance.
   - name: Dexterous
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent DEX.
 
 actions:

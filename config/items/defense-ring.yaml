@@ -2,6 +2,7 @@ id: defense-ring
 name: Defense Ring
 slot: accessory
 damage-type: none
-stat-modifiers: []
+stat-modifiers:
+  damage-taken: -1
 effect: Jewelry Accessory. -1 Damage.
 stack-max: 5

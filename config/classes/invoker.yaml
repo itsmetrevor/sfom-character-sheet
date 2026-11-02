@@ -5,43 +5,52 @@ id: invoker
 name: Invoker
 roles: [ dps, healer, specialist ]
 main-stat: mnd
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: scholar
+  - kind: class
+    class: scholar
     level: 15
-  - class: chronomancer
+  - kind: class
+    class: chronomancer
     level: 10
 
 expertise-modifiers:
-  - mind: 1
-    requirements: [ class-lvl: 2 ]
-  - resistance: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: mind
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: resistance
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - dex: 1
-  - mnd: 2
-  - int: 1
-  - def: 1
-  - nrg: 1
-  - for: 1
+  max-hp: -5
+  dex: 1
+  mnd: 2
+  int: 1
+  def: 1
+  nrg: 1
+  for: 1
 
 equipment:
-  - main-hand: Focus Tome
-  - armor: Light Armor
-  - off-hand: Tome
+  main-hand: Focus Tome
+  armor: Light Armor
+  off-hand: Tome
 
 combat-modifier:
-  - name: Communion
-  - description: 'Channeled Marker effects fire at start of next turn; vanish on firing unless stated. One channeled at a time unless stated; channeling ends if you use another Main. Grand Dragon (Ranged Summon Arcane; Square 7x7 within 10; D20+MND vs RES): MND to all enemies + Disabled; 7x7 marker dealing (X+3)D6+MND at next-turn start.'
+  name: Communion
+  description: 'Channeled Marker effects fire at start of next turn; vanish on firing unless stated. One channeled at a time unless stated; channeling ends if you use another Main. Grand Dragon (Ranged Summon Arcane; Square 7x7 within 10; D20+MND vs RES): MND to all enemies + Disabled; 7x7 marker dealing (X+3)D6+MND at next-turn start.'
 
 ultimate:
-  - name: Invoke the Heavens
-  - description: Summon the Grand Dragon.
-  - charge:
+  name: Invoke the Heavens
+  description: Summon the Grand Dragon.
+  charge:
     - Expose a target
     - cast a Summon
     - land a marker hit
@@ -50,19 +59,29 @@ ultimate:
 passives:
   - name: Grant Me Audience
     target: self
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: Commune with Invoker summon for information/aid.
   - name: Celestial Blessing
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Once per round, -1 energy cost (min 1).'
   - name: Guidance
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Summon damaging/healing abilities +1D6.
   - name: Mindful
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent MND.
 
 actions:

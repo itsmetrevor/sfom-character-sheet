@@ -10,27 +10,28 @@ extra-language-choices: 1
 vision: low-light
 
 stat-modifiers:
-  - max-hp: 5
-  - luk: 1
-  - str: -1
-  - agl: 1
+  max-hp: 5
+  luk: 1
+  str: -1
+  agl: 1
 
 expertise-modifiers:
-  - charisma: 2
+  - expertise: charisma
+    value: 2
 
 passives:
   - name: Cute
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Gain 'Inspired' when using a Charisma Check against a Target for the first time.
   - name: Small
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       When spending AGL to move you may move through Enemy Squares.
 

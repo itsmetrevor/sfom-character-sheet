@@ -7,7 +7,8 @@ description: |
   Four Craftsman backgrounds — Armorer, Blacksmith, Clothier, Jeweler — share crafting mechanics; each requires adventure resources, and resources impart effects on crafted Gear. See the Crafting Section, page XX. Capabilities: Weapons. Each comes with a specific 'Writ' shown to shop/forge proprietors for facility access.
 
 expertise-modifiers:
-  - crafting: 2
+  - expertise: crafting
+    value: 2
 
 starting-items:
   - item: blacksmiths-writ
@@ -17,18 +18,26 @@ starting-items:
 
 passives:
   - name: "Common"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Craft 1 Weapon. Required: 3 Materials. Weapon gains 1 Effect from Materials used."
     detail: "Craft 1 Weapon. Required: 3 Materials. Weapon gains 1 Effect from Materials used. (From ability-bar graphic; no paragraph details in source.)"
   - name: "Uncommon"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Craft 1 Weapon. Required: 7 Materials. Weapon gains 2 Effects from Materials used."
     detail: "Craft 1 Weapon. Required: 7 Materials. Weapon gains 2 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
   - name: "Rare"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Craft 1 Weapon. Required: 15 Materials. Weapon gains 3 Effects from Materials used."
     detail: "Craft 1 Weapon. Required: 15 Materials. Weapon gains 3 Effects from Materials used. (From ability-bar graphic; no paragraph details in source.)"
   - name: "Efficiency"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3."
     detail: "Reduce total Materials needed to Craft. Common: -1, Uncommon: -2, Rare: -3. (From ability-bar graphic; no paragraph details in source.)"

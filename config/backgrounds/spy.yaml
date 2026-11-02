@@ -7,7 +7,8 @@ description: |
   You have spent time as a professional spy and have learned a variety of ways to blend into your surroundings. You have trained to use disguises and how to be as stealthy as possible.
 
 expertise-modifiers:
-  - stealth: 2
+  - expertise: stealth
+    value: 2
 
 starting-items:
   - item: disguise-kit
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Stealthy"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Once per Full Rest, gain 'Inspired' on a 'Stealth' Check."
     detail: "You have an easier time hiding from those around you, The difficulty of the 'Stealth' Check is at the discretion of the GM."
   - name: "Linguistic"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Know 2 additional Ancestral Languages of your choice."
     detail: "Speaking and understanding other languages is an easy way to gather information and blend in."
   - name: "Disguise"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Once per Full Rest, your first 'Crafting' Check to make a Disguise Succeeds."
     detail: "You have an easier time creating disguises, the difficulty of the 'Stealth' Check is at the discretion of the GM."
   - name: "Imposter"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Gain 'Inspired' on 'Deception' Checks when pretending to be someone else."
     detail: "You have an easier time pretending to be other people. The difficulty of the 'Stealth' Check is at the discretion of the GM. There may be situations where even succeeding this Check may not matter depending on if the Target knows the person you are pretending to be or according to the GM's discretion."

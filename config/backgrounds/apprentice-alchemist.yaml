@@ -7,8 +7,10 @@ description: |
   You are a novice Alchemist just starting out in the profession. With your Fragment abilities you can quickly learn all there is to know about crafting potions using various items. This background allows you to craft a larger variety of items than the 'Chemist' Class.
 
 expertise-modifiers:
-  - crafting: 1
-  - resistance: 1
+  - expertise: crafting
+    value: 1
+  - expertise: resistance
+    value: 1
 
 starting-items:
   - item: healing-potion
@@ -20,18 +22,26 @@ starting-items:
 
 passives:
   - name: "Knowledge"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Gain 'Inspired' when making an Intelligence check to understand the makeup of a potion or object."
     detail: "This Effect can be used on anything to understand the components that make it up. The difficulty of the Check will be determined by your GM."
   - name: "Craft Common"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "You may Craft Common Potions. Check the Alchemy Crafting Guide for more info."
     detail: "Go to the 'Alchemy Crafting Guide' on page XX. When crafting potions you will be required to spend Materials from your Inventory. Each Potion will require specific types of Materials. Common Potions require Materials that are easier to find and Rare Potions require Materials that are harder to find."
   - name: "Efficiency"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "When Crafting Potions you may spend 1 less Material (to a minimum of 1)."
     detail: "You may choose which Material you don't want to spend when crafting potions."
   - name: "Craft Rare"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "You may Craft Rare Potions. Check the Alchemy Crafting Guide for more info."
     detail: "Go to the 'Alchemy Crafting Guide' on page XX. When crafting potions you will be required to spend Materials from your Inventory. Each Potion will require specific types of Materials. Common Potions require Materials that are easier to find and Rare Potions require Materials that are harder to find."

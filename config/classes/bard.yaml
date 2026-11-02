@@ -5,42 +5,51 @@ id: bard
 name: Bard
 roles: [ specialist ]
 main-stat: luk
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: thief
+  - kind: class
+    class: thief
     level: 5
-  - class: negotiator
+  - kind: class
+    class: negotiator
     level: 10
 
 expertise-modifiers:
-  - luck: 1
-    requirements: [ class-lvl: 2 ]
-  - charisma: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: luck
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: charisma
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: -5
-  - dex: 1
-  - mnd: 1
-  - luk: 2
-  - jmp: 1
-  - nrg: 1
+  max-hp: -5
+  dex: 1
+  mnd: 1
+  luk: 2
+  jmp: 1
+  nrg: 1
 
 equipment:
-  - main-hand: Instrument 2H
-  - armor: Light
-  - off-hand: none (2-hander uses both slots)
+  main-hand: Instrument 2H
+  armor: Light
+  off-hand: none (2-hander uses both slots)
 
 combat-modifier:
-  - name: Performing Arts
-  - description: 'Main Actions are Playing a Song — no other mains while playing; spend Main+Energy per turn to continue. Roll 5D6 per song (1/section; same stack; 6 counts 1-5). Complete all sections earns Influence to spend; new song transfers all; clears at end. Influence: Elegy -1 damage; Refrain Blind choice; Shanty Levitate choice; Mending +3HP; Marching +1 damage; Encore Quick choice.'
+  name: Performing Arts
+  description: 'Main Actions are Playing a Song — no other mains while playing; spend Main+Energy per turn to continue. Roll 5D6 per song (1/section; same stack; 6 counts 1-5). Complete all sections earns Influence to spend; new song transfers all; clears at end. Influence: Elegy -1 damage; Refrain Blind choice; Shanty Levitate choice; Mending +3HP; Marching +1 damage; Encore Quick choice.'
 
 ultimate:
-  - name: Greatest Showman
-  - description: All enemies Charmed; all move adjacent to you; gain (X+LUK) gold per enemy.
-  - charge:
+  name: Greatest Showman
+  description: All enemies Charmed; all move adjacent to you; gain (X+LUK) gold per enemy.
+  charge:
     - play 5 song sections
     - play 3+ sections of one song
     - add an Influence
@@ -49,19 +58,30 @@ ultimate:
 passives:
   - name: Performer
     target: self
-    requirements: [ non-combat, constant ]
+    requirements:
+      - kind: non-combat
+      - kind: constant
     description: Inspired on performance Charisma.
   - name: Instrument Proficiency
     target: self
-    requirements: [ in-combat, once-per-round, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: once-per-round
+      - kind: constant
     description: 'Equip Instruments anywhere; once per round flip 1 rolled D6 to opposite face.'
   - name: Talented
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Once per round treat rolled D6 as any 1-6.
   - name: Lucky
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent LUK.
 
 actions:

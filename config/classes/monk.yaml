@@ -5,41 +5,48 @@ id: monk
 name: Monk
 roles: [ dps, healer ]
 main-stat: str
-tier: 1
+tier: tier-1
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: any-starter
+  - kind: any-starter
     level: 10
 
 expertise-modifiers:
-  - strength: 1
-    requirements: [ class-lvl: 2 ]
-  - nature: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: strength
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: nature
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - str: 2
-  - dex: 1
-  - mnd: 1
-  - agl: 1
-  - def: 1
-  - res: 1
+  max-hp: 0
+  str: 2
+  dex: 1
+  mnd: 1
+  agl: 1
+  def: 1
+  res: 1
 
 equipment:
-  - main-hand: Unarmed (gloves/wraps, none)
-  - armor: Light Armor
-  - off-hand: Unarmed
+  main-hand: Unarmed (gloves/wraps, none)
+  armor: Light Armor
+  off-hand: Unarmed
 
 combat-modifier:
-  - name: Disciple of the Fist
-  - description: 'Way of the Fist checks can Crit for double damage. Each Stagger/Expose gains 1 Combo Point (max 6); spend points before Way-of-the-Fist check for Inspired per point on 1 check (no points on spent-point checks). Without ranged weapon, Sub-Class physical ranged count as Ranged Elemental Wind Magic. Physical Melee Damage Dealer.'
+  name: Disciple of the Fist
+  description: 'Way of the Fist checks can Crit for double damage. Each Stagger/Expose gains 1 Combo Point (max 6); spend points before Way-of-the-Fist check for Inspired per point on 1 check (no points on spent-point checks). Without ranged weapon, Sub-Class physical ranged count as Ranged Elemental Wind Magic. Physical Melee Damage Dealer.'
 
 ultimate:
-  - name: Full Palm Barrage
-  - description: Gain Inspired; use Way of the Fist; +3 on all checks for the attack.
-  - charge:
+  name: Full Palm Barrage
+  description: Gain Inspired; use Way of the Fist; +3 on all checks for the attack.
+  charge:
     - Push/Pull a target
     - x2 Way-of-the-Fist hits
     - x4 hits
@@ -48,19 +55,29 @@ ultimate:
 passives:
   - name: Balanced
     target: self
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: May succeed a Concentration or Mind check.
   - name: Unarmed Proficiency
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Equip Unarmed anywhere; melee Physical Attack abilities +X damage and +X Stagger/Expose with no Off-Hand.'
   - name: Counter Attack
     target: T1 R1
-    requirements: [ in-combat, class-adept, attacked-in-range ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: attacked-in-range
     description: 'Counter with STR check (D20+STR vs DEF); Stagger STR+X.'
   - name: Stronger
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent STR.
 
 actions:

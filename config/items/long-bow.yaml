@@ -3,6 +3,6 @@ name: Long Bow
 slot: main-hand
 damage-type: piercing
 stat-modifiers:
-  - range: 1
+  range: 1
 effect: "Piercing [Ranged] Weapon. Ranged Attacks: +1 Range."
 stack-max: 5

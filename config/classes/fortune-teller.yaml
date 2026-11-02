@@ -5,43 +5,50 @@ id: fortune-teller
 name: Fortune Teller
 roles: [ specialist ]
 main-stat: luk
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: trickster
+  - kind: class
+    class: trickster
     level: 5
-  - class: battle-mage
+  - kind: class
+    class: battle-mage
     level: 10
-  - class: bard
+  - kind: class
+    class: bard
     level: 10
 
 expertise-modifiers:
-  - luck: 1
-    requirements: [ class-lvl: 3 ]
+  - expertise: luck
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 3
 
 stat-modifiers:
-  - max-hp: -5
-  - mnd: 1
-  - int: 1
-  - luk: 2
-  - agl: 1
-  - res: 2
-  - for: 1
+  max-hp: -5
+  mnd: 1
+  int: 1
+  luk: 2
+  agl: 1
+  res: 2
+  for: 1
 
 equipment:
-  - main-hand: Focus or Instrument
-  - armor: Light Armor
-  - off-hand: Dagger
+  main-hand: Focus or Instrument
+  armor: Light Armor
+  off-hand: Dagger
 
 combat-modifier:
-  - name: Psychic Readings
-  - description: 'Passed checks from Card Reading gain Psychic Charge. Spend charges to hand-pick Tarot Deck cards instead of flipping (shuffle before further flips). Card effects use your stats and D6 rolls. Magic Ranged Wild Card.'
+  name: Psychic Readings
+  description: 'Passed checks from Card Reading gain Psychic Charge. Spend charges to hand-pick Tarot Deck cards instead of flipping (shuffle before further flips). Card effects use your stats and D6 rolls. Magic Ranged Wild Card.'
 
 ultimate:
-  - name: Intertwined Fate
-  - description: Make a Card Reading where all checks succeed, hitting all party members and all enemies.
-  - charge:
+  name: Intertwined Fate
+  description: Make a Card Reading where all checks succeed, hitting all party members and all enemies.
+  charge:
     - use a Fortune Die
     - use Card Reading
     - succeed all 3 flipped cards
@@ -50,19 +57,29 @@ ultimate:
 passives:
   - name: Prediction
     target: self
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: Draw 3 Tarot cards for GM fortune reading.
   - name: Fortunate
     target: T1 enemy R5
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: '+1 FOR; Fortune Die floor of 3. Check D20+LUK vs RES.'
   - name: Serendipitous
     target: Self or 1 R5
-    requirements: [ in-combat, class-adept, once-per-round ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: once-per-round
     description: Roll D6 to raise or lower one check per round.
   - name: Lucky
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent LUK.
 
 actions:

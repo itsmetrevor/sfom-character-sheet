@@ -10,28 +10,30 @@ languages:
 vision: dark
 
 stat-modifiers:
-  - max-hp: 10
-  - int: 1
-  - dex: -1
-  - for: 1
+  max-hp: 10
+  int: 1
+  dex: -1
+  for: 1
 
 expertise-modifiers:
-  - crafting: 1
-  - intelligence: 1
+  - expertise: crafting
+    value: 1
+  - expertise: intelligence
+    value: 1
 
 passives:
   - name: Tinkerer
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Gain 'Inspired' when making a Crafting Check.
   - name: Innovation
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       +X Damage Dealt and Healing Received when Spending Items from your inventory.
 

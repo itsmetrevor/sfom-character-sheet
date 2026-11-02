@@ -5,42 +5,49 @@ id: rune-knight
 name: Rune Knight
 roles: [ tank, dps ]
 main-stat: con
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: double-con
 
 prerequisites:
-  - class: gladiator
+  - kind: class
+    class: gladiator
     level: 15
-  - class: ninja
+  - kind: class
+    class: ninja
     level: 10
-  - class: paladin
+  - kind: class
+    class: paladin
     level: 10
 
 expertise-modifiers:
-  - crafting: 1
-    requirements: [ class-lvl: 3 ]
+  - expertise: crafting
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 3
 
 stat-modifiers:
-  - max-hp: 5
-  - con: 2
-  - mnd: 2
-  - int: 1
-  - def: 2
-  - res: 1
+  max-hp: 5
+  con: 2
+  mnd: 2
+  int: 1
+  def: 2
+  res: 1
 
 equipment:
-  - main-hand: Slashing or Piercing Sword
-  - armor: Heavy Armor
-  - off-hand: Shield
+  main-hand: Slashing or Piercing Sword
+  armor: Heavy Armor
+  off-hand: Shield
 
 combat-modifier:
-  - name: Runic Blessing
-  - description: 'All attacks Provoke. MAX HP equals double CON. Main/Support activate specific Rune; spend 3 different Active Runes around any action for Runic Circle Reaction. Riders: diamond-1 +2 DEF; diamond-bar receive -X; diamond-slash +2 RES; diamond-dash gain Drain (X). Magic Melee/Ranged Provoker All-Rounder. (Modifier header prints Necromancy as-printed — use Runic Blessing per sheet.)'
+  name: Runic Blessing
+  description: 'All attacks Provoke. MAX HP equals double CON. Main/Support activate specific Rune; spend 3 different Active Runes around any action for Runic Circle Reaction. Riders: diamond-1 +2 DEF; diamond-bar receive -X; diamond-slash +2 RES; diamond-dash gain Drain (X). Magic Melee/Ranged Provoker All-Rounder. (Modifier header prints Necromancy as-printed — use Runic Blessing per sheet.)'
 
 ultimate:
-  - name: Circle of Pain
-  - description: Provoke all enemies and gain each Rune; entrants to Runic Circle take 3D6 this round.
-  - charge:
+  name: Circle of Pain
+  description: Provoke all enemies and gain each Rune; entrants to Runic Circle take 3D6 this round.
+  charge:
     - use or inflict a Status Effect
     - gain a Rune
     - survive unstaggered
@@ -49,19 +56,29 @@ ultimate:
 passives:
   - name: Sigils
     target: T1 R1
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: 'Plant 1 Sigil till next Long Rest — eye (trackable sensor anywhere), I (alerts on entering sight), line (usable 3rd eye).'
   - name: Ward
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Immune to forced movement, pass-through, and prone from abilities.
   - name: Barrier
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: Attacks deal -X to you.
   - name: Built to Last
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent CON.
 
 actions:

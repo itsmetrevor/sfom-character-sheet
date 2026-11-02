@@ -5,43 +5,52 @@ id: alchemist
 name: Alchemist
 roles: [ dps, healer, specialist ]
 main-stat: int
-tier: 3
+tier: tier-3
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: chemist
+  - kind: class
+    class: chemist
     level: 15
-  - class: battle-mage
+  - kind: class
+    class: battle-mage
     level: 10
 
 expertise-modifiers:
-  - intelligence: 1
-    requirements: [ class-lvl: 2 ]
-  - crafting: 1
-    requirements: [ class-lvl: 4 ]
+  - expertise: intelligence
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 2
+  - expertise: crafting
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 4
 
 stat-modifiers:
-  - max-hp: 0
-  - dex: 2
-  - int: 1
-  - luk: 1
-  - agl: 1
-  - def: 1
-  - res: 1
+  max-hp: 0
+  dex: 2
+  int: 1
+  luk: 1
+  agl: 1
+  def: 1
+  res: 1
 
 equipment:
-  - main-hand: Ranged Piercing Pistol
-  - armor: Medium
-  - off-hand: Dagger
+  main-hand: Ranged Piercing Pistol
+  armor: Medium
+  off-hand: Dagger
 
 combat-modifier:
-  - name: Advanced Alchemy
-  - description: 'Spend multiple items combining into one. +5 ingredients from Chemistry. Spending via Alchemy-Mix: roll D6 — 6 item works without being spent. Final Mix effects end with combat. Physical Ranged All-Rounder.'
+  name: Advanced Alchemy
+  description: 'Spend multiple items combining into one. +5 ingredients from Chemistry. Spending via Alchemy-Mix: roll D6 — 6 item works without being spent. Final Mix effects end with combat. Physical Ranged All-Rounder.'
 
 ultimate:
-  - name: Philosopher's Stone
-  - description: Use all 3 catalysts and add x enhancements to next Alchemy-Mix without spending items.
-  - charge:
+  name: Philosopher's Stone
+  description: Use all 3 catalysts and add x enhancements to next Alchemy-Mix without spending items.
+  charge:
     - add an Enhancement
     - throw an item
     - use Alchemy-Mix
@@ -50,19 +59,29 @@ ultimate:
 passives:
   - name: Equivalent Exchange
     target: 1 1-square-or-smaller target
-    requirements: [ non-combat, well-rested ]
+    requirements:
+      - kind: non-combat
+      - kind: well-rested
     description: Reshape object keeping materials and mass.
   - name: Quick Mix
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: 'Once per turn, 2 spent items count as 1.'
   - name: Chemical Enhancement
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'Used items hit harder — healing/damage +X, statuses +1 round, DOTs +2.'
   - name: Intellectual
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent INT.
 
 actions:

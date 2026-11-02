@@ -3,6 +3,6 @@ name: Shovel
 slot: main-hand
 damage-type: slashing
 stat-modifiers:
-  - melee-damage: 1
+  melee-damage: 1
 effect: Slashing/Bludgeoning Weapon. +1 Melee Damage. (Also granted by Wanderer.)
 stack-max: 5

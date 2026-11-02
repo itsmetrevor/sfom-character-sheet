@@ -1,0 +1,41 @@
+id: class-progression
+name: Class Progression
+source-pages: [p046, p047, p048, p049]
+tier-chart-source: p047
+
+class-level-max: 20
+
+main-class:
+  star-stats: follow-main-class
+  equipment: main-class-only
+
+subclass:
+  abilities: right-side-only
+  passives: unlocked-only
+  note: Overlay sheets; the current Main Class supplies star stats and equipment.
+
+unlock-model:
+  abilities: manual
+  stars: manual
+  note: The source does not map every action to a class level; v1 stores manual unlock toggles.
+  class-level-source: gm-awards
+
+stars:
+  per-unlock: 1
+  fills: [expertise, locked-passives]
+  completion-reward: placeholder
+
+# Explicit class-to-class requirements live in each class's prerequisites.
+# The inverse graph is derived at load time. Shard Bearer is intentionally not
+# present as a class entity (choose-your-own template).
+derived-unlocks: true
+
+tier-unlock-rules:
+  tier-1:
+    from: any-starter
+    level: 10
+  shard-bearer:
+    from: tier-4
+    level: 10
+    required-classes: 3
+    enabled: false

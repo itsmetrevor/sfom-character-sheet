@@ -7,7 +7,8 @@ description: |
   You are either self taught or trained in an Art Form of your choice. Are you a painter, dancer, actor, or something more? Your abilities are capable of reaching into the souls of those who see your Art.
 
 expertise-modifiers:
-  - charisma: 2
+  - expertise: charisma
+    value: 2
 
 starting-items:
   - item: artists-tools
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Art Form"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Choose an Art form. Gain 'Inspired' when making a Charisma check to use it."
     detail: "Talk with the GM about what your Art Form is. Once its agreed upon, any time you use that Art Form you will gain 'Inspired'."
   - name: "Performer"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain Gold by making a Charisma Check when Performing in front of Crowds. 1-15 = 2 / 16-19 = 5 / 20+ = 10."
     detail: "The amount of gold you gain is based on how well you perform. The GM has some discretion on gold obtained based on crowd size or location."
   - name: "Mesmerizing"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Targets make a Resistance Check against your Charisma Check when you Perform. Failures are mesmerized."
     detail: "When you perform your Art Form there is a chance a Target will be inflicted with 'Mesmerized'. This means they can't look away as long as you are performing."
   - name: "Perfection"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Once per Full Rest, use your Art form on a Selected Target to cause a specific emotional reaction of your choice."
     detail: "When you peform your Art Form, you may choose a Target and they will have a specific emotional reaction of your choice. Will they weep tears of joy, remember who they once were, or realize the error of their ways?"

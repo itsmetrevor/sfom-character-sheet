@@ -1,0 +1,32 @@
+id: creation-steps
+name: Character Creation
+source-pages: [p004, p005]
+
+steps:
+  - id: base-stats
+    order: 1
+    title: Fill in base stats
+    detail: Use config/rules/base-stats.yaml.
+
+  - id: ancestry
+    order: 2
+    title: Choose Ancestry
+    detail: Record languages, vision, expertise, Max HP, main-stat modifiers, bonus stats, and both ancestry passives.
+
+  - id: background
+    order: 3
+    title: Choose Background
+    detail: Up to 2 backgrounds; take permanent expertise from 1, starting items from 1, and one tier ability per party-level tier.
+
+  - id: main-class
+    order: 4
+    title: Choose Starting Class
+    detail: Choose 1 starter class and copy its star stats; X starts at 1.
+    classes: [chemist, gladiator, ranger, scholar, soldier, trickster]
+
+  - id: starting-gear
+    order: 5
+    title: Choose Starting Gear
+    detail: The Gear section referenced by p004-p005 is not present in the supplied transcription.
+    status: placeholder
+    fallback: config/rules/starting-gear.yaml

@@ -1,0 +1,12 @@
+id: stat-shapes
+source-pages: [p004]
+
+shapes:
+  - id: square
+    meaning: permanent
+  - id: circle
+    meaning: temporary
+  - id: star
+    meaning: class
+  - id: diamond-pip
+    meaning: party-level

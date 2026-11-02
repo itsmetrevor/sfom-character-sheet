@@ -10,28 +10,30 @@ languages:
 vision: dark
 
 stat-modifiers:
-  - max-hp: 6
-  - luk: 1
-  - con: -1
-  - for: 1
+  max-hp: 6
+  luk: 1
+  con: -1
+  for: 1
 
 expertise-modifiers:
-  - luck: 1
-  - stealth: 1
+  - expertise: luck
+    value: 1
+  - expertise: stealth
+    value: 1
 
 passives:
   - name: Unobtrusive
     type: non-combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       Targets Gain 'Dizzy' when making a Perception Check to see you if you have not made yourself known.
   - name: Non-Threatening
     type: combat
     target: Self
     requirements:
-      - constant
+      - kind: constant
     description: |
       If equal distance with an Ally from an Enemy, the Enemy will attack the Ally instead if you have not provoked the Enemy.
 

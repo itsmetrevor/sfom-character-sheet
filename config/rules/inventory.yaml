@@ -1,0 +1,7 @@
+id: inventory
+source-pages: [p002, p003]
+
+inventory-max: 12
+stack-max: 5
+custom-items: allowed
+starting-items-source: background

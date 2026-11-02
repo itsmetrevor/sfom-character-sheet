@@ -9,21 +9,23 @@ languages:
 vision: normal
 
 stat-modifiers:
-  - max-hp: 8
-  - mnd: 1
-  - luk: -1
-  - res: 1
+  max-hp: 8
+  mnd: 1
+  luk: -1
+  res: 1
 
 expertise-modifiers:
-  - perception: 1
-  - mind: 1
+  - expertise: perception
+    value: 1
+  - expertise: mind
+    value: 1
 
 passives:
   - name: Future Sight
     type: non-combat
     target: Self
     requirements:
-      - well-rested
+      - kind: well-rested
     check: SC (Concentration) VS 20
     description: |
       You may make a 'Perception' Check to see a memory of 1 possible outcome from the next 2 minutes.
@@ -31,7 +33,7 @@ passives:
     type: combat
     target: Self
     requirements:
-      - once-per-combat
+      - kind: once-per-combat
     description: |
       When you are Knocked Out, Remove the 'Knocked Out' Status Effect and Restore 1HP. Grants 'Unseen' & 'Damage Immunity' until the end of this Round.
 

@@ -2,6 +2,6 @@ id: disguise-kit
 name: Disguise Kit
 slot: item
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: Used to craft disguises (Spy starting item).
 stack-max: 5

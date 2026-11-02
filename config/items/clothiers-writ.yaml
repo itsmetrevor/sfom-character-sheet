@@ -2,6 +2,6 @@ id: clothiers-writ
 name: Clothier's Writ
 slot: item
 damage-type: none
-stat-modifiers: []
+stat-modifiers: {}
 effect: "Writ shown to shop/forge proprietors for facility access (Clothier: Light Armor & Clothing Accessory crafting)."
 stack-max: 1

@@ -7,7 +7,8 @@ description: |
   Buying or selling you love to haggle to make the best deal you can. Trained as a merchant you have a better understanding of the value of goods and always get a good price.
 
 expertise-modifiers:
-  - intelligence: 2
+  - expertise: intelligence
+    value: 2
 
 starting-items:
   - item: gold-coins
@@ -15,18 +16,26 @@ starting-items:
 
 passives:
   - name: "Good Deals"
-    requirements: [ party-lvl: 0 ]
+    requirements:
+      - kind: party-level
+        level: 0
     summary: "Buying: -2 Gold per item (min 1). Selling: +2 Gold, even after haggling."
     detail: "You know how to make a deal. When you purchase from a shop or vendor each item will come with a -2 Gold Discount (to a minimum of 1) or sell for +2 Gold, even after haggling."
   - name: "Silver Tongue"
-    requirements: [ party-lvl: 3 ]
+    requirements:
+      - kind: party-level
+        level: 3
     summary: "Gain 'Inspired' on 'Charisma' Checks to Haggle."
     detail: "A savvy business man always knows what to say, being Charismatic gives you an advantage when making a deal."
   - name: "Appraise"
-    requirements: [ party-lvl: 6 ]
+    requirements:
+      - kind: party-level
+        level: 6
     summary: "Know each item's value in shops and at vendors."
     detail: "You have spent enough time around merchandise to know the value of what an item should be at a standard shop or vendor. GM has discretion for what you may or may not know at specific or unique shops."
   - name: "Great Deals"
-    requirements: [ party-lvl: 9 ]
+    requirements:
+      - kind: party-level
+        level: 9
     summary: "Improve 'Good Deals' by 2 more (-4 buying / +4 selling, min 1)."
     detail: "You have masted the art of the deal. Now when you purchase from a shop or vendor each item will come with a -4 Gold Discount (to a minimum of 1) or sell for +4 Gold, even after haggling."

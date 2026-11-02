@@ -5,43 +5,50 @@ id: assassin
 name: Assassin
 roles: [ dps ]
 main-stat: dex
-tier: 4
+tier: tier-4
 x-start: 1
+max-hp-mode: normal
 
 prerequisites:
-  - class: beast-tamer
+  - kind: class
+    class: beast-tamer
     level: 5
-  - class: berserker
+  - kind: class
+    class: berserker
     level: 10
-  - class: dragon-lancer
+  - kind: class
+    class: dragon-lancer
     level: 10
 
 expertise-modifiers:
-  - stealth: 1
-    requirements: [ class-lvl: 3 ]
+  - expertise: stealth
+    value: 1
+    requirements:
+      - kind: class-level
+        level: 3
 
 stat-modifiers:
-  - max-hp: -5
-  - str: 2
-  - dex: 1
-  - luk: 1
-  - jmp: 1
-  - agl: 1
-  - for: 1
+  max-hp: -5
+  str: 2
+  dex: 1
+  luk: 1
+  jmp: 1
+  agl: 1
+  for: 1
 
 equipment:
-  - main-hand: any Main-Hand
-  - armor: any Armor over Medium base
-  - off-hand: any Off-Hand (Any Dagger / Any Pistol per sheet)
+  main-hand: any Main-Hand
+  armor: any Armor over Medium base
+  off-hand: any Off-Hand (Any Dagger / Any Pistol per sheet)
 
 combat-modifier:
-  - name: Killer Instincts
-  - description: 'Every Critical Hit rolls again — second Critical upgrades multiplier to x3. Uses Weapon Specialist un-unlocked. Physical Melee/Ranged Damage Dealer.'
+  name: Killer Instincts
+  description: 'Every Critical Hit rolls again — second Critical upgrades multiplier to x3. Uses Weapon Specialist un-unlocked. Physical Melee/Ranged Damage Dealer.'
 
 ultimate:
-  - name: Assassination
-  - description: +5 crit chance this round; Critical vs non-boss defeats it.
-  - charge:
+  name: Assassination
+  description: +5 crit chance this round; Critical vs non-boss defeats it.
+  charge:
     - inflict a Status Effect
     - gain Unseen
     - roll a Critical
@@ -50,19 +57,28 @@ ultimate:
 passives:
   - name: Master of Disguise
     target: self
-    requirements: [ non-combat ]
+    requirements:
+      - kind: non-combat
     description: 'Inspired crafting disguises; disguised Inspired on Deception and Stealth.'
   - name: Resourceful
     target: self
-    requirements: [ in-combat, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: constant
     description: Defeating target adds bonus Steal item roll to LUK rewards.
   - name: Weapon Specialist
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: 'Equip any weapon; melee +X crit chance from behind; ranged +1 per square above.'
   - name: Dexterous
     target: self
-    requirements: [ in-combat, class-adept, constant ]
+    requirements:
+      - kind: in-combat
+      - kind: class-adept
+      - kind: constant
     description: +1 permanent DEX.
 
 actions:
