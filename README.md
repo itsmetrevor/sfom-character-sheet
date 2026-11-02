@@ -32,7 +32,7 @@ dx build --release --platform web
 
 ## PWA and offline
 
-The web build is a PWA with `manifest.json`, icons, and a service worker. It is published as a GitHub Pages project site at `https://<owner>.github.io/sfom-character-sheet/`, so `Dioxus.toml` sets `base_path = "sfom-character-sheet"` and all manifest/service-worker/public paths are relative.
+The web build is a PWA with `manifest.json`, icons, and a service worker. It is published as a GitHub Pages project site at `https://itsmetrevor.github.io/sfom-character-sheet/`, so `Dioxus.toml` sets `base_path = "sfom-character-sheet"` and all manifest/service-worker/public paths are relative.
 
 The service worker is not active under `dx serve`; test it against a release build served under the project subpath:
 
