@@ -1,9 +1,14 @@
 use std::collections::{BTreeMap, BTreeSet};
+use std::path::Path;
+#[cfg(not(target_arch = "wasm32"))]
+use std::path::PathBuf;
 
-use include_dir::{include_dir, Dir};
 use serde::de::DeserializeOwned;
 use serde::Deserialize;
 use thiserror::Error;
+
+#[cfg(target_arch = "wasm32")]
+use gloo_net::http::Request;
 
 use super::character::{CharacterV1, SCHEMA_VERSION};
 use super::enums::{
@@ -13,22 +18,83 @@ use super::enums::{
 };
 use super::rules::Rules;
 
-static CONFIG_DIR: Dir<'static> = include_dir!("config");
-
 #[derive(Debug, Error)]
 pub enum ConfigError {
-    #[error("missing embedded config file: {0}")]
+    #[error("missing config file: {0}")]
     MissingFile(String),
-    #[error("embedded config is not valid UTF-8: {0}")]
-    InvalidUtf8(String),
+    #[error("failed to read {path}: {source}")]
+    Io {
+        path: String,
+        #[source]
+        source: std::io::Error,
+    },
+    #[error("failed to fetch {url}: {message}")]
+    Fetch { url: String, message: String },
     #[error("failed to parse {path}: {source}")]
     Parse {
         path: String,
         #[source]
         source: serde_yaml::Error,
     },
+    #[error("failed to parse config index {path}: {source}")]
+    Index {
+        path: String,
+        #[source]
+        source: serde_json::Error,
+    },
+    #[error("unsupported config index version: {0}")]
+    UnsupportedIndexVersion(u32),
     #[error("config validation failed:\n{0}")]
     Validation(String),
+}
+
+#[cfg(target_arch = "wasm32")]
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+struct ConfigIndex {
+    version: u32,
+    core: CoreFiles,
+    entities: EntityFiles,
+    rules: RuleFiles,
+}
+
+#[cfg(target_arch = "wasm32")]
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+struct CoreFiles {
+    enums: String,
+    requirements: String,
+    expertise: String,
+    languages: String,
+    vision_types: String,
+    character_template: String,
+}
+
+#[cfg(target_arch = "wasm32")]
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+struct EntityFiles {
+    ancestries: Vec<String>,
+    backgrounds: Vec<String>,
+    classes: Vec<String>,
+    items: Vec<String>,
+}
+
+#[cfg(target_arch = "wasm32")]
+#[derive(Debug, Clone, Deserialize)]
+#[serde(rename_all = "kebab-case")]
+struct RuleFiles {
+    base_stats: String,
+    creation_steps: String,
+    hybrid_ancestries: String,
+    party_levels: String,
+    stat_shapes: String,
+    class_progression: String,
+    combat: String,
+    inventory: String,
+    starting_gear: String,
+    status_effects: String,
+    economy: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Deserialize)]
@@ -261,31 +327,171 @@ pub struct GameData {
 }
 
 impl GameData {
-    pub fn load_embedded() -> Result<Self, ConfigError> {
+    pub fn load_from_dir(root: impl AsRef<Path>) -> Result<Self, ConfigError> {
+        let root = root.as_ref();
         let game = Self {
-            enums: parse_file("_enums.yaml")?,
-            ancestries: parse_dir("ancestries")?,
-            backgrounds: parse_dir("backgrounds")?,
-            classes: parse_dir("classes")?,
-            items: parse_dir("items")?,
-            expertise: parse_file("expertise.yaml")?,
-            languages: parse_file("languages.yaml")?,
-            vision_types: parse_file("vision-types.yaml")?,
-            requirements: parse_file("requirements.yaml")?,
+            enums: parse_path(root.join("_enums.yaml"))?,
+            ancestries: parse_dir_path(&root.join("ancestries"))?,
+            backgrounds: parse_dir_path(&root.join("backgrounds"))?,
+            classes: parse_dir_path(&root.join("classes"))?,
+            items: parse_dir_path(&root.join("items"))?,
+            expertise: parse_path(root.join("expertise.yaml"))?,
+            languages: parse_path(root.join("languages.yaml"))?,
+            vision_types: parse_path(root.join("vision-types.yaml"))?,
+            requirements: parse_path(root.join("requirements.yaml"))?,
             rules: Rules {
-                base_stats: parse_file("rules/base-stats.yaml")?,
-                creation_steps: parse_file("rules/creation-steps.yaml")?,
-                hybrid_ancestries: parse_file("rules/hybrid-ancestries.yaml")?,
-                party_levels: parse_file("rules/party-levels.yaml")?,
-                stat_shapes: parse_file("rules/stat-shapes.yaml")?,
-                class_progression: parse_file("rules/class-progression.yaml")?,
-                combat: parse_file("rules/combat.yaml")?,
-                inventory: parse_file("rules/inventory.yaml")?,
-                starting_gear: parse_file("rules/starting-gear.yaml")?,
-                status_effects: parse_file("rules/status-effects.yaml")?,
-                economy: parse_file("rules/economy.yaml")?,
+                base_stats: parse_path(root.join("rules/base-stats.yaml"))?,
+                creation_steps: parse_path(root.join("rules/creation-steps.yaml"))?,
+                hybrid_ancestries: parse_path(root.join("rules/hybrid-ancestries.yaml"))?,
+                party_levels: parse_path(root.join("rules/party-levels.yaml"))?,
+                stat_shapes: parse_path(root.join("rules/stat-shapes.yaml"))?,
+                class_progression: parse_path(root.join("rules/class-progression.yaml"))?,
+                combat: parse_path(root.join("rules/combat.yaml"))?,
+                inventory: parse_path(root.join("rules/inventory.yaml"))?,
+                starting_gear: parse_path(root.join("rules/starting-gear.yaml"))?,
+                status_effects: parse_path(root.join("rules/status-effects.yaml"))?,
+                economy: parse_path(root.join("rules/economy.yaml"))?,
             },
-            character_template: parse_file("_character_template.yaml")?,
+            character_template: parse_path(root.join("_character_template.yaml"))?,
+        };
+        game.validate().map_err(ConfigError::Validation)?;
+        Ok(game)
+    }
+
+    pub async fn load_runtime() -> Result<Self, ConfigError> {
+        #[cfg(target_arch = "wasm32")]
+        {
+            Self::load_from_web("config").await
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            let root = std::env::var_os("SOM_CONFIG_DIR")
+                .map(PathBuf::from)
+                .or_else(|| {
+                    ["public/config", "config"]
+                        .into_iter()
+                        .map(PathBuf::from)
+                        .find(|path| path.is_dir())
+                })
+                .or_else(|| {
+                    std::env::current_exe()
+                        .ok()
+                        .and_then(|path| path.parent().map(|parent| parent.join("config")))
+                        .filter(|path| path.is_dir())
+                })
+                .unwrap_or_else(|| PathBuf::from("public/config"));
+            Self::load_from_dir(root)
+        }
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    pub async fn load_from_web(base: &str) -> Result<Self, ConfigError> {
+        let index_url = join_url(base, "index.json");
+        let index_text = fetch_text(&index_url).await?;
+        let index: ConfigIndex =
+            serde_json::from_str(&index_text).map_err(|source| ConfigError::Index {
+                path: index_url.clone(),
+                source,
+            })?;
+        if index.version != 1 {
+            return Err(ConfigError::UnsupportedIndexVersion(index.version));
+        }
+
+        let fetch = |relative: &str| {
+            let relative = relative.to_string();
+            async move { fetch_yaml(base, &relative).await }
+        };
+        let mut ancestries = Vec::new();
+        for file in &index.entities.ancestries {
+            if let Some(value) = fetch_optional(base, &join_url("ancestries", file)).await? {
+                ancestries.push(parse_text(file, &value)?);
+            }
+        }
+        let mut backgrounds = Vec::new();
+        for file in &index.entities.backgrounds {
+            if let Some(value) = fetch_optional(base, &join_url("backgrounds", file)).await? {
+                backgrounds.push(parse_text(file, &value)?);
+            }
+        }
+        let mut classes = Vec::new();
+        for file in &index.entities.classes {
+            if let Some(value) = fetch_optional(base, &join_url("classes", file)).await? {
+                classes.push(parse_text(file, &value)?);
+            }
+        }
+        let mut items = Vec::new();
+        for file in &index.entities.items {
+            if let Some(value) = fetch_optional(base, &join_url("items", file)).await? {
+                items.push(parse_text(file, &value)?);
+            }
+        }
+
+        let game = Self {
+            enums: parse_text(&index.core.enums, &fetch(&index.core.enums).await?)?,
+            ancestries,
+            backgrounds,
+            classes,
+            items,
+            expertise: parse_text(&index.core.expertise, &fetch(&index.core.expertise).await?)?,
+            languages: parse_text(&index.core.languages, &fetch(&index.core.languages).await?)?,
+            vision_types: parse_text(
+                &index.core.vision_types,
+                &fetch(&index.core.vision_types).await?,
+            )?,
+            requirements: parse_text(
+                &index.core.requirements,
+                &fetch(&index.core.requirements).await?,
+            )?,
+            rules: Rules {
+                base_stats: parse_text(
+                    &index.rules.base_stats,
+                    &fetch(&join_url("rules", &index.rules.base_stats)).await?,
+                )?,
+                creation_steps: parse_text(
+                    &index.rules.creation_steps,
+                    &fetch(&join_url("rules", &index.rules.creation_steps)).await?,
+                )?,
+                hybrid_ancestries: parse_text(
+                    &index.rules.hybrid_ancestries,
+                    &fetch(&join_url("rules", &index.rules.hybrid_ancestries)).await?,
+                )?,
+                party_levels: parse_text(
+                    &index.rules.party_levels,
+                    &fetch(&join_url("rules", &index.rules.party_levels)).await?,
+                )?,
+                stat_shapes: parse_text(
+                    &index.rules.stat_shapes,
+                    &fetch(&join_url("rules", &index.rules.stat_shapes)).await?,
+                )?,
+                class_progression: parse_text(
+                    &index.rules.class_progression,
+                    &fetch(&join_url("rules", &index.rules.class_progression)).await?,
+                )?,
+                combat: parse_text(
+                    &index.rules.combat,
+                    &fetch(&join_url("rules", &index.rules.combat)).await?,
+                )?,
+                inventory: parse_text(
+                    &index.rules.inventory,
+                    &fetch(&join_url("rules", &index.rules.inventory)).await?,
+                )?,
+                starting_gear: parse_text(
+                    &index.rules.starting_gear,
+                    &fetch(&join_url("rules", &index.rules.starting_gear)).await?,
+                )?,
+                status_effects: parse_text(
+                    &index.rules.status_effects,
+                    &fetch(&join_url("rules", &index.rules.status_effects)).await?,
+                )?,
+                economy: parse_text(
+                    &index.rules.economy,
+                    &fetch(&join_url("rules", &index.rules.economy)).await?,
+                )?,
+            },
+            character_template: parse_text(
+                &index.core.character_template,
+                &fetch(&index.core.character_template).await?,
+            )?,
         };
         game.validate().map_err(ConfigError::Validation)?;
         Ok(game)
@@ -794,39 +1000,103 @@ fn check_expertise_modifiers(
     }
 }
 
-fn parse_file<T: DeserializeOwned>(path: &str) -> Result<T, ConfigError> {
-    let source = read_file(path)?;
+fn parse_path<T: DeserializeOwned>(path: impl AsRef<Path>) -> Result<T, ConfigError> {
+    let path = path.as_ref();
+    let source = std::fs::read_to_string(path).map_err(|source| ConfigError::Io {
+        path: path.display().to_string(),
+        source,
+    })?;
+    serde_yaml::from_str(&source).map_err(|source| ConfigError::Parse {
+        path: path.display().to_string(),
+        source,
+    })
+}
+
+fn parse_dir_path<T: DeserializeOwned>(dir: &Path) -> Result<Vec<T>, ConfigError> {
+    let mut files = std::fs::read_dir(dir)
+        .map_err(|source| ConfigError::Io {
+            path: dir.display().to_string(),
+            source,
+        })?
+        .filter_map(Result::ok)
+        .map(|entry| entry.path())
+        .filter(|path| {
+            path.extension()
+                .is_some_and(|extension| extension == "yaml")
+        })
+        .collect::<Vec<_>>();
+    files.sort();
+    files.iter().map(parse_path).collect()
+}
+
+#[cfg(target_arch = "wasm32")]
+fn parse_text<T: DeserializeOwned>(path: &str, source: &str) -> Result<T, ConfigError> {
     serde_yaml::from_str(source).map_err(|source| ConfigError::Parse {
         path: path.to_string(),
         source,
     })
 }
 
-fn parse_dir<T: DeserializeOwned>(dir: &str) -> Result<Vec<T>, ConfigError> {
-    let dir = CONFIG_DIR
-        .get_dir(dir)
-        .ok_or_else(|| ConfigError::MissingFile(dir.to_string()))?;
-    let mut files = dir
-        .files()
-        .filter(|file| file.path().extension().is_some_and(|ext| ext == "yaml"))
-        .collect::<Vec<_>>();
-    files.sort_by(|left, right| left.path().cmp(right.path()));
-    files
-        .into_iter()
-        .map(|file| {
-            let path = file.path().to_string_lossy().to_string();
-            let source = file
-                .contents_utf8()
-                .ok_or_else(|| ConfigError::InvalidUtf8(path.clone()))?;
-            serde_yaml::from_str(source).map_err(|source| ConfigError::Parse { path, source })
-        })
-        .collect()
+#[cfg(target_arch = "wasm32")]
+fn join_url(base: &str, relative: &str) -> String {
+    format!(
+        "{}/{}",
+        base.trim_end_matches('/'),
+        relative.trim_start_matches('/')
+    )
 }
 
-fn read_file(path: &str) -> Result<&'static str, ConfigError> {
-    let file = CONFIG_DIR
-        .get_file(path)
-        .ok_or_else(|| ConfigError::MissingFile(path.to_string()))?;
-    file.contents_utf8()
-        .ok_or_else(|| ConfigError::InvalidUtf8(path.to_string()))
+#[cfg(target_arch = "wasm32")]
+async fn fetch_yaml(base: &str, relative: &str) -> Result<String, ConfigError> {
+    fetch_text(&join_url(base, relative)).await
+}
+
+#[cfg(target_arch = "wasm32")]
+async fn fetch_optional(base: &str, relative: &str) -> Result<Option<String>, ConfigError> {
+    let url = join_url(base, relative);
+    let response = Request::get(&url)
+        .send()
+        .await
+        .map_err(|error| ConfigError::Fetch {
+            url: url.clone(),
+            message: error.to_string(),
+        })?;
+    if response.status() == 404 {
+        return Ok(None);
+    }
+    if !response.ok() {
+        return Err(ConfigError::Fetch {
+            url,
+            message: format!("HTTP {}", response.status()),
+        });
+    }
+    response
+        .text()
+        .await
+        .map(Some)
+        .map_err(|error| ConfigError::Fetch {
+            url,
+            message: error.to_string(),
+        })
+}
+
+#[cfg(target_arch = "wasm32")]
+async fn fetch_text(url: &str) -> Result<String, ConfigError> {
+    let response = Request::get(url)
+        .send()
+        .await
+        .map_err(|error| ConfigError::Fetch {
+            url: url.to_string(),
+            message: error.to_string(),
+        })?;
+    if !response.ok() {
+        return Err(ConfigError::Fetch {
+            url: url.to_string(),
+            message: format!("HTTP {}", response.status()),
+        });
+    }
+    response.text().await.map_err(|error| ConfigError::Fetch {
+        url: url.to_string(),
+        message: error.to_string(),
+    })
 }

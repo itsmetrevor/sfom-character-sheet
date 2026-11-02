@@ -20,6 +20,7 @@ pub(crate) fn SettingsScreen(
             div { class: "panel-heading", h2 { "Data status" } }
             dl { class: "detail-list",
                 div { dt { "Schema" } dd { "v{game.character_template.schema_version}" } }
+                div { dt { "Config" } dd { "runtime config/ · edit and reload" } }
                 div { dt { "Starting gear" } dd { "{game.rules.starting_gear.status}: {game.rules.starting_gear.missing_source}" } }
                 div { dt { "Status effects" } dd { "{game.rules.status_effects.status}: {game.rules.status_effects.missing_source}" } }
                 div { dt { "Class unlock model" } dd { "{game.rules.class_progression.unlock_model.abilities}" } }

@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_VERSION = "shard-v4";
+const CACHE_VERSION = "shard-v7";
 const STATIC_SHELL = [
   "./",
   "./index.html",
@@ -12,12 +12,55 @@ const STATIC_SHELL = [
   "./icons/icon-maskable-512.png"
 ];
 
+async function precacheConfig(cache) {
+  try {
+    const indexUrl = new URL("./config/index.json", self.location.href);
+    const response = await fetch(indexUrl, { cache: "reload" });
+    if (!response.ok) return;
+    await cache.put(indexUrl, response.clone());
+    const index = await response.json();
+    const paths = [];
+
+    for (const value of Object.values(index.core || {})) paths.push(value);
+    for (const [directory, files] of Object.entries(index.entities || {})) {
+      for (const file of files || []) paths.push(`${directory}/${file}`);
+    }
+    for (const value of Object.values(index.rules || {})) paths.push(`rules/${value}`);
+
+    await Promise.all(
+      paths.map((path) => {
+        const url = new URL(`./config/${path}`, self.location.href);
+        return cache.add(url).catch(() => undefined);
+      })
+    );
+  } catch {
+    // Config remains runtime-loaded; offline caching will retry on the next visit.
+  }
+}
+
+async function networkFirst(request) {
+  const cache = await caches.open(CACHE_VERSION);
+  try {
+    const response = await fetch(request, { cache: "no-store" });
+    if (response.ok) {
+      await cache.put(request, response.clone());
+    }
+    return response;
+  } catch {
+    return (
+      (await cache.match(request)) ||
+      new Response("", { status: 503, statusText: "Offline" })
+    );
+  }
+}
+
 async function precacheAppShell() {
   const cache = await caches.open(CACHE_VERSION);
 
   await Promise.all(
     STATIC_SHELL.map((url) => cache.add(url).catch(() => undefined))
   );
+  await precacheConfig(cache);
 
   try {
     const indexResponse = await fetch("./index.html", { cache: "reload" });
@@ -89,6 +132,12 @@ self.addEventListener("fetch", (event) => {
 
   const url = new URL(request.url);
   if (url.origin !== self.location.origin) return;
+
+  const configPrefix = new URL("./config/", self.location.href).pathname;
+  if (url.pathname.startsWith(configPrefix)) {
+    event.respondWith(networkFirst(request));
+    return;
+  }
 
   if (request.mode === "navigate") {
     event.respondWith(

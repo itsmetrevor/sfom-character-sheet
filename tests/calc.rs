@@ -9,7 +9,8 @@ use som_v3::domain::enums::{ClassRole, Expertise, Stat};
 use som_v3::domain::GameData;
 
 fn game() -> GameData {
-    GameData::load_embedded().expect("embedded config should load")
+    GameData::load_from_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/public/config"))
+        .expect("runtime config should load")
 }
 
 fn blank_character(main_class: &str) -> CharacterV1 {

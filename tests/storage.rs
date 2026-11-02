@@ -3,8 +3,8 @@ use som_v3::domain::storage::{CharacterStore, MemoryStore, StorageError};
 use som_v3::domain::GameData;
 
 fn template() -> som_v3::domain::character::CharacterV1 {
-    GameData::load_embedded()
-        .expect("embedded config should load")
+    GameData::load_from_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/public/config"))
+        .expect("runtime config should load")
         .character_template
 }
 

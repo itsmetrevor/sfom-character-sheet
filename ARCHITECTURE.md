@@ -25,12 +25,13 @@ Not in v1: combat/action resolution, dice automation, full rules adjudication, R
 ## Repository layout
 
 ```text
-config/
+public/config/
   ancestries/        one entity per YAML file
   backgrounds/       one entity per YAML file
   classes/           one entity per YAML file
   items/             one entity per YAML file
   rules/             game procedures, progression, and rules tables
+  index.json         web file manifest (static hosts cannot list directories)
   _enums.yaml        closed vocabularies (single source of truth)
   requirements.yaml  requirement-kind descriptions
   expertise.yaml     expertise reference data
@@ -47,7 +48,7 @@ AGENTS.md           agent/workflow guidance
 
 ### Closed vocabularies are enums
 
-`config/_enums.yaml` lists every closed vocabulary. These map to Rust enums, not free-form strings:
+`public/config/_enums.yaml` lists every closed vocabulary. These map to Rust enums, not free-form strings:
 
 - class tiers, class roles, party roles
 - main/bonus stats and modifier targets
@@ -76,15 +77,15 @@ Ability/passive names and action tags are open, extensible labels rather than cl
 
 ### Source fidelity and placeholders
 
-Entity files carry `# source: pNNN` where known. Preserve printed values and documented quirks. When adding inferred or missing data, mark it as provisional in the file or in `config/rules/`. Missing source sections are represented as explicit placeholders, not invented content:
+Entity files carry `# source: pNNN` where known. Preserve printed values and documented quirks. When adding inferred or missing data, mark it as provisional in the file or in `public/config/rules/`. Missing source sections are represented as explicit placeholders, not invented content:
 
-- starting gear bundles: `config/rules/starting-gear.yaml`
-- status-effect catalog: `config/rules/status-effects.yaml`
-- X growth and energy maximum formulas: `config/rules/combat.yaml`
+- starting gear bundles: `public/config/rules/starting-gear.yaml`
+- status-effect catalog: `public/config/rules/status-effects.yaml`
+- X growth and energy maximum formulas: `public/config/rules/combat.yaml`
 
 ## Rules data
 
-`config/rules/` is the machine-readable home for game procedures:
+`public/config/rules/` is the machine-readable home for game procedures:
 
 - `base-stats.yaml` — base spread and bonus-stat grafts.
 - `creation-steps.yaml` — ordered creation flow and starting-class list.
@@ -99,11 +100,15 @@ Entity files carry `# source: pNNN` where known. Preserve printed values and doc
 
 The class unlock graph is derived at load time by inverting `prerequisites` and applying `tier-unlock-rules`. Individual action-to-level mappings are not in the source, so v1 stores manual unlock toggles per class.
 
+## UI direction
+
+The UI follows the `docs/phone-app/` wireframes: phone-first white surfaces, thin black rules, uppercase labels, circular back/menu/source marks, and large outlined menu actions. Keep new screens in that visual language rather than reintroducing the earlier dark dashboard/tab layout.
+
 ## Derived stats
 
 The calculation layer consumes explicit inputs, not UI state:
 
-- base stats from `config/rules/base-stats.yaml`
+- base stats from `public/config/rules/base-stats.yaml`
 - permanent ancestry bonuses
 - the current main class's star stats and `max-hp-mode`
 - equipped item `stat-modifiers`
@@ -111,7 +116,7 @@ The calculation layer consumes explicit inputs, not UI state:
 - party-level stat pips
 - temporary/status effects only where structured later
 
-Permanent and temporary modifiers are kept separate. If the source is ambiguous, expose an override rather than guessing. `double-con` currently adds `2 × CON` to Max HP as a provisional rule; `overrides.max-hp` always wins. `config/_character_template.yaml` shows the v1 save shape.
+Permanent and temporary modifiers are kept separate. If the source is ambiguous, expose an override rather than guessing. `double-con` currently adds `2 × CON` to Max HP as a provisional rule; `overrides.max-hp` always wins. `public/config/_character_template.yaml` shows the v1 save shape.
 
 ## Character save schema v1
 
@@ -159,10 +164,10 @@ Rules:
 ## Runtime architecture
 
 ```text
-embedded YAML (config/)
+runtime YAML (public/config/)
         |
         v
-GameData loader + validation (domain)
+GameData loader + validation (web fetch / native scan)
         |
         +--> stat/level calculations (domain)
         |
@@ -179,7 +184,7 @@ GameData loader + validation (domain)
               Dioxus UI signals
 ```
 
-- Config is embedded at compile time; web/mobile do not read the repository filesystem.
+- Config is loaded at runtime: the web build fetches `public/config/` files, while native/mobile builds scan a config directory (override with `SOM_CONFIG_DIR`). The web index must list new files because static hosting cannot enumerate directories.
 - The loader validates enum values, references, duplicate ids, and required fields once at startup and in tests.
 - The UI never parses YAML or computes rules ad hoc; it calls domain functions.
 - Autosave is debounced; explicit export/import is always available.
@@ -209,7 +214,7 @@ Required checks once the Rust workspace exists:
 ## Delivery plan
 
 - **Phase 0 (done):** rules directory, enum-first normalization, save-schema v1, architecture contract.
-- **Phase 1 (done):** Cargo/Dioxus/Nix scaffold, embedded config loader, validation tests, app shell.
+- **Phase 1 (done):** Cargo/Dioxus/Nix scaffold, runtime config loader, validation tests, app shell.
 - **Phase 2 (done):** vertical slice — create an ancestry/background/starter-class character, compute stats, save, reload.
 - **Phase 3 (done):** full sheet editing, leveling, statuses, export/import.
 - **Phase 4 (done):** installable offline PWA plus the `mobile` feature and native file store.

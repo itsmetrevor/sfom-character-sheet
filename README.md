@@ -66,22 +66,25 @@ These require the Android SDK/NDK or Xcode and the matching Rust targets. Those 
 
 ## Layout
 
-- `config/` — embedded game data: entity YAML plus `config/rules/`
+- `public/config/` — runtime game data: entity YAML plus `public/config/rules/`
 - `src/domain/` — pure Rust config loader, enums, rules, calculations, and browser/file/memory storage
 - `src/app.rs` — Dioxus shell, creation, list, and read-only sheet
 - `src/editor.rs` — full sheet editor
 - `src/settings.rs` — JSON export/import and PWA/storage notes
 - `src/main.rs` — app launcher
-- `public/` — manifest, service worker, icons, and styles copied to the web root
+- `public/` — PWA files, styles, and runtime game config copied to the web root
+- `public/config/` — live YAML game data; not compiled into the WASM binary
 - `index.html` — PWA shell (Dioxus injects the wasm loader)
 - `docs/` — contractee-supplied documents and transcriptions only
 - `ARCHITECTURE.md` — scope, data contract, save schema, delivery plan
 - `AGENTS.md` — agent workflow notes
 
-The YAML is embedded at compile time. Editing `config/` requires a rebuild; `dx serve` watches it during development.
+Game data is loaded at runtime from `public/config/`, not embedded in the WASM binary. Editing an existing YAML file and reloading is enough; no Rust rebuild is required.
+
+The web loader discovers files through `public/config/index.json` because static hosting cannot list directories. Add a new YAML file to the relevant entity list in `index.json` to make it visible to the web app. Native/mobile builds scan the entity directories directly, and `SOM_CONFIG_DIR` can point at an external config directory.
 
 Save-format identifiers still use the historical `som-v3` name (`som-v3.characters.v1` for localStorage and the native data directory). They are intentionally not tied to the repository name.
 
 ## Data status
 
-The starting-gear bundle source and status-effect rules are not present in the supplied handbook transcription. `config/rules/starting-gear.yaml` and `config/rules/status-effects.yaml` are explicit placeholders; do not invent values without checking the source.
+The starting-gear bundle source and status-effect rules are not present in the supplied handbook transcription. `public/config/rules/starting-gear.yaml` and `public/config/rules/status-effects.yaml` are explicit placeholders; do not invent values without checking the source.

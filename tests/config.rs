@@ -7,11 +7,12 @@ use som_v3::domain::enums::{
 use som_v3::domain::GameData;
 
 fn game() -> GameData {
-    GameData::load_embedded().expect("embedded config should load and validate")
+    GameData::load_from_dir(concat!(env!("CARGO_MANIFEST_DIR"), "/public/config"))
+        .expect("runtime config should load and validate")
 }
 
 #[test]
-fn embedded_config_loads_expected_entities() {
+fn runtime_config_loads_expected_entities() {
     let game = game();
 
     assert_eq!(game.ancestries.len(), 12);
@@ -215,5 +216,47 @@ fn template_references_existing_content() {
                 "template references unknown item {item}"
             );
         }
+    }
+}
+
+#[test]
+fn web_config_index_matches_runtime_files() {
+    use std::collections::BTreeSet;
+    use std::path::Path;
+
+    let root = Path::new(env!("CARGO_MANIFEST_DIR")).join("public/config");
+    let index: serde_json::Value =
+        serde_json::from_str(&std::fs::read_to_string(root.join("index.json")).unwrap()).unwrap();
+
+    for value in index["core"].as_object().unwrap().values() {
+        let relative = value.as_str().unwrap();
+        assert!(
+            root.join(relative).is_file(),
+            "missing core file {relative}"
+        );
+    }
+
+    for (directory, files) in index["entities"].as_object().unwrap() {
+        let listed = files
+            .as_array()
+            .unwrap()
+            .iter()
+            .map(|value| value.as_str().unwrap().to_string())
+            .collect::<BTreeSet<_>>();
+        let actual = std::fs::read_dir(root.join(directory))
+            .unwrap()
+            .filter_map(Result::ok)
+            .filter_map(|entry| entry.file_name().into_string().ok())
+            .filter(|name| name.ends_with(".yaml"))
+            .collect::<BTreeSet<_>>();
+        assert_eq!(listed, actual, "index mismatch for {directory}");
+    }
+
+    for value in index["rules"].as_object().unwrap().values() {
+        let relative = value.as_str().unwrap();
+        assert!(
+            root.join("rules").join(relative).is_file(),
+            "missing rule file {relative}"
+        );
     }
 }
