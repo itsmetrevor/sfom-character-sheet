@@ -332,7 +332,6 @@ function ScreenBody(props: {
     case "options":
       return (
         <SettingsScreen
-          game={game}
           store={props.store}
           onImported={props.onImported}
           onReloadGameData={props.onReloadGameData}
