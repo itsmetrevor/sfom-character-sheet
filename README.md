@@ -2,44 +2,36 @@
 
 Phone-first, fully client-side character companion for the homebrew tabletop game *Shard - Fragments of Memory*.
 
-Current state: Phase 4. The app loads validated YAML config, creates and tracks characters, edits the full sheet, exports/imports JSON, and ships as an installable offline-capable PWA. Native/mobile storage is prepared through the `mobile` feature and a file-backed store.
+Current state: Phase 5. The app is TypeScript + React + Vite with live HMR preview. It loads validated YAML config, creates and tracks characters, edits the full sheet, exports/imports JSON, and ships as an installable offline-capable PWA. Native storage is prepared through Capacitor wrapping the same web build.
 
 ## Requirements
 
-- Nix with flakes enabled
-- Android Studio/SDK/NDK or Xcode only for native mobile builds; web/PWA needs only the devshell
+- Nix with flakes enabled (provides Node.js 24 + npm), or any local Node 22+
+- Android Studio/SDK or Xcode only for native mobile shells; web/PWA needs only the devshell
 
 ## Commands
 
 ```bash
 nix develop
 
-# Domain config/tests (no Dioxus, fast, native)
-cargo test --no-default-features --lib --tests
-cargo clippy --no-default-features --lib -- -D warnings
-
-# Full app check and web build
-cargo check
-cargo clippy --all-targets --features web -- -D warnings
-dx serve --platform web
-dx build --platform web
-
-# PWA / offline test build
-dx build --release --platform web
+npm install   # first run (approves the esbuild install script)
+npm test      # domain/config/storage tests (vitest)
+npm run typecheck
+npm run dev       # live preview with HMR under /sfom-character-sheet/
+npm run build     # production PWA bundle in dist/
+npm run preview   # serve the production bundle locally
 ```
-
-`cargo fmt --check` is part of CI.
 
 ## PWA and offline
 
-The web build is a PWA with `manifest.json`, icons, and a service worker. It is published as a GitHub Pages project site at `https://itsmetrevor.github.io/sfom-character-sheet/`, so `Dioxus.toml` sets `base_path = "sfom-character-sheet"` and all manifest/service-worker/public paths are relative.
+The web build is a PWA with `manifest.json`, icons, and a service worker. It is published as a GitHub Pages project site at `https://itsmetrevor.github.io/sfom-character-sheet/`, so `vite.config.ts` sets `base: "/sfom-character-sheet/"` and all manifest/service-worker/public paths are relative.
 
-The service worker is not active under `dx serve`; test it against a release build served under the project subpath:
+The service worker is not active under `npm run dev`; test it against a production build served under the project subpath:
 
 ```bash
-dx build --release --platform web
+npm run build
 mkdir -p /tmp/pages/sfom-character-sheet
-cp -a target/dx/som-v3/release/web/public/. /tmp/pages/sfom-character-sheet/
+cp -a dist/. /tmp/pages/sfom-character-sheet/
 nix shell nixpkgs#python3 --command python3 -m http.server 8080 --directory /tmp/pages
 ```
 
@@ -47,41 +39,42 @@ Open `http://localhost:8080/sfom-character-sheet/`, let the service worker insta
 
 ## GitHub Pages deployment
 
-`.github/workflows/pages.yml` builds the release bundle with Nix, cleans stale hashed assets, uploads `target/dx/som-v3/release/web/public`, and deploys it with GitHub Pages.
+`.github/workflows/pages.yml` typechecks, tests, and builds with npm, uploads `dist`, and deploys it with GitHub Pages.
 
-In the repository settings, set Pages to deploy from **GitHub Actions**. If the repository is renamed, update `base_path` in `Dioxus.toml` and the base-path check in the workflow. The Cargo package and build output remain `som-v3` / `target/dx/som-v3`; only the Pages base path follows the repo name. If Pages serves `.wasm` without the preferred `application/wasm` type, the generated wasm-bindgen loader falls back automatically.
+In the repository settings, set Pages to deploy from **GitHub Actions**. If the repository is renamed, update `base` in `vite.config.ts` and the base-path check in the workflow.
 
-`dx serve --platform web` serves the app under `/sfom-character-sheet/` as well.
+`npm run dev` serves the app under `/sfom-character-sheet/` with HMR as well: code edits refresh instantly, and YAML edits under `public/config/` reload from disk with no rebuild.
 
 ## Mobile
 
-Dioxus mobile builds use the `mobile` Cargo feature (selected by `dx` for `--android`/`--ios`) and a native file-backed store instead of browser localStorage.
+Capacitor wraps the same `dist/` web build for Android/iOS (`capacitor.config.ts`) and exposes a native file-backed store (Filesystem API) instead of browser localStorage.
 
 ```bash
-dx serve --android
-dx serve --ios
+npx cap sync
+npx cap open android
+npx cap open ios
 ```
 
-These require the Android SDK/NDK or Xcode and the matching Rust targets. Those toolchains are not included in the current flake, and mobile builds are not part of CI yet.
+These require the Android SDK or Xcode. Those toolchains are not included in the current flake, and mobile builds are not part of CI yet.
 
 ## Layout
 
 - `public/config/` — runtime game data: entity YAML plus `public/config/rules/`
-- `src/domain/` — pure Rust config loader, enums, rules, calculations, and browser/file/memory storage
-- `src/app.rs` — Dioxus shell, creation, list, and read-only sheet
-- `src/editor.rs` — full sheet editor
-- `src/settings.rs` — JSON export/import and PWA/storage notes
-- `src/main.rs` — app launcher
-- `public/` — PWA files, styles, and runtime game config copied to the web root
-- `public/config/` — live YAML game data; not compiled into the WASM binary
-- `index.html` — PWA shell (Dioxus injects the wasm loader)
+- `src/lib/domain/` — pure config loader, enums, rules, calculations, and browser/file/memory storage (no React)
+- `src/lib/domain/configNode.ts` — Node-only directory loader for tests/tooling (never bundled)
+- `src/app/` — React shell, creation, list, sheet/editor/settings screens
+- `src/main.tsx` — app entry; `src/styles.css` — bundled phone-first stylesheet (HMR)
+- `public/` — PWA files (manifest, icons, service worker) and runtime game config copied to the web root
+- `public/config/` — live YAML game data; fetched at runtime, not bundled
+- `index.html` — Vite entry + PWA shell
+- `capacitor.config.ts` — native wrapper config (Android/iOS shells)
 - `docs/` — contractee-supplied documents and transcriptions only
 - `ARCHITECTURE.md` — scope, data contract, save schema, delivery plan
 - `AGENTS.md` — agent workflow notes
 
-Game data is loaded at runtime from `public/config/`, not embedded in the WASM binary. Editing an existing YAML file and reloading is enough; no Rust rebuild is required.
+Game data is loaded at runtime from `public/config/`, not bundled. Editing an existing YAML file and reloading is enough; no rebuild is required.
 
-The web loader discovers files through `public/config/index.json` because static hosting cannot list directories. Add a new YAML file to the relevant entity list in `index.json` to make it visible to the web app. Native/mobile builds scan the entity directories directly, and `SOM_CONFIG_DIR` can point at an external config directory.
+The web loader discovers files through `public/config/index.json` because static hosting cannot list directories. Add a new YAML file to the relevant entity list in `index.json` to make it visible to the web app.
 
 Save-format identifiers still use the historical `som-v3` name (`som-v3.characters.v1` for localStorage and the native data directory). They are intentionally not tied to the repository name.
 

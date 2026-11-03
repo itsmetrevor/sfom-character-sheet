@@ -1,10 +1,9 @@
 "use strict";
 
-const CACHE_VERSION = "shard-v7";
+const CACHE_VERSION = "shard-v8";
 const STATIC_SHELL = [
   "./",
   "./index.html",
-  "./main.css",
   "./manifest.json",
   "./favicon.ico",
   "./icons/icon-192.png",
@@ -69,31 +68,27 @@ async function precacheAppShell() {
 
     const html = await indexResponse.text();
     const indexPath = new URL("./index.html", self.location.href);
+    // Hashed Vite scripts (replaces the old wasm-loader scan).
     const scriptUrls = [...html.matchAll(/<script[^>]+src=["']([^"']+)["']/g)]
       .map((match) => new URL(match[1], indexPath).href);
+    // Hashed Vite stylesheets: src/styles.css is bundled, not a static file.
+    const styleUrls = [
+      ...html.matchAll(/<link[^>]+rel=["']stylesheet["'][^>]*href=["']([^"']+)["']/g),
+      ...html.matchAll(/<link[^>]+href=["']([^"']+)["'][^>]*rel=["']stylesheet["']/g),
+    ].map((match) => new URL(match[1], indexPath).href);
 
-    for (const scriptUrl of scriptUrls) {
-      const scriptResponse = await fetch(scriptUrl, { cache: "reload" });
-      if (!scriptResponse.ok) continue;
-      await cache.put(scriptUrl, scriptResponse.clone());
-
-      const script = await scriptResponse.text();
-      const wasmUrls = [...script.matchAll(/["']([^"']+\.wasm)["']/g)]
-        .map((match) => new URL(match[1], scriptUrl).href);
-
-      for (const wasmUrl of new Set(wasmUrls)) {
-        try {
-          const wasmResponse = await fetch(wasmUrl, { cache: "reload" });
-          if (wasmResponse.ok) {
-            await cache.put(wasmUrl, wasmResponse);
-          }
-        } catch {
-          // A relative wasm string in the loader may not be a real URL.
+    for (const assetUrl of new Set([...scriptUrls, ...styleUrls])) {
+      try {
+        const assetResponse = await fetch(assetUrl, { cache: "reload" });
+        if (assetResponse.ok) {
+          await cache.put(assetUrl, assetResponse);
         }
+      } catch {
+        // Keep the static shell even if a hashed asset could not be cached yet.
       }
     }
   } catch {
-    // Keep the static shell even if the hashed app binary could not be cached yet.
+    // Keep the static shell even if the hashed app bundle could not be cached yet.
   }
 }
 

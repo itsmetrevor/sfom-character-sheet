@@ -15,12 +15,12 @@ Not in v1: combat/action resolution, dice automation, full rules adjudication, R
 
 ## Decisions
 
-- **Stack:** Rust + Dioxus, fully client-side, web/Android/iOS eventually.
-- **First target:** web/PWA. The UI stays phone-first and domain logic stays platform-agnostic so Android/iOS adapters can follow.
-- **Config:** declarative YAML for content and rules; calculations and validation live in tested Rust. Do not embed a scripting interpreter in v1.
-- **State:** plain Rust domain types; Dioxus signals only at the UI boundary.
-- **Persistence:** versioned JSON saves behind a storage trait. Web saves use localStorage key `som-v3.characters.v1`; native/mobile saves use a JSON file via `FileStore`. JSON export/import is required.
-- **Crate shape:** one Dioxus crate initially, with a pure `domain` module that has no Dioxus or web dependencies. Split into crates only if build or test friction demands it.
+- **Stack:** TypeScript + React + Vite (npm), fully client-side, web/Android/iOS via Capacitor.
+- **First target:** web/PWA. The UI stays phone-first and domain logic stays platform-agnostic so Capacitor Android/iOS shells can wrap the same bundle.
+- **Config:** declarative YAML for content and rules; calculations and validation live in tested TypeScript (`src/lib/domain/`). Do not embed a scripting interpreter in v1.
+- **State:** plain TypeScript domain objects; React state only at the UI boundary.
+- **Persistence:** versioned JSON saves. Web saves use localStorage key `som-v3.characters.v1`; Capacitor native saves use a JSON file via the Filesystem API with the same shape. JSON export/import is required.
+- **Package shape:** one Vite app; the pure `src/lib/domain/` module has no React or browser dependencies (only `yaml` for parsing). Node-only file loading lives in `configNode.ts`, used by tests/tooling, never bundled.
 
 ## Repository layout
 
@@ -38,8 +38,10 @@ public/config/
   languages.yaml     language reference data
   vision-types.yaml  vision reference data
   _character_template.yaml  readable save-schema v1 fixture
+src/lib/domain/   pure config loader, enums, rules, calculations, storage
+src/app/          React shell, creation, list, and sheet/editor/settings screens
+tests/            vitest suite mirroring the domain contract
 docs/               contractee-supplied scans, text, and transcriptions only
-src/                future Dioxus app; domain code must stay UI-free
 ARCHITECTURE.md     this file
 AGENTS.md           agent/workflow guidance
 ```
@@ -167,35 +169,35 @@ Rules:
 runtime YAML (public/config/)
         |
         v
-GameData loader + validation (web fetch / native scan)
+GameData loader + validation (fetch + index.json / node fs in tests)
         |
         +--> stat/level calculations (domain)
         |
-        +--> CharacterV1 save model (domain)
+        +--> CharacterV1 save model (domain, camelCase; kebab-case on the wire)
                     |
                     v
-                Storage trait
-                 /        \
-     WebStore/localStorage  FileStore/app data
-                 \        /
-              JSON import/export
-                    |
-                    v
-              Dioxus UI signals
+          LocalStorageStore / Capacitor FileStore (same JSON shape)
+                     |
+                     v
+               JSON import/export
+                     |
+                     v
+               React state
 ```
 
-- Config is loaded at runtime: the web build fetches `public/config/` files, while native/mobile builds scan a config directory (override with `SOM_CONFIG_DIR`). The web index must list new files because static hosting cannot enumerate directories.
+- Config is loaded at runtime: the web build fetches `public/config/` files via `index.json` (static hosting cannot enumerate directories); tests load the same files from disk via `configNode.ts`. `SOM_CONFIG_DIR`-style overrides are gone: edit YAML and reload, no rebuild.
 - The loader validates enum values, references, duplicate ids, and required fields once at startup and in tests.
 - The UI never parses YAML or computes rules ad hoc; it calls domain functions.
-- Autosave is debounced; explicit export/import is always available.
+- Saves persist on every change; explicit export/import is always available.
+- `npm run dev` gives HMR for code and reloads YAML from disk, so config edits preview without a rebuild.
 
 ## Platform strategy
 
-1. Web/PWA first: installable shell, offline cache, phone-sized layout. Deployment is a GitHub Pages project site at `/sfom-character-sheet/`; `Dioxus.toml` sets `base_path = "sfom-character-sheet"`, while `index.html`, the manifest, and the service worker use relative public paths so the PWA stays inside that scope.
-2. The service worker precaches the stable shell, discovers the hashed wasm/js from `index.html`, and serves a cached app shell for offline navigation. Bump `CACHE_VERSION` in `public/sw.js` when the shell changes.
-3. Native/mobile builds enable the `mobile` Cargo feature and use `FileStore` instead of browser localStorage. The current file path is provisional on Android/iOS; mobile toolchains are external to the flake and not CI-tested.
+1. Web/PWA first: installable shell, offline cache, phone-sized layout. Deployment is a GitHub Pages project site at `/sfom-character-sheet/`; `vite.config.ts` sets `base: "/sfom-character-sheet/"`, while `index.html`, the manifest, and the service worker use relative public paths so the PWA stays inside that scope.
+2. The service worker precaches the stable shell, discovers the hashed JS/CSS from `index.html`, and serves a cached app shell for offline navigation. Bump `CACHE_VERSION` in `public/sw.js` when the shell changes.
+3. Native builds wrap the same `dist/` bundle with Capacitor (`capacitor.config.ts`) and use the Filesystem API instead of browser localStorage. Android/iOS SDKs are external to the flake and not CI-tested.
 4. Keep routing, storage, and file APIs behind small interfaces.
-5. GitHub Actions (`.github/workflows/pages.yml`) builds a clean release artifact and deploys it with GitHub Pages.
+5. GitHub Actions (`.github/workflows/pages.yml`) typechecks, tests, builds with npm, and deploys `dist/` with GitHub Pages.
 
 ## Validation and testing
 
@@ -208,8 +210,8 @@ Required checks once the Rust workspace exists:
 - inverse unlock graph is consistent with class prerequisites
 - golden derived-stat cases for base + ancestry + class + equipment + pips
 - save round-trip and schema-version migration
-- web/PWA release build and an offline reload smoke test served under `/sfom-character-sheet/`
-- `cargo fmt --check`, `cargo clippy --features web -D warnings`, `cargo test`, WASM build
+- web/PWA production build and an offline reload smoke test served under `/sfom-character-sheet/`
+- `npm run typecheck`, `npm test`, `npm run build`
 
 ## Delivery plan
 
@@ -219,7 +221,8 @@ Required checks once the Rust workspace exists:
 - **Phase 3 (done):** full sheet editing, leveling, statuses, export/import.
 - **Phase 4 (done):** installable offline PWA plus the `mobile` feature and native file store.
 - **Deployment (done):** GitHub Pages project-site base path, relative PWA paths, and automated Pages deployment.
-- **Next:** native Android/iOS validation, then optional post-v1 work such as custom content authoring or multi-device sync.
+- **Phase 5 (done):** TypeScript/React/Vite port of the full app with HMR live preview, Vitest contract tests, and Capacitor as the native path. The save schema, YAML config, and wire formats are unchanged.
+- **Next:** native Android/iOS validation via Capacitor, then optional post-v1 work such as custom content authoring or multi-device sync.
 
 ## Known placeholders and open questions
 

@@ -3,32 +3,30 @@
 ## Project goal
 
 - Build a phone-first app across web, Android, and iOS for creating and tracking characters in the homebrew tabletop game "Shard - Fragments of Memory". The app is fully client-side.
-- Stack: Rust + Dioxus (https://github.com/dioxuslabs/dioxus), with the development environment managed by Nix flakes and devshells. Do not substitute another stack.
-- Config stays declarative YAML; calculations and validation belong in tested Rust. Rune is deferred unless config-defined formulas become a hard requirement.
+- Stack: TypeScript + React + Vite (npm), with the development environment managed by Nix flakes and devshells. Native shells are provided by Capacitor wrapping the same web build.
+- Config stays declarative YAML; calculations and validation belong in tested TypeScript under `src/lib/domain/`. Rune is deferred unless config-defined formulas become a hard requirement.
 - V1 is a manual character tracker with derived stats, not a combat/rules engine. See `ARCHITECTURE.md` for scope, save schema, and delivery plan.
 - `docs/` is reserved for contractee-supplied documents and transcriptions. Put architecture/planning notes in the repo root, not `docs/`.
 
 ## Repository state
 
-- Phase 4 is in place: installable offline PWA, service worker/manifest/icons, and a native file-store/mobile feature. Earlier phases cover creation, derived stats, full sheet editing/leveling, browser saves, and JSON export/import.
+- Phase 5 is in place: the app was ported from Rust/Dioxus to TypeScript/React/Vite with live HMR preview, keeping the same YAML config, save schema, and phone UI. Earlier phases cover creation, derived stats, full sheet editing/leveling, browser saves, JSON export/import, and the installable offline PWA.
 - Phase 0 data normalization is complete: `public/config/rules/` holds game rules, entity files are enum-normalized, and `public/config/_character_template.yaml` is the v1 save fixture.
-- YAML is loaded at runtime from `public/config/` and is not embedded in the WASM binary. Editing existing files updates after reload. Web discovery uses `public/config/index.json`; keep it in sync when adding files. Native builds scan directories and honor `SOM_CONFIG_DIR`.
-- Deployment is a GitHub Pages project site at `/sfom-character-sheet/`: `Dioxus.toml` sets `base_path = "sfom-character-sheet"` and `index.html`/manifest/service worker use relative public paths. Do not reintroduce root-absolute `/...` public paths; if the repo is renamed, update `base_path` and the workflow's base-path check.
-- `public/` is copied verbatim to the web root by Dioxus. `index.html` at the repo root is the PWA shell; do not move it under `docs/` or `public/`.
+- YAML is loaded at runtime from `public/config/` via fetch and is not bundled. Editing existing files updates after reload (dev server hot-reloads). Web discovery uses `public/config/index.json`; keep it in sync when adding files. Native (Capacitor) builds serve the same `dist/` bundle.
+- Deployment is a GitHub Pages project site at `/sfom-character-sheet/`: `vite.config.ts` sets `base: "/sfom-character-sheet/"` and `index.html`/manifest/service worker use relative public paths. Do not reintroduce root-absolute `/...` public paths; if the repo is renamed, update the Vite base and the workflow's base-path check.
+- `public/` is copied verbatim to `dist/` by Vite. `index.html` at the repo root is the Vite entry + PWA shell; do not move it under `docs/` or `public/`.
 - `.github/workflows/pages.yml` builds a clean release bundle and deploys it with GitHub Pages; Pages must be set to deploy from GitHub Actions.
 - Real content today is the game data in `public/config/` and the handbook material in `docs/`.
 
 ## Commands
 
-- `nix develop` - Rust, wasm32 target, and `dx` from the pinned flake.
-- `cargo test --no-default-features --lib --tests` - fast domain/config tests without compiling Dioxus.
-- `cargo clippy --all-targets --features web -- -D warnings` and `cargo fmt --check`.
-- `dx serve --platform web` serves under `/sfom-character-sheet/`; `dx build --platform web`; `dx build --release --platform web` for PWA/offline testing.
-- Local PWA test: copy the release output into `/tmp/pages/sfom-character-sheet/`, serve `/tmp/pages`, and open `/sfom-character-sheet/`.
-- `dx serve --android` / `dx serve --ios` use the `mobile` feature; those toolchains are not in the flake and are not CI-tested.
-- Keep the `wasm-bindgen` pin in `Cargo.toml` in sync with the devshell `wasm-bindgen-cli` version (currently 0.2.129); bump both together.
+- `nix develop` - Node.js 24 + npm from the pinned flake.
+- `npm test` - domain/config/storage tests (vitest, 19 tests). `npm run typecheck` (`tsc --noEmit`) is part of CI.
+- `npm run dev` serves under `/sfom-character-sheet/` with HMR; `npm run build` writes the PWA bundle to `dist/`; `npm run preview` serves the bundle locally.
+- Local PWA test: `npm run build`, copy `dist/` into `/tmp/pages/sfom-character-sheet/`, serve `/tmp/pages`, and open `/sfom-character-sheet/`.
+- Native shells: `npx cap sync` then `npx cap open android` / `npx cap open ios` (Capacitor; those SDKs are not in the flake and are not CI-tested). The web build is the single UI; Capacitor only wraps `dist/` and provides the Filesystem API.
 - Bump `CACHE_VERSION` in `public/sw.js` whenever the app shell changes, or offline clients keep old assets.
-- The localStorage key `som-v3.characters.v1` and native data-directory name are save-format identifiers, not repo branding. Do not rename them without a migration.
+- Native storage: web builds use localStorage; Capacitor builds use the Filesystem API with the same JSON shape. The localStorage key `som-v3.characters.v1` and native data-directory name are save-format identifiers, not repo branding. Do not rename them without a migration.
 
 ## Source of truth (game data)
 
@@ -45,8 +43,8 @@
 - One entity per YAML file under `ancestries/`, `backgrounds/`, `classes/`, `items/`. The filename stem is the `id` used by cross-file references.
 - `public/config/rules/` holds game procedures: base stats, creation, hybrid ancestries, party levels, class progression, combat, inventory, starting gear, status effects, and economy.
 - Root shared data: `_enums.yaml` (closed vocabularies), `requirements.yaml`, `expertise.yaml`, `languages.yaml`, `vision-types.yaml`.
-- Feature flags: `web` is default; `mobile` selects Dioxus mobile and native `FileStore`. CI uses `--features web`, not `--all-features`.
-- `_enums.yaml` is the source of truth for closed enums. Do not introduce new tier/role/stat/slot/damage/requirement values without updating it (and the future Rust enum).
+- Native builds use Capacitor (`capacitor.config.ts`); the file store falls back to localStorage on web. No Cargo feature flags remain.
+- `_enums.yaml` is the source of truth for closed enums. Do not introduce new tier/role/stat/slot/damage/requirement values without updating it (and the matching union in `src/lib/domain/enums.ts`).
 - Keys are lowercase kebab-case. Stat abbreviations: `str dex con mnd int luk` (main), `jmp agl def res nrg for` (bonus).
 - Normalized shapes:
   - requirements: list of `{ kind: <requirement-kind>, level?: N }`
@@ -56,7 +54,7 @@
   - `equipment`: map of slot to allowed-equipment text
   - `combat-modifier`/`ultimate`: mappings, not single-key list items
   - class tiers: `starter`, `tier-1` … `tier-4`, `ultimate`; each class also has `max-hp-mode: normal|double-con`
-- `_character_template.yaml` is a readable v1 save fixture, not a schema; Rust domain types under `src/domain/` are authoritative and validate it at load time.
+- `_character_template.yaml` is a readable v1 save fixture, not a schema; TypeScript domain types under `src/lib/domain/` are authoritative and validate it at load time. Domain objects use camelCase; the YAML/JSON wire format stays kebab-case (see `characterFromWire`/`characterToWire`).
 - Data is a transcription, not a redesign: preserve printed values; when inferring or correcting, mark it in a comment/detail field (see `public/config/backgrounds/jeweler.yaml`). Missing source sections live as explicit placeholders under `public/config/rules/`.
 - Do not split classes into per-passive/per-action files. An audit found all 281 class actions are bespoke (zero cross-class duplicates); ancestry/background/class files are the intended smallest units.
 
