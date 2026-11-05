@@ -509,9 +509,11 @@ function AppHeader(props: {
           aria-label="Menu"
           onClick={props.onToggleMenu}
         >
-          <span className="hamburger-line" />
-          <span className="hamburger-line" />
-          <span className="hamburger-line" />
+          <svg viewBox="0 0 18 14" aria-hidden="true">
+            <rect x="0" y="0" width="18" height="2" fill="currentColor" />
+            <rect x="0" y="6" width="18" height="2" fill="currentColor" />
+            <rect x="0" y="12" width="18" height="2" fill="currentColor" />
+          </svg>
         </button>
       </div>
     </header>

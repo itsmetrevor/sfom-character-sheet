@@ -101,16 +101,14 @@ button {
 }
 
 .menu-toggle {
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
+    display: grid;
+    place-items: center;
 }
 
-.hamburger-line {
+.menu-toggle svg {
     display: block;
-    width: 16px;
-    height: 2px;
-    background: var(--ink);
+    width: 18px;
+    height: 14px;
 }
 
 .content {
