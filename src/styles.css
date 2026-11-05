@@ -272,26 +272,10 @@ button {
     text-align: center;
 }
 
-.logo-crystal {
-    width: 42px;
-    height: 70px;
-    margin-bottom: -8px;
-    background: var(--ink);
-    clip-path: polygon(50% 0, 100% 38%, 82% 100%, 18% 100%, 0 38%);
-}
-
-.logo-word {
-    font-family: Impact, "Arial Black", sans-serif;
-    font-size: clamp(3.3rem, 15vw, 4.8rem);
-    letter-spacing: 0.06em;
-    line-height: 0.9;
-}
-
-.logo-sub {
-    margin-top: 8px;
-    font-size: 0.64rem;
-    font-weight: 700;
-    letter-spacing: 0.2em;
+.logo-image {
+    display: block;
+    width: min(100%, 340px);
+    height: auto;
 }
 
 .menu-stack {

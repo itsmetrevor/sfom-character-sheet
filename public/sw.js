@@ -1,9 +1,10 @@
 "use strict";
 
-const CACHE_VERSION = "shard-v8";
+const CACHE_VERSION = "shard-v9";
 const STATIC_SHELL = [
   "./",
   "./index.html",
+  "./logo.png",
   "./manifest.json",
   "./favicon.ico",
   "./icons/icon-192.png",

@@ -424,9 +424,11 @@ function MainMenu(props: { onNavigate: (screen: Screen) => void }) {
   return (
     <section className="main-menu">
       <div className="logo">
-        <div className="logo-crystal" />
-        <div className="logo-word">SHARD</div>
-        <div className="logo-sub">FRAGMENTS OF MEMORY</div>
+        <img
+          className="logo-image"
+          src={`${import.meta.env.BASE_URL}logo.png`}
+          alt="Shard - Fragments of Memory"
+        />
       </div>
       <div className="menu-stack">
         <button
