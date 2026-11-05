@@ -1,5 +1,6 @@
 {
   "version": 1,
+  "revision": 1,
   "core": {
     "enums": "_enums.yaml",
     "requirements": "requirements.yaml",

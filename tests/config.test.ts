@@ -11,13 +11,13 @@ import type { ConfigIndex } from "../src/lib/domain/config.js";
 const ROOT = process.cwd();
 const CONFIG_DIR = join(ROOT, "public/config");
 
-function game() {
+async function game() {
   return loadGameDataFromDir(CONFIG_DIR);
 }
 
 describe("runtime config", () => {
-  it("loads expected entities", () => {
-    const g = game();
+  it("loads expected entities", async () => {
+    const g = await game();
 
     expect(g.ancestries).toHaveLength(12);
     expect(g.backgrounds).toHaveLength(30);
@@ -30,8 +30,8 @@ describe("runtime config", () => {
     expect(g.expertise.some((e) => e.id === "any")).toBe(false);
   });
 
-  it("starters connect to every tier-1 class", () => {
-    const g = game();
+  it("starters connect to every tier-1 class", async () => {
+    const g = await game();
     const starters = g.classes.filter((c) => c.tier === "starter");
     const tierOne = g.classes.filter((c) => c.tier === "tier-1");
 
@@ -47,8 +47,8 @@ describe("runtime config", () => {
     }
   });
 
-  it("classes have required structure", () => {
-    const g = game();
+  it("classes have required structure", async () => {
+    const g = await game();
     for (const cls of g.classes) {
       for (const slot of ["main-hand", "armor", "off-hand"] as const) {
         expect(cls.equipment[slot], `${cls.id} is missing equipment slot ${slot}`).toBeDefined();
@@ -69,8 +69,8 @@ describe("runtime config", () => {
     }
   });
 
-  it("wires rules and enums", () => {
-    const g = game();
+  it("wires rules and enums", async () => {
+    const g = await game();
 
     expect(g.rules.classProgression.classLevelMax).toBe(20);
     expect(g.rules.partyLevels.backgroundAbilityTiers).toEqual([0, 3, 6, 9]);
@@ -88,8 +88,8 @@ describe("runtime config", () => {
     expect(g.enums.requirementKinds).toContain("party-level");
   });
 
-  it("template is valid and round-trips", () => {
-    const g = game();
+  it("template is valid and round-trips", async () => {
+    const g = await game();
     const template = g.characterTemplate;
 
     expect(template.schemaVersion).toBe(1);
@@ -101,8 +101,8 @@ describe("runtime config", () => {
     expect(parsed).toEqual(template);
   });
 
-  it("template references existing content", () => {
-    const g = game();
+  it("template references existing content", async () => {
+    const g = await game();
     const template = g.characterTemplate;
 
     expect(g.ancestry(template.ancestry.primary)).toBeDefined();
@@ -132,7 +132,7 @@ describe("runtime config", () => {
     }
   });
 
-  it("web config index matches runtime files", () => {
+  it("web config index matches runtime files", async () => {
     const index = JSON.parse(
       readFileSync(join(CONFIG_DIR, "index.json"), "utf8"),
     ) as ConfigIndex;

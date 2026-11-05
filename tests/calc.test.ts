@@ -6,7 +6,7 @@ import { loadGameDataFromDir } from "../src/lib/domain/configNode.js";
 
 const CONFIG_DIR = join(process.cwd(), "public/config");
 
-function game() {
+async function game() {
   return loadGameDataFromDir(CONFIG_DIR);
 }
 
@@ -42,8 +42,8 @@ function blankCharacter(mainClass: string): CharacterV1 {
 }
 
 describe("deriveCharacter", () => {
-  it("derives fixture scholar stats", () => {
-    const g = game();
+  it("derives fixture scholar stats", async () => {
+    const g = await game();
     const derived = deriveCharacter(g, g.characterTemplate);
 
     expect(derived.maxHp).toBe(39);
@@ -68,8 +68,8 @@ describe("deriveCharacter", () => {
     expect(derived.expertise["strength"]).toBe(0);
   });
 
-  it("applies double-con and equipment", () => {
-    const g = game();
+  it("applies double-con and equipment", async () => {
+    const g = await game();
     const character = blankCharacter("gladiator");
     character.equipment.armor = "bronze-armor";
 
@@ -84,8 +84,8 @@ describe("deriveCharacter", () => {
     expect(derived.notes.some((n) => n.includes("double-con"))).toBe(true);
   });
 
-  it("lets manual max-hp override win", () => {
-    const g = game();
+  it("lets manual max-hp override win", async () => {
+    const g = await game();
     const character = blankCharacter("gladiator");
     character.overrides.maxHp = 99;
 
@@ -95,8 +95,8 @@ describe("deriveCharacter", () => {
     expect(derived.notes.some((n) => n.includes("manual override"))).toBe(true);
   });
 
-  it("respects class level for class expertise unlocks", () => {
-    const g = game();
+  it("respects class level for class expertise unlocks", async () => {
+    const g = await game();
     const character = blankCharacter("gladiator");
     character.classes[0].level = 4;
 

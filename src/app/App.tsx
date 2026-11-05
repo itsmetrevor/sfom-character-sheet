@@ -6,13 +6,32 @@ import {
   GameData,
   MAIN_STATS,
   BONUS_STATS,
+  applyPackToOverlay,
+  fetchBaseFileMap,
+  fetchIndexRevision,
+  fetchUpstreamSnapshot,
+  parsePack,
+  UPSTREAM_BASE_URL,
+  OverlayStore,
+  RevisionStore,
+  USER_OVERLAY_KEY,
+  UPSTREAM_OVERLAY_KEY,
+  UPSTREAM_REVISION_KEY,
   type Action,
   type Background,
   type Class,
+  type ConfigPack,
   type InventoryEntry,
 } from "../lib/domain/index.js";
 import { CharacterEditor } from "./Editor.js";
 import { SettingsScreen } from "./Settings.js";
+import {
+  ConfigManager,
+  packWarnings,
+  type FileRecords,
+  type OverlayRecords,
+  type UpstreamPanelState,
+} from "./ConfigManager.js";
 import {
   ancestryLabel,
   backgroundAbilityAt,
@@ -40,16 +59,36 @@ export type Screen =
   | "expertise"
   | "abilities"
   | "edit-character"
-  | "options";
+  | "options"
+  | "manage-data";
 
 type CreateStep = "ancestry" | "background" | "info" | "class" | "review";
 
 const CLASS_TIERS = ["starter", "tier-1", "tier-2", "tier-3", "tier-4"] as const;
 
+function recordsToMap<T extends string | null>(
+  records: Record<string, T>,
+): Map<string, T> {
+  return new Map(Object.entries(records)) as Map<string, T>;
+}
+
 export function App() {
   const [game, setGame] = useState<GameData | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
+  const [baseFiles, setBaseFiles] = useState<FileRecords | null>(null);
+  const [userFiles, setUserFiles] = useState<OverlayRecords>({});
+  const [upstreamFiles, setUpstreamFiles] = useState<OverlayRecords>({});
+  const [baseRevision, setBaseRevision] = useState<number | null>(null);
+  const [cachedUpstreamRevision, setCachedUpstreamRevision] = useState<number | null>(null);
+  const [upstreamStatus, setUpstreamStatus] = useState<{
+    status: "idle" | "checking" | "available" | "uptodate" | "error";
+    detail: string | null;
+    availableRevision: number | null;
+  }>({ status: "idle", detail: null, availableRevision: null });
   const store = useMemo(() => new AppStore(), []);
+  const userStore = useMemo(() => new OverlayStore(USER_OVERLAY_KEY), []);
+  const upstreamStore = useMemo(() => new OverlayStore(UPSTREAM_OVERLAY_KEY), []);
+  const revisionStore = useMemo(() => new RevisionStore(UPSTREAM_REVISION_KEY), []);
   const [characters, setCharacters] = useState<CharacterV1[]>(() => {
     try {
       return store.list();
@@ -70,19 +109,69 @@ export function App() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const reloadGameData = useCallback(() => {
+  const rebuildWith = useCallback(
+    async (base: FileRecords, upstream: OverlayRecords, user: OverlayRecords) => {
+      setGame(
+        await GameData.assemble(recordsToMap(base), [
+          recordsToMap(upstream),
+          recordsToMap(user),
+        ]),
+      );
+    },
+    [],
+  );
+
+  const loadAll = useCallback(async () => {
     setGame(null);
     setLoadError(null);
-    GameData.loadRuntime()
-      .then(setGame)
-      .catch((error: unknown) =>
-        setLoadError(error instanceof Error ? error.message : String(error)),
-      );
-  }, []);
+    try {
+      const baseUrl = `${import.meta.env.BASE_URL}config`;
+      const [baseMap, revision] = await Promise.all([
+        fetchBaseFileMap(baseUrl),
+        fetchIndexRevision(baseUrl).catch(() => null),
+      ]);
+      const baseRec: FileRecords = Object.fromEntries(baseMap);
+      const user = userStore.load();
+      const upstream = upstreamStore.load();
+      const userRec: OverlayRecords = Object.fromEntries(user);
+      const upstreamRec: OverlayRecords = Object.fromEntries(upstream);
+      setBaseFiles(baseRec);
+      setBaseRevision(revision);
+      setUserFiles(userRec);
+      setUpstreamFiles(upstreamRec);
+      setCachedUpstreamRevision(revisionStore.load());
+      try {
+        await rebuildWith(baseRec, upstreamRec, userRec);
+      } catch (overlayError) {
+        // Custom content broke against the fresh base: fall back to official.
+        await rebuildWith(baseRec, {}, {});
+        setNotice(
+          `Custom content failed to apply and was skipped: ${
+            overlayError instanceof Error ? overlayError.message : String(overlayError)
+          } Open Manage data to fix or reset it.`,
+        );
+      }
+    } catch (error) {
+      setLoadError(error instanceof Error ? error.message : String(error));
+    }
+  }, [rebuildWith, userStore, upstreamStore, revisionStore]);
 
   useEffect(() => {
-    reloadGameData();
-  }, [reloadGameData]);
+    void loadAll();
+  }, [loadAll]);
+
+  // Dev live-reload: the Vite config plugin sends this when YAML changes.
+  useEffect(() => {
+    const hot = import.meta.hot;
+    if (!hot) return;
+    const handler = () => {
+      void loadAll();
+    };
+    hot.on("som-config-changed", handler);
+    return () => {
+      hot.off("som-config-changed", handler);
+    };
+  }, [loadAll]);
 
   const refresh = useCallback(() => {
     try {
@@ -104,6 +193,127 @@ export function App() {
       }
     },
     [store],
+  );
+
+  const onCommitUser = useCallback(
+    async (next: OverlayRecords) => {
+      if (!baseFiles) throw new Error("Base config is not loaded yet.");
+      const candidate = recordsToMap(next);
+      const rebuilt = await GameData.assemble(recordsToMap(baseFiles), [
+        recordsToMap(upstreamFiles),
+        candidate,
+      ]);
+      userStore.save(candidate);
+      setUserFiles(next);
+      setGame(rebuilt);
+    },
+    [baseFiles, upstreamFiles, userStore],
+  );
+
+  const onResetUser = useCallback(async () => {
+    if (!baseFiles) return;
+    userStore.clear();
+    const next: OverlayRecords = {};
+    setUserFiles(next);
+    await rebuildWith(baseFiles, upstreamFiles, next);
+  }, [baseFiles, upstreamFiles, rebuildWith, userStore]);
+
+  const onImportPackText = useCallback(
+    async (text: string): Promise<{ applied: number; warnings: string[] }> => {
+      const pack: ConfigPack = parsePack(text);
+      const warnings = packWarnings(pack, baseRevision);
+      const merged = applyPackToOverlay(recordsToMap(userFiles), pack);
+      const next: OverlayRecords = Object.fromEntries(merged);
+      await onCommitUser(next);
+      return { applied: Object.keys(pack.files).length, warnings };
+    },
+    [userFiles, baseRevision, onCommitUser],
+  );
+
+  const upstreamPanel: UpstreamPanelState = useMemo(
+    () => ({
+      status: upstreamStatus.status,
+      detail:
+        upstreamStatus.detail ??
+        (cachedUpstreamRevision != null
+          ? `Cached official updates at revision ${cachedUpstreamRevision}.`
+          : upstreamStatus.status === "uptodate"
+            ? "Bundled config matches the official source."
+            : "Check whether the handbook authors published changes."),
+      availableRevision: upstreamStatus.availableRevision,
+      onCheck: async () => {
+        setUpstreamStatus({ status: "checking", detail: null, availableRevision: null });
+        try {
+          const revision = await fetchIndexRevision(UPSTREAM_BASE_URL);
+          if (revision == null) {
+            setUpstreamStatus({
+              status: "error",
+              detail: "The official source did not advertise a revision.",
+              availableRevision: null,
+            });
+          } else if (baseRevision != null && revision > baseRevision) {
+            setUpstreamStatus({
+              status: "available",
+              detail: `Official revision ${revision} is available (bundled: ${baseRevision}).`,
+              availableRevision: revision,
+            });
+          } else {
+            setUpstreamStatus({
+              status: "uptodate",
+              detail: `Official revision ${revision ?? "unknown"} matches the bundle.`,
+              availableRevision: revision,
+            });
+          }
+        } catch (error) {
+          setUpstreamStatus({
+            status: "error",
+            detail: error instanceof Error ? error.message : String(error),
+            availableRevision: null,
+          });
+        }
+      },
+      onApply: async () => {
+        const snapshot = await fetchUpstreamSnapshot(UPSTREAM_BASE_URL);
+        if (!baseFiles) throw new Error("Base config is not loaded yet.");
+        // Store only files that differ from the bundle to keep the delta small.
+        const delta: OverlayRecords = {};
+        for (const [path, text] of snapshot.files) {
+          if (baseFiles[path] !== text) delta[path] = text;
+        }
+        upstreamStore.save(recordsToMap(delta));
+        revisionStore.save(snapshot.revision);
+        setUpstreamFiles(delta);
+        setCachedUpstreamRevision(snapshot.revision);
+        await rebuildWith(baseFiles, delta, userFiles);
+        setUpstreamStatus({
+          status: "uptodate",
+          detail: `Official updates applied (revision ${snapshot.revision ?? "unknown"}).`,
+          availableRevision: snapshot.revision,
+        });
+      },
+      onRemove: async () => {
+        upstreamStore.clear();
+        revisionStore.clear();
+        setUpstreamFiles({});
+        setCachedUpstreamRevision(null);
+        if (baseFiles) await rebuildWith(baseFiles, {}, userFiles);
+        setUpstreamStatus({
+          status: "idle",
+          detail: null,
+          availableRevision: null,
+        });
+      },
+    }),
+    [
+      upstreamStatus,
+      cachedUpstreamRevision,
+      baseRevision,
+      baseFiles,
+      userFiles,
+      rebuildWith,
+      upstreamStore,
+      revisionStore,
+    ],
   );
 
   const deleteCharacter = useCallback(
@@ -194,7 +404,7 @@ export function App() {
               <h2>Config failed to load</h2>
               <pre className="error-text">{loadError}</pre>
               <div className="button-row">
-                <button className="secondary" onClick={reloadGameData}>
+                <button className="secondary" onClick={() => void loadAll()}>
                   RETRY
                 </button>
               </div>
@@ -225,7 +435,16 @@ export function App() {
             onUpdate={updateCharacter}
             onDelete={deleteCharacter}
             onImported={refresh}
-            onReloadGameData={reloadGameData}
+            onManage={() => setScreen("manage-data")}
+            baseFiles={baseFiles}
+            userFiles={userFiles}
+            upstreamFiles={upstreamFiles}
+            baseRevision={baseRevision}
+            cachedUpstreamRevision={cachedUpstreamRevision}
+            onCommitUser={onCommitUser}
+            onResetUser={onResetUser}
+            onImportPackText={onImportPackText}
+            upstreamPanel={upstreamPanel}
           />
         )}
       </main>
@@ -258,6 +477,8 @@ function headerInfo(screen: Screen): { title: string; back: Screen | null } {
       return { title: "EDIT CHARACTER", back: "character-menu" };
     case "options":
       return { title: "OPTIONS", back: "main-menu" };
+    case "manage-data":
+      return { title: "MANAGE DATA", back: "options" };
   }
 }
 
@@ -310,7 +531,16 @@ function ScreenBody(props: {
   onUpdate: (character: CharacterV1) => void;
   onDelete: (id: string) => void;
   onImported: () => void;
-  onReloadGameData: () => void;
+  onManage: () => void;
+  baseFiles: FileRecords | null;
+  userFiles: OverlayRecords;
+  upstreamFiles: OverlayRecords;
+  baseRevision: number | null;
+  cachedUpstreamRevision: number | null;
+  onCommitUser: (next: OverlayRecords) => Promise<void>;
+  onResetUser: () => Promise<void>;
+  onImportPackText: (text: string) => Promise<{ applied: number; warnings: string[] }>;
+  upstreamPanel: UpstreamPanelState;
 }) {
   const { screen, game, selected } = props;
   switch (screen) {
@@ -334,7 +564,21 @@ function ScreenBody(props: {
         <SettingsScreen
           store={props.store}
           onImported={props.onImported}
-          onReloadGameData={props.onReloadGameData}
+          onManage={() => props.onNavigate("manage-data")}
+        />
+      );
+    case "manage-data":
+      return (
+        <ConfigManager
+          baseFiles={props.baseFiles ?? {}}
+          upstreamFiles={props.upstreamFiles}
+          userFiles={props.userFiles}
+          baseRevision={props.baseRevision}
+          upstreamRevision={props.cachedUpstreamRevision}
+          onCommitUser={props.onCommitUser}
+          onResetUser={props.onResetUser}
+          onImportPackText={props.onImportPackText}
+          upstream={props.upstreamPanel}
         />
       );
     case "character-menu":

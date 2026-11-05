@@ -185,8 +185,8 @@ GameData loader + validation (fetch + index.json / node fs in tests)
                React state
 ```
 
-- Config is loaded at runtime: the web build fetches `public/config/` files via `index.json` (static hosting cannot enumerate directories); tests load the same files from disk via `configNode.ts`. `SOM_CONFIG_DIR`-style overrides are gone: edit YAML and reload, no rebuild.
-- The loader validates enum values, references, duplicate ids, and required fields once at startup and in tests.
+- Config loads layered at runtime: the web build fetches `public/config/` files via `index.json` into a base file map; the cached official-updates layer and the user layer (edits, new files, installed packs, tombstones) merge on top, and validation runs on the merged result. Tests load the same files from disk via `configNode.ts`. The dev server pushes a `som-config-changed` HMR event on YAML saves so the app refetches without losing UI state.
+- In-app management (`src/app/ConfigManager.tsx`) edits/creates/deletes files, imports/exports share packs (`som-config-pack` v1 JSON), checks the pinned upstream for a newer content `revision`, and resets to official. Every mutation validates the merged game before applying; failures keep the last-good game with inline errors.
 - The UI never parses YAML or computes rules ad hoc; it calls domain functions.
 - Saves persist on every change; explicit export/import is always available.
 - `npm run dev` gives HMR for code and reloads YAML from disk, so config edits preview without a rebuild.

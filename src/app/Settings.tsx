@@ -4,7 +4,7 @@ import { AppStore } from "../lib/domain/index.js";
 export function SettingsScreen(props: {
   store: AppStore;
   onImported: () => void;
-  onReloadGameData: () => void;
+  onManage: () => void;
 }) {
   const { store } = props;
   const [exportText, setExportText] = useState(() => safeExport(store));
@@ -33,14 +33,16 @@ export function SettingsScreen(props: {
       <section className="panel">
         <div className="panel-heading">
           <h2>Game data</h2>
-          <button className="secondary compact" onClick={props.onReloadGameData}>
-            Reload game data
+        </div>
+        <p className="muted">
+          Browse official files, make your own tweaks, install shared packs, or
+          fetch the handbook authors&apos; latest changes.
+        </p>
+        <div className="button-row">
+          <button className="primary" onClick={props.onManage}>
+            Manage game data
           </button>
         </div>
-        <p className="muted small">
-          Reload the runtime config after editing the game data files — no
-          rebuild needed.
-        </p>
       </section>
 
       <section className="panel">
