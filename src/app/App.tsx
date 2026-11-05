@@ -688,7 +688,7 @@ function MainMenu(props: { onNavigate: (screen: Screen) => void }) {
           CHOOSE CHARACTER
         </button>
         <button
-          className="menu-action quiet"
+          className="menu-action strong"
           onClick={() => props.onNavigate("options")}
         >
           OPTIONS
