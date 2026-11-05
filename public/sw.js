@@ -1,6 +1,6 @@
 "use strict";
 
-const CACHE_VERSION = "shard-v9";
+const CACHE_VERSION = "shard-v10";
 const STATIC_SHELL = [
   "./",
   "./index.html",
