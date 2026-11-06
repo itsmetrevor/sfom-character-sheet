@@ -495,7 +495,16 @@ function AppHeader(props: {
             aria-label="Back"
             onClick={() => props.onBack(back)}
           >
-            <span className="back-arrow">←</span>
+            <span aria-hidden="true">
+              <svg viewBox="0 0 18 14">
+                <path
+                  d="M11 1 L4 7 L11 13"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2.5}
+                />
+              </svg>
+            </span>
           </button>
         )}
       </div>
@@ -507,9 +516,9 @@ function AppHeader(props: {
           onClick={props.onToggleMenu}
         >
           <svg viewBox="0 0 18 14" aria-hidden="true">
-            <rect x="0" y="0" width="18" height="2" fill="currentColor" />
-            <rect x="0" y="6" width="18" height="2" fill="currentColor" />
-            <rect x="0" y="12" width="18" height="2" fill="currentColor" />
+            <rect x="0" y="0" width="18" height="3" fill="currentColor" />
+            <rect x="0" y="5.5" width="18" height="3" fill="currentColor" />
+            <rect x="0" y="11" width="18" height="3" fill="currentColor" />
           </svg>
         </button>
       </div>
