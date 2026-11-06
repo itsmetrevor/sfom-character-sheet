@@ -448,9 +448,6 @@ export function App() {
           />
         )}
       </main>
-      <footer className="footer">
-        A character companion for Shard - Fragments of Memory.
-      </footer>
     </div>
   );
 }

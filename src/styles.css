@@ -119,15 +119,6 @@ button {
     padding: 16px 14px 30px;
 }
 
-.footer {
-    padding: 18px 14px 28px;
-    color: #aaaaaa;
-    font-size: 0.62rem;
-    letter-spacing: 0.08em;
-    text-align: center;
-    text-transform: uppercase;
-}
-
 .menu-overlay {
     position: fixed;
     inset: 0;
