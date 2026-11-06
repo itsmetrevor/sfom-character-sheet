@@ -16,30 +16,12 @@
 
 html {
     background: #ececea;
-    scrollbar-width: thin;
-    scrollbar-color: transparent transparent;
+    scrollbar-width: none;
     scrollbar-gutter: stable;
 }
 
-html.scrolling {
-    scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
-}
-
 ::-webkit-scrollbar {
-    width: 6px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: transparent;
-    border-radius: 3px;
-}
-
-html.scrolling ::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.28);
+    display: none;
 }
 
 body {
