@@ -21,8 +21,7 @@ html {
     scrollbar-gutter: stable;
 }
 
-html.scrolling,
-html:hover {
+html.scrolling {
     scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
 }
 
@@ -39,8 +38,7 @@ html:hover {
     border-radius: 3px;
 }
 
-html.scrolling ::-webkit-scrollbar-thumb,
-html:hover ::-webkit-scrollbar-thumb {
+html.scrolling ::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.28);
 }
 
