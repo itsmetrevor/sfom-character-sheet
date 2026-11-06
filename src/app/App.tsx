@@ -1428,11 +1428,11 @@ function CreateCharacterScreen(props: {
         >
           CHOOSE BACKGROUND
         </button>
-        <button className={stepClass(step === "info")} onClick={() => setStep("info")}>
-          CHARACTER INFO
-        </button>
         <button className={stepClass(step === "class")} onClick={() => setStep("class")}>
           CHOOSE STARTING CLASS
+        </button>
+        <button className={stepClass(step === "info")} onClick={() => setStep("info")}>
+          CHARACTER INFO
         </button>
         <button className={stepClass(step === "review")} onClick={() => setStep("review")}>
           FINISH CHARACTER
@@ -1506,7 +1506,7 @@ function CreateCharacterScreen(props: {
             <button className="secondary" onClick={() => setStep("ancestry")}>
               BACK
             </button>
-            <button className="primary" onClick={() => setStep("info")}>
+            <button className="primary" onClick={() => setStep("class")}>
               NEXT
             </button>
           </div>
@@ -1535,10 +1535,10 @@ function CreateCharacterScreen(props: {
             />
           </label>
           <div className="button-row">
-            <button className="secondary" onClick={() => setStep("background")}>
+            <button className="secondary" onClick={() => setStep("class")}>
               BACK
             </button>
-            <button className="primary" onClick={() => setStep("class")}>
+            <button className="primary" onClick={() => setStep("review")}>
               NEXT
             </button>
           </div>
@@ -1560,11 +1560,11 @@ function CreateCharacterScreen(props: {
           </div>
           {selectedClass && <ClassPreview cls={selectedClass} />}
           <div className="button-row">
-            <button className="secondary" onClick={() => setStep("info")}>
+            <button className="secondary" onClick={() => setStep("background")}>
               BACK
             </button>
-            <button className="primary" onClick={() => setStep("review")}>
-              REVIEW
+            <button className="primary" onClick={() => setStep("info")}>
+              NEXT
             </button>
           </div>
         </section>
@@ -1581,7 +1581,7 @@ function CreateCharacterScreen(props: {
             <p>{classId}</p>
           </div>
           <div className="button-row">
-            <button className="secondary" onClick={() => setStep("class")}>
+            <button className="secondary" onClick={() => setStep("info")}>
               BACK
             </button>
             <button className="primary" onClick={finish}>
