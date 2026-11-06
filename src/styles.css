@@ -60,7 +60,6 @@ button {
     gap: 8px;
     padding: 14px 14px 12px;
     background: rgba(255, 255, 255, 0.96);
-    border-bottom: 1px solid #e5e5e5;
     backdrop-filter: blur(10px);
 }
 
