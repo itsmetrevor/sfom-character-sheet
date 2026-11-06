@@ -16,6 +16,32 @@
 
 html {
     background: #ececea;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    scrollbar-gutter: stable;
+}
+
+html.scrolling,
+html:hover {
+    scrollbar-color: rgba(0, 0, 0, 0.28) transparent;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 3px;
+}
+
+html.scrolling ::-webkit-scrollbar-thumb,
+html:hover ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.28);
 }
 
 body {
